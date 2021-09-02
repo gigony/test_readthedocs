@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monai.transforms.inverse &#8212; MONAI 0.6.0 Documentation</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../index.html">
+  <img src="../../../_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for monai.transforms.inverse</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 - 2021 MONAI Consortium</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Hashable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="kn">from</span> <span class="nn">monai.transforms.transform</span> <span class="kn">import</span> <span class="n">RandomizableTransform</span><span class="p">,</span> <span class="n">Transform</span>
+<span class="kn">from</span> <span class="nn">monai.utils.enums</span> <span class="kn">import</span> <span class="n">InverseKeys</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;InvertibleTransform&quot;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="InvertibleTransform"><a class="viewcode-back" href="../../../transforms.html#monai.transforms.InvertibleTransform">[docs]</a><span class="k">class</span> <span class="nc">InvertibleTransform</span><span class="p">(</span><span class="n">Transform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Classes for invertible transforms.</span>
+
+<span class="sd">    This class exists so that an ``invert`` method can be implemented. This allows, for</span>
+<span class="sd">    example, images to be cropped, rotated, padded, etc., during training and inference,</span>
+<span class="sd">    and after be returned to their original size before saving to file for comparison in</span>
+<span class="sd">    an external viewer.</span>
+
+<span class="sd">    When the ``__call__`` method is called, the transformation information for each key is</span>
+<span class="sd">    stored. If the transforms were applied to keys &quot;image&quot; and &quot;label&quot;, there will be two</span>
+<span class="sd">    extra keys in the dictionary: &quot;image_transforms&quot; and &quot;label_transforms&quot;. Each list</span>
+<span class="sd">    contains a list of the transforms applied to that key. When the ``inverse`` method is</span>
+<span class="sd">    called, the inverse is called on each key individually, which allows for different</span>
+<span class="sd">    parameters being passed to each label (e.g., different interpolation for image and</span>
+<span class="sd">    label).</span>
+
+<span class="sd">    When the ``inverse`` method is called, the inverse transforms are applied in a last-</span>
+<span class="sd">    in-first-out order. As the inverse is applied, its entry is removed from the list</span>
+<span class="sd">    detailing the applied transformations. That is to say that during the forward pass,</span>
+<span class="sd">    the list of applied transforms grows, and then during the inverse it shrinks back</span>
+<span class="sd">    down to an empty list.</span>
+
+<span class="sd">    The information in ``data[key_transform]`` will be compatible with the default collate</span>
+<span class="sd">    since it only stores strings, numbers and arrays.</span>
+
+<span class="sd">    We currently check that the ``id()`` of the transform is the same in the forward and</span>
+<span class="sd">    inverse directions. This is a useful check to ensure that the inverses are being</span>
+<span class="sd">    processed in the correct order. However, this may cause issues if the ``id()`` of the</span>
+<span class="sd">    object changes (such as multiprocessing on Windows). If you feel this issue affects</span>
+<span class="sd">    you, please raise a GitHub issue.</span>
+
+<span class="sd">    Note to developers: When converting a transform to an invertible transform, you need to:</span>
+
+<span class="sd">        #. Inherit from this class.</span>
+<span class="sd">        #. In ``__call__``, add a call to ``push_transform``.</span>
+<span class="sd">        #. Any extra information that might be needed for the inverse can be included with the</span>
+<span class="sd">           dictionary ``extra_info``. This dictionary should have the same keys regardless of</span>
+<span class="sd">           whether ``do_transform`` was `True` or `False` and can only contain objects that are</span>
+<span class="sd">           accepted in pytorch data loader&#39;s collate function (e.g., `None` is not allowed).</span>
+<span class="sd">        #. Implement an ``inverse`` method. Make sure that after performing the inverse,</span>
+<span class="sd">           ``pop_transform`` is called.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="InvertibleTransform.push_transform"><a class="viewcode-back" href="../../../transforms.html#monai.transforms.InvertibleTransform.push_transform">[docs]</a>    <span class="k">def</span> <span class="nf">push_transform</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">key</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">,</span>
+        <span class="n">extra_info</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">orig_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Append to list of applied transforms for that key.&quot;&quot;&quot;</span>
+        <span class="n">key_transform</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="n">InverseKeys</span><span class="o">.</span><span class="n">KEY_SUFFIX</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">InverseKeys</span><span class="o">.</span><span class="n">CLASS_NAME</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+            <span class="n">InverseKeys</span><span class="o">.</span><span class="n">ID</span><span class="p">:</span> <span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="n">orig_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">info</span><span class="p">[</span><span class="n">InverseKeys</span><span class="o">.</span><span class="n">ORIG_SIZE</span><span class="p">]</span> <span class="o">=</span> <span class="n">orig_size</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="s2">&quot;shape&quot;</span><span class="p">):</span>
+            <span class="n">info</span><span class="p">[</span><span class="n">InverseKeys</span><span class="o">.</span><span class="n">ORIG_SIZE</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">if</span> <span class="n">extra_info</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">info</span><span class="p">[</span><span class="n">InverseKeys</span><span class="o">.</span><span class="n">EXTRA_INFO</span><span class="p">]</span> <span class="o">=</span> <span class="n">extra_info</span>
+        <span class="c1"># If class is randomizable transform, store whether the transform was actually performed (based on `prob`)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">RandomizableTransform</span><span class="p">):</span>
+            <span class="n">info</span><span class="p">[</span><span class="n">InverseKeys</span><span class="o">.</span><span class="n">DO_TRANSFORM</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_transform</span>
+        <span class="c1"># If this is the first, create list</span>
+        <span class="k">if</span> <span class="n">key_transform</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">key_transform</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">data</span><span class="p">[</span><span class="n">key_transform</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="InvertibleTransform.check_transforms_match"><a class="viewcode-back" href="../../../transforms.html#monai.transforms.InvertibleTransform.check_transforms_match">[docs]</a>    <span class="k">def</span> <span class="nf">check_transforms_match</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transform</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Check transforms are of same instance.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">transform</span><span class="p">[</span><span class="n">InverseKeys</span><span class="o">.</span><span class="n">ID</span><span class="p">]</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span>
+        <span class="c1"># basic check if multiprocessing uses &#39;spawn&#39; (objects get recreated so don&#39;t have same ID)</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">multiprocessing</span><span class="o">.</span><span class="n">get_start_method</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;spawn&quot;</span>
+            <span class="ow">and</span> <span class="n">transform</span><span class="p">[</span><span class="n">InverseKeys</span><span class="o">.</span><span class="n">CLASS_NAME</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="p">):</span>
+            <span class="k">return</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Should inverse most recently applied invertible transform first&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="InvertibleTransform.get_most_recent_transform"><a class="viewcode-back" href="../../../transforms.html#monai.transforms.InvertibleTransform.get_most_recent_transform">[docs]</a>    <span class="k">def</span> <span class="nf">get_most_recent_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get most recent transform.&quot;&quot;&quot;</span>
+        <span class="n">transform</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="n">InverseKeys</span><span class="o">.</span><span class="n">KEY_SUFFIX</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_transforms_match</span><span class="p">(</span><span class="n">transform</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">transform</span></div>
+
+<div class="viewcode-block" id="InvertibleTransform.pop_transform"><a class="viewcode-back" href="../../../transforms.html#monai.transforms.InvertibleTransform.pop_transform">[docs]</a>    <span class="k">def</span> <span class="nf">pop_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Hashable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Remove most recent transform.&quot;&quot;&quot;</span>
+        <span class="n">data</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="n">InverseKeys</span><span class="o">.</span><span class="n">KEY_SUFFIX</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="InvertibleTransform.inverse"><a class="viewcode-back" href="../../../transforms.html#monai.transforms.InvertibleTransform.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inverse of ``__call__``.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: When the subclass does not override this method.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Subclass </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> must implement this method.&quot;</span><span class="p">)</span></div></div>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2020 - 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

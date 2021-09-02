@@ -1,0 +1,372 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>What’s new in 0.6 🎉🎉 &#8212; MONAI Deploy Application SDK 0.1.0 Documentation</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="What’s new in 0.5" href="whatsnew_0_5.html" />
+    <link rel="prev" title="What’s New" href="whatsnew.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="index.html">
+  <img src="_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   What’s new in 0.6 🎉🎉
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="whatsnew_0_5.html">
+   What’s new in 0.5
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#decollating-mini-batches-as-an-essential-post-processing-step">
+   Decollating mini-batches as an essential post-processing step
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unetr-transformers-for-medical-image-segmentation">
+   UNETR: Transformers for Medical Image Segmentation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pythonic-apis-to-load-the-pretrained-models-from-clara-train-mmars">
+   Pythonic APIs to load the pretrained models from Clara Train MMARs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enhancements-of-the-base-metric-interfaces">
+   Enhancements of the base metric interfaces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#c-cuda-extension-modules-via-pytorch-jit-compilation">
+   C++/CUDA extension modules via PyTorch JIT compilation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#backward-compatibility-and-enhanced-continuous-integration-continuous-delivery">
+   Backward compatibility and enhanced continuous integration/continuous delivery
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#collaboration-with-project-monai-monailabel-for-smooth-integration">
+   Collaboration with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Project-MONAI/MONAILabel
+    </span>
+   </code>
+   for smooth integration
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="what-s-new-in-0-6">
+<h1>What’s new in 0.6 🎉🎉<a class="headerlink" href="#what-s-new-in-0-6" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Decollating mini-batches as an essential post-processing step</p></li>
+<li><p>Pythonic APIs to load the pretrained models from Clara Train MMARs</p></li>
+<li><p>UNETR: Transformers for Medical Image Segmentation</p></li>
+<li><p>Enhancements of the base metric interfaces</p></li>
+<li><p>C++/CUDA extension modules via PyTorch JIT compilation</p></li>
+<li><p>Backward compatibility and enhanced continuous integration/continuous delivery</p></li>
+<li><p>Collaboration with Project-MONAI/MONAILabel for smooth integration</p></li>
+</ul>
+<div class="section" id="decollating-mini-batches-as-an-essential-post-processing-step">
+<h2>Decollating mini-batches as an essential post-processing step<a class="headerlink" href="#decollating-mini-batches-as-an-essential-post-processing-step" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">decollate</span> <span class="pre">batch</span></code> is introduced in MONAI v0.6, to simplify the post-processing transforms and enable flexible operations on a batch of model outputs.
+It can decollate batched data (e.g. model inference results) into a list of tensors – as an ‘inverse’ operation of <code class="docutils literal notranslate"><span class="pre">collate_fn</span></code> of the PyTorch data loader. It has the benefits such as:</p>
+<ul class="simple">
+<li><p>enabling postprocessing transforms for each item independently, for example, randomised transforms could be applied differently for each predicted item in a batch.</p></li>
+<li><p>simplifying the transform APIs and reducing the input validation burdens, because both the preprocessing and postprocessing transforms now only support the “channel-first” input format.</p></li>
+<li><p>enabling the transform inverse operation for data items in different original shapes, as the inverted items are in a list, instead of being stacked in a single tensor.</p></li>
+<li><p>allowing for both a “batch-first” tensor and a list of “channel-first” tensors for flexible metric computation.</p></li>
+</ul>
+<p>A typical process of <code class="docutils literal notranslate"><span class="pre">decollate</span> <span class="pre">batch</span></code> is illustrated as follows (with a <code class="docutils literal notranslate"><span class="pre">batch_size=N</span></code> model predictions and labels as an example):
+<img alt="decollate_batch" src="_images/decollate_batch.png" /></p>
+<p><a class="reference external" href="https://github.com/Project-MONAI/tutorials/blob/master/modules/decollate_batch.ipynb">decollate batch tutorial</a> shows a detailed usage example based on a PyTorch native workflow.</p>
+<p><a class="reference external" href="https://github.com/Project-MONAI/MONAI/wiki/v0.5-to-v0.6-migration-guide">Migrating your v0.5 code to v0.6</a> wiki shows how to migrate an existing program from v0.5 to v0.6 to adapt to the <code class="docutils literal notranslate"><span class="pre">decollate</span> <span class="pre">batch</span></code> logic.</p>
+</div>
+<div class="section" id="unetr-transformers-for-medical-image-segmentation">
+<h2>UNETR: Transformers for Medical Image Segmentation<a class="headerlink" href="#unetr-transformers-for-medical-image-segmentation" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://arxiv.org/abs/2103.10504">UNETR</a> is a transformer-based model for volumetric (3D) medical image segmentation and is currently the state-of-the-art on <a class="reference external" href="https://www.synapse.org/#%21Synapse:syn3193805/wiki/217752">BTCV dataset</a> test server for the task of multi-organ semantic segmentation. UNETR is introduced in MONAI v0.6 and its flexible implementation supports various segmentation tasks.
+<img alt="UNETR" src="_images/UNETR.png" /></p>
+<p>A tutorial for the task of 3D multi-organ semantic segmentation using UNETR is provided within
+<a class="reference external" href="https://github.com/Project-MONAI/tutorials/blob/master/3d_segmentation/unetr_btcv_segmentation_3d.ipynb"><code class="docutils literal notranslate"><span class="pre">project-monai/tutorials</span></code></a>.
+And it contains the following features:</p>
+<ul class="simple">
+<li><p>Transforms for dictionary format data,</p></li>
+<li><p>Defining a new transform according to MONAI transform API,</p></li>
+<li><p>Loading Nifti image with metadata, loading a list of images and stacking them,</p></li>
+<li><p>Randomly adjusting the intensity for data augmentation,</p></li>
+<li><p>Optimized cache IO and transforms to accelerate training and validation,</p></li>
+<li><p>3D UNETR model, DiceCE loss function and Mean Dice metric for multi-organ segmentation task,</p></li>
+</ul>
+<p>The following illustrates target body organs that are segmentation in this tutorial:
+<img alt="BTCV_organs" src="_images/BTCV_organs.png" /></p>
+<p>Please visit UNETR repository for more details:
+https://monai.io/research/unetr-btcv-multi-organ-segmentation</p>
+</div>
+<div class="section" id="pythonic-apis-to-load-the-pretrained-models-from-clara-train-mmars">
+<h2>Pythonic APIs to load the pretrained models from Clara Train MMARs<a class="headerlink" href="#pythonic-apis-to-load-the-pretrained-models-from-clara-train-mmars" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://docs.nvidia.com/clara/clara-train-sdk/pt/mmar.html">The MMAR (Medical Model ARchive)</a>
+defines a data structure for organizing all artifacts produced during the model development life cycle.
+NVIDIA Clara provides <a class="reference external" href="https://ngc.nvidia.com/catalog/models?orderBy=scoreDESC&amp;pageNumber=0&amp;query=clara_pt&amp;quickFilter=&amp;filters=">various MMARs of medical domain-specific models</a>.
+These MMARs include all the information about the model including configurations and scripts to provide a workspace to perform model development tasks. To better leverage the trained MMARs released on Nvidia GPU cloud, MONAI provides pythonic APIs to access them.</p>
+<p>To demonstrate this new feature, a medical image segmentation tutorial is created within
+<a class="reference external" href="https://github.com/Project-MONAI/tutorials/blob/master/modules/transfer_mmar.ipynb"><code class="docutils literal notranslate"><span class="pre">project-monai/tutorials</span></code></a>.
+It mainly produces the following figure to compare the loss curves and validation scores for</p>
+<ul class="simple">
+<li><p>training from scratch (the green line),</p></li>
+<li><p>applying pretrained MMAR weights without training (the magenta line),</p></li>
+<li><p>training from the MMAR model weights (the blue line),</p></li>
+</ul>
+<p>according to the number of training epochs:</p>
+<p><img alt="transfer_mmar" src="_images/transfer_mmar.png" /></p>
+<p>The tutorial shows the capability of encapsulating the details of MMAR parsing, as well as the potential of using pretrained MMARs for transfer learning.
+These APIs are also being integrated into AI-assisted interactive workflows to accelerate the manual annotating processes (e.g. via <a class="reference external" href="https://github.com/Project-MONAI/MONAILabel">project-MONAI/MONAILabel</a>).</p>
+</div>
+<div class="section" id="enhancements-of-the-base-metric-interfaces">
+<h2>Enhancements of the base metric interfaces<a class="headerlink" href="#enhancements-of-the-base-metric-interfaces" title="Permalink to this headline">¶</a></h2>
+<p>The base API for metrics is now enhanced to support the essential computation logic for both iteration and epoch-based metrics.
+With this update, the MONAI metrics module becomes more extensible, and thus a good starting point for customised metrics.
+The APIs also by default support data parallel computation and consider the computation efficiency:  with a <code class="docutils literal notranslate"><span class="pre">Cumulative</span></code> base class, intermediate metric outcomes can be automatically buffered, cumulated, synced across distributed processes, and aggregated for the final results. The <a class="reference external" href="https://github.com/Project-MONAI/tutorials/blob/master/modules/compute_metric.py">multi-processing computation example</a> shows how to compute metrics based on saved predictions and labels in multi-processing environment.</p>
+</div>
+<div class="section" id="c-cuda-extension-modules-via-pytorch-jit-compilation">
+<h2>C++/CUDA extension modules via PyTorch JIT compilation<a class="headerlink" href="#c-cuda-extension-modules-via-pytorch-jit-compilation" title="Permalink to this headline">¶</a></h2>
+<p>To further accelerate the domain-specific routines in the workflows, MONAI C++/CUDA modules are introduced as extensions of the PyTorch native implementation.
+It now provides modules using <a class="reference external" href="https://pytorch.org/tutorials/advanced/cpp_extension.html#custom-c-and-cuda-extensions">the two ways of building C++ extensions from PyTorch</a>:</p>
+<ul class="simple">
+<li><p>via <code class="docutils literal notranslate"><span class="pre">setuptools</span></code> (since MONAI v0.5), for modules including <code class="docutils literal notranslate"><span class="pre">Resampler</span></code>, <code class="docutils literal notranslate"><span class="pre">Conditional</span> <span class="pre">random</span> <span class="pre">field</span> <span class="pre">(CRF)</span></code>, <code class="docutils literal notranslate"><span class="pre">Fast</span> <span class="pre">bilateral</span> <span class="pre">filtering</span> <span class="pre">using</span> <span class="pre">the</span> <span class="pre">permutohedral</span> <span class="pre">lattice</span></code>.</p></li>
+<li><p>via just-in-time (JIT) compilation (since MONAI v0.6), for the <code class="docutils literal notranslate"><span class="pre">Gaussian</span> <span class="pre">mixtures</span></code> module. This approach allows for dynamic optimisation according to the user-specified parameters and local system environments.
+The following figure shows results of MONAI’s Gaussian mixture models applied to a tissue and surgical tools segmentation task:
+<img alt="Gaussian mixture models as a postprocessing step" src="_images/gmm_feature_set_comparison_s.png" /></p></li>
+</ul>
+</div>
+<div class="section" id="backward-compatibility-and-enhanced-continuous-integration-continuous-delivery">
+<h2>Backward compatibility and enhanced continuous integration/continuous delivery<a class="headerlink" href="#backward-compatibility-and-enhanced-continuous-integration-continuous-delivery" title="Permalink to this headline">¶</a></h2>
+<p>Starting from this version, we experiment with basic policies of backward compatibility.
+New utilities are introduced on top of the existing semantic versioning modules, and the git branching model.</p>
+<p>At the same time, we actively analyze efficient, scalable, and secure CI/CD solutions to accommodate fast and collaborative codebase development.</p>
+<p>Although a complete mechanism is still under development, these provide another essential step towards API-stable versions of MONAI, sustainable release cycles, and efficient open-source collaborations.</p>
+</div>
+<div class="section" id="collaboration-with-project-monai-monailabel-for-smooth-integration">
+<h2>Collaboration with <a class="reference external" href="https://github.com/Project-MONAI/MONAILabel"><code class="docutils literal notranslate"><span class="pre">Project-MONAI/MONAILabel</span></code></a> for smooth integration<a class="headerlink" href="#collaboration-with-project-monai-monailabel-for-smooth-integration" title="Permalink to this headline">¶</a></h2>
+<p>Since MONAI v0.6, we welcome <a class="reference external" href="https://github.com/Project-MONAI/MONAILabel"><code class="docutils literal notranslate"><span class="pre">MONAILabel</span></code></a> under <a class="reference external" href="https://github.com/Project-MONAI"><code class="docutils literal notranslate"><span class="pre">Project-MONAI</span></code></a>.</p>
+<p>MONAI Label is an intelligent open source image labeling and learning tool that enables users to create annotated datasets and build AI annotation models for clinical evaluation.
+MONAI Label enables application developers to build labeling apps in a serverless way,
+where custom labeling apps are exposed as a service through the MONAI Label Server.</p>
+<p>Please visit MONAILabel documentation website for details:
+https://docs.monai.io/projects/label/en/latest/</p>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="whatsnew.html" title="previous page">What’s New</a>
+    <a class='right-next' id="next-link" href="whatsnew_0_5.html" title="next page">What’s new in 0.5</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

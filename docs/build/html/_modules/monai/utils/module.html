@@ -1,0 +1,496 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monai.utils.module &#8212; MONAI 0.6.0 Documentation</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../index.html">
+  <img src="../../../_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for monai.utils.module</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 - 2021 MONAI Consortium</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">import_module</span>
+<span class="kn">from</span> <span class="nn">pkgutil</span> <span class="kn">import</span> <span class="n">walk_packages</span>
+<span class="kn">from</span> <span class="nn">re</span> <span class="kn">import</span> <span class="n">match</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="n">OPTIONAL_IMPORT_MSG_FMT</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;InvalidPyTorchVersionError&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;OptionalImportError&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;exact_version&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;export&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;min_version&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;optional_import&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;load_submodules&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get_full_type_name&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get_package_version&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get_torch_version_tuple&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PT_BEFORE_1_7&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version_leq&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="export"><a class="viewcode-back" href="../../../utils.html#monai.utils.module.export">[docs]</a><span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="n">modname</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make the decorated object a member of the named module. This will also add the object under its aliases if it has</span>
+<span class="sd">    a `__aliases__` member, thus this decorator should be before the `alias` decorator to pick up those names. Alias</span>
+<span class="sd">    names which conflict with package names or existing members will be ignored.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_inner</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+        <span class="n">mod</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="n">modname</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="vm">__name__</span><span class="p">):</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+
+            <span class="c1"># add the aliases for `obj` to the target module</span>
+            <span class="k">for</span> <span class="n">alias</span> <span class="ow">in</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;__aliases__&quot;</span><span class="p">,</span> <span class="p">()):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">alias</span><span class="p">):</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">alias</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="k">return</span> <span class="n">_inner</span></div>
+
+
+<div class="viewcode-block" id="load_submodules"><a class="viewcode-back" href="../../../utils.html#monai.utils.module.load_submodules">[docs]</a><span class="k">def</span> <span class="nf">load_submodules</span><span class="p">(</span><span class="n">basemod</span><span class="p">,</span> <span class="n">load_all</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">exclude_pattern</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;(.*[tT]est.*)|(_.*)&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Traverse the source of the module structure starting with module `basemod`, loading all packages plus all files if</span>
+<span class="sd">    `load_all` is True, excluding anything whose name matches `exclude_pattern`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">submodules</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">err_mod</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">importer</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">is_pkg</span> <span class="ow">in</span> <span class="n">walk_packages</span><span class="p">(</span>
+        <span class="n">basemod</span><span class="o">.</span><span class="n">__path__</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="n">basemod</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">onerror</span><span class="o">=</span><span class="n">err_mod</span><span class="o">.</span><span class="n">append</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">is_pkg</span> <span class="ow">or</span> <span class="n">load_all</span><span class="p">)</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span> <span class="ow">and</span> <span class="n">match</span><span class="p">(</span><span class="n">exclude_pattern</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">mod</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                <span class="n">importer</span><span class="o">.</span><span class="n">find_module</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">load_module</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+                <span class="n">submodules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">OptionalImportError</span><span class="p">:</span>
+                <span class="k">pass</span>  <span class="c1"># could not import the optional deps., they are ignored</span>
+
+    <span class="k">return</span> <span class="n">submodules</span><span class="p">,</span> <span class="n">err_mod</span></div>
+
+
+<span class="k">def</span> <span class="nf">get_full_type_name</span><span class="p">(</span><span class="n">typeobj</span><span class="p">):</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">typeobj</span><span class="o">.</span><span class="vm">__module__</span>
+    <span class="k">if</span> <span class="n">module</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">module</span> <span class="o">==</span> <span class="nb">str</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">typeobj</span><span class="o">.</span><span class="vm">__name__</span>  <span class="c1"># Avoid reporting __builtin__</span>
+    <span class="k">return</span> <span class="n">module</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">typeobj</span><span class="o">.</span><span class="vm">__name__</span>
+
+
+<div class="viewcode-block" id="min_version"><a class="viewcode-back" href="../../../utils.html#monai.utils.module.min_version">[docs]</a><span class="k">def</span> <span class="nf">min_version</span><span class="p">(</span><span class="n">the_module</span><span class="p">,</span> <span class="n">min_version_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert version strings into tuples of int and compare them.</span>
+
+<span class="sd">    Returns True if the module&#39;s version is greater or equal to the &#39;min_version&#39;.</span>
+<span class="sd">    When min_version_str is not provided, it always returns True.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">min_version_str</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">the_module</span><span class="p">,</span> <span class="s2">&quot;__version__&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># always valid version</span>
+
+    <span class="n">mod_version</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">the_module</span><span class="o">.</span><span class="n">__version__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[:</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">required</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">min_version_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[:</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">mod_version</span> <span class="o">&gt;=</span> <span class="n">required</span></div>
+
+
+<div class="viewcode-block" id="exact_version"><a class="viewcode-back" href="../../../utils.html#monai.utils.module.exact_version">[docs]</a><span class="k">def</span> <span class="nf">exact_version</span><span class="p">(</span><span class="n">the_module</span><span class="p">,</span> <span class="n">version_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns True if the module&#39;s __version__ matches version_str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">the_module</span><span class="p">,</span> <span class="s2">&quot;__version__&quot;</span><span class="p">):</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">the_module</span><span class="si">}</span><span class="s2"> has no attribute __version__ in exact_version check.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">the_module</span><span class="o">.</span><span class="n">__version__</span> <span class="o">==</span> <span class="n">version_str</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="InvalidPyTorchVersionError"><a class="viewcode-back" href="../../../utils.html#monai.utils.module.InvalidPyTorchVersionError">[docs]</a><span class="k">class</span> <span class="nc">InvalidPyTorchVersionError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Raised when called function or method requires a more recent</span>
+<span class="sd">    PyTorch version than that installed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">required_version</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> requires PyTorch version </span><span class="si">{</span><span class="n">required_version</span><span class="si">}</span><span class="s2"> or later&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="OptionalImportError"><a class="viewcode-back" href="../../../utils.html#monai.utils.module.OptionalImportError">[docs]</a><span class="k">class</span> <span class="nc">OptionalImportError</span><span class="p">(</span><span class="ne">ImportError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Could not import APIs from an optional dependency.</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="optional_import"><a class="viewcode-back" href="../../../utils.html#monai.utils.module.optional_import">[docs]</a><span class="k">def</span> <span class="nf">optional_import</span><span class="p">(</span>
+    <span class="n">module</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">version_checker</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">min_version</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">descriptor</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">OPTIONAL_IMPORT_MSG_FMT</span><span class="p">,</span>
+    <span class="n">version_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">allow_namespace_pkg</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Imports an optional module specified by `module` string.</span>
+<span class="sd">    Any importing related exceptions will be stored, and exceptions raise lazily</span>
+<span class="sd">    when attempting to use the failed-to-import module.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        module: name of the module to be imported.</span>
+<span class="sd">        version: version string used by the version_checker.</span>
+<span class="sd">        version_checker: a callable to check the module version, Defaults to monai.utils.min_version.</span>
+<span class="sd">        name: a non-module attribute (such as method/class) to import from the imported module.</span>
+<span class="sd">        descriptor: a format string for the final error message when using a not imported module.</span>
+<span class="sd">        version_args: additional parameters to the version checker.</span>
+<span class="sd">        allow_namespace_pkg: whether importing a namespace package is allowed. Defaults to False.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The imported module and a boolean flag indicating whether the import is successful.</span>
+
+<span class="sd">    Examples::</span>
+
+<span class="sd">        &gt;&gt;&gt; torch, flag = optional_import(&#39;torch&#39;, &#39;1.1&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; print(torch, flag)</span>
+<span class="sd">        &lt;module &#39;torch&#39; from &#39;python/lib/python3.6/site-packages/torch/__init__.py&#39;&gt; True</span>
+
+<span class="sd">        &gt;&gt;&gt; the_module, flag = optional_import(&#39;unknown_module&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; print(flag)</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; the_module.method  # trying to access a module which is not imported</span>
+<span class="sd">        OptionalImportError: import unknown_module (No module named &#39;unknown_module&#39;).</span>
+
+<span class="sd">        &gt;&gt;&gt; torch, flag = optional_import(&#39;torch&#39;, &#39;42&#39;, exact_version)</span>
+<span class="sd">        &gt;&gt;&gt; torch.nn  # trying to access a module for which there isn&#39;t a proper version imported</span>
+<span class="sd">        OptionalImportError: import torch (requires version &#39;42&#39; by &#39;exact_version&#39;).</span>
+
+<span class="sd">        &gt;&gt;&gt; conv, flag = optional_import(&#39;torch.nn.functional&#39;, &#39;1.0&#39;, name=&#39;conv1d&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; print(conv)</span>
+<span class="sd">        &lt;built-in method conv1d of type object at 0x11a49eac0&gt;</span>
+
+<span class="sd">        &gt;&gt;&gt; conv, flag = optional_import(&#39;torch.nn.functional&#39;, &#39;42&#39;, name=&#39;conv1d&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; conv()  # trying to use a function from the not successfully imported module (due to unmatched version)</span>
+<span class="sd">        OptionalImportError: from torch.nn.functional import conv1d (requires version &#39;42&#39; by &#39;min_version&#39;).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">tb</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">exception_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">name</span><span class="p">:</span>
+        <span class="n">actual_cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;from </span><span class="si">{</span><span class="n">module</span><span class="si">}</span><span class="s2"> import </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">actual_cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;import </span><span class="si">{</span><span class="n">module</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">pkg</span> <span class="o">=</span> <span class="nb">__import__</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>  <span class="c1"># top level module</span>
+        <span class="n">the_module</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">allow_namespace_pkg</span><span class="p">:</span>
+            <span class="n">is_namespace</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">the_module</span><span class="p">,</span> <span class="s2">&quot;__file__&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">the_module</span><span class="p">,</span> <span class="s2">&quot;__path__&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">is_namespace</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">AssertionError</span>
+        <span class="k">if</span> <span class="n">name</span><span class="p">:</span>  <span class="c1"># user specified to load class/function/... from the module</span>
+            <span class="n">the_module</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">the_module</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">import_exception</span><span class="p">:</span>  <span class="c1"># any exceptions during import</span>
+        <span class="n">tb</span> <span class="o">=</span> <span class="n">import_exception</span><span class="o">.</span><span class="n">__traceback__</span>
+        <span class="n">exception_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">import_exception</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># found the module</span>
+        <span class="k">if</span> <span class="n">version_args</span> <span class="ow">and</span> <span class="n">version_checker</span><span class="p">(</span><span class="n">pkg</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">version_args</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">the_module</span><span class="p">,</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">version_args</span> <span class="ow">and</span> <span class="n">version_checker</span><span class="p">(</span><span class="n">pkg</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">the_module</span><span class="p">,</span> <span class="kc">True</span>
+
+    <span class="c1"># preparing lazy error message</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">descriptor</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">actual_cmd</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">version</span> <span class="ow">and</span> <span class="n">tb</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># a pure version issue</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; (requires &#39;</span><span class="si">{</span><span class="n">module</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">&#39; by &#39;</span><span class="si">{</span><span class="n">version_checker</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39;)&quot;</span>
+    <span class="k">if</span> <span class="n">exception_str</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; (</span><span class="si">{</span><span class="n">exception_str</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+    <span class="k">class</span> <span class="nc">_LazyRaise</span><span class="p">:</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="n">_kwargs</span><span class="p">):</span>
+            <span class="n">_default_msg</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">For details about installing the optional dependencies, please visit:&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">    https://docs.monai.io/en/latest/installation.html#installing-the-recommended-dependencies&quot;</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">tb</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_exception</span> <span class="o">=</span> <span class="n">OptionalImportError</span><span class="p">(</span><span class="n">_default_msg</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_exception</span> <span class="o">=</span> <span class="n">OptionalImportError</span><span class="p">(</span><span class="n">_default_msg</span><span class="p">)</span><span class="o">.</span><span class="n">with_traceback</span><span class="p">(</span><span class="n">tb</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Raises:</span>
+<span class="sd">                OptionalImportError: When you call this method.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exception</span>
+
+        <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="n">_kwargs</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Raises:</span>
+<span class="sd">                OptionalImportError: When you call this method.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exception</span>
+
+    <span class="k">return</span> <span class="n">_LazyRaise</span><span class="p">(),</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="get_package_version"><a class="viewcode-back" href="../../../utils.html#monai.utils.module.get_package_version">[docs]</a><span class="k">def</span> <span class="nf">get_package_version</span><span class="p">(</span><span class="n">dep_name</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;NOT INSTALLED or UNKNOWN VERSION.&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Try to load package and get version. If not found, return `default`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dep</span><span class="p">,</span> <span class="n">has_dep</span> <span class="o">=</span> <span class="n">optional_import</span><span class="p">(</span><span class="n">dep_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">has_dep</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dep</span><span class="p">,</span> <span class="s2">&quot;__version__&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">dep</span><span class="o">.</span><span class="n">__version__</span>
+    <span class="k">return</span> <span class="n">default</span></div>
+
+
+<div class="viewcode-block" id="get_torch_version_tuple"><a class="viewcode-back" href="../../../utils.html#monai.utils.module.get_torch_version_tuple">[docs]</a><span class="k">def</span> <span class="nf">get_torch_version_tuple</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple of ints represents the pytorch major/minor version.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[:</span><span class="mi">2</span><span class="p">]))</span></div>
+
+
+<div class="viewcode-block" id="version_leq"><a class="viewcode-back" href="../../../utils.html#monai.utils.module.version_leq">[docs]</a><span class="k">def</span> <span class="nf">version_leq</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns True if version `lhs` is earlier or equal to `rhs`.&quot;&quot;&quot;</span>
+
+    <span class="n">ver</span><span class="p">,</span> <span class="n">has_ver</span> <span class="o">=</span> <span class="n">optional_import</span><span class="p">(</span><span class="s2">&quot;pkg_resources&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;parse_version&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">has_ver</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ver</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">ver</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_try_cast</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">match</span><span class="p">(</span><span class="s2">&quot;(</span><span class="se">\\</span><span class="s2">d+)(.*)&quot;</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">groups</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">val</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">val</span>
+
+    <span class="c1"># remove git version suffixes if present</span>
+    <span class="n">lhs</span> <span class="o">=</span> <span class="n">lhs</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">rhs</span> <span class="o">=</span> <span class="n">rhs</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># parse the version strings in this basic way without `packaging` package</span>
+    <span class="n">lhs</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">_try_cast</span><span class="p">,</span> <span class="n">lhs</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">))</span>
+    <span class="n">rhs</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">_try_cast</span><span class="p">,</span> <span class="n">rhs</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="o">!=</span> <span class="n">r</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">l</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">&lt;</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">PT_BEFORE_1_7</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">__version__</span> <span class="o">!=</span> <span class="s2">&quot;1.7.0&quot;</span> <span class="ow">and</span> <span class="n">version_leq</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span> <span class="s2">&quot;1.7.0&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+    <span class="n">PT_BEFORE_1_7</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2020 - 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

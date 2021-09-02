@@ -1,0 +1,466 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Installation Guide &#8212; MONAI Deploy Application SDK 0.1.0 Documentation</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Development" href="contrib.html" />
+    <link rel="prev" title="Utilities" href="utils.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="index.html">
+  <img src="_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="current reference internal nav-link" href="#">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#from-pypi">
+   From PyPI
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#milestone-release">
+     Milestone release
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#weekly-preview-release">
+     Weekly preview release
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#from-github">
+   From GitHub
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#option-1-as-a-part-of-your-system-wide-module">
+     Option 1 (as a part of your system-wide module):
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#option-2-editable-installation">
+     Option 2 (editable installation):
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#validating-the-install">
+   Validating the install
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monai-version-string">
+   MONAI version string
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#from-dockerhub">
+   From DockerHub
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing-the-recommended-dependencies">
+   Installing the recommended dependencies
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="installation-guide">
+<h1>Installation Guide<a class="headerlink" href="#installation-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#from-pypi">From PyPI</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#milestone-release">Milestone release</a></p></li>
+<li><p><a class="reference external" href="#weekly-preview-release">Weekly preview release</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#from-github">From GitHub</a></p>
+<ol class="simple">
+<li><p><a class="reference external" href="#milestone-release">System-wide</a></p></li>
+<li><p><a class="reference external" href="#weekly-preview-release">Editable</a></p></li>
+</ol>
+</li>
+<li><p><a class="reference external" href="#validating-the-install">Validating the install</a></p></li>
+<li><p><a class="reference external" href="#monai-version-string">MONAI version string</a></p></li>
+<li><p><a class="reference external" href="#from-dockerhub">From DockerHub</a></p></li>
+<li><p><a class="reference external" href="#Installing-the-recommended-dependencies">Installing the recommended dependencies</a></p></li>
+</ol>
+<hr class="docutils" />
+<p>MONAI’s core functionality is written in Python 3 (&gt;= 3.6) and only requires <a class="reference external" href="https://numpy.org/">Numpy</a> and <a class="reference external" href="https://pytorch.org/">Pytorch</a>.</p>
+<p>The package is currently distributed via Github as the primary source code repository,
+and the Python package index (PyPI). The pre-built Docker images are made available on DockerHub.</p>
+<p>To install optional features such as handling the NIfTI files using
+<a class="reference external" href="https://nipy.org/nibabel/">Nibabel</a>, or building workflows using <a class="reference external" href="https://pytorch.org/ignite/">Pytorch
+Ignite</a>, please follow the instructions:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="#installing-the-recommended-dependencies">Installing the recommended dependencies</a></p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="from-pypi">
+<h2>From PyPI<a class="headerlink" href="#from-pypi" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="milestone-release">
+<h3>Milestone release<a class="headerlink" href="#milestone-release" title="Permalink to this headline">¶</a></h3>
+<p>To install the <a class="reference external" href="https://pypi.org/project/monai/">current milestone release</a>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install monai
+</pre></div>
+</div>
+</div>
+<div class="section" id="weekly-preview-release">
+<h3>Weekly preview release<a class="headerlink" href="#weekly-preview-release" title="Permalink to this headline">¶</a></h3>
+<p>To install the <a class="reference external" href="https://pypi.org/project/monai-weekly/">weekly preview release</a>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install monai-weekly
+</pre></div>
+</div>
+<p>The weekly build is released to PyPI every Sunday with a pre-release build number <code class="docutils literal notranslate"><span class="pre">dev[%y%U]</span></code>.
+To report any issues on the weekly preview, please include the version and commit information:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -c <span class="s2">&quot;import monai; print(monai.__version__); print(monai.__commit_id__)&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="from-github">
+<h2>From GitHub<a class="headerlink" href="#from-github" title="Permalink to this headline">¶</a></h2>
+<p>(<em>If you have installed the
+PyPI release version using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">monai</span></code>, please run <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">uninstall</span> <span class="pre">monai</span></code> before using the commands from this section. Because <code class="docutils literal notranslate"><span class="pre">pip</span></code> by
+default prefers the milestone release</em>.)</p>
+<p>The milestone versions are currently planned and released every few months.  As the
+codebase is under active development, you may want to install MONAI from GitHub
+for the latest features:</p>
+<div class="section" id="option-1-as-a-part-of-your-system-wide-module">
+<h3>Option 1 (as a part of your system-wide module):<a class="headerlink" href="#option-1-as-a-part-of-your-system-wide-module" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install git+https://github.com/Project-MONAI/MONAI#egg<span class="o">=</span>monai
+</pre></div>
+</div>
+<p>or, to build with MONAI Cpp/CUDA extensions:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">BUILD_MONAI</span><span class="o">=</span><span class="m">1</span> pip install git+https://github.com/Project-MONAI/MONAI#egg<span class="o">=</span>monai
+</pre></div>
+</div>
+<p>To build the extensions, if the system environment already has a version of Pytorch installed,
+<code class="docutils literal notranslate"><span class="pre">--no-build-isolation</span></code> might be preferred:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">BUILD_MONAI</span><span class="o">=</span><span class="m">1</span> pip install --no-build-isolation git+https://github.com/Project-MONAI/MONAI#egg<span class="o">=</span>monai
+</pre></div>
+</div>
+<p>this command will download and install the current <code class="docutils literal notranslate"><span class="pre">dev</span></code> branch of <a class="reference external" href="https://github.com/Project-MONAI/MONAI">MONAI from
+GitHub</a>.</p>
+<p>This documentation website by default shows the information for the latest version.</p>
+</div>
+<div class="section" id="option-2-editable-installation">
+<h3>Option 2 (editable installation):<a class="headerlink" href="#option-2-editable-installation" title="Permalink to this headline">¶</a></h3>
+<p>To install an editable version of MONAI, it is recommended to clone the codebase directly:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/Project-MONAI/MONAI.git
+</pre></div>
+</div>
+<p>This command will create a <code class="docutils literal notranslate"><span class="pre">MONAI/</span></code> folder in your current directory.
+You can install it by running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> MONAI/
+python setup.py develop
+</pre></div>
+</div>
+<p>or, to build with MONAI Cpp/CUDA extensions and install:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> MONAI/
+<span class="nv">BUILD_MONAI</span><span class="o">=</span><span class="m">1</span> python setup.py develop
+<span class="c1"># for MacOS</span>
+<span class="nv">BUILD_MONAI</span><span class="o">=</span><span class="m">1</span> <span class="nv">CC</span><span class="o">=</span>clang <span class="nv">CXX</span><span class="o">=</span>clang++ python setup.py develop
+</pre></div>
+</div>
+<p>To uninstall the package please run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> MONAI/
+python setup.py develop --uninstall
+
+<span class="c1"># to further clean up the MONAI/ folder (Bash script)</span>
+./runtests.sh --clean
+</pre></div>
+</div>
+<p>Alternatively, simply adding the root directory of the cloned source code (e.g., <code class="docutils literal notranslate"><span class="pre">/workspace/Documents/MONAI</span></code>) to your <code class="docutils literal notranslate"><span class="pre">$PYTHONPATH</span></code>
+and the codebase is ready to use (without the additional features of MONAI C++/CUDA extensions).</p>
+</div>
+</div>
+<div class="section" id="validating-the-install">
+<h2>Validating the install<a class="headerlink" href="#validating-the-install" title="Permalink to this headline">¶</a></h2>
+<p>You can verify the installation by:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -c <span class="s1">&#39;import monai; monai.config.print_config()&#39;</span>
+</pre></div>
+</div>
+<p>If the installation is successful, this command will print out the MONAI version information, and this confirms the core
+modules of MONAI are ready-to-use.</p>
+</div>
+<div class="section" id="monai-version-string">
+<h2>MONAI version string<a class="headerlink" href="#monai-version-string" title="Permalink to this headline">¶</a></h2>
+<p>The MONAI version string shows the current status of your local installation. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MONAI</span> <span class="n">version</span><span class="p">:</span> <span class="mf">0.1.0</span><span class="o">+</span><span class="mf">144.</span><span class="n">g52c763d</span><span class="o">.</span><span class="n">dirty</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0.1.0</span></code> indicates that your installation is based on the <code class="docutils literal notranslate"><span class="pre">0.1.0</span></code> milestone release.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">+144</span></code> indicates that your installation is 144 git commits ahead of the milestone release.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">g52c763d</span></code> indicates that your installation corresponds to the git commit hash <code class="docutils literal notranslate"><span class="pre">52c763d</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dirty</span></code> indicates that you have modified the codebase locally, and the codebase is inconsistent with <code class="docutils literal notranslate"><span class="pre">52c763d</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="from-dockerhub">
+<h2>From DockerHub<a class="headerlink" href="#from-dockerhub" title="Permalink to this headline">¶</a></h2>
+<p>Make sure you have installed the NVIDIA driver and Docker 19.03+ for your Linux distribution.
+Note that you do not need to install the CUDA toolkit on the host, but the driver needs to be installed.
+Please find out more information on <a class="reference external" href="https://github.com/NVIDIA/nvidia-docker">nvidia-docker</a>.</p>
+<p>Assuming that you have the Nvidia driver and Docker 19.03+ installed, running the following command will
+download and start a container with the latest version of MONAI. The latest <code class="docutils literal notranslate"><span class="pre">dev</span></code> branch of MONAI from GitHub
+is included in the image.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --gpus all --rm -ti --ipc<span class="o">=</span>host projectmonai/monai:latest
+</pre></div>
+</div>
+<p>You can also run a milestone release docker image by specifying the image tag, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">--</span><span class="n">gpus</span> <span class="nb">all</span> <span class="o">--</span><span class="n">rm</span> <span class="o">-</span><span class="n">ti</span> <span class="o">--</span><span class="n">ipc</span><span class="o">=</span><span class="n">host</span> <span class="n">projectmonai</span><span class="o">/</span><span class="n">monai</span><span class="p">:</span><span class="mf">0.1.0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-the-recommended-dependencies">
+<h2>Installing the recommended dependencies<a class="headerlink" href="#installing-the-recommended-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>By default, the installation steps will only download and install the minimal requirements of MONAI.
+Optional dependencies can be installed using <a class="reference external" href="https://packaging.python.org/tutorials/installing-packages/#installing-setuptools-extras">the extras syntax</a> to support additional features.</p>
+<p>For example, to install MONAI with Nibabel and Scikit-image support:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/Project-MONAI/MONAI.git
+<span class="nb">cd</span> MONAI/
+pip install -e <span class="s1">&#39;.[nibabel,skimage]&#39;</span>
+</pre></div>
+</div>
+<p>Alternatively, to install all optional dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/Project-MONAI/MONAI.git
+<span class="nb">cd</span> MONAI/
+pip install -e <span class="s1">&#39;.[all]&#39;</span>
+</pre></div>
+</div>
+<p>To install all optional dependencies for MONAI development:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/Project-MONAI/MONAI.git
+<span class="nb">cd</span> MONAI/
+pip install -r requirements-dev.txt
+</pre></div>
+</div>
+<p>Since MONAI v0.2.0, the extras syntax such as <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">'monai[nibabel]'</span></code> is available via PyPI.</p>
+<ul class="simple">
+<li><p>The options are</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">nibabel</span><span class="p">,</span> <span class="n">skimage</span><span class="p">,</span> <span class="n">pillow</span><span class="p">,</span> <span class="n">tensorboard</span><span class="p">,</span> <span class="n">gdown</span><span class="p">,</span> <span class="n">ignite</span><span class="p">,</span> <span class="n">torchvision</span><span class="p">,</span> <span class="n">itk</span><span class="p">,</span> <span class="n">tqdm</span><span class="p">,</span> <span class="n">lmdb</span><span class="p">,</span> <span class="n">psutil</span><span class="p">,</span> <span class="n">cucim</span><span class="p">,</span> <span class="n">openslide</span><span class="p">,</span> <span class="n">pandas</span><span class="p">,</span> <span class="n">einops</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>which correspond to <code class="docutils literal notranslate"><span class="pre">nibabel</span></code>, <code class="docutils literal notranslate"><span class="pre">scikit-image</span></code>, <code class="docutils literal notranslate"><span class="pre">pillow</span></code>, <code class="docutils literal notranslate"><span class="pre">tensorboard</span></code>,
+<code class="docutils literal notranslate"><span class="pre">gdown</span></code>, <code class="docutils literal notranslate"><span class="pre">pytorch-ignite</span></code>, <code class="docutils literal notranslate"><span class="pre">torchvision</span></code>, <code class="docutils literal notranslate"><span class="pre">itk</span></code>, <code class="docutils literal notranslate"><span class="pre">tqdm</span></code>, <code class="docutils literal notranslate"><span class="pre">lmdb</span></code>, <code class="docutils literal notranslate"><span class="pre">psutil</span></code>, <code class="docutils literal notranslate"><span class="pre">cucim</span></code>, <code class="docutils literal notranslate"><span class="pre">openslide-python</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and <code class="docutils literal notranslate"><span class="pre">einops</span></code>, respectively.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">'monai[all]'</span></code> installs all the optional dependencies.</p></li>
+</ul>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="utils.html" title="previous page">Utilities</a>
+    <a class='right-next' id="next-link" href="contrib.html" title="next page">Development</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

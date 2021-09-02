@@ -1,0 +1,1095 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monai.transforms.croppad.array &#8212; MONAI 0.6.0 Documentation</title>
+    
+  <link href="../../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../../index.html">
+  <img src="../../../../_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for monai.transforms.croppad.array</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 - 2021 MONAI Consortium</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">A collection of &quot;vanilla&quot; transforms for crop and pad operations</span>
+<span class="sd">https://github.com/Project-MONAI/MONAI/wiki/MONAI_Design</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">ceil</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="kn">from</span> <span class="nn">monai.config</span> <span class="kn">import</span> <span class="n">IndexSelection</span>
+<span class="kn">from</span> <span class="nn">monai.data.utils</span> <span class="kn">import</span> <span class="n">get_random_patch</span><span class="p">,</span> <span class="n">get_valid_patch_size</span>
+<span class="kn">from</span> <span class="nn">monai.transforms.transform</span> <span class="kn">import</span> <span class="n">Randomizable</span><span class="p">,</span> <span class="n">Transform</span>
+<span class="kn">from</span> <span class="nn">monai.transforms.utils</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">compute_divisible_spatial_size</span><span class="p">,</span>
+    <span class="n">generate_pos_neg_label_crop_centers</span><span class="p">,</span>
+    <span class="n">generate_spatial_bounding_box</span><span class="p">,</span>
+    <span class="n">is_positive</span><span class="p">,</span>
+    <span class="n">map_binary_to_indices</span><span class="p">,</span>
+    <span class="n">weighted_patch_samples</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">monai.utils</span> <span class="kn">import</span> <span class="n">Method</span><span class="p">,</span> <span class="n">NumpyPadMode</span><span class="p">,</span> <span class="n">ensure_tuple</span><span class="p">,</span> <span class="n">ensure_tuple_rep</span><span class="p">,</span> <span class="n">fall_back_tuple</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;SpatialPad&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BorderPad&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DivisiblePad&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SpatialCrop&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CenterSpatialCrop&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CenterScaleCrop&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RandSpatialCrop&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RandScaleCrop&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RandSpatialCropSamples&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CropForeground&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RandWeightedCrop&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RandCropByPosNegLabel&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ResizeWithPadOrCrop&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BoundingRect&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="SpatialPad"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SpatialPad">[docs]</a><span class="k">class</span> <span class="nc">SpatialPad</span><span class="p">(</span><span class="n">Transform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Performs padding to the data, symmetric for all sides or all on one side for each dimension.</span>
+<span class="sd">    Uses np.pad so in practice, a mode needs to be provided. See numpy.lib.arraypad.pad</span>
+<span class="sd">    for additional details.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spatial_size: the spatial size of output data after padding, if a dimension of the input</span>
+<span class="sd">            data size is bigger than the pad size, will not pad that dimension.</span>
+<span class="sd">            If its components have non-positive values, the corresponding size of input image will be used</span>
+<span class="sd">            (no padding). for example: if the spatial size of input data is [30, 30, 30] and</span>
+<span class="sd">            `spatial_size=[32, 25, -1]`, the spatial size of output data will be [32, 30, 30].</span>
+<span class="sd">        method: {``&quot;symmetric&quot;``, ``&quot;end&quot;``}</span>
+<span class="sd">            Pad image symmetric on every side or only pad at the end sides. Defaults to ``&quot;symmetric&quot;``.</span>
+<span class="sd">        mode: {``&quot;constant&quot;``, ``&quot;edge&quot;``, ``&quot;linear_ramp&quot;``, ``&quot;maximum&quot;``, ``&quot;mean&quot;``,</span>
+<span class="sd">            ``&quot;median&quot;``, ``&quot;minimum&quot;``, ``&quot;reflect&quot;``, ``&quot;symmetric&quot;``, ``&quot;wrap&quot;``, ``&quot;empty&quot;``}</span>
+<span class="sd">            One of the listed string values or a user supplied function. Defaults to ``&quot;constant&quot;``.</span>
+<span class="sd">            See also: https://numpy.org/doc/1.18/reference/generated/numpy.pad.html</span>
+<span class="sd">        np_kwargs: other args for `np.pad` API, note that `np.pad` treats channel dimension as the first dimension.</span>
+<span class="sd">            more details: https://numpy.org/doc/1.18/reference/generated/numpy.pad.html</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">spatial_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">method</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Method</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Method</span><span class="o">.</span><span class="n">SYMMETRIC</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">NumpyPadMode</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">NumpyPadMode</span><span class="o">.</span><span class="n">CONSTANT</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">np_kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spatial_size</span> <span class="o">=</span> <span class="n">spatial_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">method</span><span class="p">:</span> <span class="n">Method</span> <span class="o">=</span> <span class="n">Method</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span> <span class="n">NumpyPadMode</span> <span class="o">=</span> <span class="n">NumpyPadMode</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">np_kwargs</span> <span class="o">=</span> <span class="n">np_kwargs</span>
+
+    <span class="k">def</span> <span class="nf">_determine_data_pad_width</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_shape</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+        <span class="n">spatial_size</span> <span class="o">=</span> <span class="n">fall_back_tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spatial_size</span><span class="p">,</span> <span class="n">data_shape</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="n">Method</span><span class="o">.</span><span class="n">SYMMETRIC</span><span class="p">:</span>
+            <span class="n">pad_width</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sp_i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">spatial_size</span><span class="p">):</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">sp_i</span> <span class="o">-</span> <span class="n">data_shape</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">pad_width</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">width</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">width</span> <span class="o">-</span> <span class="p">(</span><span class="n">width</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)))</span>
+            <span class="k">return</span> <span class="n">pad_width</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">sp_i</span> <span class="o">-</span> <span class="n">data_shape</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">0</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sp_i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">spatial_size</span><span class="p">)]</span>
+
+<div class="viewcode-block" id="SpatialPad.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SpatialPad.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">NumpyPadMode</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            img: data to be transformed, assuming `img` is channel-first and</span>
+<span class="sd">                padding doesn&#39;t apply to the channel dim.</span>
+<span class="sd">            mode: {``&quot;constant&quot;``, ``&quot;edge&quot;``, ``&quot;linear_ramp&quot;``, ``&quot;maximum&quot;``, ``&quot;mean&quot;``,</span>
+<span class="sd">                ``&quot;median&quot;``, ``&quot;minimum&quot;``, ``&quot;reflect&quot;``, ``&quot;symmetric&quot;``, ``&quot;wrap&quot;``, ``&quot;empty&quot;``}</span>
+<span class="sd">                One of the listed string values or a user supplied function. Defaults to ``self.mode``.</span>
+<span class="sd">                See also: https://numpy.org/doc/1.18/reference/generated/numpy.pad.html</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data_pad_width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_determine_data_pad_width</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">all_pad_width</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">+</span> <span class="n">data_pad_width</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">all_pad_width</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+            <span class="c1"># all zeros, skip padding</span>
+            <span class="k">return</span> <span class="n">img</span>
+
+        <span class="n">mode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">value</span> <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">NumpyPadMode</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">all_pad_width</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">np_kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">img</span></div></div>
+
+
+<div class="viewcode-block" id="BorderPad"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.BorderPad">[docs]</a><span class="k">class</span> <span class="nc">BorderPad</span><span class="p">(</span><span class="n">Transform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Pad the input data by adding specified borders to every dimension.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spatial_border: specified size for every spatial border. Any -ve values will be set to 0. It can be 3 shapes:</span>
+
+<span class="sd">            - single int number, pad all the borders with the same size.</span>
+<span class="sd">            - length equals the length of image shape, pad every spatial dimension separately.</span>
+<span class="sd">              for example, image shape(CHW) is [1, 4, 4], spatial_border is [2, 1],</span>
+<span class="sd">              pad every border of H dim with 2, pad every border of W dim with 1, result shape is [1, 8, 6].</span>
+<span class="sd">            - length equals 2 x (length of image shape), pad every border of every dimension separately.</span>
+<span class="sd">              for example, image shape(CHW) is [1, 4, 4], spatial_border is [1, 2, 3, 4], pad top of H dim with 1,</span>
+<span class="sd">              pad bottom of H dim with 2, pad left of W dim with 3, pad right of W dim with 4.</span>
+<span class="sd">              the result shape is [1, 7, 11].</span>
+
+<span class="sd">        mode: {``&quot;constant&quot;``, ``&quot;edge&quot;``, ``&quot;linear_ramp&quot;``, ``&quot;maximum&quot;``, ``&quot;mean&quot;``,</span>
+<span class="sd">            ``&quot;median&quot;``, ``&quot;minimum&quot;``, ``&quot;reflect&quot;``, ``&quot;symmetric&quot;``, ``&quot;wrap&quot;``, ``&quot;empty&quot;``}</span>
+<span class="sd">            One of the listed string values or a user supplied function. Defaults to ``&quot;constant&quot;``.</span>
+<span class="sd">            See also: https://numpy.org/doc/1.18/reference/generated/numpy.pad.html</span>
+<span class="sd">        np_kwargs: other args for `np.pad` API, note that `np.pad` treats channel dimension as the first dimension.</span>
+<span class="sd">            more details: https://numpy.org/doc/1.18/reference/generated/numpy.pad.html</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">spatial_border</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">NumpyPadMode</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">NumpyPadMode</span><span class="o">.</span><span class="n">CONSTANT</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">np_kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spatial_border</span> <span class="o">=</span> <span class="n">spatial_border</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span> <span class="n">NumpyPadMode</span> <span class="o">=</span> <span class="n">NumpyPadMode</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">np_kwargs</span> <span class="o">=</span> <span class="n">np_kwargs</span>
+
+<div class="viewcode-block" id="BorderPad.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.BorderPad.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">NumpyPadMode</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            img: data to be transformed, assuming `img` is channel-first and</span>
+<span class="sd">                padding doesn&#39;t apply to the channel dim.</span>
+<span class="sd">            mode: {``&quot;constant&quot;``, ``&quot;edge&quot;``, ``&quot;linear_ramp&quot;``, ``&quot;maximum&quot;``, ``&quot;mean&quot;``,</span>
+<span class="sd">                ``&quot;median&quot;``, ``&quot;minimum&quot;``, ``&quot;reflect&quot;``, ``&quot;symmetric&quot;``, ``&quot;wrap&quot;``, ``&quot;empty&quot;``}</span>
+<span class="sd">                One of the listed string values or a user supplied function. Defaults to ``self.mode``.</span>
+<span class="sd">                See also: https://numpy.org/doc/1.18/reference/generated/numpy.pad.html</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: When ``self.spatial_border`` does not contain ints.</span>
+<span class="sd">            ValueError: When ``self.spatial_border`` length is not one of</span>
+<span class="sd">                [1, len(spatial_shape), 2*len(spatial_shape)].</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">spatial_shape</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">spatial_border</span> <span class="o">=</span> <span class="n">ensure_tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spatial_border</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">spatial_border</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;self.spatial_border must contain only ints, got </span><span class="si">{</span><span class="n">spatial_border</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="n">spatial_border</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">spatial_border</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">spatial_border</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">data_pad_width</span> <span class="o">=</span> <span class="p">[(</span><span class="n">spatial_border</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">spatial_border</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">spatial_shape</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">spatial_border</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">spatial_shape</span><span class="p">):</span>
+            <span class="n">data_pad_width</span> <span class="o">=</span> <span class="p">[(</span><span class="n">sp</span><span class="p">,</span> <span class="n">sp</span><span class="p">)</span> <span class="k">for</span> <span class="n">sp</span> <span class="ow">in</span> <span class="n">spatial_border</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">spatial_shape</span><span class="p">)]]</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">spatial_border</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">spatial_shape</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">data_pad_width</span> <span class="o">=</span> <span class="p">[(</span><span class="n">spatial_border</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span><span class="p">],</span> <span class="n">spatial_border</span><span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">spatial_shape</span><span class="p">))]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Unsupported spatial_border length: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">spatial_border</span><span class="p">)</span><span class="si">}</span><span class="s2">, available options are &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;[1, len(spatial_shape)=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">spatial_shape</span><span class="p">)</span><span class="si">}</span><span class="s2">, 2*len(spatial_shape)=</span><span class="si">{</span><span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">spatial_shape</span><span class="p">)</span><span class="si">}</span><span class="s2">].&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">mode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">value</span> <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">NumpyPadMode</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">+</span> <span class="n">data_pad_width</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">np_kwargs</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="DivisiblePad"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.DivisiblePad">[docs]</a><span class="k">class</span> <span class="nc">DivisiblePad</span><span class="p">(</span><span class="n">Transform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Pad the input data, so that the spatial sizes are divisible by `k`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DivisiblePad.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.DivisiblePad.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">k</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">NumpyPadMode</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">NumpyPadMode</span><span class="o">.</span><span class="n">CONSTANT</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">np_kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            k: the target k for each spatial dimension.</span>
+<span class="sd">                if `k` is negative or 0, the original size is preserved.</span>
+<span class="sd">                if `k` is an int, the same `k` be applied to all the input spatial dimensions.</span>
+<span class="sd">            mode: {``&quot;constant&quot;``, ``&quot;edge&quot;``, ``&quot;linear_ramp&quot;``, ``&quot;maximum&quot;``, ``&quot;mean&quot;``,</span>
+<span class="sd">                ``&quot;median&quot;``, ``&quot;minimum&quot;``, ``&quot;reflect&quot;``, ``&quot;symmetric&quot;``, ``&quot;wrap&quot;``, ``&quot;empty&quot;``}</span>
+<span class="sd">                One of the listed string values or a user supplied function. Defaults to ``&quot;constant&quot;``.</span>
+<span class="sd">                See also: https://numpy.org/doc/1.18/reference/generated/numpy.pad.html</span>
+<span class="sd">            np_kwargs: other args for `np.pad` API, note that `np.pad` treats channel dimension as the first dimension.</span>
+<span class="sd">                more details: https://numpy.org/doc/1.18/reference/generated/numpy.pad.html</span>
+
+<span class="sd">        See also :py:class:`monai.transforms.SpatialPad`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span> <span class="n">NumpyPadMode</span> <span class="o">=</span> <span class="n">NumpyPadMode</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">np_kwargs</span> <span class="o">=</span> <span class="n">np_kwargs</span></div>
+
+<div class="viewcode-block" id="DivisiblePad.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.DivisiblePad.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">NumpyPadMode</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            img: data to be transformed, assuming `img` is channel-first</span>
+<span class="sd">                and padding doesn&#39;t apply to the channel dim.</span>
+<span class="sd">            mode: {``&quot;constant&quot;``, ``&quot;edge&quot;``, ``&quot;linear_ramp&quot;``, ``&quot;maximum&quot;``, ``&quot;mean&quot;``,</span>
+<span class="sd">                ``&quot;median&quot;``, ``&quot;minimum&quot;``, ``&quot;reflect&quot;``, ``&quot;symmetric&quot;``, ``&quot;wrap&quot;``, ``&quot;empty&quot;``}</span>
+<span class="sd">                One of the listed string values or a user supplied function. Defaults to ``self.mode``.</span>
+<span class="sd">                See also: https://numpy.org/doc/1.18/reference/generated/numpy.pad.html</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">new_size</span> <span class="o">=</span> <span class="n">compute_divisible_spatial_size</span><span class="p">(</span><span class="n">spatial_shape</span><span class="o">=</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">k</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)</span>
+        <span class="n">spatial_pad</span> <span class="o">=</span> <span class="n">SpatialPad</span><span class="p">(</span>
+            <span class="n">spatial_size</span><span class="o">=</span><span class="n">new_size</span><span class="p">,</span>
+            <span class="n">method</span><span class="o">=</span><span class="n">Method</span><span class="o">.</span><span class="n">SYMMETRIC</span><span class="p">,</span>
+            <span class="n">mode</span><span class="o">=</span><span class="n">mode</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">np_kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">spatial_pad</span><span class="p">(</span><span class="n">img</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="SpatialCrop"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SpatialCrop">[docs]</a><span class="k">class</span> <span class="nc">SpatialCrop</span><span class="p">(</span><span class="n">Transform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    General purpose cropper to produce sub-volume region of interest (ROI).</span>
+<span class="sd">    If a dimension of the expected ROI size is bigger than the input image size, will not crop that dimension.</span>
+<span class="sd">    So the cropped result may be smaller than the expected ROI, and the cropped results of several images may</span>
+<span class="sd">    not have exactly the same shape.</span>
+<span class="sd">    It can support to crop ND spatial (channel-first) data.</span>
+
+<span class="sd">    The cropped region can be parameterised in various ways:</span>
+<span class="sd">        - a list of slices for each spatial dimension (allows for use of -ve indexing and `None`)</span>
+<span class="sd">        - a spatial center and size</span>
+<span class="sd">        - the start and end coordinates of the ROI</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SpatialCrop.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SpatialCrop.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">roi_center</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">roi_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">roi_start</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">roi_end</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">roi_slices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">slice</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            roi_center: voxel coordinates for center of the crop ROI.</span>
+<span class="sd">            roi_size: size of the crop ROI, if a dimension of ROI size is bigger than image size,</span>
+<span class="sd">                will not crop that dimension of the image.</span>
+<span class="sd">            roi_start: voxel coordinates for start of the crop ROI.</span>
+<span class="sd">            roi_end: voxel coordinates for end of the crop ROI, if a coordinate is out of image,</span>
+<span class="sd">                use the end coordinate of image.</span>
+<span class="sd">            roi_slices: list of slices for each of the spatial dimensions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">roi_slices</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">step</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">s</span><span class="o">.</span><span class="n">step</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">roi_slices</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Only slice steps of 1/None are currently supported&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">slices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">roi_slices</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">roi_center</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">roi_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">roi_center</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">roi_center</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+                <span class="n">roi_size</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">roi_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+                <span class="n">roi_start_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">roi_center</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">floor_divide</span><span class="p">(</span><span class="n">roi_size</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">roi_end_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">roi_start_np</span> <span class="o">+</span> <span class="n">roi_size</span><span class="p">,</span> <span class="n">roi_start_np</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">roi_start</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">roi_end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Please specify either roi_center, roi_size or roi_start, roi_end.&quot;</span><span class="p">)</span>
+                <span class="n">roi_start_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">roi_start</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">roi_end_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">roi_end</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">),</span> <span class="n">roi_start_np</span><span class="p">)</span>
+            <span class="c1"># Allow for 1D by converting back to np.array (since np.maximum will convert to int)</span>
+            <span class="n">roi_start_np</span> <span class="o">=</span> <span class="n">roi_start_np</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">roi_start_np</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">roi_start_np</span><span class="p">])</span>
+            <span class="n">roi_end_np</span> <span class="o">=</span> <span class="n">roi_end_np</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">roi_end_np</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">roi_end_np</span><span class="p">])</span>
+            <span class="c1"># convert to slices</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">slices</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">roi_start_np</span><span class="p">,</span> <span class="n">roi_end_np</span><span class="p">)]</span></div>
+
+<div class="viewcode-block" id="SpatialCrop.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SpatialCrop.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply the transform to `img`, assuming `img` is channel-first and</span>
+<span class="sd">        slicing doesn&#39;t apply to the channel dim.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sd</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slices</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>  <span class="c1"># spatial dims</span>
+        <span class="n">slices</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">slices</span><span class="p">[:</span><span class="n">sd</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">img</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">slices</span><span class="p">)]</span></div></div>
+
+
+<div class="viewcode-block" id="CenterSpatialCrop"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.CenterSpatialCrop">[docs]</a><span class="k">class</span> <span class="nc">CenterSpatialCrop</span><span class="p">(</span><span class="n">Transform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Crop at the center of image with specified ROI size.</span>
+<span class="sd">    If a dimension of the expected ROI size is bigger than the input image size, will not crop that dimension.</span>
+<span class="sd">    So the cropped result may be smaller than the expected ROI, and the cropped results of several images may</span>
+<span class="sd">    not have exactly the same shape.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        roi_size: the spatial size of the crop region e.g. [224,224,128]</span>
+<span class="sd">            if a dimension of ROI size is bigger than image size, will not crop that dimension of the image.</span>
+<span class="sd">            If its components have non-positive values, the corresponding size of input image will be used.</span>
+<span class="sd">            for example: if the spatial size of input data is [40, 40, 40] and `roi_size=[32, 64, -1]`,</span>
+<span class="sd">            the spatial size of output data will be [32, 40, 40].</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">roi_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">roi_size</span> <span class="o">=</span> <span class="n">roi_size</span>
+
+<div class="viewcode-block" id="CenterSpatialCrop.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.CenterSpatialCrop.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply the transform to `img`, assuming `img` is channel-first and</span>
+<span class="sd">        slicing doesn&#39;t apply to the channel dim.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">roi_size</span> <span class="o">=</span> <span class="n">fall_back_tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">roi_size</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">//</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
+        <span class="n">cropper</span> <span class="o">=</span> <span class="n">SpatialCrop</span><span class="p">(</span><span class="n">roi_center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span> <span class="n">roi_size</span><span class="o">=</span><span class="n">roi_size</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cropper</span><span class="p">(</span><span class="n">img</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="CenterScaleCrop"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.CenterScaleCrop">[docs]</a><span class="k">class</span> <span class="nc">CenterScaleCrop</span><span class="p">(</span><span class="n">Transform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Crop at the center of image with specified scale of ROI size.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        roi_scale: specifies the expected scale of image size to crop. e.g. [0.3, 0.4, 0.5] or a number for all dims.</span>
+<span class="sd">            If its components have non-positive values, will use `1.0` instead, which means the input image size.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">roi_scale</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">roi_scale</span> <span class="o">=</span> <span class="n">roi_scale</span>
+
+<div class="viewcode-block" id="CenterScaleCrop.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.CenterScaleCrop.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="n">img_size</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">ndim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">img_size</span><span class="p">)</span>
+        <span class="n">roi_size</span> <span class="o">=</span> <span class="p">[</span><span class="n">ceil</span><span class="p">(</span><span class="n">r</span> <span class="o">*</span> <span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">roi_scale</span><span class="p">,</span> <span class="n">ndim</span><span class="p">),</span> <span class="n">img_size</span><span class="p">)]</span>
+        <span class="n">sp_crop</span> <span class="o">=</span> <span class="n">CenterSpatialCrop</span><span class="p">(</span><span class="n">roi_size</span><span class="o">=</span><span class="n">roi_size</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sp_crop</span><span class="p">(</span><span class="n">img</span><span class="o">=</span><span class="n">img</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="RandSpatialCrop"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandSpatialCrop">[docs]</a><span class="k">class</span> <span class="nc">RandSpatialCrop</span><span class="p">(</span><span class="n">Randomizable</span><span class="p">,</span> <span class="n">Transform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Crop image with random size or specific size ROI. It can crop at a random position as center</span>
+<span class="sd">    or at the image center. And allows to set the minimum and maximum size to limit the randomly generated ROI.</span>
+
+<span class="sd">    Note: even `random_size=False`, if a dimension of the expected ROI size is bigger than the input image size,</span>
+<span class="sd">    will not crop that dimension. So the cropped result may be smaller than the expected ROI, and the cropped results</span>
+<span class="sd">    of several images may not have exactly the same shape.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        roi_size: if `random_size` is True, it specifies the minimum crop region.</span>
+<span class="sd">            if `random_size` is False, it specifies the expected ROI size to crop. e.g. [224, 224, 128]</span>
+<span class="sd">            if a dimension of ROI size is bigger than image size, will not crop that dimension of the image.</span>
+<span class="sd">            If its components have non-positive values, the corresponding size of input image will be used.</span>
+<span class="sd">            for example: if the spatial size of input data is [40, 40, 40] and `roi_size=[32, 64, -1]`,</span>
+<span class="sd">            the spatial size of output data will be [32, 40, 40].</span>
+<span class="sd">        max_roi_size: if `random_size` is True and `roi_size` specifies the min crop region size, `max_roi_size`</span>
+<span class="sd">            can specify the max crop region size. if None, defaults to the input image size.</span>
+<span class="sd">            if its components have non-positive values, the corresponding size of input image will be used.</span>
+<span class="sd">        random_center: crop at random position as center or the image center.</span>
+<span class="sd">        random_size: crop with random size or specific size ROI.</span>
+<span class="sd">            if True, the actual size is sampled from `randint(roi_size, max_roi_size + 1)`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">roi_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">max_roi_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">random_center</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">random_size</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">roi_size</span> <span class="o">=</span> <span class="n">roi_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_roi_size</span> <span class="o">=</span> <span class="n">max_roi_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">random_center</span> <span class="o">=</span> <span class="n">random_center</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">random_size</span> <span class="o">=</span> <span class="n">random_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_slices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">slice</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="RandSpatialCrop.randomize"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandSpatialCrop.randomize">[docs]</a>    <span class="k">def</span> <span class="nf">randomize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img_size</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">=</span> <span class="n">fall_back_tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">roi_size</span><span class="p">,</span> <span class="n">img_size</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_size</span><span class="p">:</span>
+            <span class="n">max_size</span> <span class="o">=</span> <span class="n">img_size</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_roi_size</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">fall_back_tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_roi_size</span><span class="p">,</span> <span class="n">img_size</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">j</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_size</span><span class="p">,</span> <span class="n">max_size</span><span class="p">)]):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;min ROI size: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_size</span><span class="si">}</span><span class="s2"> is bigger than max ROI size: </span><span class="si">{</span><span class="n">max_size</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_size</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">high</span><span class="o">=</span><span class="n">max_size</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">img_size</span><span class="p">))))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_center</span><span class="p">:</span>
+            <span class="n">valid_size</span> <span class="o">=</span> <span class="n">get_valid_patch_size</span><span class="p">(</span><span class="n">img_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_size</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_slices</span> <span class="o">=</span> <span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">),)</span> <span class="o">+</span> <span class="n">get_random_patch</span><span class="p">(</span><span class="n">img_size</span><span class="p">,</span> <span class="n">valid_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RandSpatialCrop.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandSpatialCrop.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply the transform to `img`, assuming `img` is channel-first and</span>
+<span class="sd">        slicing doesn&#39;t apply to the channel dim.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">randomize</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_center</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">img</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_slices</span><span class="p">]</span>
+        <span class="n">cropper</span> <span class="o">=</span> <span class="n">CenterSpatialCrop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_size</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cropper</span><span class="p">(</span><span class="n">img</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="RandScaleCrop"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandScaleCrop">[docs]</a><span class="k">class</span> <span class="nc">RandScaleCrop</span><span class="p">(</span><span class="n">RandSpatialCrop</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Subclass of :py:class:`monai.transforms.RandSpatialCrop`. Crop image with</span>
+<span class="sd">    random size or specific size ROI.  It can crop at a random position as</span>
+<span class="sd">    center or at the image center.  And allows to set the minimum and maximum</span>
+<span class="sd">    scale of image size to limit the randomly generated ROI.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        roi_scale: if `random_size` is True, it specifies the minimum crop size: `roi_scale * image spatial size`.</span>
+<span class="sd">            if `random_size` is False, it specifies the expected scale of image size to crop. e.g. [0.3, 0.4, 0.5].</span>
+<span class="sd">            If its components have non-positive values, will use `1.0` instead, which means the input image size.</span>
+<span class="sd">        max_roi_scale: if `random_size` is True and `roi_scale` specifies the min crop region size, `max_roi_scale`</span>
+<span class="sd">            can specify the max crop region size: `max_roi_scale * image spatial size`.</span>
+<span class="sd">            if None, defaults to the input image size. if its components have non-positive values,</span>
+<span class="sd">            will use `1.0` instead, which means the input image size.</span>
+<span class="sd">        random_center: crop at random position as center or the image center.</span>
+<span class="sd">        random_size: crop with random size or specified size ROI by `roi_scale * image spatial size`.</span>
+<span class="sd">            if True, the actual size is sampled from</span>
+<span class="sd">            `randint(roi_scale * image spatial size, max_roi_scale * image spatial size + 1)`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">roi_scale</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span>
+        <span class="n">max_roi_scale</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">random_center</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">random_size</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">roi_size</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_roi_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">random_center</span><span class="o">=</span><span class="n">random_center</span><span class="p">,</span> <span class="n">random_size</span><span class="o">=</span><span class="n">random_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">roi_scale</span> <span class="o">=</span> <span class="n">roi_scale</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_roi_scale</span> <span class="o">=</span> <span class="n">max_roi_scale</span>
+
+<div class="viewcode-block" id="RandScaleCrop.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandScaleCrop.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply the transform to `img`, assuming `img` is channel-first and</span>
+<span class="sd">        slicing doesn&#39;t apply to the channel dim.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">img_size</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">ndim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">img_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">roi_size</span> <span class="o">=</span> <span class="p">[</span><span class="n">ceil</span><span class="p">(</span><span class="n">r</span> <span class="o">*</span> <span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">roi_scale</span><span class="p">,</span> <span class="n">ndim</span><span class="p">),</span> <span class="n">img_size</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_roi_scale</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_roi_size</span> <span class="o">=</span> <span class="p">[</span><span class="n">ceil</span><span class="p">(</span><span class="n">r</span> <span class="o">*</span> <span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_roi_scale</span><span class="p">,</span> <span class="n">ndim</span><span class="p">),</span> <span class="n">img_size</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">max_roi_size</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">img</span><span class="o">=</span><span class="n">img</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="RandSpatialCropSamples"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandSpatialCropSamples">[docs]</a><span class="k">class</span> <span class="nc">RandSpatialCropSamples</span><span class="p">(</span><span class="n">Randomizable</span><span class="p">,</span> <span class="n">Transform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Crop image with random size or specific size ROI to generate a list of N samples.</span>
+<span class="sd">    It can crop at a random position as center or at the image center. And allows to set</span>
+<span class="sd">    the minimum size to limit the randomly generated ROI.</span>
+<span class="sd">    It will return a list of cropped images.</span>
+
+<span class="sd">    Note: even `random_size=False`, if a dimension of the expected ROI size is bigger than the input image size,</span>
+<span class="sd">    will not crop that dimension. So the cropped result may be smaller than the expected ROI, and the cropped</span>
+<span class="sd">    results of several images may not have exactly the same shape.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        roi_size: if `random_size` is True, it specifies the minimum crop region.</span>
+<span class="sd">            if `random_size` is False, it specifies the expected ROI size to crop. e.g. [224, 224, 128]</span>
+<span class="sd">            if a dimension of ROI size is bigger than image size, will not crop that dimension of the image.</span>
+<span class="sd">            If its components have non-positive values, the corresponding size of input image will be used.</span>
+<span class="sd">            for example: if the spatial size of input data is [40, 40, 40] and `roi_size=[32, 64, -1]`,</span>
+<span class="sd">            the spatial size of output data will be [32, 40, 40].</span>
+<span class="sd">        num_samples: number of samples (crop regions) to take in the returned list.</span>
+<span class="sd">        max_roi_size: if `random_size` is True and `roi_size` specifies the min crop region size, `max_roi_size`</span>
+<span class="sd">            can specify the max crop region size. if None, defaults to the input image size.</span>
+<span class="sd">            if its components have non-positive values, the corresponding size of input image will be used.</span>
+<span class="sd">        random_center: crop at random position as center or the image center.</span>
+<span class="sd">        random_size: crop with random size or specific size ROI.</span>
+<span class="sd">            The actual size is sampled from `randint(roi_size, img_size)`.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: When ``num_samples`` is nonpositive.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">roi_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">num_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">max_roi_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">random_center</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">random_size</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">num_samples</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;num_samples must be positive, got </span><span class="si">{</span><span class="n">num_samples</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_samples</span> <span class="o">=</span> <span class="n">num_samples</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cropper</span> <span class="o">=</span> <span class="n">RandSpatialCrop</span><span class="p">(</span><span class="n">roi_size</span><span class="p">,</span> <span class="n">max_roi_size</span><span class="p">,</span> <span class="n">random_center</span><span class="p">,</span> <span class="n">random_size</span><span class="p">)</span>
+
+<div class="viewcode-block" id="RandSpatialCropSamples.set_random_state"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandSpatialCropSamples.set_random_state">[docs]</a>    <span class="k">def</span> <span class="nf">set_random_state</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Randomizable&quot;</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">set_random_state</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cropper</span><span class="o">.</span><span class="n">set_random_state</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="RandSpatialCropSamples.randomize"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandSpatialCropSamples.randomize">[docs]</a>    <span class="k">def</span> <span class="nf">randomize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="RandSpatialCropSamples.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandSpatialCropSamples.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply the transform to `img`, assuming `img` is channel-first and</span>
+<span class="sd">        cropping doesn&#39;t change the channel dim.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">cropper</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_samples</span><span class="p">)]</span></div></div>
+
+
+<div class="viewcode-block" id="CropForeground"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.CropForeground">[docs]</a><span class="k">class</span> <span class="nc">CropForeground</span><span class="p">(</span><span class="n">Transform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Crop an image using a bounding box. The bounding box is generated by selecting foreground using select_fn</span>
+<span class="sd">    at channels channel_indices. margin is added in each spatial dimension of the bounding box.</span>
+<span class="sd">    The typical usage is to help training and evaluation if the valid part is small in the whole medical image.</span>
+<span class="sd">    Users can define arbitrary function to select expected foreground from the whole image or specified channels.</span>
+<span class="sd">    And it can also add margin to every dim of the bounding box of foreground object.</span>
+<span class="sd">    For example:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        image = np.array(</span>
+<span class="sd">            [[[0, 0, 0, 0, 0],</span>
+<span class="sd">              [0, 1, 2, 1, 0],</span>
+<span class="sd">              [0, 1, 3, 2, 0],</span>
+<span class="sd">              [0, 1, 2, 1, 0],</span>
+<span class="sd">              [0, 0, 0, 0, 0]]])  # 1x5x5, single channel 5x5 image</span>
+
+
+<span class="sd">        def threshold_at_one(x):</span>
+<span class="sd">            # threshold at 1</span>
+<span class="sd">            return x &gt; 1</span>
+
+
+<span class="sd">        cropper = CropForeground(select_fn=threshold_at_one, margin=0)</span>
+<span class="sd">        print(cropper(image))</span>
+<span class="sd">        [[[2, 1],</span>
+<span class="sd">          [3, 2],</span>
+<span class="sd">          [2, 1]]]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="CropForeground.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.CropForeground.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">select_fn</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="n">is_positive</span><span class="p">,</span>
+        <span class="n">channel_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">IndexSelection</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">margin</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">return_coords</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">k_divisible</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">NumpyPadMode</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">NumpyPadMode</span><span class="o">.</span><span class="n">CONSTANT</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            select_fn: function to select expected foreground, default is to select values &gt; 0.</span>
+<span class="sd">            channel_indices: if defined, select foreground only on the specified channels</span>
+<span class="sd">                of image. if None, select foreground on the whole image.</span>
+<span class="sd">            margin: add margin value to spatial dims of the bounding box, if only 1 value provided, use it for all dims.</span>
+<span class="sd">            return_coords: whether return the coordinates of spatial bounding box for foreground.</span>
+<span class="sd">            k_divisible: make each spatial dimension to be divisible by k, default to 1.</span>
+<span class="sd">                if `k_divisible` is an int, the same `k` be applied to all the input spatial dimensions.</span>
+<span class="sd">            mode: padding mode {``&quot;constant&quot;``, ``&quot;edge&quot;``, ``&quot;linear_ramp&quot;``, ``&quot;maximum&quot;``, ``&quot;mean&quot;``,</span>
+<span class="sd">                ``&quot;median&quot;``, ``&quot;minimum&quot;``, ``&quot;reflect&quot;``, ``&quot;symmetric&quot;``, ``&quot;wrap&quot;``, ``&quot;empty&quot;``}</span>
+<span class="sd">                one of the listed string values or a user supplied function. Defaults to ``&quot;constant&quot;``.</span>
+<span class="sd">                see also: https://numpy.org/doc/1.18/reference/generated/numpy.pad.html</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">select_fn</span> <span class="o">=</span> <span class="n">select_fn</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">channel_indices</span> <span class="o">=</span> <span class="n">ensure_tuple</span><span class="p">(</span><span class="n">channel_indices</span><span class="p">)</span> <span class="k">if</span> <span class="n">channel_indices</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">margin</span> <span class="o">=</span> <span class="n">margin</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">return_coords</span> <span class="o">=</span> <span class="n">return_coords</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k_divisible</span> <span class="o">=</span> <span class="n">k_divisible</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span> <span class="n">NumpyPadMode</span> <span class="o">=</span> <span class="n">NumpyPadMode</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CropForeground.compute_bounding_box"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.CropForeground.compute_bounding_box">[docs]</a>    <span class="k">def</span> <span class="nf">compute_bounding_box</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the start points and end points of bounding box to crop.</span>
+<span class="sd">        And adjust bounding box coords to be divisible by `k`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">box_start</span><span class="p">,</span> <span class="n">box_end</span> <span class="o">=</span> <span class="n">generate_spatial_bounding_box</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">select_fn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel_indices</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">margin</span><span class="p">)</span>
+        <span class="n">box_start_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">box_start</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+        <span class="n">box_end_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">box_end</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+        <span class="n">orig_spatial_size</span> <span class="o">=</span> <span class="n">box_end_</span> <span class="o">-</span> <span class="n">box_start_</span>
+        <span class="c1"># make the spatial size divisible by `k`</span>
+        <span class="n">spatial_size</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">compute_divisible_spatial_size</span><span class="p">(</span><span class="n">spatial_shape</span><span class="o">=</span><span class="n">orig_spatial_size</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">k_divisible</span><span class="p">))</span>
+        <span class="c1"># update box_start and box_end</span>
+        <span class="n">box_start_</span> <span class="o">=</span> <span class="n">box_start_</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">floor_divide</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">spatial_size</span><span class="p">)</span> <span class="o">-</span> <span class="n">orig_spatial_size</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">box_end_</span> <span class="o">=</span> <span class="n">box_start_</span> <span class="o">+</span> <span class="n">spatial_size</span>
+        <span class="k">return</span> <span class="n">box_start_</span><span class="p">,</span> <span class="n">box_end_</span></div>
+
+<div class="viewcode-block" id="CropForeground.crop_pad"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.CropForeground.crop_pad">[docs]</a>    <span class="k">def</span> <span class="nf">crop_pad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">box_start</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">box_end</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Crop and pad based on the bounding box.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cropped</span> <span class="o">=</span> <span class="n">SpatialCrop</span><span class="p">(</span><span class="n">roi_start</span><span class="o">=</span><span class="n">box_start</span><span class="p">,</span> <span class="n">roi_end</span><span class="o">=</span><span class="n">box_end</span><span class="p">)(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">pad_to_start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="o">-</span><span class="n">box_start</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">pad_to_end</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">box_end</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">pad</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="nb">zip</span><span class="p">(</span><span class="n">pad_to_start</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">pad_to_end</span><span class="o">.</span><span class="n">tolist</span><span class="p">())))</span>
+        <span class="k">return</span> <span class="n">BorderPad</span><span class="p">(</span><span class="n">spatial_border</span><span class="o">=</span><span class="n">pad</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">)(</span><span class="n">cropped</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CropForeground.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.CropForeground.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply the transform to `img`, assuming `img` is channel-first and</span>
+<span class="sd">        slicing doesn&#39;t change the channel dim.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">box_start</span><span class="p">,</span> <span class="n">box_end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_bounding_box</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">cropped</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">crop_pad</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">box_start</span><span class="p">,</span> <span class="n">box_end</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_coords</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cropped</span><span class="p">,</span> <span class="n">box_start</span><span class="p">,</span> <span class="n">box_end</span>
+        <span class="k">return</span> <span class="n">cropped</span></div></div>
+
+
+<div class="viewcode-block" id="RandWeightedCrop"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandWeightedCrop">[docs]</a><span class="k">class</span> <span class="nc">RandWeightedCrop</span><span class="p">(</span><span class="n">Randomizable</span><span class="p">,</span> <span class="n">Transform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Samples a list of `num_samples` image patches according to the provided `weight_map`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spatial_size: the spatial size of the image patch e.g. [224, 224, 128].</span>
+<span class="sd">            If its components have non-positive values, the corresponding size of `img` will be used.</span>
+<span class="sd">        num_samples: number of samples (image patches) to take in the returned list.</span>
+<span class="sd">        weight_map: weight map used to generate patch samples. The weights must be non-negative.</span>
+<span class="sd">            Each element denotes a sampling weight of the spatial location. 0 indicates no sampling.</span>
+<span class="sd">            It should be a single-channel array in shape, for example, `(1, spatial_dim_0, spatial_dim_1, ...)`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">spatial_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">],</span> <span class="n">num_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">weight_map</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spatial_size</span> <span class="o">=</span> <span class="n">ensure_tuple</span><span class="p">(</span><span class="n">spatial_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight_map</span> <span class="o">=</span> <span class="n">weight_map</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">centers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="RandWeightedCrop.randomize"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandWeightedCrop.randomize">[docs]</a>    <span class="k">def</span> <span class="nf">randomize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight_map</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">centers</span> <span class="o">=</span> <span class="n">weighted_patch_samples</span><span class="p">(</span>
+            <span class="n">spatial_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">spatial_size</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">weight_map</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n_samples</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_samples</span><span class="p">,</span> <span class="n">r_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span>
+        <span class="p">)</span>  <span class="c1"># using only the first channel as weight map</span></div>
+
+<div class="viewcode-block" id="RandWeightedCrop.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandWeightedCrop.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">weight_map</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            img: input image to sample patches from. assuming `img` is a channel-first array.</span>
+<span class="sd">            weight_map: weight map used to generate patch samples. The weights must be non-negative.</span>
+<span class="sd">                Each element denotes a sampling weight of the spatial location. 0 indicates no sampling.</span>
+<span class="sd">                It should be a single-channel array in shape, for example, `(1, spatial_dim_0, spatial_dim_1, ...)`</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of image patches</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">weight_map</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">weight_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight_map</span>
+        <span class="k">if</span> <span class="n">weight_map</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;weight map must be provided for weighted patch sampling.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">!=</span> <span class="n">weight_map</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;image and weight map spatial shape mismatch: </span><span class="si">{</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">weight_map</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">randomize</span><span class="p">(</span><span class="n">weight_map</span><span class="p">)</span>
+        <span class="n">_spatial_size</span> <span class="o">=</span> <span class="n">fall_back_tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spatial_size</span><span class="p">,</span> <span class="n">weight_map</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">center</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">centers</span><span class="p">:</span>
+            <span class="n">cropper</span> <span class="o">=</span> <span class="n">SpatialCrop</span><span class="p">(</span><span class="n">roi_center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span> <span class="n">roi_size</span><span class="o">=</span><span class="n">_spatial_size</span><span class="p">)</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cropper</span><span class="p">(</span><span class="n">img</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">results</span></div></div>
+
+
+<div class="viewcode-block" id="RandCropByPosNegLabel"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandCropByPosNegLabel">[docs]</a><span class="k">class</span> <span class="nc">RandCropByPosNegLabel</span><span class="p">(</span><span class="n">Randomizable</span><span class="p">,</span> <span class="n">Transform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Crop random fixed sized regions with the center being a foreground or background voxel</span>
+<span class="sd">    based on the Pos Neg Ratio.</span>
+<span class="sd">    And will return a list of arrays for all the cropped images.</span>
+<span class="sd">    For example, crop two (3 x 3) arrays from (5 x 5) array with pos/neg=1::</span>
+
+<span class="sd">        [[[0, 0, 0, 0, 0],</span>
+<span class="sd">          [0, 1, 2, 1, 0],            [[0, 1, 2],     [[2, 1, 0],</span>
+<span class="sd">          [0, 1, 3, 0, 0],     --&gt;     [0, 1, 3],      [3, 0, 0],</span>
+<span class="sd">          [0, 0, 0, 0, 0],             [0, 0, 0]]      [0, 0, 0]]</span>
+<span class="sd">          [0, 0, 0, 0, 0]]]</span>
+
+<span class="sd">    If a dimension of the expected spatial size is bigger than the input image size,</span>
+<span class="sd">    will not crop that dimension. So the cropped result may be smaller than expected size, and the cropped</span>
+<span class="sd">    results of several images may not have exactly same shape.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spatial_size: the spatial size of the crop region e.g. [224, 224, 128].</span>
+<span class="sd">            if a dimension of ROI size is bigger than image size, will not crop that dimension of the image.</span>
+<span class="sd">            if its components have non-positive values, the corresponding size of `label` will be used.</span>
+<span class="sd">            for example: if the spatial size of input data is [40, 40, 40] and `spatial_size=[32, 64, -1]`,</span>
+<span class="sd">            the spatial size of output data will be [32, 40, 40].</span>
+<span class="sd">        label: the label image that is used for finding foreground/background, if None, must set at</span>
+<span class="sd">            `self.__call__`.  Non-zero indicates foreground, zero indicates background.</span>
+<span class="sd">        pos: used with `neg` together to calculate the ratio ``pos / (pos + neg)`` for the probability</span>
+<span class="sd">            to pick a foreground voxel as a center rather than a background voxel.</span>
+<span class="sd">        neg: used with `pos` together to calculate the ratio ``pos / (pos + neg)`` for the probability</span>
+<span class="sd">            to pick a foreground voxel as a center rather than a background voxel.</span>
+<span class="sd">        num_samples: number of samples (crop regions) to take in each list.</span>
+<span class="sd">        image: optional image data to help select valid area, can be same as `img` or another image array.</span>
+<span class="sd">            if not None, use ``label == 0 &amp; image &gt; image_threshold`` to select the negative</span>
+<span class="sd">            sample (background) center. So the crop center will only come from the valid image areas.</span>
+<span class="sd">        image_threshold: if enabled `image`, use ``image &gt; image_threshold`` to determine</span>
+<span class="sd">            the valid image content areas.</span>
+<span class="sd">        fg_indices: if provided pre-computed foreground indices of `label`, will ignore above `image` and</span>
+<span class="sd">            `image_threshold`, and randomly select crop centers based on them, need to provide `fg_indices`</span>
+<span class="sd">            and `bg_indices` together, expect to be 1 dim array of spatial indices after flattening.</span>
+<span class="sd">            a typical usage is to call `FgBgToIndices` transform first and cache the results.</span>
+<span class="sd">        bg_indices: if provided pre-computed background indices of `label`, will ignore above `image` and</span>
+<span class="sd">            `image_threshold`, and randomly select crop centers based on them, need to provide `fg_indices`</span>
+<span class="sd">            and `bg_indices` together, expect to be 1 dim array of spatial indices after flattening.</span>
+<span class="sd">            a typical usage is to call `FgBgToIndices` transform first and cache the results.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: When ``pos`` or ``neg`` are negative.</span>
+<span class="sd">        ValueError: When ``pos=0`` and ``neg=0``. Incompatible values.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">spatial_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">label</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">pos</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">neg</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">num_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">image</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">image_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">fg_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">bg_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spatial_size</span> <span class="o">=</span> <span class="n">ensure_tuple</span><span class="p">(</span><span class="n">spatial_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
+        <span class="k">if</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">neg</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pos and neg must be nonnegative, got pos=</span><span class="si">{</span><span class="n">pos</span><span class="si">}</span><span class="s2"> neg=</span><span class="si">{</span><span class="n">neg</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pos</span> <span class="o">+</span> <span class="n">neg</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Incompatible values: pos=0 and neg=0.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos_ratio</span> <span class="o">=</span> <span class="n">pos</span> <span class="o">/</span> <span class="p">(</span><span class="n">pos</span> <span class="o">+</span> <span class="n">neg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_samples</span> <span class="o">=</span> <span class="n">num_samples</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">image</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_threshold</span> <span class="o">=</span> <span class="n">image_threshold</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">centers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fg_indices</span> <span class="o">=</span> <span class="n">fg_indices</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bg_indices</span> <span class="o">=</span> <span class="n">bg_indices</span>
+
+<div class="viewcode-block" id="RandCropByPosNegLabel.randomize"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandCropByPosNegLabel.randomize">[docs]</a>    <span class="k">def</span> <span class="nf">randomize</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">label</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">fg_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">bg_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">image</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spatial_size</span> <span class="o">=</span> <span class="n">fall_back_tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spatial_size</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">label</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="k">if</span> <span class="n">fg_indices</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">bg_indices</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fg_indices_</span><span class="p">,</span> <span class="n">bg_indices_</span> <span class="o">=</span> <span class="n">map_binary_to_indices</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_threshold</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fg_indices_</span> <span class="o">=</span> <span class="n">fg_indices</span>
+            <span class="n">bg_indices_</span> <span class="o">=</span> <span class="n">bg_indices</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">centers</span> <span class="o">=</span> <span class="n">generate_pos_neg_label_crop_centers</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">spatial_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_samples</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos_ratio</span><span class="p">,</span> <span class="n">label</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">fg_indices_</span><span class="p">,</span> <span class="n">bg_indices_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">R</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="RandCropByPosNegLabel.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandCropByPosNegLabel.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">img</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">label</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">image</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">fg_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">bg_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            img: input data to crop samples from based on the pos/neg ratio of `label` and `image`.</span>
+<span class="sd">                Assumes `img` is a channel-first array.</span>
+<span class="sd">            label: the label image that is used for finding foreground/background, if None, use `self.label`.</span>
+<span class="sd">            image: optional image data to help select valid area, can be same as `img` or another image array.</span>
+<span class="sd">                use ``label == 0 &amp; image &gt; image_threshold`` to select the negative sample(background) center.</span>
+<span class="sd">                so the crop center will only exist on valid image area. if None, use `self.image`.</span>
+<span class="sd">            fg_indices: foreground indices to randomly select crop centers,</span>
+<span class="sd">                need to provide `fg_indices` and `bg_indices` together.</span>
+<span class="sd">            bg_indices: background indices to randomly select crop centers,</span>
+<span class="sd">                need to provide `fg_indices` and `bg_indices` together.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">label</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;label should be provided.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">image</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span>
+        <span class="k">if</span> <span class="n">fg_indices</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">bg_indices</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fg_indices</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">bg_indices</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">fg_indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fg_indices</span>
+                <span class="n">bg_indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bg_indices</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">fg_indices</span><span class="p">,</span> <span class="n">bg_indices</span> <span class="o">=</span> <span class="n">map_binary_to_indices</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_threshold</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">randomize</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">fg_indices</span><span class="p">,</span> <span class="n">bg_indices</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">centers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">center</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">centers</span><span class="p">:</span>
+                <span class="n">cropper</span> <span class="o">=</span> <span class="n">SpatialCrop</span><span class="p">(</span><span class="n">roi_center</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">center</span><span class="p">),</span> <span class="n">roi_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">spatial_size</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cropper</span><span class="p">(</span><span class="n">img</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">results</span></div></div>
+
+
+<div class="viewcode-block" id="ResizeWithPadOrCrop"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.ResizeWithPadOrCrop">[docs]</a><span class="k">class</span> <span class="nc">ResizeWithPadOrCrop</span><span class="p">(</span><span class="n">Transform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Resize an image to a target spatial size by either centrally cropping the image or</span>
+<span class="sd">    padding it evenly with a user-specified mode.</span>
+<span class="sd">    When the dimension is smaller than the target size, do symmetric padding along that dim.</span>
+<span class="sd">    When the dimension is larger than the target size, do central cropping along that dim.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spatial_size: the spatial size of output data after padding or crop.</span>
+<span class="sd">            If has non-positive values, the corresponding size of input image will be used (no padding).</span>
+<span class="sd">        mode: {``&quot;constant&quot;``, ``&quot;edge&quot;``, ``&quot;linear_ramp&quot;``, ``&quot;maximum&quot;``, ``&quot;mean&quot;``,</span>
+<span class="sd">            ``&quot;median&quot;``, ``&quot;minimum&quot;``, ``&quot;reflect&quot;``, ``&quot;symmetric&quot;``, ``&quot;wrap&quot;``, ``&quot;empty&quot;``}</span>
+<span class="sd">            One of the listed string values or a user supplied function for padding. Defaults to ``&quot;constant&quot;``.</span>
+<span class="sd">            See also: https://numpy.org/doc/1.18/reference/generated/numpy.pad.html</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">spatial_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">NumpyPadMode</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">NumpyPadMode</span><span class="o">.</span><span class="n">CONSTANT</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">padder</span> <span class="o">=</span> <span class="n">SpatialPad</span><span class="p">(</span><span class="n">spatial_size</span><span class="o">=</span><span class="n">spatial_size</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cropper</span> <span class="o">=</span> <span class="n">CenterSpatialCrop</span><span class="p">(</span><span class="n">roi_size</span><span class="o">=</span><span class="n">spatial_size</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ResizeWithPadOrCrop.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.ResizeWithPadOrCrop.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">NumpyPadMode</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            img: data to pad or crop, assuming `img` is channel-first and</span>
+<span class="sd">                padding or cropping doesn&#39;t apply to the channel dim.</span>
+<span class="sd">            mode: {``&quot;constant&quot;``, ``&quot;edge&quot;``, ``&quot;linear_ramp&quot;``, ``&quot;maximum&quot;``, ``&quot;mean&quot;``,</span>
+<span class="sd">                ``&quot;median&quot;``, ``&quot;minimum&quot;``, ``&quot;reflect&quot;``, ``&quot;symmetric&quot;``, ``&quot;wrap&quot;``, ``&quot;empty&quot;``}</span>
+<span class="sd">                One of the listed string values or a user supplied function for padding.</span>
+<span class="sd">                If None, defaults to the ``mode`` in construction.</span>
+<span class="sd">                See also: https://numpy.org/doc/1.18/reference/generated/numpy.pad.html</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">padder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cropper</span><span class="p">(</span><span class="n">img</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="BoundingRect"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.BoundingRect">[docs]</a><span class="k">class</span> <span class="nc">BoundingRect</span><span class="p">(</span><span class="n">Transform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute coordinates of axis-aligned bounding rectangles from input image `img`.</span>
+<span class="sd">    The output format of the coordinates is (shape is [channel, 2 * spatial dims]):</span>
+
+<span class="sd">        [[1st_spatial_dim_start, 1st_spatial_dim_end,</span>
+<span class="sd">         2nd_spatial_dim_start, 2nd_spatial_dim_end,</span>
+<span class="sd">         ...,</span>
+<span class="sd">         Nth_spatial_dim_start, Nth_spatial_dim_end],</span>
+
+<span class="sd">         ...</span>
+
+<span class="sd">         [1st_spatial_dim_start, 1st_spatial_dim_end,</span>
+<span class="sd">         2nd_spatial_dim_start, 2nd_spatial_dim_end,</span>
+<span class="sd">         ...,</span>
+<span class="sd">         Nth_spatial_dim_start, Nth_spatial_dim_end]]</span>
+
+<span class="sd">    The bounding boxes edges are aligned with the input image edges.</span>
+<span class="sd">    This function returns [-1, -1, ...] if there&#39;s no positive intensity.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        select_fn: function to select expected foreground, default is to select values &gt; 0.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">select_fn</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="n">is_positive</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">select_fn</span> <span class="o">=</span> <span class="n">select_fn</span>
+
+<div class="viewcode-block" id="BoundingRect.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.BoundingRect.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        See also: :py:class:`monai.transforms.utils.generate_spatial_bounding_box`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">bbox</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">start_</span><span class="p">,</span> <span class="n">end_</span> <span class="o">=</span> <span class="n">generate_spatial_bounding_box</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">select_fn</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">select_fn</span><span class="p">,</span> <span class="n">channel_indices</span><span class="o">=</span><span class="n">channel</span><span class="p">)</span>
+            <span class="n">bbox</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">start_</span><span class="p">,</span> <span class="n">end_</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">k</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">bbox</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div></div>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2020 - 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

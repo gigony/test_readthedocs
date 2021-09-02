@@ -1,0 +1,528 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monai.metrics.confusion_matrix &#8212; MONAI 0.6.0 Documentation</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../index.html">
+  <img src="../../../_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for monai.metrics.confusion_matrix</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 - 2021 MONAI Consortium</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="kn">from</span> <span class="nn">monai.metrics.utils</span> <span class="kn">import</span> <span class="n">do_metric_reduction</span><span class="p">,</span> <span class="n">ignore_background</span>
+<span class="kn">from</span> <span class="nn">monai.utils</span> <span class="kn">import</span> <span class="n">MetricReduction</span><span class="p">,</span> <span class="n">ensure_tuple</span>
+
+<span class="kn">from</span> <span class="nn">.metric</span> <span class="kn">import</span> <span class="n">CumulativeIterationMetric</span>
+
+
+<div class="viewcode-block" id="ConfusionMatrixMetric"><a class="viewcode-back" href="../../../metrics.html#monai.metrics.ConfusionMatrixMetric">[docs]</a><span class="k">class</span> <span class="nc">ConfusionMatrixMetric</span><span class="p">(</span><span class="n">CumulativeIterationMetric</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute confusion matrix related metrics. This function supports to calculate all metrics mentioned in:</span>
+<span class="sd">    `Confusion matrix &lt;https://en.wikipedia.org/wiki/Confusion_matrix&gt;`_.</span>
+<span class="sd">    It can support both multi-classes and multi-labels classification and segmentation tasks.</span>
+<span class="sd">    `y_preds` is expected to have binarized predictions and `y` should be in one-hot format. You can use suitable transforms</span>
+<span class="sd">    in ``monai.transforms.post`` first to achieve binarized values.</span>
+<span class="sd">    The `include_background` parameter can be set to ``False`` for an instance to exclude</span>
+<span class="sd">    the first category (channel index 0) which is by convention assumed to be background. If the non-background</span>
+<span class="sd">    segmentations are small compared to the total image size they can get overwhelmed by the signal from the</span>
+<span class="sd">    background so excluding it in such cases helps convergence.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        include_background: whether to skip metric computation on the first channel of</span>
+<span class="sd">            the predicted output. Defaults to True.</span>
+<span class="sd">        metric_name: [``&quot;sensitivity&quot;``, ``&quot;specificity&quot;``, ``&quot;precision&quot;``, ``&quot;negative predictive value&quot;``,</span>
+<span class="sd">            ``&quot;miss rate&quot;``, ``&quot;fall out&quot;``, ``&quot;false discovery rate&quot;``, ``&quot;false omission rate&quot;``,</span>
+<span class="sd">            ``&quot;prevalence threshold&quot;``, ``&quot;threat score&quot;``, ``&quot;accuracy&quot;``, ``&quot;balanced accuracy&quot;``,</span>
+<span class="sd">            ``&quot;f1 score&quot;``, ``&quot;matthews correlation coefficient&quot;``, ``&quot;fowlkes mallows index&quot;``,</span>
+<span class="sd">            ``&quot;informedness&quot;``, ``&quot;markedness&quot;``]</span>
+<span class="sd">            Some of the metrics have multiple aliases (as shown in the wikipedia page aforementioned),</span>
+<span class="sd">            and you can also input those names instead.</span>
+<span class="sd">            Except for input only one metric, multiple metrics are also supported via input a sequence of metric names, such as</span>
+<span class="sd">            (&quot;sensitivity&quot;, &quot;precision&quot;, &quot;recall&quot;), if ``compute_sample`` is ``True``, multiple ``f`` and ``not_nans`` will be</span>
+<span class="sd">            returned with the same order as input names when calling the class.</span>
+<span class="sd">        compute_sample: when reducing, if ``True``, each sample&#39;s metric will be computed based on each confusion matrix first.</span>
+<span class="sd">            if ``False``, compute reduction on the confusion matrices first, defaults to ``False``.</span>
+<span class="sd">        reduction: {``&quot;none&quot;``, ``&quot;mean&quot;``, ``&quot;sum&quot;``, ``&quot;mean_batch&quot;``, ``&quot;sum_batch&quot;``,</span>
+<span class="sd">            ``&quot;mean_channel&quot;``, ``&quot;sum_channel&quot;``}</span>
+<span class="sd">        get_not_nans: whether to return the `not_nans` count, if True, aggregate() returns [(metric, not_nans), ...]. If False,</span>
+<span class="sd">            aggregate() returns [metric, ...].</span>
+<span class="sd">            Here `not_nans` count the number of not nans for True Positive, False Positive, True Negative and False Negative.</span>
+<span class="sd">            Its shape depends on the shape of the metric, and it has one more dimension with size 4. For example, if the shape</span>
+<span class="sd">            of the metric is [3, 3], `not_nans` has the shape [3, 3, 4].</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">include_background</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">metric_name</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;hit_rate&quot;</span><span class="p">,</span>
+        <span class="n">compute_sample</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">reduction</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">MetricReduction</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">MetricReduction</span><span class="o">.</span><span class="n">MEAN</span><span class="p">,</span>
+        <span class="n">get_not_nans</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">include_background</span> <span class="o">=</span> <span class="n">include_background</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metric_name</span> <span class="o">=</span> <span class="n">ensure_tuple</span><span class="p">(</span><span class="n">metric_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compute_sample</span> <span class="o">=</span> <span class="n">compute_sample</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reduction</span> <span class="o">=</span> <span class="n">reduction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_not_nans</span> <span class="o">=</span> <span class="n">get_not_nans</span>
+
+    <span class="k">def</span> <span class="nf">_compute_tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            y_pred: input data to compute. It must be one-hot format and first dim is batch.</span>
+<span class="sd">                The values should be binarized.</span>
+<span class="sd">            y: ground truth to compute the metric. It must be one-hot format and first dim is batch.</span>
+<span class="sd">                The values should be binarized.</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: when `y` is not a binarized tensor.</span>
+<span class="sd">            ValueError: when `y_pred` has less than two dimensions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;y_pred and y must be PyTorch Tensor.&quot;</span><span class="p">)</span>
+        <span class="c1"># check binarized input</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">torch</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">y_pred</span><span class="o">.</span><span class="n">byte</span><span class="p">()</span> <span class="o">==</span> <span class="n">y_pred</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;y_pred should be a binarized tensor.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">torch</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">byte</span><span class="p">()</span> <span class="o">==</span> <span class="n">y</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;y should be a binarized tensor.&quot;</span><span class="p">)</span>
+        <span class="c1"># check dimension</span>
+        <span class="n">dims</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">ndimension</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">dims</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;y_pred should have at least two dimensions.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dims</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">or</span> <span class="p">(</span><span class="n">dims</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_sample</span><span class="p">:</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;As for classification task, compute_sample should be False.&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">compute_sample</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="n">get_confusion_matrix</span><span class="p">(</span>
+            <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+            <span class="n">include_background</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">include_background</span><span class="p">,</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="ConfusionMatrixMetric.aggregate"><a class="viewcode-back" href="../../../metrics.html#monai.metrics.ConfusionMatrixMetric.aggregate">[docs]</a>    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute reduction for the confusion matrix values.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_buffer</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;the data to aggregate must be PyTorch Tensor.&quot;</span><span class="p">)</span>
+
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metric_name</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_sample</span><span class="p">:</span>
+                <span class="n">sub_confusion_matrix</span> <span class="o">=</span> <span class="n">compute_confusion_matrix_metric</span><span class="p">(</span><span class="n">metric_name</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+                <span class="n">f</span><span class="p">,</span> <span class="n">not_nans</span> <span class="o">=</span> <span class="n">do_metric_reduction</span><span class="p">(</span><span class="n">sub_confusion_matrix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduction</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">f</span><span class="p">,</span> <span class="n">not_nans</span> <span class="o">=</span> <span class="n">do_metric_reduction</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduction</span><span class="p">)</span>
+                <span class="n">f</span> <span class="o">=</span> <span class="n">compute_confusion_matrix_metric</span><span class="p">(</span><span class="n">metric_name</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_not_nans</span><span class="p">:</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">f</span><span class="p">,</span> <span class="n">not_nans</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">results</span></div></div>
+
+
+<div class="viewcode-block" id="get_confusion_matrix"><a class="viewcode-back" href="../../../metrics.html#monai.metrics.get_confusion_matrix">[docs]</a><span class="k">def</span> <span class="nf">get_confusion_matrix</span><span class="p">(</span>
+    <span class="n">y_pred</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+    <span class="n">include_background</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute confusion matrix. A tensor with the shape [BC4] will be returned. Where, the third dimension</span>
+<span class="sd">    represents the number of true positive, false positive, true negative and false negative values for</span>
+<span class="sd">    each channel of each sample within the input batch. Where, B equals to the batch size and C equals to</span>
+<span class="sd">    the number of classes that need to be computed.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        y_pred: input data to compute. It must be one-hot format and first dim is batch.</span>
+<span class="sd">            The values should be binarized.</span>
+<span class="sd">        y: ground truth to compute the metric. It must be one-hot format and first dim is batch.</span>
+<span class="sd">            The values should be binarized.</span>
+<span class="sd">        include_background: whether to skip metric computation on the first channel of</span>
+<span class="sd">            the predicted output. Defaults to True.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: when `y_pred` and `y` have different shapes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">include_background</span><span class="p">:</span>
+        <span class="n">y_pred</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ignore_background</span><span class="p">(</span>
+            <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;y_pred and y should have same shapes.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># get confusion matrix related metric</span>
+    <span class="n">batch_size</span><span class="p">,</span> <span class="n">n_class</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="c1"># convert to [BNS], where S is the number of pixels for one sample.</span>
+    <span class="c1"># As for classification tasks, S equals to 1.</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">n_class</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">n_class</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">tp</span> <span class="o">=</span> <span class="p">((</span><span class="n">y_pred</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+    <span class="n">tn</span> <span class="o">=</span> <span class="p">((</span><span class="n">y_pred</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+
+    <span class="n">tp</span> <span class="o">=</span> <span class="n">tp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">tn</span> <span class="o">=</span> <span class="n">tn</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">p</span>
+
+    <span class="n">fn</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="n">tp</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">tn</span>
+
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">tp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">fn</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">compute_confusion_matrix_metric</span><span class="p">(</span><span class="n">metric_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function is used to compute confusion matrix related metric.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        metric_name: [``&quot;sensitivity&quot;``, ``&quot;specificity&quot;``, ``&quot;precision&quot;``, ``&quot;negative predictive value&quot;``,</span>
+<span class="sd">            ``&quot;miss rate&quot;``, ``&quot;fall out&quot;``, ``&quot;false discovery rate&quot;``, ``&quot;false omission rate&quot;``,</span>
+<span class="sd">            ``&quot;prevalence threshold&quot;``, ``&quot;threat score&quot;``, ``&quot;accuracy&quot;``, ``&quot;balanced accuracy&quot;``,</span>
+<span class="sd">            ``&quot;f1 score&quot;``, ``&quot;matthews correlation coefficient&quot;``, ``&quot;fowlkes mallows index&quot;``,</span>
+<span class="sd">            ``&quot;informedness&quot;``, ``&quot;markedness&quot;``]</span>
+<span class="sd">            Some of the metrics have multiple aliases (as shown in the wikipedia page aforementioned),</span>
+<span class="sd">            and you can also input those names instead.</span>
+<span class="sd">        confusion_matrix: Please see the doc string of the function ``get_confusion_matrix`` for more details.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: when the size of the last dimension of confusion_matrix is not 4.</span>
+<span class="sd">        NotImplementedError: when specify a not implemented metric_name.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">metric</span> <span class="o">=</span> <span class="n">check_confusion_matrix_metric_name</span><span class="p">(</span><span class="n">metric_name</span><span class="p">)</span>
+
+    <span class="n">input_dim</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="o">.</span><span class="n">ndimension</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">input_dim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">confusion_matrix</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">confusion_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;the size of the last dimension of confusion_matrix should be 4.&quot;</span><span class="p">)</span>
+
+    <span class="n">tp</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">tn</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="n">fn</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">tp</span> <span class="o">+</span> <span class="n">fn</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">fp</span> <span class="o">+</span> <span class="n">tn</span>
+    <span class="c1"># calculate metric</span>
+    <span class="n">numerator</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span>
+    <span class="n">denominator</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
+    <span class="n">nan_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;nan&quot;</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="n">confusion_matrix</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;tpr&quot;</span><span class="p">:</span>
+        <span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span> <span class="o">=</span> <span class="n">tp</span><span class="p">,</span> <span class="n">p</span>
+    <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;tnr&quot;</span><span class="p">:</span>
+        <span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span> <span class="o">=</span> <span class="n">tn</span><span class="p">,</span> <span class="n">n</span>
+    <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;ppv&quot;</span><span class="p">:</span>
+        <span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span> <span class="o">=</span> <span class="n">tp</span><span class="p">,</span> <span class="p">(</span><span class="n">tp</span> <span class="o">+</span> <span class="n">fp</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;npv&quot;</span><span class="p">:</span>
+        <span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span> <span class="o">=</span> <span class="n">tn</span><span class="p">,</span> <span class="p">(</span><span class="n">tn</span> <span class="o">+</span> <span class="n">fn</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;fnr&quot;</span><span class="p">:</span>
+        <span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span> <span class="o">=</span> <span class="n">fn</span><span class="p">,</span> <span class="n">p</span>
+    <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;fpr&quot;</span><span class="p">:</span>
+        <span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span> <span class="o">=</span> <span class="n">fp</span><span class="p">,</span> <span class="n">n</span>
+    <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;fdr&quot;</span><span class="p">:</span>
+        <span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span> <span class="o">=</span> <span class="n">fp</span><span class="p">,</span> <span class="p">(</span><span class="n">fp</span> <span class="o">+</span> <span class="n">tp</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;for&quot;</span><span class="p">:</span>
+        <span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span> <span class="o">=</span> <span class="n">fn</span><span class="p">,</span> <span class="p">(</span><span class="n">fn</span> <span class="o">+</span> <span class="n">tn</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;pt&quot;</span><span class="p">:</span>
+        <span class="n">tpr</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">p</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tp</span> <span class="o">/</span> <span class="n">p</span><span class="p">,</span> <span class="n">nan_tensor</span><span class="p">)</span>
+        <span class="n">tnr</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tn</span> <span class="o">/</span> <span class="n">n</span><span class="p">,</span> <span class="n">nan_tensor</span><span class="p">)</span>
+        <span class="n">numerator</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">tpr</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">tnr</span><span class="p">))</span> <span class="o">+</span> <span class="n">tnr</span> <span class="o">-</span> <span class="mf">1.0</span>
+        <span class="n">denominator</span> <span class="o">=</span> <span class="n">tpr</span> <span class="o">+</span> <span class="n">tnr</span> <span class="o">-</span> <span class="mf">1.0</span>
+    <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;ts&quot;</span><span class="p">:</span>
+        <span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span> <span class="o">=</span> <span class="n">tp</span><span class="p">,</span> <span class="p">(</span><span class="n">tp</span> <span class="o">+</span> <span class="n">fn</span> <span class="o">+</span> <span class="n">fp</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;acc&quot;</span><span class="p">:</span>
+        <span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span> <span class="o">=</span> <span class="p">(</span><span class="n">tp</span> <span class="o">+</span> <span class="n">tn</span><span class="p">),</span> <span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;ba&quot;</span><span class="p">:</span>
+        <span class="n">tpr</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">p</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tp</span> <span class="o">/</span> <span class="n">p</span><span class="p">,</span> <span class="n">nan_tensor</span><span class="p">)</span>
+        <span class="n">tnr</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tn</span> <span class="o">/</span> <span class="n">n</span><span class="p">,</span> <span class="n">nan_tensor</span><span class="p">)</span>
+        <span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span> <span class="o">=</span> <span class="p">(</span><span class="n">tpr</span> <span class="o">+</span> <span class="n">tnr</span><span class="p">),</span> <span class="mf">2.0</span>
+    <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;f1&quot;</span><span class="p">:</span>
+        <span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span> <span class="o">=</span> <span class="n">tp</span> <span class="o">*</span> <span class="mf">2.0</span><span class="p">,</span> <span class="p">(</span><span class="n">tp</span> <span class="o">*</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="n">fn</span> <span class="o">+</span> <span class="n">fp</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;mcc&quot;</span><span class="p">:</span>
+        <span class="n">numerator</span> <span class="o">=</span> <span class="n">tp</span> <span class="o">*</span> <span class="n">tn</span> <span class="o">-</span> <span class="n">fp</span> <span class="o">*</span> <span class="n">fn</span>
+        <span class="n">denominator</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">tp</span> <span class="o">+</span> <span class="n">fp</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">tp</span> <span class="o">+</span> <span class="n">fn</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">tn</span> <span class="o">+</span> <span class="n">fp</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">tn</span> <span class="o">+</span> <span class="n">fn</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;fm&quot;</span><span class="p">:</span>
+        <span class="n">tpr</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">p</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tp</span> <span class="o">/</span> <span class="n">p</span><span class="p">,</span> <span class="n">nan_tensor</span><span class="p">)</span>
+        <span class="n">ppv</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">tp</span> <span class="o">+</span> <span class="n">fp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tp</span> <span class="o">/</span> <span class="p">(</span><span class="n">tp</span> <span class="o">+</span> <span class="n">fp</span><span class="p">),</span> <span class="n">nan_tensor</span><span class="p">)</span>
+        <span class="n">numerator</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ppv</span> <span class="o">*</span> <span class="n">tpr</span><span class="p">)</span>
+        <span class="n">denominator</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;bm&quot;</span><span class="p">:</span>
+        <span class="n">tpr</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">p</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tp</span> <span class="o">/</span> <span class="n">p</span><span class="p">,</span> <span class="n">nan_tensor</span><span class="p">)</span>
+        <span class="n">tnr</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tn</span> <span class="o">/</span> <span class="n">n</span><span class="p">,</span> <span class="n">nan_tensor</span><span class="p">)</span>
+        <span class="n">numerator</span> <span class="o">=</span> <span class="n">tpr</span> <span class="o">+</span> <span class="n">tnr</span> <span class="o">-</span> <span class="mf">1.0</span>
+        <span class="n">denominator</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;mk&quot;</span><span class="p">:</span>
+        <span class="n">ppv</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">tp</span> <span class="o">+</span> <span class="n">fp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tp</span> <span class="o">/</span> <span class="p">(</span><span class="n">tp</span> <span class="o">+</span> <span class="n">fp</span><span class="p">),</span> <span class="n">nan_tensor</span><span class="p">)</span>
+        <span class="n">npv</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">tn</span> <span class="o">+</span> <span class="n">fn</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tn</span> <span class="o">/</span> <span class="p">(</span><span class="n">tn</span> <span class="o">+</span> <span class="n">fn</span><span class="p">),</span> <span class="n">nan_tensor</span><span class="p">)</span>
+        <span class="n">numerator</span> <span class="o">=</span> <span class="n">ppv</span> <span class="o">+</span> <span class="n">npv</span> <span class="o">-</span> <span class="mf">1.0</span>
+        <span class="n">denominator</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;the metric is not implemented.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">denominator</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">denominator</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span><span class="p">,</span> <span class="n">nan_tensor</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span>
+
+
+<span class="k">def</span> <span class="nf">check_confusion_matrix_metric_name</span><span class="p">(</span><span class="n">metric_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    There are many metrics related to confusion matrix, and some of the metrics have</span>
+<span class="sd">    more than one names. In addition, some of the names are very long.</span>
+<span class="sd">    Therefore, this function is used to check and simplify the name.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Simplified metric name.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        NotImplementedError: when the metric is not implemented.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">metric_name</span> <span class="o">=</span> <span class="n">metric_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
+    <span class="n">metric_name</span> <span class="o">=</span> <span class="n">metric_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;sensitivity&quot;</span><span class="p">,</span> <span class="s2">&quot;recall&quot;</span><span class="p">,</span> <span class="s2">&quot;hit_rate&quot;</span><span class="p">,</span> <span class="s2">&quot;true_positive_rate&quot;</span><span class="p">,</span> <span class="s2">&quot;tpr&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;tpr&quot;</span>
+    <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;specificity&quot;</span><span class="p">,</span> <span class="s2">&quot;selectivity&quot;</span><span class="p">,</span> <span class="s2">&quot;true_negative_rate&quot;</span><span class="p">,</span> <span class="s2">&quot;tnr&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;tnr&quot;</span>
+    <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;precision&quot;</span><span class="p">,</span> <span class="s2">&quot;positive_predictive_value&quot;</span><span class="p">,</span> <span class="s2">&quot;ppv&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;ppv&quot;</span>
+    <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;negative_predictive_value&quot;</span><span class="p">,</span> <span class="s2">&quot;npv&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;npv&quot;</span>
+    <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;miss_rate&quot;</span><span class="p">,</span> <span class="s2">&quot;false_negative_rate&quot;</span><span class="p">,</span> <span class="s2">&quot;fnr&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;fnr&quot;</span>
+    <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;fall_out&quot;</span><span class="p">,</span> <span class="s2">&quot;false_positive_rate&quot;</span><span class="p">,</span> <span class="s2">&quot;fpr&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;fpr&quot;</span>
+    <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;false_discovery_rate&quot;</span><span class="p">,</span> <span class="s2">&quot;fdr&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;fdr&quot;</span>
+    <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;false_omission_rate&quot;</span><span class="p">,</span> <span class="s2">&quot;for&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;for&quot;</span>
+    <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;prevalence_threshold&quot;</span><span class="p">,</span> <span class="s2">&quot;pt&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;pt&quot;</span>
+    <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;threat_score&quot;</span><span class="p">,</span> <span class="s2">&quot;critical_success_index&quot;</span><span class="p">,</span> <span class="s2">&quot;ts&quot;</span><span class="p">,</span> <span class="s2">&quot;csi&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;ts&quot;</span>
+    <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">,</span> <span class="s2">&quot;acc&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;acc&quot;</span>
+    <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;balanced_accuracy&quot;</span><span class="p">,</span> <span class="s2">&quot;ba&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;ba&quot;</span>
+    <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;f1_score&quot;</span><span class="p">,</span> <span class="s2">&quot;f1&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;f1&quot;</span>
+    <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;matthews_correlation_coefficient&quot;</span><span class="p">,</span> <span class="s2">&quot;mcc&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;mcc&quot;</span>
+    <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;fowlkes_mallows_index&quot;</span><span class="p">,</span> <span class="s2">&quot;fm&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;fm&quot;</span>
+    <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;informedness&quot;</span><span class="p">,</span> <span class="s2">&quot;bookmaker_informedness&quot;</span><span class="p">,</span> <span class="s2">&quot;bm&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;bm&quot;</span>
+    <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;markedness&quot;</span><span class="p">,</span> <span class="s2">&quot;deltap&quot;</span><span class="p">,</span> <span class="s2">&quot;mk&quot;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="s2">&quot;mk&quot;</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;the metric is not implemented.&quot;</span><span class="p">)</span>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2020 - 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

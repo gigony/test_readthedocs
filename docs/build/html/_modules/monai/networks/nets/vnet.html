@@ -1,0 +1,440 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monai.networks.nets.vnet &#8212; MONAI 0.6.0 Documentation</title>
+    
+  <link href="../../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../../index.html">
+  <img src="../../../../_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for monai.networks.nets.vnet</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 - 2021 MONAI Consortium</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+
+<span class="kn">from</span> <span class="nn">monai.networks.blocks.convolutions</span> <span class="kn">import</span> <span class="n">Convolution</span>
+<span class="kn">from</span> <span class="nn">monai.networks.layers.factories</span> <span class="kn">import</span> <span class="n">Act</span><span class="p">,</span> <span class="n">Conv</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">Norm</span><span class="p">,</span> <span class="n">split_args</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;VNet&quot;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">get_acti_layer</span><span class="p">(</span><span class="n">act</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">nchan</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">act</span> <span class="o">==</span> <span class="s2">&quot;prelu&quot;</span><span class="p">:</span>
+        <span class="n">act</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;prelu&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;num_parameters&quot;</span><span class="p">:</span> <span class="n">nchan</span><span class="p">})</span>
+    <span class="n">act_name</span><span class="p">,</span> <span class="n">act_args</span> <span class="o">=</span> <span class="n">split_args</span><span class="p">(</span><span class="n">act</span><span class="p">)</span>
+    <span class="n">act_type</span> <span class="o">=</span> <span class="n">Act</span><span class="p">[</span><span class="n">act_name</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">act_type</span><span class="p">(</span><span class="o">**</span><span class="n">act_args</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">LUConv</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spatial_dims</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">nchan</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">act</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">],</span> <span class="nb">str</span><span class="p">]):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LUConv</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">act_function</span> <span class="o">=</span> <span class="n">get_acti_layer</span><span class="p">(</span><span class="n">act</span><span class="p">,</span> <span class="n">nchan</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_block</span> <span class="o">=</span> <span class="n">Convolution</span><span class="p">(</span>
+            <span class="n">dimensions</span><span class="o">=</span><span class="n">spatial_dims</span><span class="p">,</span>
+            <span class="n">in_channels</span><span class="o">=</span><span class="n">nchan</span><span class="p">,</span>
+            <span class="n">out_channels</span><span class="o">=</span><span class="n">nchan</span><span class="p">,</span>
+            <span class="n">kernel_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">act</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">norm</span><span class="o">=</span><span class="n">Norm</span><span class="o">.</span><span class="n">BATCH</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_block</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">act_function</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+
+
+<span class="k">def</span> <span class="nf">_make_nconv</span><span class="p">(</span><span class="n">spatial_dims</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">nchan</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">act</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">],</span> <span class="nb">str</span><span class="p">]):</span>
+    <span class="n">layers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">depth</span><span class="p">):</span>
+        <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">LUConv</span><span class="p">(</span><span class="n">spatial_dims</span><span class="p">,</span> <span class="n">nchan</span><span class="p">,</span> <span class="n">act</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="n">layers</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">InputTransition</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spatial_dims</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">act</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">],</span> <span class="nb">str</span><span class="p">]):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">InputTransition</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="mi">16</span> <span class="o">%</span> <span class="n">in_channels</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;16 should be divisible by in_channels, got in_channels=</span><span class="si">{</span><span class="n">in_channels</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">spatial_dims</span> <span class="o">=</span> <span class="n">spatial_dims</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_channels</span> <span class="o">=</span> <span class="n">in_channels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">act_function</span> <span class="o">=</span> <span class="n">get_acti_layer</span><span class="p">(</span><span class="n">act</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_block</span> <span class="o">=</span> <span class="n">Convolution</span><span class="p">(</span>
+            <span class="n">dimensions</span><span class="o">=</span><span class="n">spatial_dims</span><span class="p">,</span>
+            <span class="n">in_channels</span><span class="o">=</span><span class="n">in_channels</span><span class="p">,</span>
+            <span class="n">out_channels</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+            <span class="n">kernel_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">act</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">norm</span><span class="o">=</span><span class="n">Norm</span><span class="o">.</span><span class="n">BATCH</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_block</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">repeat_num</span> <span class="o">=</span> <span class="mi">16</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_channels</span>
+        <span class="n">x16</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">repeat</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">repeat_num</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">][:</span> <span class="bp">self</span><span class="o">.</span><span class="n">spatial_dims</span> <span class="o">+</span> <span class="mi">2</span><span class="p">])</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">act_function</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">x16</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">out</span>
+
+
+<span class="k">class</span> <span class="nc">DownTransition</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">spatial_dims</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">in_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">nconvs</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">act</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">dropout_prob</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">dropout_dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DownTransition</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="n">conv_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv3d</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Conv</span><span class="p">[</span><span class="n">Conv</span><span class="o">.</span><span class="n">CONV</span><span class="p">,</span> <span class="n">spatial_dims</span><span class="p">]</span>
+        <span class="n">norm_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm3d</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Norm</span><span class="p">[</span><span class="n">Norm</span><span class="o">.</span><span class="n">BATCH</span><span class="p">,</span> <span class="n">spatial_dims</span><span class="p">]</span>
+        <span class="n">dropout_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout2d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout3d</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">[</span><span class="n">Dropout</span><span class="o">.</span><span class="n">DROPOUT</span><span class="p">,</span> <span class="n">dropout_dim</span><span class="p">]</span>
+
+        <span class="n">out_channels</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">in_channels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down_conv</span> <span class="o">=</span> <span class="n">conv_type</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bn1</span> <span class="o">=</span> <span class="n">norm_type</span><span class="p">(</span><span class="n">out_channels</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">act_function1</span> <span class="o">=</span> <span class="n">get_acti_layer</span><span class="p">(</span><span class="n">act</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">act_function2</span> <span class="o">=</span> <span class="n">get_acti_layer</span><span class="p">(</span><span class="n">act</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ops</span> <span class="o">=</span> <span class="n">_make_nconv</span><span class="p">(</span><span class="n">spatial_dims</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">nconvs</span><span class="p">,</span> <span class="n">act</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">dropout_type</span><span class="p">(</span><span class="n">dropout_prob</span><span class="p">)</span> <span class="k">if</span> <span class="n">dropout_prob</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">down</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">act_function1</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bn1</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">down_conv</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">down</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">down</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ops</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">act_function2</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">down</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">out</span>
+
+
+<span class="k">class</span> <span class="nc">UpTransition</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">spatial_dims</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">in_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">out_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">nconvs</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">act</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">dropout_prob</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">dropout_dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">UpTransition</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="n">conv_trans_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">ConvTranspose2d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">ConvTranspose3d</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Conv</span><span class="p">[</span><span class="n">Conv</span><span class="o">.</span><span class="n">CONVTRANS</span><span class="p">,</span> <span class="n">spatial_dims</span><span class="p">]</span>
+        <span class="n">norm_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm3d</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Norm</span><span class="p">[</span><span class="n">Norm</span><span class="o">.</span><span class="n">BATCH</span><span class="p">,</span> <span class="n">spatial_dims</span><span class="p">]</span>
+        <span class="n">dropout_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout2d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout3d</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">[</span><span class="n">Dropout</span><span class="o">.</span><span class="n">DROPOUT</span><span class="p">,</span> <span class="n">dropout_dim</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">up_conv</span> <span class="o">=</span> <span class="n">conv_trans_type</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bn1</span> <span class="o">=</span> <span class="n">norm_type</span><span class="p">(</span><span class="n">out_channels</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">dropout_type</span><span class="p">(</span><span class="n">dropout_prob</span><span class="p">)</span> <span class="k">if</span> <span class="n">dropout_prob</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout2</span> <span class="o">=</span> <span class="n">dropout_type</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">act_function1</span> <span class="o">=</span> <span class="n">get_acti_layer</span><span class="p">(</span><span class="n">act</span><span class="p">,</span> <span class="n">out_channels</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">act_function2</span> <span class="o">=</span> <span class="n">get_acti_layer</span><span class="p">(</span><span class="n">act</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ops</span> <span class="o">=</span> <span class="n">_make_nconv</span><span class="p">(</span><span class="n">spatial_dims</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">nconvs</span><span class="p">,</span> <span class="n">act</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">skipx</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="n">skipxdo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout2</span><span class="p">(</span><span class="n">skipx</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">act_function1</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bn1</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">up_conv</span><span class="p">(</span><span class="n">out</span><span class="p">)))</span>
+        <span class="n">xcat</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">out</span><span class="p">,</span> <span class="n">skipxdo</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ops</span><span class="p">(</span><span class="n">xcat</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">act_function2</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">xcat</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">out</span>
+
+
+<span class="k">class</span> <span class="nc">OutputTransition</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spatial_dims</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">act</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">],</span> <span class="nb">str</span><span class="p">]):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">OutputTransition</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="n">conv_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv3d</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Conv</span><span class="p">[</span><span class="n">Conv</span><span class="o">.</span><span class="n">CONV</span><span class="p">,</span> <span class="n">spatial_dims</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">act_function1</span> <span class="o">=</span> <span class="n">get_acti_layer</span><span class="p">(</span><span class="n">act</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_block</span> <span class="o">=</span> <span class="n">Convolution</span><span class="p">(</span>
+            <span class="n">dimensions</span><span class="o">=</span><span class="n">spatial_dims</span><span class="p">,</span>
+            <span class="n">in_channels</span><span class="o">=</span><span class="n">in_channels</span><span class="p">,</span>
+            <span class="n">out_channels</span><span class="o">=</span><span class="n">out_channels</span><span class="p">,</span>
+            <span class="n">kernel_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">act</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">norm</span><span class="o">=</span><span class="n">Norm</span><span class="o">.</span><span class="n">BATCH</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">conv_type</span><span class="p">(</span><span class="n">out_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="c1"># convolve 32 down to 2 channels</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_block</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">act_function1</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+
+
+<div class="viewcode-block" id="VNet"><a class="viewcode-back" href="../../../../networks.html#monai.networks.nets.VNet">[docs]</a><span class="k">class</span> <span class="nc">VNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    V-Net based on `Fully Convolutional Neural Networks for Volumetric Medical Image Segmentation</span>
+<span class="sd">    &lt;https://arxiv.org/pdf/1606.04797.pdf&gt;`_.</span>
+<span class="sd">    Adapted from `the official Caffe implementation</span>
+<span class="sd">    &lt;https://github.com/faustomilletari/VNet&gt;`_. and `another pytorch implementation</span>
+<span class="sd">    &lt;https://github.com/mattmacy/vnet.pytorch/blob/master/vnet.py&gt;`_.</span>
+<span class="sd">    The model supports 2D or 3D inputs.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spatial_dims: spatial dimension of the input data. Defaults to 3.</span>
+<span class="sd">        in_channels: number of input channels for the network. Defaults to 1.</span>
+<span class="sd">            The value should meet the condition that ``16 % in_channels == 0``.</span>
+<span class="sd">        out_channels: number of output channels for the network. Defaults to 1.</span>
+<span class="sd">        act: activation type in the network. Defaults to ``(&quot;elu&quot;, {&quot;inplace&quot;: True})``.</span>
+<span class="sd">        dropout_prob: dropout ratio. Defaults to 0.5. Defaults to 3.</span>
+<span class="sd">        dropout_dim: determine the dimensions of dropout. Defaults to 3.</span>
+
+<span class="sd">            - ``dropout_dim = 1``, randomly zeroes some of the elements for each channel.</span>
+<span class="sd">            - ``dropout_dim = 2``, Randomly zeroes out entire channels (a channel is a 2D feature map).</span>
+<span class="sd">            - ``dropout_dim = 3``, Randomly zeroes out entire channels (a channel is a 3D feature map).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">spatial_dims</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="n">in_channels</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">out_channels</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">act</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;elu&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;inplace&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}),</span>
+        <span class="n">dropout_prob</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">dropout_dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">spatial_dims</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;spatial_dims can only be 2 or 3.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_tr</span> <span class="o">=</span> <span class="n">InputTransition</span><span class="p">(</span><span class="n">spatial_dims</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="n">act</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down_tr32</span> <span class="o">=</span> <span class="n">DownTransition</span><span class="p">(</span><span class="n">spatial_dims</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">act</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down_tr64</span> <span class="o">=</span> <span class="n">DownTransition</span><span class="p">(</span><span class="n">spatial_dims</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">act</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down_tr128</span> <span class="o">=</span> <span class="n">DownTransition</span><span class="p">(</span><span class="n">spatial_dims</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">act</span><span class="p">,</span> <span class="n">dropout_prob</span><span class="o">=</span><span class="n">dropout_prob</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down_tr256</span> <span class="o">=</span> <span class="n">DownTransition</span><span class="p">(</span><span class="n">spatial_dims</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">act</span><span class="p">,</span> <span class="n">dropout_prob</span><span class="o">=</span><span class="n">dropout_prob</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up_tr256</span> <span class="o">=</span> <span class="n">UpTransition</span><span class="p">(</span><span class="n">spatial_dims</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">act</span><span class="p">,</span> <span class="n">dropout_prob</span><span class="o">=</span><span class="n">dropout_prob</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up_tr128</span> <span class="o">=</span> <span class="n">UpTransition</span><span class="p">(</span><span class="n">spatial_dims</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">act</span><span class="p">,</span> <span class="n">dropout_prob</span><span class="o">=</span><span class="n">dropout_prob</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up_tr64</span> <span class="o">=</span> <span class="n">UpTransition</span><span class="p">(</span><span class="n">spatial_dims</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">act</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up_tr32</span> <span class="o">=</span> <span class="n">UpTransition</span><span class="p">(</span><span class="n">spatial_dims</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">act</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_tr</span> <span class="o">=</span> <span class="n">OutputTransition</span><span class="p">(</span><span class="n">spatial_dims</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">act</span><span class="p">)</span>
+
+<div class="viewcode-block" id="VNet.forward"><a class="viewcode-back" href="../../../../networks.html#monai.networks.nets.VNet.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">out16</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_tr</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">out32</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">down_tr32</span><span class="p">(</span><span class="n">out16</span><span class="p">)</span>
+        <span class="n">out64</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">down_tr64</span><span class="p">(</span><span class="n">out32</span><span class="p">)</span>
+        <span class="n">out128</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">down_tr128</span><span class="p">(</span><span class="n">out64</span><span class="p">)</span>
+        <span class="n">out256</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">down_tr256</span><span class="p">(</span><span class="n">out128</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">up_tr256</span><span class="p">(</span><span class="n">out256</span><span class="p">,</span> <span class="n">out128</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">up_tr128</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">out64</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">up_tr64</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">out32</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">up_tr32</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">out16</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_tr</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span></div></div>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2020 - 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

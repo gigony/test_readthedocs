@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monai.networks.blocks.acti_norm &#8212; MONAI 0.6.0 Documentation</title>
+    
+  <link href="../../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../../index.html">
+  <img src="../../../../_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for monai.networks.blocks.acti_norm</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 - 2021 MONAI Consortium</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+
+<span class="kn">from</span> <span class="nn">monai.networks.layers.utils</span> <span class="kn">import</span> <span class="n">get_act_layer</span><span class="p">,</span> <span class="n">get_dropout_layer</span><span class="p">,</span> <span class="n">get_norm_layer</span>
+
+
+<div class="viewcode-block" id="ADN"><a class="viewcode-back" href="../../../../networks.html#monai.networks.blocks.ADN">[docs]</a><span class="k">class</span> <span class="nc">ADN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Constructs a sequential module of optional activation, dropout, and normalization layers</span>
+<span class="sd">    (with an arbitrary order)::</span>
+
+<span class="sd">        -- (Norm) -- (Dropout) -- (Acti) --</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ordering: a string representing the ordering of activation, dropout, and normalization. Defaults to &quot;NDA&quot;.</span>
+<span class="sd">        in_channels: `C` from an expected input of size (N, C, H[, W, D]).</span>
+<span class="sd">        act: activation type and arguments. Defaults to PReLU.</span>
+<span class="sd">        norm: feature normalization type and arguments. Defaults to instance norm.</span>
+<span class="sd">        norm_dim: determine the spatial dimensions of the normalization layer.</span>
+<span class="sd">            defaults to `dropout_dim` if unspecified.</span>
+<span class="sd">        dropout: dropout ratio. Defaults to no dropout.</span>
+<span class="sd">        dropout_dim: determine the spatial dimensions of dropout.</span>
+<span class="sd">            defaults to `norm_dim` if unspecified.</span>
+
+<span class="sd">            - When dropout_dim = 1, randomly zeroes some of the elements for each channel.</span>
+<span class="sd">            - When dropout_dim = 2, Randomly zeroes out entire channels (a channel is a 2D feature map).</span>
+<span class="sd">            - When dropout_dim = 3, Randomly zeroes out entire channels (a channel is a 3D feature map).</span>
+
+<span class="sd">    Examples::</span>
+
+<span class="sd">        # activation, group norm, dropout</span>
+<span class="sd">        &gt;&gt;&gt; norm_params = (&quot;GROUP&quot;, {&quot;num_groups&quot;: 1, &quot;affine&quot;: False})</span>
+<span class="sd">        &gt;&gt;&gt; ADN(norm=norm_params, in_channels=1, dropout_dim=1, dropout=0.8, ordering=&quot;AND&quot;)</span>
+<span class="sd">        ADN(</span>
+<span class="sd">            (A): ReLU()</span>
+<span class="sd">            (N): GroupNorm(1, 1, eps=1e-05, affine=False)</span>
+<span class="sd">            (D): Dropout(p=0.8, inplace=False)</span>
+<span class="sd">        )</span>
+
+<span class="sd">        # LeakyReLU, dropout</span>
+<span class="sd">        &gt;&gt;&gt; act_params = (&quot;leakyrelu&quot;, {&quot;negative_slope&quot;: 0.1, &quot;inplace&quot;: True})</span>
+<span class="sd">        &gt;&gt;&gt; ADN(act=act_params, in_channels=1, dropout_dim=1, dropout=0.8, ordering=&quot;AD&quot;)</span>
+<span class="sd">        ADN(</span>
+<span class="sd">            (A): LeakyReLU(negative_slope=0.1, inplace=True)</span>
+<span class="sd">            (D): Dropout(p=0.8, inplace=False)</span>
+<span class="sd">        )</span>
+
+<span class="sd">    See also:</span>
+
+<span class="sd">        :py:class:`monai.networks.layers.Dropout`</span>
+<span class="sd">        :py:class:`monai.networks.layers.Act`</span>
+<span class="sd">        :py:class:`monai.networks.layers.Norm`</span>
+<span class="sd">        :py:class:`monai.networks.layers.split_args`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">ordering</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;NDA&quot;</span><span class="p">,</span>
+        <span class="n">in_channels</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">act</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;RELU&quot;</span><span class="p">,</span>
+        <span class="n">norm</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">norm_dim</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">dropout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">dropout_dim</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="n">op_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;N&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+        <span class="c1"># define the normalization type and the arguments to the constructor</span>
+        <span class="k">if</span> <span class="n">norm</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">norm_dim</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">dropout_dim</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;norm_dim or dropout_dim needs to be specified.&quot;</span><span class="p">)</span>
+            <span class="n">op_dict</span><span class="p">[</span><span class="s2">&quot;N&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_norm_layer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span> <span class="n">spatial_dims</span><span class="o">=</span><span class="n">norm_dim</span> <span class="ow">or</span> <span class="n">dropout_dim</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="n">in_channels</span><span class="p">)</span>
+
+        <span class="c1"># define the activation type and the arguments to the constructor</span>
+        <span class="k">if</span> <span class="n">act</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">op_dict</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_act_layer</span><span class="p">(</span><span class="n">act</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">dropout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">norm_dim</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">dropout_dim</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;norm_dim or dropout_dim needs to be specified.&quot;</span><span class="p">)</span>
+            <span class="n">op_dict</span><span class="p">[</span><span class="s2">&quot;D&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_dropout_layer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">dropout</span><span class="p">,</span> <span class="n">dropout_dim</span><span class="o">=</span><span class="n">dropout_dim</span> <span class="ow">or</span> <span class="n">norm_dim</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">ordering</span><span class="o">.</span><span class="n">upper</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">op_dict</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ordering must be a string of </span><span class="si">{</span><span class="n">op_dict</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2"> in it.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">op_dict</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">op_dict</span><span class="p">[</span><span class="n">item</span><span class="p">])</span>  <span class="c1"># type: ignore</span></div>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2020 - 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

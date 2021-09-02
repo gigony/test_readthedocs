@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monai.handlers.regression_metrics &#8212; MONAI 0.6.0 Documentation</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../index.html">
+  <img src="../../../_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for monai.handlers.regression_metrics</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 - 2021 MONAI Consortium</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">monai.handlers.ignite_metric</span> <span class="kn">import</span> <span class="n">IgniteMetric</span>
+<span class="kn">from</span> <span class="nn">monai.metrics</span> <span class="kn">import</span> <span class="n">MAEMetric</span><span class="p">,</span> <span class="n">MSEMetric</span><span class="p">,</span> <span class="n">PSNRMetric</span><span class="p">,</span> <span class="n">RMSEMetric</span>
+<span class="kn">from</span> <span class="nn">monai.utils</span> <span class="kn">import</span> <span class="n">MetricReduction</span>
+
+
+<div class="viewcode-block" id="MeanSquaredError"><a class="viewcode-back" href="../../../handlers.html#monai.handlers.MeanSquaredError">[docs]</a><span class="k">class</span> <span class="nc">MeanSquaredError</span><span class="p">(</span><span class="n">IgniteMetric</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes Mean Squared Error from full size Tensor and collects average over batch, iterations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="MeanSquaredError.__init__"><a class="viewcode-back" href="../../../handlers.html#monai.handlers.MeanSquaredError.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">output_transform</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span>
+        <span class="n">save_details</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            output_transform: callable to extract `y_pred` and `y` from `ignite.engine.state.output` then</span>
+<span class="sd">                construct `(y_pred, y)` pair, where `y_pred` and `y` can be `batch-first` Tensors or</span>
+<span class="sd">                lists of `channel-first` Tensors. the form of `(y_pred, y)` is required by the `update()`.</span>
+<span class="sd">                for example: if `ignite.engine.state.output` is `{&quot;pred&quot;: xxx, &quot;label&quot;: xxx, &quot;other&quot;: xxx}`,</span>
+<span class="sd">                output_transform can be `lambda x: (x[&quot;pred&quot;], x[&quot;label&quot;])`.</span>
+<span class="sd">            save_details: whether to save metric computation details per image, for example: mean squared error of every image.</span>
+<span class="sd">                default to True, will save to `engine.state.metric_details` dict with the metric name as key.</span>
+
+<span class="sd">        See also:</span>
+<span class="sd">            :py:class:`monai.metrics.MSEMetric`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">metric_fn</span> <span class="o">=</span> <span class="n">MSEMetric</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="n">MetricReduction</span><span class="o">.</span><span class="n">MEAN</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">metric_fn</span><span class="o">=</span><span class="n">metric_fn</span><span class="p">,</span>
+            <span class="n">output_transform</span><span class="o">=</span><span class="n">output_transform</span><span class="p">,</span>
+            <span class="n">save_details</span><span class="o">=</span><span class="n">save_details</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="MeanAbsoluteError"><a class="viewcode-back" href="../../../handlers.html#monai.handlers.MeanAbsoluteError">[docs]</a><span class="k">class</span> <span class="nc">MeanAbsoluteError</span><span class="p">(</span><span class="n">IgniteMetric</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes Mean Absolute Error from full size Tensor and collects average over batch, iterations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="MeanAbsoluteError.__init__"><a class="viewcode-back" href="../../../handlers.html#monai.handlers.MeanAbsoluteError.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">output_transform</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span>
+        <span class="n">save_details</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            output_transform: transform the ignite.engine.state.output into [y_pred, y] pair.</span>
+<span class="sd">            save_details: whether to save metric computation details per image, for example: mean absolute error of every image.</span>
+<span class="sd">                default to True, will save to `engine.state.metric_details` dict with the metric name as key.</span>
+
+<span class="sd">        See also:</span>
+<span class="sd">            :py:class:`monai.metrics.MAEMetric`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">metric_fn</span> <span class="o">=</span> <span class="n">MAEMetric</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="n">MetricReduction</span><span class="o">.</span><span class="n">MEAN</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">metric_fn</span><span class="o">=</span><span class="n">metric_fn</span><span class="p">,</span>
+            <span class="n">output_transform</span><span class="o">=</span><span class="n">output_transform</span><span class="p">,</span>
+            <span class="n">save_details</span><span class="o">=</span><span class="n">save_details</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="RootMeanSquaredError"><a class="viewcode-back" href="../../../handlers.html#monai.handlers.RootMeanSquaredError">[docs]</a><span class="k">class</span> <span class="nc">RootMeanSquaredError</span><span class="p">(</span><span class="n">IgniteMetric</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes Root Mean Squared Error from full size Tensor and collects average over batch, iterations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="RootMeanSquaredError.__init__"><a class="viewcode-back" href="../../../handlers.html#monai.handlers.RootMeanSquaredError.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">output_transform</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span>
+        <span class="n">save_details</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            output_transform: transform the ignite.engine.state.output into [y_pred, y] pair.</span>
+<span class="sd">            save_details: whether to save metric computation details per image, for example: root mean squared error of every image.</span>
+<span class="sd">                default to True, will save to `engine.state.metric_details` dict with the metric name as key.</span>
+
+<span class="sd">        See also:</span>
+<span class="sd">            :py:class:`monai.metrics.RMSEMetric`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">metric_fn</span> <span class="o">=</span> <span class="n">RMSEMetric</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="n">MetricReduction</span><span class="o">.</span><span class="n">MEAN</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">metric_fn</span><span class="o">=</span><span class="n">metric_fn</span><span class="p">,</span>
+            <span class="n">output_transform</span><span class="o">=</span><span class="n">output_transform</span><span class="p">,</span>
+            <span class="n">save_details</span><span class="o">=</span><span class="n">save_details</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="PeakSignalToNoiseRatio"><a class="viewcode-back" href="../../../handlers.html#monai.handlers.PeakSignalToNoiseRatio">[docs]</a><span class="k">class</span> <span class="nc">PeakSignalToNoiseRatio</span><span class="p">(</span><span class="n">IgniteMetric</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes Peak Signal to Noise Ratio from full size Tensor and collects average over batch, iterations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="PeakSignalToNoiseRatio.__init__"><a class="viewcode-back" href="../../../handlers.html#monai.handlers.PeakSignalToNoiseRatio.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">max_val</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+        <span class="n">output_transform</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span>
+        <span class="n">save_details</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            max_val: The dynamic range of the images/volumes (i.e., the difference between the</span>
+<span class="sd">                maximum and the minimum allowed values e.g. 255 for a uint8 image).</span>
+<span class="sd">            output_transform: transform the ignite.engine.state.output into [y_pred, y] pair.</span>
+<span class="sd">            save_details: whether to save metric computation details per image, for example: PSNR of every image.</span>
+<span class="sd">                default to True, will save to `engine.state.metric_details` dict with the metric name as key.</span>
+<span class="sd">            reduction: {``&quot;none&quot;``, ``&quot;mean&quot;``, ``&quot;sum&quot;``, ``&quot;mean_batch&quot;``, ``&quot;sum_batch&quot;``,</span>
+
+<span class="sd">        See also:</span>
+<span class="sd">            :py:class:`monai.metrics.PSNRMetric`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">metric_fn</span> <span class="o">=</span> <span class="n">PSNRMetric</span><span class="p">(</span><span class="n">max_val</span><span class="o">=</span><span class="n">max_val</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="n">MetricReduction</span><span class="o">.</span><span class="n">MEAN</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">metric_fn</span><span class="o">=</span><span class="n">metric_fn</span><span class="p">,</span>
+            <span class="n">output_transform</span><span class="o">=</span><span class="n">output_transform</span><span class="p">,</span>
+            <span class="n">save_details</span><span class="o">=</span><span class="n">save_details</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2020 - 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

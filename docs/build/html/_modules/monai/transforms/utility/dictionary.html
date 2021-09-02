@@ -1,0 +1,1411 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monai.transforms.utility.dictionary &#8212; MONAI 0.6.0 Documentation</title>
+    
+  <link href="../../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../../index.html">
+  <img src="../../../../_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for monai.transforms.utility.dictionary</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 - 2021 MONAI Consortium</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">A collection of dictionary-based wrappers around the &quot;vanilla&quot; transforms for utility functions</span>
+<span class="sd">defined in :py:class:`monai.transforms.utility.array`.</span>
+
+<span class="sd">Class names are ended with &#39;d&#39; to denote dictionary-based transforms.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Hashable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="kn">from</span> <span class="nn">monai.config</span> <span class="kn">import</span> <span class="n">DtypeLike</span><span class="p">,</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">NdarrayTensor</span>
+<span class="kn">from</span> <span class="nn">monai.transforms.inverse</span> <span class="kn">import</span> <span class="n">InvertibleTransform</span>
+<span class="kn">from</span> <span class="nn">monai.transforms.transform</span> <span class="kn">import</span> <span class="n">MapTransform</span><span class="p">,</span> <span class="n">Randomizable</span>
+<span class="kn">from</span> <span class="nn">monai.transforms.utility.array</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AddChannel</span><span class="p">,</span>
+    <span class="n">AsChannelFirst</span><span class="p">,</span>
+    <span class="n">AsChannelLast</span><span class="p">,</span>
+    <span class="n">CastToType</span><span class="p">,</span>
+    <span class="n">ConvertToMultiChannelBasedOnBratsClasses</span><span class="p">,</span>
+    <span class="n">DataStats</span><span class="p">,</span>
+    <span class="n">EnsureChannelFirst</span><span class="p">,</span>
+    <span class="n">EnsureType</span><span class="p">,</span>
+    <span class="n">FgBgToIndices</span><span class="p">,</span>
+    <span class="n">Identity</span><span class="p">,</span>
+    <span class="n">LabelToMask</span><span class="p">,</span>
+    <span class="n">Lambda</span><span class="p">,</span>
+    <span class="n">MapLabelValue</span><span class="p">,</span>
+    <span class="n">RemoveRepeatedChannel</span><span class="p">,</span>
+    <span class="n">RepeatChannel</span><span class="p">,</span>
+    <span class="n">SimulateDelay</span><span class="p">,</span>
+    <span class="n">SplitChannel</span><span class="p">,</span>
+    <span class="n">SqueezeDim</span><span class="p">,</span>
+    <span class="n">ToCupy</span><span class="p">,</span>
+    <span class="n">ToNumpy</span><span class="p">,</span>
+    <span class="n">ToPIL</span><span class="p">,</span>
+    <span class="n">TorchVision</span><span class="p">,</span>
+    <span class="n">ToTensor</span><span class="p">,</span>
+    <span class="n">Transpose</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">monai.transforms.utils</span> <span class="kn">import</span> <span class="n">extreme_points_to_image</span><span class="p">,</span> <span class="n">get_extreme_points</span><span class="p">,</span> <span class="n">tensor_to_numpy</span>
+<span class="kn">from</span> <span class="nn">monai.utils</span> <span class="kn">import</span> <span class="n">ensure_tuple</span><span class="p">,</span> <span class="n">ensure_tuple_rep</span>
+<span class="kn">from</span> <span class="nn">monai.utils.enums</span> <span class="kn">import</span> <span class="n">InverseKeys</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;AddChannelD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AddChannelDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AddChanneld&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AddExtremePointsChannelD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AddExtremePointsChannelDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AddExtremePointsChanneld&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AsChannelFirstD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AsChannelFirstDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AsChannelFirstd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AsChannelLastD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AsChannelLastDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AsChannelLastd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CastToTypeD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CastToTypeDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CastToTyped&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ConcatItemsD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ConcatItemsDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ConcatItemsd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ConvertToMultiChannelBasedOnBratsClassesD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ConvertToMultiChannelBasedOnBratsClassesDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ConvertToMultiChannelBasedOnBratsClassesd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CopyItemsD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CopyItemsDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CopyItemsd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DataStatsD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DataStatsDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DataStatsd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DeleteItemsD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DeleteItemsDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;DeleteItemsd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;EnsureChannelFirstD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;EnsureChannelFirstDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;EnsureChannelFirstd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;EnsureTypeD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;EnsureTypeDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;EnsureTyped&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FgBgToIndicesD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FgBgToIndicesDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FgBgToIndicesd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;IdentityD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;IdentityDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Identityd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LabelToMaskD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LabelToMaskDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LabelToMaskd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LambdaD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LambdaDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Lambdad&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MapLabelValueD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MapLabelValueDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MapLabelValued&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RandLambdaD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RandLambdaDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RandLambdad&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RandTorchVisionD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RandTorchVisionDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RandTorchVisiond&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RemoveRepeatedChannelD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RemoveRepeatedChannelDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RemoveRepeatedChanneld&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RepeatChannelD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RepeatChannelDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RepeatChanneld&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SelectItemsD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SelectItemsDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SelectItemsd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SimulateDelayD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SimulateDelayDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SimulateDelayd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SplitChannelD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SplitChannelDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SplitChanneld&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SqueezeDimD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SqueezeDimDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SqueezeDimd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ToCupyD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ToCupyDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ToCupyd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ToNumpyD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ToNumpyDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ToNumpyd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ToPILD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ToPILDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ToPILd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ToTensorD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ToTensorDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ToTensord&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TorchVisionD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TorchVisionDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TorchVisiond&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Transposed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TransposeDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TransposeD&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="Identityd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.Identityd">[docs]</a><span class="k">class</span> <span class="nc">Identityd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.Identity`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Identityd.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.Identityd.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">identity</span> <span class="o">=</span> <span class="n">Identity</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Identityd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.Identityd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="AsChannelFirstd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.AsChannelFirstd">[docs]</a><span class="k">class</span> <span class="nc">AsChannelFirstd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.AsChannelFirst`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AsChannelFirstd.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.AsChannelFirstd.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">channel_dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            channel_dim: which dimension of input image is the channel, default is the last dimension.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span> <span class="o">=</span> <span class="n">AsChannelFirst</span><span class="p">(</span><span class="n">channel_dim</span><span class="o">=</span><span class="n">channel_dim</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AsChannelFirstd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.AsChannelFirstd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="AsChannelLastd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.AsChannelLastd">[docs]</a><span class="k">class</span> <span class="nc">AsChannelLastd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.AsChannelLast`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AsChannelLastd.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.AsChannelLastd.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">channel_dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            channel_dim: which dimension of input image is the channel, default is the first dimension.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span> <span class="o">=</span> <span class="n">AsChannelLast</span><span class="p">(</span><span class="n">channel_dim</span><span class="o">=</span><span class="n">channel_dim</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AsChannelLastd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.AsChannelLastd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="AddChanneld"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.AddChanneld">[docs]</a><span class="k">class</span> <span class="nc">AddChanneld</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.AddChannel`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AddChanneld.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.AddChanneld.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adder</span> <span class="o">=</span> <span class="n">AddChannel</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="AddChanneld.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.AddChanneld.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">NdarrayTensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">NdarrayTensor</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adder</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="EnsureChannelFirstd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.EnsureChannelFirstd">[docs]</a><span class="k">class</span> <span class="nc">EnsureChannelFirstd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.EnsureChannelFirst`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="EnsureChannelFirstd.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.EnsureChannelFirstd.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">meta_keys</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">KeysCollection</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">meta_key_postfix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;meta_dict&quot;</span><span class="p">,</span>
+        <span class="n">strict_check</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            meta_keys: explicitly indicate the key of the corresponding meta data dictionary.</span>
+<span class="sd">                for example, for data with key `image`, the metadata by default is in `image_meta_dict`.</span>
+<span class="sd">                the meta data is a dictionary object which contains: filename, original_shape, etc.</span>
+<span class="sd">                it can be a sequence of string, map to the `keys`.</span>
+<span class="sd">                if None, will try to construct meta_keys by `key_{meta_key_postfix}`.</span>
+<span class="sd">            meta_key_postfix: if meta_keys is None and `key_{postfix}` was used to store the metadata in `LoadImaged`.</span>
+<span class="sd">                So need the key to extract metadata for channel dim information, default is `meta_dict`.</span>
+<span class="sd">                For example, for data with key `image`, metadata by default is in `image_meta_dict`.</span>
+<span class="sd">            strict_check: whether to raise an error when the meta information is insufficient.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adjuster</span> <span class="o">=</span> <span class="n">EnsureChannelFirst</span><span class="p">(</span><span class="n">strict_check</span><span class="o">=</span><span class="n">strict_check</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta_keys</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">meta_keys</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta_key_postfix</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">meta_key_postfix</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="EnsureChannelFirstd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.EnsureChannelFirstd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">meta_key</span><span class="p">,</span> <span class="n">meta_key_postfix</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_keys</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_key_postfix</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjuster</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="n">meta_key</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">meta_key_postfix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="RepeatChanneld"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RepeatChanneld">[docs]</a><span class="k">class</span> <span class="nc">RepeatChanneld</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.RepeatChannel`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="RepeatChanneld.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RepeatChanneld.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">repeats</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            repeats: the number of repetitions for each element.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repeater</span> <span class="o">=</span> <span class="n">RepeatChannel</span><span class="p">(</span><span class="n">repeats</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RepeatChanneld.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RepeatChanneld.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">repeater</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">RemoveRepeatedChanneld</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.RemoveRepeatedChannel`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">repeats</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            repeats: the number of repetitions for each element.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repeater</span> <span class="o">=</span> <span class="n">RemoveRepeatedChannel</span><span class="p">(</span><span class="n">repeats</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">repeater</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span>
+
+
+<div class="viewcode-block" id="SplitChanneld"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SplitChanneld">[docs]</a><span class="k">class</span> <span class="nc">SplitChanneld</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.SplitChannel`.</span>
+<span class="sd">    All the input specified by `keys` should be split into same count of data.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SplitChanneld.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SplitChanneld.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">output_postfixes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">channel_dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            output_postfixes: the postfixes to construct keys to store split data.</span>
+<span class="sd">                for example: if the key of input data is `pred` and split 2 classes, the output</span>
+<span class="sd">                data keys will be: pred_(output_postfixes[0]), pred_(output_postfixes[1])</span>
+<span class="sd">                if None, using the index number: `pred_0`, `pred_1`, ... `pred_N`.</span>
+<span class="sd">            channel_dim: which dimension of input image is the channel, default to 0.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_postfixes</span> <span class="o">=</span> <span class="n">output_postfixes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">splitter</span> <span class="o">=</span> <span class="n">SplitChannel</span><span class="p">(</span><span class="n">channel_dim</span><span class="o">=</span><span class="n">channel_dim</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SplitChanneld.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SplitChanneld.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">rets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">splitter</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="n">postfixes</span><span class="p">:</span> <span class="n">Sequence</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rets</span><span class="p">)))</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_postfixes</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_postfixes</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">postfixes</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rets</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;count of split results must match output_postfixes.&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rets</span><span class="p">):</span>
+                <span class="n">split_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">postfixes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="k">if</span> <span class="n">split_key</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;input data already contains key </span><span class="si">{</span><span class="n">split_key</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">split_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="CastToTyped"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.CastToTyped">[docs]</a><span class="k">class</span> <span class="nc">CastToTyped</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.CastToType`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="CastToTyped.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.CastToTyped.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">DtypeLike</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">dtype</span><span class="p">]],</span> <span class="n">DtypeLike</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">dtype</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
+        <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            dtype: convert image to this data type, default is `np.float32`.</span>
+<span class="sd">                it also can be a sequence of dtypes or torch.dtype,</span>
+<span class="sd">                each element corresponds to a key in ``keys``.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">MapTransform</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">dtype</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span> <span class="o">=</span> <span class="n">CastToType</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CastToTyped.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.CastToTyped.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">dtype</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="ToTensord"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.ToTensord">[docs]</a><span class="k">class</span> <span class="nc">ToTensord</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">,</span> <span class="n">InvertibleTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.ToTensor`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ToTensord.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.ToTensord.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span> <span class="o">=</span> <span class="n">ToTensor</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ToTensord.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.ToTensord.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">push_transform</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span></div>
+
+<div class="viewcode-block" id="ToTensord.inverse"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.ToTensord.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="c1"># Create inverse transform</span>
+            <span class="n">inverse_transform</span> <span class="o">=</span> <span class="n">ToNumpy</span><span class="p">()</span>
+            <span class="c1"># Apply inverse</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">inverse_transform</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="c1"># Remove the applied transform</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pop_transform</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="EnsureTyped"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.EnsureTyped">[docs]</a><span class="k">class</span> <span class="nc">EnsureTyped</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">,</span> <span class="n">InvertibleTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.EnsureType`.</span>
+
+<span class="sd">    Ensure the input data to be a PyTorch Tensor or numpy array, support: `numpy array`, `PyTorch Tensor`,</span>
+<span class="sd">    `float`, `int`, `bool`, `string` and `object` keep the original.</span>
+<span class="sd">    If passing a dictionary, list or tuple, still return dictionary, list or tuple and recursively convert</span>
+<span class="sd">    every item to the expected data type.</span>
+
+<span class="sd">    Note: Currently, we only convert tensor data to numpy array or scalar number in the inverse operation.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="EnsureTyped.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.EnsureTyped.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">data_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;tensor&quot;</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            data_type: target data type to convert, should be &quot;tensor&quot; or &quot;numpy&quot;.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span> <span class="o">=</span> <span class="n">EnsureType</span><span class="p">(</span><span class="n">data_type</span><span class="o">=</span><span class="n">data_type</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="EnsureTyped.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.EnsureTyped.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">push_transform</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span></div>
+
+<div class="viewcode-block" id="EnsureTyped.inverse"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.EnsureTyped.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="c1"># FIXME: currently, only convert tensor data to numpy array or scalar number,</span>
+            <span class="c1"># need to also invert numpy array but it&#39;s not easy to determine the previous data type</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">tensor_to_numpy</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="c1"># Remove the applied transform</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pop_transform</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="ToNumpyd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.ToNumpyd">[docs]</a><span class="k">class</span> <span class="nc">ToNumpyd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.ToNumpy`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ToNumpyd.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.ToNumpyd.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span> <span class="o">=</span> <span class="n">ToNumpy</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ToNumpyd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.ToNumpyd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="ToCupyd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.ToCupyd">[docs]</a><span class="k">class</span> <span class="nc">ToCupyd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.ToCupy`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ToCupyd.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.ToCupyd.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span> <span class="o">=</span> <span class="n">ToCupy</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ToCupyd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.ToCupyd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">ToPILd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.ToNumpy`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span> <span class="o">=</span> <span class="n">ToPIL</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span>
+
+
+<span class="k">class</span> <span class="nc">Transposed</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">,</span> <span class="n">InvertibleTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.Transpose`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">Transpose</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="c1"># if None was supplied then numpy uses range(a.ndim)[::-1]</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">indices</span> <span class="ow">or</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">ndim</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">push_transform</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">extra_info</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;indices&quot;</span><span class="p">:</span> <span class="n">indices</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">d</span>
+
+    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">transform</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_most_recent_transform</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+            <span class="c1"># Create inverse transform</span>
+            <span class="n">fwd_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">transform</span><span class="p">[</span><span class="n">InverseKeys</span><span class="o">.</span><span class="n">EXTRA_INFO</span><span class="p">][</span><span class="s2">&quot;indices&quot;</span><span class="p">])</span>
+            <span class="n">inv_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">fwd_indices</span><span class="p">)</span>
+            <span class="n">inverse_transform</span> <span class="o">=</span> <span class="n">Transpose</span><span class="p">(</span><span class="n">inv_indices</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+            <span class="c1"># Apply inverse</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">inverse_transform</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="c1"># Remove the applied transform</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pop_transform</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span>
+
+
+<div class="viewcode-block" id="DeleteItemsd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.DeleteItemsd">[docs]</a><span class="k">class</span> <span class="nc">DeleteItemsd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Delete specified items from data dictionary to release memory.</span>
+<span class="sd">    It will remove the key-values and copy the others to construct a new dictionary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DeleteItemsd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.DeleteItemsd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">val</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">data</span><span class="p">)}</span></div></div>
+
+
+<div class="viewcode-block" id="SelectItemsd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SelectItemsd">[docs]</a><span class="k">class</span> <span class="nc">SelectItemsd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Select only specified items from data dictionary to release memory.</span>
+<span class="sd">    It will copy the selected key-values and construct and new dictionary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SelectItemsd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SelectItemsd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">data</span><span class="p">)}</span>
+        <span class="k">return</span> <span class="n">result</span></div></div>
+
+
+<div class="viewcode-block" id="SqueezeDimd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SqueezeDimd">[docs]</a><span class="k">class</span> <span class="nc">SqueezeDimd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.SqueezeDim`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SqueezeDimd.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SqueezeDimd.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            dim: dimension to be squeezed. Default: 0 (the first dimension)</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span> <span class="o">=</span> <span class="n">SqueezeDim</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="n">dim</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SqueezeDimd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SqueezeDimd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">NdarrayTensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">NdarrayTensor</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="DataStatsd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.DataStatsd">[docs]</a><span class="k">class</span> <span class="nc">DataStatsd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.DataStats`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DataStatsd.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.DataStatsd.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">prefix</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Data&quot;</span><span class="p">,</span>
+        <span class="n">data_type</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">data_shape</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">value_range</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">data_value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">additional_info</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">Callable</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">logger_handler</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">logging</span><span class="o">.</span><span class="n">Handler</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            prefix: will be printed in format: &quot;{prefix} statistics&quot;.</span>
+<span class="sd">                it also can be a sequence of string, each element corresponds to a key in ``keys``.</span>
+<span class="sd">            data_type: whether to show the type of input data.</span>
+<span class="sd">                it also can be a sequence of bool, each element corresponds to a key in ``keys``.</span>
+<span class="sd">            data_shape: whether to show the shape of input data.</span>
+<span class="sd">                it also can be a sequence of bool, each element corresponds to a key in ``keys``.</span>
+<span class="sd">            value_range: whether to show the value range of input data.</span>
+<span class="sd">                it also can be a sequence of bool, each element corresponds to a key in ``keys``.</span>
+<span class="sd">            data_value: whether to show the raw value of input data.</span>
+<span class="sd">                it also can be a sequence of bool, each element corresponds to a key in ``keys``.</span>
+<span class="sd">                a typical example is to print some properties of Nifti image: affine, pixdim, etc.</span>
+<span class="sd">            additional_info: user can define callable function to extract</span>
+<span class="sd">                additional info from input data. it also can be a sequence of string, each element</span>
+<span class="sd">                corresponds to a key in ``keys``.</span>
+<span class="sd">            logger_handler: add additional handler to output data: save to file, etc.</span>
+<span class="sd">                add existing python logging handlers: https://docs.python.org/3/library/logging.handlers.html</span>
+<span class="sd">                the handler should have a logging level of at least `INFO`.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_type</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">data_type</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_shape</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">data_shape</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value_range</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">value_range</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_value</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">data_value</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">additional_info</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">additional_info</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger_handler</span> <span class="o">=</span> <span class="n">logger_handler</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printer</span> <span class="o">=</span> <span class="n">DataStats</span><span class="p">(</span><span class="n">logger_handler</span><span class="o">=</span><span class="n">logger_handler</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataStatsd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.DataStatsd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">NdarrayTensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">NdarrayTensor</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">data_type</span><span class="p">,</span> <span class="n">data_shape</span><span class="p">,</span> <span class="n">value_range</span><span class="p">,</span> <span class="n">data_value</span><span class="p">,</span> <span class="n">additional_info</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span>
+            <span class="n">d</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_shape</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_range</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">additional_info</span>
+        <span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="p">(</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">],</span>
+                <span class="n">prefix</span><span class="p">,</span>
+                <span class="n">data_type</span><span class="p">,</span>
+                <span class="n">data_shape</span><span class="p">,</span>
+                <span class="n">value_range</span><span class="p">,</span>
+                <span class="n">data_value</span><span class="p">,</span>
+                <span class="n">additional_info</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="SimulateDelayd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SimulateDelayd">[docs]</a><span class="k">class</span> <span class="nc">SimulateDelayd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.SimulateDelay`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SimulateDelayd.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SimulateDelayd.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">delay_time</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            delay_time: The minimum amount of time, in fractions of seconds, to accomplish this identity task.</span>
+<span class="sd">                It also can be a sequence of string, each element corresponds to a key in ``keys``.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delay_time</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">delay_time</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delayer</span> <span class="o">=</span> <span class="n">SimulateDelay</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="SimulateDelayd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SimulateDelayd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">NdarrayTensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">NdarrayTensor</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">delay_time</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">delay_time</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">delayer</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">delay_time</span><span class="o">=</span><span class="n">delay_time</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="CopyItemsd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.CopyItemsd">[docs]</a><span class="k">class</span> <span class="nc">CopyItemsd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Copy specified items from data dictionary and save with different key names.</span>
+<span class="sd">    It can copy several items together and copy several times.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="CopyItemsd.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.CopyItemsd.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">times</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            times: expected copy times, for example, if keys is &quot;img&quot;, times is 3,</span>
+<span class="sd">                it will add 3 copies of &quot;img&quot; data to the dictionary.</span>
+<span class="sd">            names: the names corresponding to the newly copied data,</span>
+<span class="sd">                the length should match `len(keys) x times`. for example, if keys is [&quot;img&quot;, &quot;seg&quot;]</span>
+<span class="sd">                and times is 2, names can be: [&quot;img_1&quot;, &quot;seg_1&quot;, &quot;img_2&quot;, &quot;seg_2&quot;].</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: When ``times`` is nonpositive.</span>
+<span class="sd">            ValueError: When ``len(names)`` is not ``len(keys) * times``. Incompatible values.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">times</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;times must be positive, got </span><span class="si">{</span><span class="n">times</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">times</span> <span class="o">=</span> <span class="n">times</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="n">ensure_tuple</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">)</span> <span class="o">!=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">)</span> <span class="o">*</span> <span class="n">times</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;len(names) must match len(keys) * times, &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;got len(names)=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">)</span><span class="si">}</span><span class="s2"> len(keys) * times=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">)</span> <span class="o">*</span> <span class="n">times</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="n">names</span></div>
+
+<div class="viewcode-block" id="CopyItemsd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.CopyItemsd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            KeyError: When a key in ``self.names`` already exists in ``data``.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">key_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">times</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">new_key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">key_len</span> <span class="p">:</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">key_len</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="n">new_key</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Key </span><span class="si">{</span><span class="n">new_key</span><span class="si">}</span><span class="s2"> already exists in data.&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+                    <span class="n">d</span><span class="p">[</span><span class="n">new_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">d</span><span class="p">[</span><span class="n">new_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="ConcatItemsd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.ConcatItemsd">[docs]</a><span class="k">class</span> <span class="nc">ConcatItemsd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Concatenate specified items from data dictionary together on the first dim to construct a big array.</span>
+<span class="sd">    Expect all the items are numpy array or PyTorch Tensor.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ConcatItemsd.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.ConcatItemsd.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be concatenated together.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            name: the name corresponding to the key to store the concatenated data.</span>
+<span class="sd">            dim: on which dimension to concatenate the items, default is 0.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span></div>
+
+<div class="viewcode-block" id="ConcatItemsd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.ConcatItemsd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: When items in ``data`` differ in type.</span>
+<span class="sd">            TypeError: When the item type is not in ``Union[numpy.ndarray, torch.Tensor]``.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">data_type</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">data_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">data_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">data_type</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;All items in data must have the same type.&quot;</span><span class="p">)</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">data_type</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+            <span class="n">d</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">data_type</span> <span class="o">==</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+            <span class="n">d</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported data type: </span><span class="si">{</span><span class="n">data_type</span><span class="si">}</span><span class="s2">, available options are (numpy.ndarray, torch.Tensor).&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="Lambdad"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.Lambdad">[docs]</a><span class="k">class</span> <span class="nc">Lambdad</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.Lambda`.</span>
+
+<span class="sd">    For example:</span>
+
+<span class="sd">    .. code-block:: python</span>
+<span class="sd">        :emphasize-lines: 2</span>
+
+<span class="sd">        input_data={&#39;image&#39;: np.zeros((10, 2, 2)), &#39;label&#39;: np.ones((10, 2, 2))}</span>
+<span class="sd">        lambd = Lambdad(keys=&#39;label&#39;, func=lambda x: x[:4, :, :])</span>
+<span class="sd">        print(lambd(input_data)[&#39;label&#39;].shape)</span>
+<span class="sd">        (4, 2, 2)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">            See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">        func: Lambda/function to be applied. It also can be a sequence of Callable,</span>
+<span class="sd">            each element corresponds to a key in ``keys``.</span>
+<span class="sd">        overwrite: whether to overwrite the original data in the input dictionary with lamdbda function output.</span>
+<span class="sd">            default to True. it also can be a sequence of bool, each element corresponds to a key in ``keys``.</span>
+<span class="sd">        allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">func</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">Callable</span><span class="p">],</span>
+        <span class="n">overwrite</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">overwrite</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">overwrite</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lambd</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Lambdad.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.Lambdad.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">overwrite</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">overwrite</span><span class="p">):</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lambd</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">overwrite</span><span class="p">:</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="RandLambdad"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandLambdad">[docs]</a><span class="k">class</span> <span class="nc">RandLambdad</span><span class="p">(</span><span class="n">Lambdad</span><span class="p">,</span> <span class="n">Randomizable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Randomizable version :py:class:`monai.transforms.Lambdad`, the input `func` contains random logic.</span>
+<span class="sd">    It&#39;s a randomizable transform so `CacheDataset` will not execute it and cache the results.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">            See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">        func: Lambda/function to be applied. It also can be a sequence of Callable,</span>
+<span class="sd">            each element corresponds to a key in ``keys``.</span>
+<span class="sd">        overwrite: whether to overwrite the original data in the input dictionary with lamdbda function output.</span>
+<span class="sd">            default to True. it also can be a sequence of bool, each element corresponds to a key in ``keys``.</span>
+
+<span class="sd">    For more details, please check :py:class:`monai.transforms.Lambdad`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="RandLambdad.randomize"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandLambdad.randomize">[docs]</a>    <span class="k">def</span> <span class="nf">randomize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span></div></div>
+
+
+<div class="viewcode-block" id="LabelToMaskd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.LabelToMaskd">[docs]</a><span class="k">class</span> <span class="nc">LabelToMaskd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.LabelToMask`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">            See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">        select_labels: labels to generate mask from. for 1 channel label, the `select_labels`</span>
+<span class="sd">            is the expected label values, like: [1, 2, 3]. for One-Hot format label, the</span>
+<span class="sd">            `select_labels` is the expected channel indices.</span>
+<span class="sd">        merge_channels: whether to use `np.any()` to merge the result on channel dim.</span>
+<span class="sd">            if yes, will return a single channel mask with binary data.</span>
+<span class="sd">        allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>  <span class="c1"># pytype: disable=annotation-type-mismatch</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">select_labels</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">merge_channels</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># pytype: disable=annotation-type-mismatch</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span> <span class="o">=</span> <span class="n">LabelToMask</span><span class="p">(</span><span class="n">select_labels</span><span class="o">=</span><span class="n">select_labels</span><span class="p">,</span> <span class="n">merge_channels</span><span class="o">=</span><span class="n">merge_channels</span><span class="p">)</span>
+
+<div class="viewcode-block" id="LabelToMaskd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.LabelToMaskd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="FgBgToIndicesd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.FgBgToIndicesd">[docs]</a><span class="k">class</span> <span class="nc">FgBgToIndicesd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.FgBgToIndices`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">            See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">        fg_postfix: postfix to save the computed foreground indices in dict.</span>
+<span class="sd">            for example, if computed on `label` and `postfix = &quot;_fg_indices&quot;`, the key will be `label_fg_indices`.</span>
+<span class="sd">        bg_postfix: postfix to save the computed background indices in dict.</span>
+<span class="sd">            for example, if computed on `label` and `postfix = &quot;_bg_indices&quot;`, the key will be `label_bg_indices`.</span>
+<span class="sd">        image_key: if image_key is not None, use ``label == 0 &amp; image &gt; image_threshold`` to determine</span>
+<span class="sd">            the negative sample(background). so the output items will not map to all the voxels in the label.</span>
+<span class="sd">        image_threshold: if enabled image_key, use ``image &gt; image_threshold`` to determine</span>
+<span class="sd">            the valid image content area and select background only in this area.</span>
+<span class="sd">        output_shape: expected shape of output indices. if not None, unravel indices to specified shape.</span>
+<span class="sd">        allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">fg_postfix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;_fg_indices&quot;</span><span class="p">,</span>
+        <span class="n">bg_postfix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;_bg_indices&quot;</span><span class="p">,</span>
+        <span class="n">image_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">image_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">output_shape</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fg_postfix</span> <span class="o">=</span> <span class="n">fg_postfix</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bg_postfix</span> <span class="o">=</span> <span class="n">bg_postfix</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_key</span> <span class="o">=</span> <span class="n">image_key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span> <span class="o">=</span> <span class="n">FgBgToIndices</span><span class="p">(</span><span class="n">image_threshold</span><span class="p">,</span> <span class="n">output_shape</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FgBgToIndicesd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.FgBgToIndicesd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">image_key</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_key</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">fg_postfix</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">bg_postfix</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">image</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="ConvertToMultiChannelBasedOnBratsClassesd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.ConvertToMultiChannelBasedOnBratsClassesd">[docs]</a><span class="k">class</span> <span class="nc">ConvertToMultiChannelBasedOnBratsClassesd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.ConvertToMultiChannelBasedOnBratsClasses`.</span>
+<span class="sd">    Convert labels to multi channels based on brats18 classes:</span>
+<span class="sd">    label 1 is the necrotic and non-enhancing tumor core</span>
+<span class="sd">    label 2 is the the peritumoral edema</span>
+<span class="sd">    label 4 is the GD-enhancing tumor</span>
+<span class="sd">    The possible classes are TC (Tumor core), WT (Whole tumor)</span>
+<span class="sd">    and ET (Enhancing tumor).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span> <span class="o">=</span> <span class="n">ConvertToMultiChannelBasedOnBratsClasses</span><span class="p">()</span>
+
+<div class="viewcode-block" id="ConvertToMultiChannelBasedOnBratsClassesd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.ConvertToMultiChannelBasedOnBratsClassesd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="AddExtremePointsChanneld"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.AddExtremePointsChanneld">[docs]</a><span class="k">class</span> <span class="nc">AddExtremePointsChanneld</span><span class="p">(</span><span class="n">Randomizable</span><span class="p">,</span> <span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.AddExtremePointsChannel`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">            See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">        label_key: key to label source to get the extreme points.</span>
+<span class="sd">        background: Class index of background label, defaults to 0.</span>
+<span class="sd">        pert: Random perturbation amount to add to the points, defaults to 0.0.</span>
+<span class="sd">        sigma: if a list of values, must match the count of spatial dimensions of input data,</span>
+<span class="sd">            and apply every value in the list to 1 spatial dimension. if only 1 value provided,</span>
+<span class="sd">            use it for all spatial dimensions.</span>
+<span class="sd">        rescale_min: minimum value of output data.</span>
+<span class="sd">        rescale_max: maximum value of output data.</span>
+<span class="sd">        allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">label_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">background</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">pert</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">sigma</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">],</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span>
+        <span class="n">rescale_min</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">rescale_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">MapTransform</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">background</span> <span class="o">=</span> <span class="n">background</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pert</span> <span class="o">=</span> <span class="n">pert</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_key</span> <span class="o">=</span> <span class="n">label_key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="n">sigma</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rescale_min</span> <span class="o">=</span> <span class="n">rescale_min</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rescale_max</span> <span class="o">=</span> <span class="n">rescale_max</span>
+
+<div class="viewcode-block" id="AddExtremePointsChanneld.randomize"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.AddExtremePointsChanneld.randomize">[docs]</a>    <span class="k">def</span> <span class="nf">randomize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">get_extreme_points</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">rand_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">background</span><span class="p">,</span> <span class="n">pert</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pert</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AddExtremePointsChanneld.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.AddExtremePointsChanneld.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">label_key</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">label</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Only supports single channel labels!&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Generate extreme points</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">randomize</span><span class="p">(</span><span class="n">label</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="n">points_image</span> <span class="o">=</span> <span class="n">extreme_points_to_image</span><span class="p">(</span>
+                <span class="n">points</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span>
+                <span class="n">sigma</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">,</span>
+                <span class="n">rescale_min</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rescale_min</span><span class="p">,</span>
+                <span class="n">rescale_max</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rescale_max</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">img</span><span class="p">,</span> <span class="n">points_image</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="TorchVisiond"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.TorchVisiond">[docs]</a><span class="k">class</span> <span class="nc">TorchVisiond</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.TorchVision` for non-randomized transforms.</span>
+<span class="sd">    For randomized transforms of TorchVision use :py:class:`monai.transforms.RandTorchVisiond`.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        As most of the TorchVision transforms only work for PIL image and PyTorch Tensor, this transform expects input</span>
+<span class="sd">        data to be dict of PyTorch Tensors, users can easily call `ToTensord` transform to convert Numpy to Tensor.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TorchVisiond.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.TorchVisiond.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            name: The transform name in TorchVision package.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+<span class="sd">            args: parameters for the TorchVision transform.</span>
+<span class="sd">            kwargs: parameters for the TorchVision transform.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trans</span> <span class="o">=</span> <span class="n">TorchVision</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TorchVisiond.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.TorchVisiond.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="RandTorchVisiond"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandTorchVisiond">[docs]</a><span class="k">class</span> <span class="nc">RandTorchVisiond</span><span class="p">(</span><span class="n">Randomizable</span><span class="p">,</span> <span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.TorchVision` for randomized transforms.</span>
+<span class="sd">    For deterministic non-randomized transforms of TorchVision use :py:class:`monai.transforms.TorchVisiond`.</span>
+
+<span class="sd">    Note:</span>
+
+<span class="sd">        - As most of the TorchVision transforms only work for PIL image and PyTorch Tensor, this transform expects input</span>
+<span class="sd">          data to be dict of PyTorch Tensors, users can easily call `ToTensord` transform to convert Numpy to Tensor.</span>
+<span class="sd">        - This class inherits the ``Randomizable`` purely to prevent any dataset caching to skip the transform</span>
+<span class="sd">          computation. If the random factor of the underlying torchvision transform is not derived from `self.R`,</span>
+<span class="sd">          the results may not be deterministic.</span>
+<span class="sd">          See Also: :py:class:`monai.transforms.Randomizable`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="RandTorchVisiond.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandTorchVisiond.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            name: The transform name in TorchVision package.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+<span class="sd">            args: parameters for the TorchVision transform.</span>
+<span class="sd">            kwargs: parameters for the TorchVision transform.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">MapTransform</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trans</span> <span class="o">=</span> <span class="n">TorchVision</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RandTorchVisiond.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.RandTorchVisiond.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trans</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="MapLabelValued"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.MapLabelValued">[docs]</a><span class="k">class</span> <span class="nc">MapLabelValued</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.MapLabelValue`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="MapLabelValued.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.MapLabelValued.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">orig_labels</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">,</span>
+        <span class="n">target_labels</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="p">:</span> <span class="n">DtypeLike</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
+        <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            orig_labels: original labels that map to others.</span>
+<span class="sd">            target_labels: expected label values, 1: 1 map to the `orig_labels`.</span>
+<span class="sd">            dtype: convert the output data to dtype, default to float32.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span> <span class="o">=</span> <span class="n">MapLabelValue</span><span class="p">(</span><span class="n">orig_labels</span><span class="o">=</span><span class="n">orig_labels</span><span class="p">,</span> <span class="n">target_labels</span><span class="o">=</span><span class="n">target_labels</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MapLabelValued.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.MapLabelValued.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapper</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<span class="n">IdentityD</span> <span class="o">=</span> <span class="n">IdentityDict</span> <span class="o">=</span> <span class="n">Identityd</span>
+<span class="n">AsChannelFirstD</span> <span class="o">=</span> <span class="n">AsChannelFirstDict</span> <span class="o">=</span> <span class="n">AsChannelFirstd</span>
+<span class="n">AsChannelLastD</span> <span class="o">=</span> <span class="n">AsChannelLastDict</span> <span class="o">=</span> <span class="n">AsChannelLastd</span>
+<span class="n">AddChannelD</span> <span class="o">=</span> <span class="n">AddChannelDict</span> <span class="o">=</span> <span class="n">AddChanneld</span>
+<span class="n">EnsureChannelFirstD</span> <span class="o">=</span> <span class="n">EnsureChannelFirstDict</span> <span class="o">=</span> <span class="n">EnsureChannelFirstd</span>
+<span class="n">RemoveRepeatedChannelD</span> <span class="o">=</span> <span class="n">RemoveRepeatedChannelDict</span> <span class="o">=</span> <span class="n">RemoveRepeatedChanneld</span>
+<span class="n">RepeatChannelD</span> <span class="o">=</span> <span class="n">RepeatChannelDict</span> <span class="o">=</span> <span class="n">RepeatChanneld</span>
+<span class="n">SplitChannelD</span> <span class="o">=</span> <span class="n">SplitChannelDict</span> <span class="o">=</span> <span class="n">SplitChanneld</span>
+<span class="n">CastToTypeD</span> <span class="o">=</span> <span class="n">CastToTypeDict</span> <span class="o">=</span> <span class="n">CastToTyped</span>
+<span class="n">ToTensorD</span> <span class="o">=</span> <span class="n">ToTensorDict</span> <span class="o">=</span> <span class="n">ToTensord</span>
+<span class="n">EnsureTypeD</span> <span class="o">=</span> <span class="n">EnsureTypeDict</span> <span class="o">=</span> <span class="n">EnsureTyped</span>
+<span class="n">ToNumpyD</span> <span class="o">=</span> <span class="n">ToNumpyDict</span> <span class="o">=</span> <span class="n">ToNumpyd</span>
+<span class="n">ToCupyD</span> <span class="o">=</span> <span class="n">ToCupyDict</span> <span class="o">=</span> <span class="n">ToCupyd</span>
+<span class="n">ToPILD</span> <span class="o">=</span> <span class="n">ToPILDict</span> <span class="o">=</span> <span class="n">ToPILd</span>
+<span class="n">TransposeD</span> <span class="o">=</span> <span class="n">TransposeDict</span> <span class="o">=</span> <span class="n">Transposed</span>
+<span class="n">DeleteItemsD</span> <span class="o">=</span> <span class="n">DeleteItemsDict</span> <span class="o">=</span> <span class="n">DeleteItemsd</span>
+<span class="n">SelectItemsD</span> <span class="o">=</span> <span class="n">SelectItemsDict</span> <span class="o">=</span> <span class="n">SelectItemsd</span>
+<span class="n">SqueezeDimD</span> <span class="o">=</span> <span class="n">SqueezeDimDict</span> <span class="o">=</span> <span class="n">SqueezeDimd</span>
+<span class="n">DataStatsD</span> <span class="o">=</span> <span class="n">DataStatsDict</span> <span class="o">=</span> <span class="n">DataStatsd</span>
+<span class="n">SimulateDelayD</span> <span class="o">=</span> <span class="n">SimulateDelayDict</span> <span class="o">=</span> <span class="n">SimulateDelayd</span>
+<span class="n">CopyItemsD</span> <span class="o">=</span> <span class="n">CopyItemsDict</span> <span class="o">=</span> <span class="n">CopyItemsd</span>
+<span class="n">ConcatItemsD</span> <span class="o">=</span> <span class="n">ConcatItemsDict</span> <span class="o">=</span> <span class="n">ConcatItemsd</span>
+<span class="n">LambdaD</span> <span class="o">=</span> <span class="n">LambdaDict</span> <span class="o">=</span> <span class="n">Lambdad</span>
+<span class="n">LabelToMaskD</span> <span class="o">=</span> <span class="n">LabelToMaskDict</span> <span class="o">=</span> <span class="n">LabelToMaskd</span>
+<span class="n">FgBgToIndicesD</span> <span class="o">=</span> <span class="n">FgBgToIndicesDict</span> <span class="o">=</span> <span class="n">FgBgToIndicesd</span>
+<span class="n">ConvertToMultiChannelBasedOnBratsClassesD</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">ConvertToMultiChannelBasedOnBratsClassesDict</span>
+<span class="p">)</span> <span class="o">=</span> <span class="n">ConvertToMultiChannelBasedOnBratsClassesd</span>
+<span class="n">AddExtremePointsChannelD</span> <span class="o">=</span> <span class="n">AddExtremePointsChannelDict</span> <span class="o">=</span> <span class="n">AddExtremePointsChanneld</span>
+<span class="n">TorchVisionD</span> <span class="o">=</span> <span class="n">TorchVisionDict</span> <span class="o">=</span> <span class="n">TorchVisiond</span>
+<span class="n">RandTorchVisionD</span> <span class="o">=</span> <span class="n">RandTorchVisionDict</span> <span class="o">=</span> <span class="n">RandTorchVisiond</span>
+<span class="n">RandLambdaD</span> <span class="o">=</span> <span class="n">RandLambdaDict</span> <span class="o">=</span> <span class="n">RandLambdad</span>
+<span class="n">MapLabelValueD</span> <span class="o">=</span> <span class="n">MapLabelValueDict</span> <span class="o">=</span> <span class="n">MapLabelValued</span>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2020 - 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

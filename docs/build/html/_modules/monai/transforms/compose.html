@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monai.transforms.compose &#8212; MONAI 0.6.0 Documentation</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../index.html">
+  <img src="../../../_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for monai.transforms.compose</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 - 2021 MONAI Consortium</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">A collection of generic interfaces for MONAI transforms.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">monai.transforms.inverse</span> <span class="kn">import</span> <span class="n">InvertibleTransform</span>
+
+<span class="c1"># For backwards compatibility (so this still works: from monai.transforms.compose import MapTransform)</span>
+<span class="kn">from</span> <span class="nn">monai.transforms.transform</span> <span class="kn">import</span> <span class="p">(</span>  <span class="c1"># noqa: F401</span>
+    <span class="n">MapTransform</span><span class="p">,</span>
+    <span class="n">Randomizable</span><span class="p">,</span>
+    <span class="n">RandomizableTransform</span><span class="p">,</span>
+    <span class="n">Transform</span><span class="p">,</span>
+    <span class="n">apply_transform</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">monai.utils</span> <span class="kn">import</span> <span class="n">MAX_SEED</span><span class="p">,</span> <span class="n">ensure_tuple</span><span class="p">,</span> <span class="n">get_seed</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Compose&quot;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="Compose"><a class="viewcode-back" href="../../../transforms.html#monai.transforms.Compose">[docs]</a><span class="k">class</span> <span class="nc">Compose</span><span class="p">(</span><span class="n">Randomizable</span><span class="p">,</span> <span class="n">InvertibleTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ``Compose`` provides the ability to chain a series of callables together in</span>
+<span class="sd">    a sequential manner. Each transform in the sequence must take a single</span>
+<span class="sd">    argument and return a single value.</span>
+
+<span class="sd">    ``Compose`` can be used in two ways:</span>
+
+<span class="sd">    #. With a series of transforms that accept and return a single</span>
+<span class="sd">       ndarray / tensor / tensor-like parameter.</span>
+<span class="sd">    #. With a series of transforms that accept and return a dictionary that</span>
+<span class="sd">       contains one or more parameters. Such transforms must have pass-through</span>
+<span class="sd">       semantics; unused values in the dictionary must be copied to the return</span>
+<span class="sd">       dictionary. It is required that the dictionary is copied between input</span>
+<span class="sd">       and output of each transform.</span>
+
+<span class="sd">    If some transform takes a data item dictionary as input, and returns a</span>
+<span class="sd">    sequence of data items in the transform chain, all following transforms</span>
+<span class="sd">    will be applied to each item of this list if `map_items` is `True` (the</span>
+<span class="sd">    default).  If `map_items` is `False`, the returned sequence is passed whole</span>
+<span class="sd">    to the next callable in the chain.</span>
+
+<span class="sd">    For example:</span>
+
+<span class="sd">    A `Compose([transformA, transformB, transformC],</span>
+<span class="sd">    map_items=True)(data_dict)` could achieve the following patch-based</span>
+<span class="sd">    transformation on the `data_dict` input:</span>
+
+<span class="sd">    #. transformA normalizes the intensity of &#39;img&#39; field in the `data_dict`.</span>
+<span class="sd">    #. transformB crops out image patches from the &#39;img&#39; and &#39;seg&#39; of</span>
+<span class="sd">       `data_dict`, and return a list of three patch samples::</span>
+
+<span class="sd">        {&#39;img&#39;: 3x100x100 data, &#39;seg&#39;: 1x100x100 data, &#39;shape&#39;: (100, 100)}</span>
+<span class="sd">                             applying transformB</span>
+<span class="sd">                                 ----------&gt;</span>
+<span class="sd">        [{&#39;img&#39;: 3x20x20 data, &#39;seg&#39;: 1x20x20 data, &#39;shape&#39;: (20, 20)},</span>
+<span class="sd">         {&#39;img&#39;: 3x20x20 data, &#39;seg&#39;: 1x20x20 data, &#39;shape&#39;: (20, 20)},</span>
+<span class="sd">         {&#39;img&#39;: 3x20x20 data, &#39;seg&#39;: 1x20x20 data, &#39;shape&#39;: (20, 20)},]</span>
+
+<span class="sd">    #. transformC then randomly rotates or flips &#39;img&#39; and &#39;seg&#39; of</span>
+<span class="sd">       each dictionary item in the list returned by transformB.</span>
+
+<span class="sd">    The composed transforms will be set the same global random seed if user called</span>
+<span class="sd">    `set_determinism()`.</span>
+
+<span class="sd">    When using the pass-through dictionary operation, you can make use of</span>
+<span class="sd">    :class:`monai.transforms.adaptors.adaptor` to wrap transforms that don&#39;t conform</span>
+<span class="sd">    to the requirements. This approach allows you to use transforms from</span>
+<span class="sd">    otherwise incompatible libraries with minimal additional work.</span>
+
+<span class="sd">    Note:</span>
+
+<span class="sd">        In many cases, Compose is not the best way to create pre-processing</span>
+<span class="sd">        pipelines. Pre-processing is often not a strictly sequential series of</span>
+<span class="sd">        operations, and much of the complexity arises when a not-sequential</span>
+<span class="sd">        set of functions must be called as if it were a sequence.</span>
+
+<span class="sd">        Example: images and labels</span>
+<span class="sd">        Images typically require some kind of normalization that labels do not.</span>
+<span class="sd">        Both are then typically augmented through the use of random rotations,</span>
+<span class="sd">        flips, and deformations.</span>
+<span class="sd">        Compose can be used with a series of transforms that take a dictionary</span>
+<span class="sd">        that contains &#39;image&#39; and &#39;label&#39; entries. This might require wrapping</span>
+<span class="sd">        `torchvision` transforms before passing them to compose.</span>
+<span class="sd">        Alternatively, one can create a class with a `__call__` function that</span>
+<span class="sd">        calls your pre-processing functions taking into account that not all of</span>
+<span class="sd">        them are called on the labels.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">transforms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">Callable</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">map_items</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">unpack_items</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">transforms</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">transforms</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span> <span class="o">=</span> <span class="n">ensure_tuple</span><span class="p">(</span><span class="n">transforms</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map_items</span> <span class="o">=</span> <span class="n">map_items</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unpack_items</span> <span class="o">=</span> <span class="n">unpack_items</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_random_state</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">get_seed</span><span class="p">())</span>
+
+<div class="viewcode-block" id="Compose.set_random_state"><a class="viewcode-back" href="../../../transforms.html#monai.transforms.Compose.set_random_state">[docs]</a>    <span class="k">def</span> <span class="nf">set_random_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Compose&quot;</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">set_random_state</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_transform</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_transform</span><span class="p">,</span> <span class="n">Randomizable</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="n">_transform</span><span class="o">.</span><span class="n">set_random_state</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">MAX_SEED</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;uint32&quot;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="Compose.randomize"><a class="viewcode-back" href="../../../transforms.html#monai.transforms.Compose.randomize">[docs]</a>    <span class="k">def</span> <span class="nf">randomize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">_transform</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_transform</span><span class="p">,</span> <span class="n">Randomizable</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">_transform</span><span class="o">.</span><span class="n">randomize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">type_error</span><span class="p">:</span>
+                <span class="n">tfm_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">_transform</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s1">&#39;Transform &quot;</span><span class="si">{</span><span class="n">tfm_name</span><span class="si">}</span><span class="s1">&quot; in Compose not randomized</span><span class="se">\n</span><span class="si">{</span><span class="n">tfm_name</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">type_error</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">,</span> <span class="ne">RuntimeWarning</span>
+                <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Compose.flatten"><a class="viewcode-back" href="../../../transforms.html#monai.transforms.Compose.flatten">[docs]</a>    <span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a Composition with a simple list of transforms, as opposed to any nested Compositions.</span>
+
+<span class="sd">        e.g., `t1 = Compose([x, x, x, x, Compose([Compose([x, x]), x, x])]).flatten()`</span>
+<span class="sd">        will result in the equivalent of `t1 = Compose([x, x, x, x, x, x, x, x])`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">new_transforms</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Compose</span><span class="p">):</span>
+                <span class="n">new_transforms</span> <span class="o">+=</span> <span class="n">t</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">transforms</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_transforms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Compose</span><span class="p">(</span><span class="n">new_transforms</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return number of transformations.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">transforms</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Compose.__call__"><a class="viewcode-back" href="../../../transforms.html#monai.transforms.Compose.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_transform</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">:</span>
+            <span class="n">input_</span> <span class="o">=</span> <span class="n">apply_transform</span><span class="p">(</span><span class="n">_transform</span><span class="p">,</span> <span class="n">input_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">map_items</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">unpack_items</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">input_</span></div>
+
+<div class="viewcode-block" id="Compose.inverse"><a class="viewcode-back" href="../../../transforms.html#monai.transforms.Compose.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">invertible_transforms</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">transforms</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">InvertibleTransform</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">invertible_transforms</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;inverse has been called but no invertible transforms have been supplied&quot;</span><span class="p">)</span>
+
+        <span class="c1"># loop backwards over transforms</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">invertible_transforms</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">apply_transform</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">inverse</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">map_items</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">unpack_items</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span></div></div>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2020 - 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

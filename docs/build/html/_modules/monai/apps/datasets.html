@@ -1,0 +1,594 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monai.apps.datasets &#8212; MONAI 0.6.0 Documentation</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../index.html">
+  <img src="../../../_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for monai.apps.datasets</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 - 2021 MONAI Consortium</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">monai.apps.utils</span> <span class="kn">import</span> <span class="n">download_and_extract</span>
+<span class="kn">from</span> <span class="nn">monai.data</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">CacheDataset</span><span class="p">,</span>
+    <span class="n">load_decathlon_datalist</span><span class="p">,</span>
+    <span class="n">load_decathlon_properties</span><span class="p">,</span>
+    <span class="n">partition_dataset</span><span class="p">,</span>
+    <span class="n">select_cross_validation_folds</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">monai.transforms</span> <span class="kn">import</span> <span class="n">LoadImaged</span><span class="p">,</span> <span class="n">Randomizable</span>
+<span class="kn">from</span> <span class="nn">monai.utils</span> <span class="kn">import</span> <span class="n">ensure_tuple</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;MedNISTDataset&quot;</span><span class="p">,</span> <span class="s2">&quot;DecathlonDataset&quot;</span><span class="p">,</span> <span class="s2">&quot;CrossValidation&quot;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="MedNISTDataset"><a class="viewcode-back" href="../../../apps.html#monai.apps.MedNISTDataset">[docs]</a><span class="k">class</span> <span class="nc">MedNISTDataset</span><span class="p">(</span><span class="n">Randomizable</span><span class="p">,</span> <span class="n">CacheDataset</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Dataset to automatically download MedNIST data and generate items for training, validation or test.</span>
+<span class="sd">    It&#39;s based on `CacheDataset` to accelerate the training process.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        root_dir: target directory to download and load MedNIST dataset.</span>
+<span class="sd">        section: expected data section, can be: `training`, `validation` or `test`.</span>
+<span class="sd">        transform: transforms to execute operations on input data.</span>
+<span class="sd">        download: whether to download and extract the MedNIST from resource link, default is False.</span>
+<span class="sd">            if expected file already exists, skip downloading even set it to True.</span>
+<span class="sd">            user can manually copy `MedNIST.tar.gz` file or `MedNIST` folder to root directory.</span>
+<span class="sd">        seed: random seed to randomly split training, validation and test datasets, default is 0.</span>
+<span class="sd">        val_frac: percentage of of validation fraction in the whole dataset, default is 0.1.</span>
+<span class="sd">        test_frac: percentage of of test fraction in the whole dataset, default is 0.1.</span>
+<span class="sd">        cache_num: number of items to be cached. Default is `sys.maxsize`.</span>
+<span class="sd">            will take the minimum of (cache_num, data_length x cache_rate, data_length).</span>
+<span class="sd">        cache_rate: percentage of cached data in total, default is 1.0 (cache all).</span>
+<span class="sd">            will take the minimum of (cache_num, data_length x cache_rate, data_length).</span>
+<span class="sd">        num_workers: the number of worker threads to use.</span>
+<span class="sd">            if 0 a single thread will be used. Default is 0.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: When ``root_dir`` is not a directory.</span>
+<span class="sd">        RuntimeError: When ``dataset_dir`` doesn&#39;t exist and downloading is not selected (``download=False``).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">resource</span> <span class="o">=</span> <span class="s2">&quot;https://drive.google.com/uc?id=1QsnnkvZyJPcbRoV_ArW8SnE1OTuoVbKE&quot;</span>
+    <span class="n">md5</span> <span class="o">=</span> <span class="s2">&quot;0bc7306e7427e00ad1c5526a6677552d&quot;</span>
+    <span class="n">compressed_file_name</span> <span class="o">=</span> <span class="s2">&quot;MedNIST.tar.gz&quot;</span>
+    <span class="n">dataset_folder_name</span> <span class="o">=</span> <span class="s2">&quot;MedNIST&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">root_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">section</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="p">(),</span>
+        <span class="n">download</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">val_frac</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">test_frac</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">cache_num</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span><span class="p">,</span>
+        <span class="n">cache_rate</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">num_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">root_dir</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Root directory root_dir must be a directory.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">section</span> <span class="o">=</span> <span class="n">section</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val_frac</span> <span class="o">=</span> <span class="n">val_frac</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_frac</span> <span class="o">=</span> <span class="n">test_frac</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_random_state</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+        <span class="n">tarfile_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">compressed_file_name</span><span class="p">)</span>
+        <span class="n">dataset_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset_folder_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_class</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">download</span><span class="p">:</span>
+            <span class="n">download_and_extract</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resource</span><span class="p">,</span> <span class="n">tarfile_name</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">md5</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Cannot find dataset directory: </span><span class="si">{</span><span class="n">dataset_dir</span><span class="si">}</span><span class="s2">, please use download=True to download it.&quot;</span>
+            <span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_data_list</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">transform</span> <span class="o">==</span> <span class="p">():</span>
+            <span class="n">transform</span> <span class="o">=</span> <span class="n">LoadImaged</span><span class="p">(</span><span class="s2">&quot;image&quot;</span><span class="p">)</span>
+        <span class="n">CacheDataset</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">transform</span><span class="p">,</span> <span class="n">cache_num</span><span class="o">=</span><span class="n">cache_num</span><span class="p">,</span> <span class="n">cache_rate</span><span class="o">=</span><span class="n">cache_rate</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="MedNISTDataset.randomize"><a class="viewcode-back" href="../../../apps.html#monai.apps.MedNISTDataset.randomize">[docs]</a>    <span class="k">def</span> <span class="nf">randomize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MedNISTDataset.get_num_classes"><a class="viewcode-back" href="../../../apps.html#monai.apps.MedNISTDataset.get_num_classes">[docs]</a>    <span class="k">def</span> <span class="nf">get_num_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get number of classes.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_class</span></div>
+
+    <span class="k">def</span> <span class="nf">_generate_data_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: When ``section`` is not one of [&quot;training&quot;, &quot;validation&quot;, &quot;test&quot;].</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">class_names</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">((</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">,</span> <span class="n">x</span><span class="p">))))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_class</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">class_names</span><span class="p">)</span>
+        <span class="n">image_files</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">,</span> <span class="n">class_names</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">,</span> <span class="n">class_names</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+            <span class="p">]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_class</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="n">num_each</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">image_files</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_class</span><span class="p">)]</span>
+        <span class="n">image_files_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">image_class</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">class_name</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_class</span><span class="p">):</span>
+            <span class="n">image_files_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">image_files</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">image_class</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_each</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">class_name</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">class_names</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">*</span> <span class="n">num_each</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_files_list</span><span class="p">)</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">randomize</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+
+        <span class="n">test_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">length</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_frac</span><span class="p">)</span>
+        <span class="n">val_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">length</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">val_frac</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">section</span> <span class="o">==</span> <span class="s2">&quot;test&quot;</span><span class="p">:</span>
+            <span class="n">section_indices</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[:</span><span class="n">test_length</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">section</span> <span class="o">==</span> <span class="s2">&quot;validation&quot;</span><span class="p">:</span>
+            <span class="n">section_indices</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">test_length</span> <span class="p">:</span> <span class="n">test_length</span> <span class="o">+</span> <span class="n">val_length</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">section</span> <span class="o">==</span> <span class="s2">&quot;training&quot;</span><span class="p">:</span>
+            <span class="n">section_indices</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">test_length</span> <span class="o">+</span> <span class="n">val_length</span> <span class="p">:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;Unsupported section: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">section</span><span class="si">}</span><span class="s1">, available options are [&quot;training&quot;, &quot;validation&quot;, &quot;test&quot;].&#39;</span>
+            <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">section_indices</span><span class="p">:</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="n">image_files_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">image_class</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s2">&quot;class_name&quot;</span><span class="p">:</span> <span class="n">class_name</span><span class="p">[</span><span class="n">i</span><span class="p">]})</span>
+
+        <span class="k">return</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="DecathlonDataset"><a class="viewcode-back" href="../../../apps.html#monai.apps.DecathlonDataset">[docs]</a><span class="k">class</span> <span class="nc">DecathlonDataset</span><span class="p">(</span><span class="n">Randomizable</span><span class="p">,</span> <span class="n">CacheDataset</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Dataset to automatically download the data of Medical Segmentation Decathlon challenge</span>
+<span class="sd">    (http://medicaldecathlon.com/) and generate items for training, validation or test.</span>
+<span class="sd">    It will also load these properties from the JSON config file of dataset. user can call `get_properties()`</span>
+<span class="sd">    to get specified properties or all the properties loaded.</span>
+<span class="sd">    It&#39;s based on :py:class:`monai.data.CacheDataset` to accelerate the training process.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        root_dir: user&#39;s local directory for caching and loading the MSD datasets.</span>
+<span class="sd">        task: which task to download and execute: one of list (&quot;Task01_BrainTumour&quot;, &quot;Task02_Heart&quot;,</span>
+<span class="sd">            &quot;Task03_Liver&quot;, &quot;Task04_Hippocampus&quot;, &quot;Task05_Prostate&quot;, &quot;Task06_Lung&quot;, &quot;Task07_Pancreas&quot;,</span>
+<span class="sd">            &quot;Task08_HepaticVessel&quot;, &quot;Task09_Spleen&quot;, &quot;Task10_Colon&quot;).</span>
+<span class="sd">        section: expected data section, can be: `training`, `validation` or `test`.</span>
+<span class="sd">        transform: transforms to execute operations on input data.</span>
+<span class="sd">            for further usage, use `AddChanneld` or `AsChannelFirstd` to convert the shape to [C, H, W, D].</span>
+<span class="sd">        download: whether to download and extract the Decathlon from resource link, default is False.</span>
+<span class="sd">            if expected file already exists, skip downloading even set it to True.</span>
+<span class="sd">        val_frac: percentage of of validation fraction in the whole dataset, default is 0.2.</span>
+<span class="sd">            user can manually copy tar file or dataset folder to the root directory.</span>
+<span class="sd">        seed: random seed to randomly shuffle the datalist before splitting into training and validation, default is 0.</span>
+<span class="sd">            note to set same seed for `training` and `validation` sections.</span>
+<span class="sd">        cache_num: number of items to be cached. Default is `sys.maxsize`.</span>
+<span class="sd">            will take the minimum of (cache_num, data_length x cache_rate, data_length).</span>
+<span class="sd">        cache_rate: percentage of cached data in total, default is 1.0 (cache all).</span>
+<span class="sd">            will take the minimum of (cache_num, data_length x cache_rate, data_length).</span>
+<span class="sd">        num_workers: the number of worker threads to use.</span>
+<span class="sd">            if 0 a single thread will be used. Default is 0.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: When ``root_dir`` is not a directory.</span>
+<span class="sd">        ValueError: When ``task`` is not one of [&quot;Task01_BrainTumour&quot;, &quot;Task02_Heart&quot;,</span>
+<span class="sd">            &quot;Task03_Liver&quot;, &quot;Task04_Hippocampus&quot;, &quot;Task05_Prostate&quot;, &quot;Task06_Lung&quot;, &quot;Task07_Pancreas&quot;,</span>
+<span class="sd">            &quot;Task08_HepaticVessel&quot;, &quot;Task09_Spleen&quot;, &quot;Task10_Colon&quot;].</span>
+<span class="sd">        RuntimeError: When ``dataset_dir`` doesn&#39;t exist and downloading is not selected (``download=False``).</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        transform = Compose(</span>
+<span class="sd">            [</span>
+<span class="sd">                LoadImaged(keys=[&quot;image&quot;, &quot;label&quot;]),</span>
+<span class="sd">                AddChanneld(keys=[&quot;image&quot;, &quot;label&quot;]),</span>
+<span class="sd">                ScaleIntensityd(keys=&quot;image&quot;),</span>
+<span class="sd">                ToTensord(keys=[&quot;image&quot;, &quot;label&quot;]),</span>
+<span class="sd">            ]</span>
+<span class="sd">        )</span>
+
+<span class="sd">        val_data = DecathlonDataset(</span>
+<span class="sd">            root_dir=&quot;./&quot;, task=&quot;Task09_Spleen&quot;, transform=transform, section=&quot;validation&quot;, seed=12345, download=True</span>
+<span class="sd">        )</span>
+
+<span class="sd">        print(val_data[0][&quot;image&quot;], val_data[0][&quot;label&quot;])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">resource</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;Task01_BrainTumour&quot;</span><span class="p">:</span> <span class="s2">&quot;https://msd-for-monai.s3-us-west-2.amazonaws.com/Task01_BrainTumour.tar&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Task02_Heart&quot;</span><span class="p">:</span> <span class="s2">&quot;https://msd-for-monai.s3-us-west-2.amazonaws.com/Task02_Heart.tar&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Task03_Liver&quot;</span><span class="p">:</span> <span class="s2">&quot;https://msd-for-monai.s3-us-west-2.amazonaws.com/Task03_Liver.tar&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Task04_Hippocampus&quot;</span><span class="p">:</span> <span class="s2">&quot;https://msd-for-monai.s3-us-west-2.amazonaws.com/Task04_Hippocampus.tar&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Task05_Prostate&quot;</span><span class="p">:</span> <span class="s2">&quot;https://msd-for-monai.s3-us-west-2.amazonaws.com/Task05_Prostate.tar&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Task06_Lung&quot;</span><span class="p">:</span> <span class="s2">&quot;https://msd-for-monai.s3-us-west-2.amazonaws.com/Task06_Lung.tar&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Task07_Pancreas&quot;</span><span class="p">:</span> <span class="s2">&quot;https://msd-for-monai.s3-us-west-2.amazonaws.com/Task07_Pancreas.tar&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Task08_HepaticVessel&quot;</span><span class="p">:</span> <span class="s2">&quot;https://msd-for-monai.s3-us-west-2.amazonaws.com/Task08_HepaticVessel.tar&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Task09_Spleen&quot;</span><span class="p">:</span> <span class="s2">&quot;https://msd-for-monai.s3-us-west-2.amazonaws.com/Task09_Spleen.tar&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Task10_Colon&quot;</span><span class="p">:</span> <span class="s2">&quot;https://msd-for-monai.s3-us-west-2.amazonaws.com/Task10_Colon.tar&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">md5</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;Task01_BrainTumour&quot;</span><span class="p">:</span> <span class="s2">&quot;240a19d752f0d9e9101544901065d872&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Task02_Heart&quot;</span><span class="p">:</span> <span class="s2">&quot;06ee59366e1e5124267b774dbd654057&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Task03_Liver&quot;</span><span class="p">:</span> <span class="s2">&quot;a90ec6c4aa7f6a3d087205e23d4e6397&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Task04_Hippocampus&quot;</span><span class="p">:</span> <span class="s2">&quot;9d24dba78a72977dbd1d2e110310f31b&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Task05_Prostate&quot;</span><span class="p">:</span> <span class="s2">&quot;35138f08b1efaef89d7424d2bcc928db&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Task06_Lung&quot;</span><span class="p">:</span> <span class="s2">&quot;8afd997733c7fc0432f71255ba4e52dc&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Task07_Pancreas&quot;</span><span class="p">:</span> <span class="s2">&quot;4f7080cfca169fa8066d17ce6eb061e4&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Task08_HepaticVessel&quot;</span><span class="p">:</span> <span class="s2">&quot;641d79e80ec66453921d997fbf12a29c&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Task09_Spleen&quot;</span><span class="p">:</span> <span class="s2">&quot;410d4a301da4e5b2f6f86ec3ddba524e&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Task10_Colon&quot;</span><span class="p">:</span> <span class="s2">&quot;bad7a188931dc2f6acf72b08eb6202d0&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">root_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">task</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">section</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">transform</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="p">(),</span>
+        <span class="n">download</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">val_frac</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">cache_num</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span><span class="p">,</span>
+        <span class="n">cache_rate</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">num_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">root_dir</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Root directory root_dir must be a directory.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">section</span> <span class="o">=</span> <span class="n">section</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val_frac</span> <span class="o">=</span> <span class="n">val_frac</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_random_state</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">task</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">resource</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported task: </span><span class="si">{</span><span class="n">task</span><span class="si">}</span><span class="s2">, available options are: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="n">dataset_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span>
+        <span class="n">tarfile_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dataset_dir</span><span class="si">}</span><span class="s2">.tar&quot;</span>
+        <span class="k">if</span> <span class="n">download</span><span class="p">:</span>
+            <span class="n">download_and_extract</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resource</span><span class="p">[</span><span class="n">task</span><span class="p">],</span> <span class="n">tarfile_name</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">md5</span><span class="p">[</span><span class="n">task</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Cannot find dataset directory: </span><span class="si">{</span><span class="n">dataset_dir</span><span class="si">}</span><span class="s2">, please use download=True to download it.&quot;</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_data_list</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">)</span>
+        <span class="c1"># as `release` key has typo in Task04 config file, ignore it.</span>
+        <span class="n">property_keys</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;reference&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;licence&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;tensorImageSize&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;modality&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;labels&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;numTraining&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;numTest&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_properties</span> <span class="o">=</span> <span class="n">load_decathlon_properties</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">,</span> <span class="s2">&quot;dataset.json&quot;</span><span class="p">),</span> <span class="n">property_keys</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">transform</span> <span class="o">==</span> <span class="p">():</span>
+            <span class="n">transform</span> <span class="o">=</span> <span class="n">LoadImaged</span><span class="p">([</span><span class="s2">&quot;image&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">])</span>
+        <span class="n">CacheDataset</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">transform</span><span class="p">,</span> <span class="n">cache_num</span><span class="o">=</span><span class="n">cache_num</span><span class="p">,</span> <span class="n">cache_rate</span><span class="o">=</span><span class="n">cache_rate</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="DecathlonDataset.get_indices"><a class="viewcode-back" href="../../../apps.html#monai.apps.DecathlonDataset.get_indices">[docs]</a>    <span class="k">def</span> <span class="nf">get_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the indices of datalist used in this dataset.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span></div>
+
+<div class="viewcode-block" id="DecathlonDataset.randomize"><a class="viewcode-back" href="../../../apps.html#monai.apps.DecathlonDataset.randomize">[docs]</a>    <span class="k">def</span> <span class="nf">randomize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DecathlonDataset.get_properties"><a class="viewcode-back" href="../../../apps.html#monai.apps.DecathlonDataset.get_properties">[docs]</a>    <span class="k">def</span> <span class="nf">get_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the loaded properties of dataset with specified keys.</span>
+<span class="sd">        If no keys specified, return all the loaded properties.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">keys</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_properties</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_properties</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_properties</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">ensure_tuple</span><span class="p">(</span><span class="n">keys</span><span class="p">)}</span>
+        <span class="k">return</span> <span class="p">{}</span></div>
+
+    <span class="k">def</span> <span class="nf">_generate_data_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]:</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="s2">&quot;training&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">section</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;training&quot;</span><span class="p">,</span> <span class="s2">&quot;validation&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;test&quot;</span>
+        <span class="n">datalist</span> <span class="o">=</span> <span class="n">load_decathlon_datalist</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">,</span> <span class="s2">&quot;dataset.json&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">,</span> <span class="n">section</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split_datalist</span><span class="p">(</span><span class="n">datalist</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_split_datalist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datalist</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">section</span> <span class="o">==</span> <span class="s2">&quot;test&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">datalist</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">datalist</span><span class="p">)</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">randomize</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+
+        <span class="n">val_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">length</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">val_frac</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">section</span> <span class="o">==</span> <span class="s2">&quot;training&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">indices</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">val_length</span><span class="p">:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">indices</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[:</span><span class="n">val_length</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">datalist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="CrossValidation"><a class="viewcode-back" href="../../../apps.html#monai.apps.CrossValidation">[docs]</a><span class="k">class</span> <span class="nc">CrossValidation</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Cross validation dataset based on the general dataset which must have `_split_datalist` API.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dataset_cls: dataset class to be used to create the cross validation partitions.</span>
+<span class="sd">            It must have `_split_datalist` API.</span>
+<span class="sd">        nfolds: number of folds to split the data for cross validation.</span>
+<span class="sd">        seed: random seed to randomly shuffle the datalist before splitting into N folds, default is 0.</span>
+<span class="sd">        dataset_params: other additional parameters for the dataset_cls base class.</span>
+
+<span class="sd">    Example of 5 folds cross validation training::</span>
+
+<span class="sd">        cvdataset = CrossValidation(</span>
+<span class="sd">            dataset_cls=DecathlonDataset,</span>
+<span class="sd">            nfolds=5,</span>
+<span class="sd">            seed=12345,</span>
+<span class="sd">            root_dir=&quot;./&quot;,</span>
+<span class="sd">            task=&quot;Task09_Spleen&quot;,</span>
+<span class="sd">            section=&quot;training&quot;,</span>
+<span class="sd">            download=True,</span>
+<span class="sd">        )</span>
+<span class="sd">        dataset_fold0_train = cvdataset.get_dataset(folds=[1, 2, 3, 4])</span>
+<span class="sd">        dataset_fold0_val = cvdataset.get_dataset(folds=0)</span>
+<span class="sd">        # execute training for fold 0 ...</span>
+
+<span class="sd">        dataset_fold1_train = cvdataset.get_dataset(folds=[1])</span>
+<span class="sd">        dataset_fold1_val = cvdataset.get_dataset(folds=[0, 2, 3, 4])</span>
+<span class="sd">        # execute training for fold 1 ...</span>
+
+<span class="sd">        ...</span>
+
+<span class="sd">        dataset_fold4_train = ...</span>
+<span class="sd">        # execute training for fold 4 ...</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dataset_cls</span><span class="p">,</span>
+        <span class="n">nfolds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">dataset_params</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dataset_cls</span><span class="p">,</span> <span class="s2">&quot;_split_datalist&quot;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dataset class must have _split_datalist API.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset_cls</span> <span class="o">=</span> <span class="n">dataset_cls</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nfolds</span> <span class="o">=</span> <span class="n">nfolds</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset_params</span> <span class="o">=</span> <span class="n">dataset_params</span>
+
+<div class="viewcode-block" id="CrossValidation.get_dataset"><a class="viewcode-back" href="../../../apps.html#monai.apps.CrossValidation.get_dataset">[docs]</a>    <span class="k">def</span> <span class="nf">get_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folds</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate dataset based on the specified fold indice in the cross validation group.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            folds: index of folds for training or validation, if a list of values, concatenate the data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nfolds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nfolds</span>
+        <span class="n">seed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">seed</span>
+
+        <span class="k">class</span> <span class="nc">_NsplitsDataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset_cls</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
+            <span class="k">def</span> <span class="nf">_split_datalist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datalist</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">partition_dataset</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">datalist</span><span class="p">,</span> <span class="n">num_partitions</span><span class="o">=</span><span class="n">nfolds</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">select_cross_validation_folds</span><span class="p">(</span><span class="n">partitions</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">folds</span><span class="o">=</span><span class="n">folds</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_NsplitsDataset</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset_params</span><span class="p">)</span></div></div>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2020 - 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

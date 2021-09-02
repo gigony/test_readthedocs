@@ -1,0 +1,499 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monai.networks.nets.dynunet &#8212; MONAI 0.6.0 Documentation</title>
+    
+  <link href="../../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../../index.html">
+  <img src="../../../../_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for monai.networks.nets.dynunet</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 - 2021 MONAI Consortium</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">from</span> <span class="nn">torch.nn.functional</span> <span class="kn">import</span> <span class="n">interpolate</span>
+
+<span class="kn">from</span> <span class="nn">monai.networks.blocks.dynunet_block</span> <span class="kn">import</span> <span class="n">UnetBasicBlock</span><span class="p">,</span> <span class="n">UnetOutBlock</span><span class="p">,</span> <span class="n">UnetResBlock</span><span class="p">,</span> <span class="n">UnetUpBlock</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DynUNet&quot;</span><span class="p">,</span> <span class="s2">&quot;DynUnet&quot;</span><span class="p">,</span> <span class="s2">&quot;Dynunet&quot;</span><span class="p">,</span> <span class="s2">&quot;dynunet&quot;</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">DynUNetSkipLayer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines a layer in the UNet topology which combines the downsample and upsample pathways with the skip connection.</span>
+<span class="sd">    The member `next_layer` may refer to instances of this class or the final bottleneck layer at the bottom the UNet</span>
+<span class="sd">    structure. The purpose of using a recursive class like this is to get around the Torchscript restrictions on</span>
+<span class="sd">    looping over lists of layers and accumulating lists of output tensors which much be indexed. The `heads` list is</span>
+<span class="sd">    shared amongst all the instances of this class and is used to store the output from the supervision heads during</span>
+<span class="sd">    forward passes of the network.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">heads</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">heads</span><span class="p">,</span> <span class="n">downsample</span><span class="p">,</span> <span class="n">upsample</span><span class="p">,</span> <span class="n">super_head</span><span class="p">,</span> <span class="n">next_layer</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">downsample</span> <span class="o">=</span> <span class="n">downsample</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upsample</span> <span class="o">=</span> <span class="n">upsample</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next_layer</span> <span class="o">=</span> <span class="n">next_layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">super_head</span> <span class="o">=</span> <span class="n">super_head</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heads</span> <span class="o">=</span> <span class="n">heads</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">index</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">downout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">downsample</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">nextout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_layer</span><span class="p">(</span><span class="n">downout</span><span class="p">)</span>
+        <span class="n">upout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upsample</span><span class="p">(</span><span class="n">nextout</span><span class="p">,</span> <span class="n">downout</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">heads</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">super_head</span><span class="p">(</span><span class="n">upout</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">upout</span>
+
+
+<div class="viewcode-block" id="DynUNet"><a class="viewcode-back" href="../../../../networks.html#monai.networks.nets.DynUNet">[docs]</a><span class="k">class</span> <span class="nc">DynUNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This reimplementation of a dynamic UNet (DynUNet) is based on:</span>
+<span class="sd">    `Automated Design of Deep Learning Methods for Biomedical Image Segmentation &lt;https://arxiv.org/abs/1904.08128&gt;`_.</span>
+<span class="sd">    `nnU-Net: Self-adapting Framework for U-Net-Based Medical Image Segmentation &lt;https://arxiv.org/abs/1809.10486&gt;`_.</span>
+
+<span class="sd">    This model is more flexible compared with ``monai.networks.nets.UNet`` in three</span>
+<span class="sd">    places:</span>
+
+<span class="sd">        - Residual connection is supported in conv blocks.</span>
+<span class="sd">        - Anisotropic kernel sizes and strides can be used in each layers.</span>
+<span class="sd">        - Deep supervision heads can be added.</span>
+
+<span class="sd">    The model supports 2D or 3D inputs and is consisted with four kinds of blocks:</span>
+<span class="sd">    one input block, `n` downsample blocks, one bottleneck and `n+1` upsample blocks. Where, `n&gt;0`.</span>
+<span class="sd">    The first and last kernel and stride values of the input sequences are used for input block and</span>
+<span class="sd">    bottleneck respectively, and the rest value(s) are used for downsample and upsample blocks.</span>
+<span class="sd">    Therefore, pleasure ensure that the length of input sequences (``kernel_size`` and ``strides``)</span>
+<span class="sd">    is no less than 3 in order to have at least one downsample upsample blocks.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spatial_dims: number of spatial dimensions.</span>
+<span class="sd">        in_channels: number of input channels.</span>
+<span class="sd">        out_channels: number of output channels.</span>
+<span class="sd">        kernel_size: convolution kernel size.</span>
+<span class="sd">        strides: convolution strides for each blocks.</span>
+<span class="sd">        upsample_kernel_size: convolution kernel size for transposed convolution layers.</span>
+<span class="sd">        norm_name: feature normalization type and arguments. Defaults to ``INSTANCE``.</span>
+<span class="sd">        deep_supervision: whether to add deep supervision head before output. Defaults to ``False``.</span>
+<span class="sd">            If ``True``, in training mode, the forward function will output not only the last feature</span>
+<span class="sd">            map, but also the previous feature maps that come from the intermediate up sample layers.</span>
+<span class="sd">            In order to unify the return type (the restriction of TorchScript), all intermediate</span>
+<span class="sd">            feature maps are interpolated into the same size as the last feature map and stacked together</span>
+<span class="sd">            (with a new dimension in the first axis)into one single tensor.</span>
+<span class="sd">            For instance, if there are three feature maps with shapes: (1, 2, 32, 24), (1, 2, 16, 12) and</span>
+<span class="sd">            (1, 2, 8, 6). The last two will be interpolated into (1, 2, 32, 24), and the stacked tensor</span>
+<span class="sd">            will has the shape (1, 3, 2, 8, 6).</span>
+<span class="sd">            When calculating the loss, you can use torch.unbind to get all feature maps can compute the loss</span>
+<span class="sd">            one by one with the ground truth, then do a weighted average for all losses to achieve the final loss.</span>
+<span class="sd">            (To be added: a corresponding tutorial link)</span>
+
+<span class="sd">        deep_supr_num: number of feature maps that will output during deep supervision head. The</span>
+<span class="sd">            value should be larger than 0 and less than the number of up sample layers.</span>
+<span class="sd">            Defaults to 1.</span>
+<span class="sd">        res_block: whether to use residual connection based convolution blocks during the network.</span>
+<span class="sd">            Defaults to ``False``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">spatial_dims</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">in_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">out_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">kernel_size</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">]],</span>
+        <span class="n">strides</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">]],</span>
+        <span class="n">upsample_kernel_size</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">]],</span>
+        <span class="n">norm_name</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;INSTANCE&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;affine&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}),</span>
+        <span class="n">deep_supervision</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">deep_supr_num</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">res_block</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DynUNet</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spatial_dims</span> <span class="o">=</span> <span class="n">spatial_dims</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_channels</span> <span class="o">=</span> <span class="n">in_channels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_channels</span> <span class="o">=</span> <span class="n">out_channels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kernel_size</span> <span class="o">=</span> <span class="n">kernel_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strides</span> <span class="o">=</span> <span class="n">strides</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upsample_kernel_size</span> <span class="o">=</span> <span class="n">upsample_kernel_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">norm_name</span> <span class="o">=</span> <span class="n">norm_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_block</span> <span class="o">=</span> <span class="n">UnetResBlock</span> <span class="k">if</span> <span class="n">res_block</span> <span class="k">else</span> <span class="n">UnetBasicBlock</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filters</span> <span class="o">=</span> <span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="n">i</span><span class="p">),</span> <span class="mi">320</span> <span class="k">if</span> <span class="n">spatial_dims</span> <span class="o">==</span> <span class="mi">3</span> <span class="k">else</span> <span class="mi">512</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">strides</span><span class="p">))]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_block</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_input_block</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">downsamples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_downsamples</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bottleneck</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_bottleneck</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upsamples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_upsamples</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_block</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_output_block</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deep_supervision</span> <span class="o">=</span> <span class="n">deep_supervision</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deep_supervision_heads</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_deep_supervision_heads</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deep_supr_num</span> <span class="o">=</span> <span class="n">deep_supr_num</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initialize_weights</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_kernel_stride</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_deep_supr_num</span><span class="p">()</span>
+
+        <span class="c1"># initialize the typed list of supervision head outputs so that Torchscript can recognize what&#39;s going on</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heads</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deep_supervision_heads</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">create_skips</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">downsamples</span><span class="p">,</span> <span class="n">upsamples</span><span class="p">,</span> <span class="n">superheads</span><span class="p">,</span> <span class="n">bottleneck</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Construct the UNet topology as a sequence of skip layers terminating with the bottleneck layer. This is</span>
+<span class="sd">            done recursively from the top down since a recursive nn.Module subclass is being used to be compatible</span>
+<span class="sd">            with Torchscript. Initially the length of `downsamples` will be one more than that of `superheads`</span>
+<span class="sd">            since the `input_block` is passed to this function as the first item in `downsamples`, however this</span>
+<span class="sd">            shouldn&#39;t be associated with a supervision head.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">downsamples</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">upsamples</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">downsamples</span><span class="p">)</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">upsamples</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">downsamples</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">superheads</span><span class="p">))</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">downsamples</span><span class="p">)</span><span class="si">}</span><span class="s2">-(0,1) != </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">superheads</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">downsamples</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># bottom of the network, pass the bottleneck block</span>
+                <span class="k">return</span> <span class="n">bottleneck</span>
+            <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># don&#39;t associate a supervision head with self.input_block</span>
+                <span class="n">current_head</span><span class="p">,</span> <span class="n">rest_heads</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Identity</span><span class="p">(),</span> <span class="n">superheads</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">deep_supervision</span><span class="p">:</span>  <span class="c1"># bypass supervision heads by passing nn.Identity in place of a real one</span>
+                <span class="n">current_head</span><span class="p">,</span> <span class="n">rest_heads</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Identity</span><span class="p">(),</span> <span class="n">superheads</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">current_head</span><span class="p">,</span> <span class="n">rest_heads</span> <span class="o">=</span> <span class="n">superheads</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">superheads</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+            <span class="c1"># create the next layer down, this will stop at the bottleneck layer</span>
+            <span class="n">next_layer</span> <span class="o">=</span> <span class="n">create_skips</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">index</span><span class="p">,</span> <span class="n">downsamples</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">upsamples</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">rest_heads</span><span class="p">,</span> <span class="n">bottleneck</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">DynUNetSkipLayer</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">heads</span><span class="p">,</span> <span class="n">downsamples</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">upsamples</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">current_head</span><span class="p">,</span> <span class="n">next_layer</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip_layers</span> <span class="o">=</span> <span class="n">create_skips</span><span class="p">(</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">input_block</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">downsamples</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">upsamples</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">deep_supervision_heads</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bottleneck</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">check_kernel_stride</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">kernels</span><span class="p">,</span> <span class="n">strides</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">strides</span>
+        <span class="n">error_msg</span> <span class="o">=</span> <span class="s2">&quot;length of kernel_size and strides should be the same, and no less than 3.&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">kernels</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">strides</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">kernels</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">k_i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">kernels</span><span class="p">):</span>
+            <span class="n">kernel</span><span class="p">,</span> <span class="n">stride</span> <span class="o">=</span> <span class="n">k_i</span><span class="p">,</span> <span class="n">strides</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="n">error_msg</span> <span class="o">=</span> <span class="s2">&quot;length of kernel_size in block </span><span class="si">{}</span><span class="s2"> should be the same as spatial_dims.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spatial_dims</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">stride</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="n">error_msg</span> <span class="o">=</span> <span class="s2">&quot;length of stride in block </span><span class="si">{}</span><span class="s2"> should be the same as spatial_dims.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">stride</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spatial_dims</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">check_deep_supr_num</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">deep_supr_num</span><span class="p">,</span> <span class="n">strides</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deep_supr_num</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">strides</span>
+        <span class="n">num_up_layers</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">strides</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">deep_supr_num</span> <span class="o">&gt;=</span> <span class="n">num_up_layers</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;deep_supr_num should be less than the number of up sample layers.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">deep_supr_num</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;deep_supr_num should be larger than 0.&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DynUNet.forward"><a class="viewcode-back" href="../../../../networks.html#monai.networks.nets.DynUNet.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_layers</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_block</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">training</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">deep_supervision</span><span class="p">:</span>
+            <span class="n">out_all</span> <span class="o">=</span> <span class="p">[</span><span class="n">out</span><span class="p">]</span>
+            <span class="n">feature_maps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heads</span><span class="p">[</span><span class="mi">1</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">deep_supr_num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">feature_map</span> <span class="ow">in</span> <span class="n">feature_maps</span><span class="p">:</span>
+                <span class="n">out_all</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interpolate</span><span class="p">(</span><span class="n">feature_map</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">:]))</span>
+            <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">out_all</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span></div>
+
+    <span class="k">def</span> <span class="nf">get_input_block</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_block</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">spatial_dims</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">in_channels</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kernel_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">strides</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">norm_name</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_bottleneck</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_block</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">spatial_dims</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kernel_size</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">strides</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">norm_name</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_output_block</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">UnetOutBlock</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">spatial_dims</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">out_channels</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_downsamples</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">inp</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">strides</span><span class="p">,</span> <span class="n">kernel_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">strides</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel_size</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_module_list</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">strides</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_block</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_upsamples</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">inp</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="p">[</span><span class="mi">1</span><span class="p">:][::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">filters</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">strides</span><span class="p">,</span> <span class="n">kernel_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">strides</span><span class="p">[</span><span class="mi">1</span><span class="p">:][::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel_size</span><span class="p">[</span><span class="mi">1</span><span class="p">:][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">upsample_kernel_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upsample_kernel_size</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_module_list</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">strides</span><span class="p">,</span> <span class="n">UnetUpBlock</span><span class="p">,</span> <span class="n">upsample_kernel_size</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_module_list</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">in_channels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+        <span class="n">out_channels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+        <span class="n">kernel_size</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">]],</span>
+        <span class="n">strides</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">]],</span>
+        <span class="n">conv_block</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+        <span class="n">upsample_kernel_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">layers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">upsample_kernel_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">in_c</span><span class="p">,</span> <span class="n">out_c</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">stride</span><span class="p">,</span> <span class="n">up_kernel</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+                <span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">strides</span><span class="p">,</span> <span class="n">upsample_kernel_size</span>
+            <span class="p">):</span>
+                <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;spatial_dims&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">spatial_dims</span><span class="p">,</span>
+                    <span class="s2">&quot;in_channels&quot;</span><span class="p">:</span> <span class="n">in_c</span><span class="p">,</span>
+                    <span class="s2">&quot;out_channels&quot;</span><span class="p">:</span> <span class="n">out_c</span><span class="p">,</span>
+                    <span class="s2">&quot;kernel_size&quot;</span><span class="p">:</span> <span class="n">kernel</span><span class="p">,</span>
+                    <span class="s2">&quot;stride&quot;</span><span class="p">:</span> <span class="n">stride</span><span class="p">,</span>
+                    <span class="s2">&quot;norm_name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm_name</span><span class="p">,</span>
+                    <span class="s2">&quot;upsample_kernel_size&quot;</span><span class="p">:</span> <span class="n">up_kernel</span><span class="p">,</span>
+                <span class="p">}</span>
+                <span class="n">layer</span> <span class="o">=</span> <span class="n">conv_block</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+                <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">in_c</span><span class="p">,</span> <span class="n">out_c</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">stride</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">strides</span><span class="p">):</span>
+                <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;spatial_dims&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">spatial_dims</span><span class="p">,</span>
+                    <span class="s2">&quot;in_channels&quot;</span><span class="p">:</span> <span class="n">in_c</span><span class="p">,</span>
+                    <span class="s2">&quot;out_channels&quot;</span><span class="p">:</span> <span class="n">out_c</span><span class="p">,</span>
+                    <span class="s2">&quot;kernel_size&quot;</span><span class="p">:</span> <span class="n">kernel</span><span class="p">,</span>
+                    <span class="s2">&quot;stride&quot;</span><span class="p">:</span> <span class="n">stride</span><span class="p">,</span>
+                    <span class="s2">&quot;norm_name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm_name</span><span class="p">,</span>
+                <span class="p">}</span>
+                <span class="n">layer</span> <span class="o">=</span> <span class="n">conv_block</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+                <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">(</span><span class="n">layers</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_deep_supervision_heads</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">get_output_block</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">upsamples</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)])</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">initialize_weights</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv3d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">ConvTranspose3d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">ConvTranspose2d</span><span class="p">)):</span>
+            <span class="n">module</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">kaiming_normal_</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">module</span><span class="o">.</span><span class="n">bias</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">module</span><span class="o">.</span><span class="n">bias</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">constant_</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">bias</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
+
+
+<span class="n">DynUnet</span> <span class="o">=</span> <span class="n">Dynunet</span> <span class="o">=</span> <span class="n">dynunet</span> <span class="o">=</span> <span class="n">DynUNet</span>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2020 - 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

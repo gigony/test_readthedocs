@@ -1,0 +1,434 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monai.metrics.regression &#8212; MONAI 0.6.0 Documentation</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../index.html">
+  <img src="../../../_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for monai.metrics.regression</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 - 2021 MONAI Consortium</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="kn">from</span> <span class="nn">monai.metrics.utils</span> <span class="kn">import</span> <span class="n">do_metric_reduction</span>
+<span class="kn">from</span> <span class="nn">monai.utils</span> <span class="kn">import</span> <span class="n">MetricReduction</span>
+
+<span class="kn">from</span> <span class="nn">.metric</span> <span class="kn">import</span> <span class="n">CumulativeIterationMetric</span>
+
+
+<span class="k">class</span> <span class="nc">RegressionMetric</span><span class="p">(</span><span class="n">CumulativeIterationMetric</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for regression metrics.</span>
+<span class="sd">    Input `y_pred` is compared with ground truth `y`.</span>
+<span class="sd">    Both `y_pred` and `y` are expected to be real-valued, where `y_pred` is output from a regression model.</span>
+<span class="sd">    `y_preds` and `y` can be a list of channel-first Tensor (CHW[D]) or a batch-first Tensor (BCHW[D]).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reduction: {``&quot;none&quot;``, ``&quot;mean&quot;``, ``&quot;sum&quot;``, ``&quot;mean_batch&quot;``, ``&quot;sum_batch&quot;``,</span>
+<span class="sd">            ``&quot;mean_channel&quot;``, ``&quot;sum_channel&quot;``}</span>
+<span class="sd">            Define the mode to reduce computation result. Defaults to ``&quot;mean&quot;``.</span>
+<span class="sd">        get_not_nans: whether to return the `not_nans` count, if True, aggregate() returns (metric, not_nans).</span>
+<span class="sd">            Here `not_nans` count the number of not nans for the metric, thus its shape equals to the shape of the metric.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">reduction</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">MetricReduction</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">MetricReduction</span><span class="o">.</span><span class="n">MEAN</span><span class="p">,</span>
+        <span class="n">get_not_nans</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reduction</span> <span class="o">=</span> <span class="n">reduction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_not_nans</span> <span class="o">=</span> <span class="n">get_not_nans</span>
+
+    <span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_buffer</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;the data to aggregate must be PyTorch Tensor.&quot;</span><span class="p">)</span>
+
+        <span class="n">f</span><span class="p">,</span> <span class="n">not_nans</span> <span class="o">=</span> <span class="n">do_metric_reduction</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduction</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">not_nans</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_not_nans</span> <span class="k">else</span> <span class="n">f</span>
+
+    <span class="k">def</span> <span class="nf">_check_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;y_pred and y shapes dont match, received y_pred: [</span><span class="si">{}</span><span class="s2">] and y: [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y_pred</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="c1"># also check if there is atleast one non-batch dimension i.e. num_dims &gt;= 2</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_pred</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;either channel or spatial dimensions required, found only batch dimension&quot;</span><span class="p">)</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">_compute_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Subclass </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> must implement this method.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_compute_tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;y_pred and y must be PyTorch Tensor.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_shape</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_metric</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="MSEMetric"><a class="viewcode-back" href="../../../metrics.html#monai.metrics.MSEMetric">[docs]</a><span class="k">class</span> <span class="nc">MSEMetric</span><span class="p">(</span><span class="n">RegressionMetric</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute Mean Squared Error between two tensors using function:</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \operatorname {MSE}\left(Y, \hat{Y}\right) =\frac {1}{n}\sum _{i=1}^{n}\left(y_i-\hat{y_i} \right)^{2}.</span>
+
+<span class="sd">    More info: https://en.wikipedia.org/wiki/Mean_squared_error</span>
+
+<span class="sd">    Input `y_pred` is compared with ground truth `y`.</span>
+<span class="sd">    Both `y_pred` and `y` are expected to be real-valued, where `y_pred` is output from a regression model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reduction: {``&quot;none&quot;``, ``&quot;mean&quot;``, ``&quot;sum&quot;``, ``&quot;mean_batch&quot;``, ``&quot;sum_batch&quot;``,</span>
+<span class="sd">            ``&quot;mean_channel&quot;``, ``&quot;sum_channel&quot;``}</span>
+<span class="sd">            Define the mode to reduce computation result of 1 batch data. Defaults to ``&quot;mean&quot;``.</span>
+<span class="sd">        get_not_nans: whether to return the `not_nans` count, if True, aggregate() returns (metric, not_nans).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">reduction</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">MetricReduction</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">MetricReduction</span><span class="o">.</span><span class="n">MEAN</span><span class="p">,</span>
+        <span class="n">get_not_nans</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="n">reduction</span><span class="p">,</span> <span class="n">get_not_nans</span><span class="o">=</span><span class="n">get_not_nans</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sq_func</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">,</span> <span class="n">exponent</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_compute_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+
+        <span class="n">mse_out</span> <span class="o">=</span> <span class="n">compute_mean_error_metrics</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sq_func</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mse_out</span></div>
+
+
+<div class="viewcode-block" id="MAEMetric"><a class="viewcode-back" href="../../../metrics.html#monai.metrics.MAEMetric">[docs]</a><span class="k">class</span> <span class="nc">MAEMetric</span><span class="p">(</span><span class="n">RegressionMetric</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute Mean Absolute Error between two tensors using function:</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \operatorname {MAE}\left(Y, \hat{Y}\right) =\frac {1}{n}\sum _{i=1}^{n}\left|y_i-\hat{y_i}\right|.</span>
+
+<span class="sd">    More info: https://en.wikipedia.org/wiki/Mean_absolute_error</span>
+
+<span class="sd">    Input `y_pred` is compared with ground truth `y`.</span>
+<span class="sd">    Both `y_pred` and `y` are expected to be real-valued, where `y_pred` is output from a regression model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reduction: {``&quot;none&quot;``, ``&quot;mean&quot;``, ``&quot;sum&quot;``, ``&quot;mean_batch&quot;``, ``&quot;sum_batch&quot;``,</span>
+<span class="sd">            ``&quot;mean_channel&quot;``, ``&quot;sum_channel&quot;``}</span>
+<span class="sd">            Define the mode to reduce computation result of 1 batch data. Defaults to ``&quot;mean&quot;``.</span>
+<span class="sd">        get_not_nans: whether to return the `not_nans` count, if True, aggregate() returns (metric, not_nans).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">reduction</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">MetricReduction</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">MetricReduction</span><span class="o">.</span><span class="n">MEAN</span><span class="p">,</span>
+        <span class="n">get_not_nans</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="n">reduction</span><span class="p">,</span> <span class="n">get_not_nans</span><span class="o">=</span><span class="n">get_not_nans</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">abs_func</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">abs</span>
+
+    <span class="k">def</span> <span class="nf">_compute_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+
+        <span class="n">mae_out</span> <span class="o">=</span> <span class="n">compute_mean_error_metrics</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">abs_func</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mae_out</span></div>
+
+
+<div class="viewcode-block" id="RMSEMetric"><a class="viewcode-back" href="../../../metrics.html#monai.metrics.RMSEMetric">[docs]</a><span class="k">class</span> <span class="nc">RMSEMetric</span><span class="p">(</span><span class="n">RegressionMetric</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute Root Mean Squared Error between two tensors using function:</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \operatorname {RMSE}\left(Y, \hat{Y}\right) ={ \sqrt{ \frac {1}{n}\sum _{i=1}^{n}\left(y_i-\hat{y_i}\right)^2 } } \</span>
+<span class="sd">        = \sqrt {\operatorname{MSE}\left(Y, \hat{Y}\right)}.</span>
+
+<span class="sd">    More info: https://en.wikipedia.org/wiki/Root-mean-square_deviation</span>
+
+<span class="sd">    Input `y_pred` is compared with ground truth `y`.</span>
+<span class="sd">    Both `y_pred` and `y` are expected to be real-valued, where `y_pred` is output from a regression model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        reduction: {``&quot;none&quot;``, ``&quot;mean&quot;``, ``&quot;sum&quot;``, ``&quot;mean_batch&quot;``, ``&quot;sum_batch&quot;``,</span>
+<span class="sd">            ``&quot;mean_channel&quot;``, ``&quot;sum_channel&quot;``}</span>
+<span class="sd">            Define the mode to reduce computation result of 1 batch data. Defaults to ``&quot;mean&quot;``.</span>
+<span class="sd">        get_not_nans: whether to return the `not_nans` count, if True, aggregate() returns (metric, not_nans).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">reduction</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">MetricReduction</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">MetricReduction</span><span class="o">.</span><span class="n">MEAN</span><span class="p">,</span>
+        <span class="n">get_not_nans</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="n">reduction</span><span class="p">,</span> <span class="n">get_not_nans</span><span class="o">=</span><span class="n">get_not_nans</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sq_func</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">,</span> <span class="n">exponent</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_compute_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+
+        <span class="n">mse_out</span> <span class="o">=</span> <span class="n">compute_mean_error_metrics</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sq_func</span><span class="p">)</span>
+        <span class="n">rmse_out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mse_out</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">rmse_out</span></div>
+
+
+<div class="viewcode-block" id="PSNRMetric"><a class="viewcode-back" href="../../../metrics.html#monai.metrics.PSNRMetric">[docs]</a><span class="k">class</span> <span class="nc">PSNRMetric</span><span class="p">(</span><span class="n">RegressionMetric</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute Peak Signal To Noise Ratio between two tensors using function:</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \operatorname{PSNR}\left(Y, \hat{Y}\right) = 20 \cdot \log_{10} \left({\mathit{MAX}}_Y\right) \</span>
+<span class="sd">        -10 \cdot \log_{10}\left(\operatorname{MSE\left(Y, \hat{Y}\right)}\right)</span>
+
+<span class="sd">    More info: https://en.wikipedia.org/wiki/Peak_signal-to-noise_ratio</span>
+
+<span class="sd">    Help taken from:</span>
+<span class="sd">    https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/ops/image_ops_impl.py line 4139</span>
+
+<span class="sd">    Input `y_pred` is compared with ground truth `y`.</span>
+<span class="sd">    Both `y_pred` and `y` are expected to be real-valued, where `y_pred` is output from a regression model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        max_val: The dynamic range of the images/volumes (i.e., the difference between the</span>
+<span class="sd">            maximum and the minimum allowed values e.g. 255 for a uint8 image).</span>
+<span class="sd">        reduction: {``&quot;none&quot;``, ``&quot;mean&quot;``, ``&quot;sum&quot;``, ``&quot;mean_batch&quot;``, ``&quot;sum_batch&quot;``,</span>
+<span class="sd">            ``&quot;mean_channel&quot;``, ``&quot;sum_channel&quot;``}</span>
+<span class="sd">            Define the mode to reduce computation result of 1 batch data. Defaults to ``&quot;mean&quot;``.</span>
+<span class="sd">        get_not_nans: whether to return the `not_nans` count, if True, aggregate() returns (metric, not_nans).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">max_val</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+        <span class="n">reduction</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">MetricReduction</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">MetricReduction</span><span class="o">.</span><span class="n">MEAN</span><span class="p">,</span>
+        <span class="n">get_not_nans</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="n">reduction</span><span class="p">,</span> <span class="n">get_not_nans</span><span class="o">=</span><span class="n">get_not_nans</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_val</span> <span class="o">=</span> <span class="n">max_val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sq_func</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">,</span> <span class="n">exponent</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_compute_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+
+        <span class="n">mse_out</span> <span class="o">=</span> <span class="n">compute_mean_error_metrics</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sq_func</span><span class="p">)</span>
+        <span class="n">psnr_val</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_val</span><span class="p">)</span> <span class="o">-</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">mse_out</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">psnr_val</span></div>
+
+
+<span class="k">def</span> <span class="nf">compute_mean_error_metrics</span><span class="p">(</span><span class="n">y_pred</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+    <span class="c1"># reducing in only channel + spatial dimensions (not batch)</span>
+    <span class="c1"># reducion of batch handled inside __call__() using do_metric_reduction() in respective calling class</span>
+    <span class="n">flt</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">flatten</span><span class="p">,</span> <span class="n">start_dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">error_metric</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">flt</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">)),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">error_metric</span>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2020 - 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

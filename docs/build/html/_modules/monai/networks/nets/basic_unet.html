@@ -1,0 +1,435 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monai.networks.nets.basic_unet &#8212; MONAI 0.6.0 Documentation</title>
+    
+  <link href="../../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../../index.html">
+  <img src="../../../../_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for monai.networks.nets.basic_unet</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 - 2021 MONAI Consortium</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+
+<span class="kn">from</span> <span class="nn">monai.networks.blocks</span> <span class="kn">import</span> <span class="n">Convolution</span><span class="p">,</span> <span class="n">UpSample</span>
+<span class="kn">from</span> <span class="nn">monai.networks.layers.factories</span> <span class="kn">import</span> <span class="n">Conv</span><span class="p">,</span> <span class="n">Pool</span>
+<span class="kn">from</span> <span class="nn">monai.utils</span> <span class="kn">import</span> <span class="n">ensure_tuple_rep</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BasicUNet&quot;</span><span class="p">,</span> <span class="s2">&quot;BasicUnet&quot;</span><span class="p">,</span> <span class="s2">&quot;Basicunet&quot;</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">TwoConv</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;two convolutions.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">in_chns</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">out_chns</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">act</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">],</span>
+        <span class="n">norm</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">],</span>
+        <span class="n">dropout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            dim: number of spatial dimensions.</span>
+<span class="sd">            in_chns: number of input channels.</span>
+<span class="sd">            out_chns: number of output channels.</span>
+<span class="sd">            act: activation type and arguments.</span>
+<span class="sd">            norm: feature normalization type and arguments.</span>
+<span class="sd">            dropout: dropout ratio. Defaults to no dropout.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="n">conv_0</span> <span class="o">=</span> <span class="n">Convolution</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">in_chns</span><span class="p">,</span> <span class="n">out_chns</span><span class="p">,</span> <span class="n">act</span><span class="o">=</span><span class="n">act</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">conv_1</span> <span class="o">=</span> <span class="n">Convolution</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">out_chns</span><span class="p">,</span> <span class="n">out_chns</span><span class="p">,</span> <span class="n">act</span><span class="o">=</span><span class="n">act</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="s2">&quot;conv_0&quot;</span><span class="p">,</span> <span class="n">conv_0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="s2">&quot;conv_1&quot;</span><span class="p">,</span> <span class="n">conv_1</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Down</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;maxpooling downsampling and two convolutions.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">in_chns</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">out_chns</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">act</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">],</span>
+        <span class="n">norm</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">],</span>
+        <span class="n">dropout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            dim: number of spatial dimensions.</span>
+<span class="sd">            in_chns: number of input channels.</span>
+<span class="sd">            out_chns: number of output channels.</span>
+<span class="sd">            act: activation type and arguments.</span>
+<span class="sd">            norm: feature normalization type and arguments.</span>
+<span class="sd">            dropout: dropout ratio. Defaults to no dropout.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="n">max_pooling</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">[</span><span class="s2">&quot;MAX&quot;</span><span class="p">,</span> <span class="n">dim</span><span class="p">](</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">convs</span> <span class="o">=</span> <span class="n">TwoConv</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">in_chns</span><span class="p">,</span> <span class="n">out_chns</span><span class="p">,</span> <span class="n">act</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">dropout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="s2">&quot;max_pooling&quot;</span><span class="p">,</span> <span class="n">max_pooling</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="s2">&quot;convs&quot;</span><span class="p">,</span> <span class="n">convs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">UpCat</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;upsampling, concatenation with the encoder feature map, two convolutions&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">in_chns</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">cat_chns</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">out_chns</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">act</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">],</span>
+        <span class="n">norm</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">],</span>
+        <span class="n">dropout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">upsample</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;deconv&quot;</span><span class="p">,</span>
+        <span class="n">halves</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            dim: number of spatial dimensions.</span>
+<span class="sd">            in_chns: number of input channels to be upsampled.</span>
+<span class="sd">            cat_chns: number of channels from the decoder.</span>
+<span class="sd">            out_chns: number of output channels.</span>
+<span class="sd">            act: activation type and arguments.</span>
+<span class="sd">            norm: feature normalization type and arguments.</span>
+<span class="sd">            dropout: dropout ratio. Defaults to no dropout.</span>
+<span class="sd">            upsample: upsampling mode, available options are</span>
+<span class="sd">                ``&quot;deconv&quot;``, ``&quot;pixelshuffle&quot;``, ``&quot;nontrainable&quot;``.</span>
+<span class="sd">            halves: whether to halve the number of channels during upsampling.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="n">up_chns</span> <span class="o">=</span> <span class="n">in_chns</span> <span class="o">//</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">halves</span> <span class="k">else</span> <span class="n">in_chns</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upsample</span> <span class="o">=</span> <span class="n">UpSample</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">in_chns</span><span class="p">,</span> <span class="n">up_chns</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">upsample</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convs</span> <span class="o">=</span> <span class="n">TwoConv</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">cat_chns</span> <span class="o">+</span> <span class="n">up_chns</span><span class="p">,</span> <span class="n">out_chns</span><span class="p">,</span> <span class="n">act</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">dropout</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">x_e</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x: features to be upsampled.</span>
+<span class="sd">            x_e: features from the encoder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x_0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upsample</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="c1"># handling spatial shapes due to the 2x maxpooling with odd edge lengths.</span>
+        <span class="n">dimensions</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span>
+        <span class="n">sp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">dimensions</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dimensions</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">x_e</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">x_0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+                <span class="n">sp</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">x_0</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">x_0</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="s2">&quot;replicate&quot;</span><span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convs</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">x_e</span><span class="p">,</span> <span class="n">x_0</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># input channels: (cat_chns + up_chns)</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+
+<div class="viewcode-block" id="BasicUNet"><a class="viewcode-back" href="../../../../networks.html#monai.networks.nets.BasicUNet">[docs]</a><span class="k">class</span> <span class="nc">BasicUNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<div class="viewcode-block" id="BasicUNet.__init__"><a class="viewcode-back" href="../../../../networks.html#monai.networks.nets.BasicUNet.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dimensions</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="n">in_channels</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">out_channels</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">features</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span>
+        <span class="n">act</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;LeakyReLU&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;negative_slope&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s2">&quot;inplace&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}),</span>
+        <span class="n">norm</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;instance&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;affine&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}),</span>
+        <span class="n">dropout</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">upsample</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;deconv&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A UNet implementation with 1D/2D/3D supports.</span>
+
+<span class="sd">        Based on:</span>
+
+<span class="sd">            Falk et al. &quot;U-Net – Deep Learning for Cell Counting, Detection, and</span>
+<span class="sd">            Morphometry&quot;. Nature Methods 16, 67–70 (2019), DOI:</span>
+<span class="sd">            http://dx.doi.org/10.1038/s41592-018-0261-2</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dimensions: number of spatial dimensions. Defaults to 3 for spatial 3D inputs.</span>
+<span class="sd">            in_channels: number of input channels. Defaults to 1.</span>
+<span class="sd">            out_channels: number of output channels. Defaults to 2.</span>
+<span class="sd">            features: six integers as numbers of features.</span>
+<span class="sd">                Defaults to ``(32, 32, 64, 128, 256, 32)``,</span>
+
+<span class="sd">                - the first five values correspond to the five-level encoder feature sizes.</span>
+<span class="sd">                - the last value corresponds to the feature size after the last upsampling.</span>
+
+<span class="sd">            act: activation type and arguments. Defaults to LeakyReLU.</span>
+<span class="sd">            norm: feature normalization type and arguments. Defaults to instance norm.</span>
+<span class="sd">            dropout: dropout ratio. Defaults to no dropout.</span>
+<span class="sd">            upsample: upsampling mode, available options are</span>
+<span class="sd">                ``&quot;deconv&quot;``, ``&quot;pixelshuffle&quot;``, ``&quot;nontrainable&quot;``.</span>
+
+<span class="sd">        Examples::</span>
+
+<span class="sd">            # for spatial 2D</span>
+<span class="sd">            &gt;&gt;&gt; net = BasicUNet(dimensions=2, features=(64, 128, 256, 512, 1024, 128))</span>
+
+<span class="sd">            # for spatial 2D, with group norm</span>
+<span class="sd">            &gt;&gt;&gt; net = BasicUNet(dimensions=2, features=(64, 128, 256, 512, 1024, 128), norm=(&quot;group&quot;, {&quot;num_groups&quot;: 4}))</span>
+
+<span class="sd">            # for spatial 3D</span>
+<span class="sd">            &gt;&gt;&gt; net = BasicUNet(dimensions=3, features=(32, 32, 64, 128, 256, 32))</span>
+
+<span class="sd">        See Also</span>
+
+<span class="sd">            - :py:class:`monai.networks.nets.DynUNet`</span>
+<span class="sd">            - :py:class:`monai.networks.nets.UNet`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="n">fea</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;BasicUNet features: </span><span class="si">{</span><span class="n">fea</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_0</span> <span class="o">=</span> <span class="n">TwoConv</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">,</span> <span class="n">features</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">act</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">dropout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down_1</span> <span class="o">=</span> <span class="n">Down</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">fea</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">fea</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">act</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">dropout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down_2</span> <span class="o">=</span> <span class="n">Down</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">fea</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">fea</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">act</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">dropout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down_3</span> <span class="o">=</span> <span class="n">Down</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">fea</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">fea</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">act</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">dropout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down_4</span> <span class="o">=</span> <span class="n">Down</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">fea</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">fea</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">act</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">dropout</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">upcat_4</span> <span class="o">=</span> <span class="n">UpCat</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">fea</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">fea</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">fea</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">act</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">dropout</span><span class="p">,</span> <span class="n">upsample</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upcat_3</span> <span class="o">=</span> <span class="n">UpCat</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">fea</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">fea</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">fea</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">act</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">dropout</span><span class="p">,</span> <span class="n">upsample</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upcat_2</span> <span class="o">=</span> <span class="n">UpCat</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">fea</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">fea</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">fea</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">act</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">dropout</span><span class="p">,</span> <span class="n">upsample</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upcat_1</span> <span class="o">=</span> <span class="n">UpCat</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">fea</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">fea</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">fea</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">act</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">dropout</span><span class="p">,</span> <span class="n">upsample</span><span class="p">,</span> <span class="n">halves</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">final_conv</span> <span class="o">=</span> <span class="n">Conv</span><span class="p">[</span><span class="s2">&quot;conv&quot;</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">](</span><span class="n">fea</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="BasicUNet.forward"><a class="viewcode-back" href="../../../../networks.html#monai.networks.nets.BasicUNet.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            x: input should have spatially N dimensions</span>
+<span class="sd">                ``(Batch, in_channels, dim_0[, dim_1, ..., dim_N])``, N is defined by `dimensions`.</span>
+<span class="sd">                It is recommended to have ``dim_n % 16 == 0`` to ensure all maxpooling inputs have</span>
+<span class="sd">                even edge lengths.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A torch Tensor of &quot;raw&quot; predictions in shape</span>
+<span class="sd">            ``(Batch, out_channels, dim_0[, dim_1, ..., dim_N])``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_0</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">x1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">down_1</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">down_2</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="n">x3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">down_3</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span>
+        <span class="n">x4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">down_4</span><span class="p">(</span><span class="n">x3</span><span class="p">)</span>
+
+        <span class="n">u4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upcat_4</span><span class="p">(</span><span class="n">x4</span><span class="p">,</span> <span class="n">x3</span><span class="p">)</span>
+        <span class="n">u3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upcat_3</span><span class="p">(</span><span class="n">u4</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
+        <span class="n">u2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upcat_2</span><span class="p">(</span><span class="n">u3</span><span class="p">,</span> <span class="n">x1</span><span class="p">)</span>
+        <span class="n">u1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upcat_1</span><span class="p">(</span><span class="n">u2</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
+
+        <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">final_conv</span><span class="p">(</span><span class="n">u1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">logits</span></div></div>
+
+
+<span class="n">BasicUnet</span> <span class="o">=</span> <span class="n">Basicunet</span> <span class="o">=</span> <span class="n">basicunet</span> <span class="o">=</span> <span class="n">BasicUNet</span>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2020 - 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

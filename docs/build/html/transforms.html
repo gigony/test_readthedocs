@@ -1,0 +1,2683 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transforms &#8212; MONAI Deploy Application SDK 0.1.0 Documentation</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Loss functions" href="losses.html" />
+    <link rel="prev" title="Applications" href="apps.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="index.html">
+  <img src="_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="apps.html">
+   Applications
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Transforms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="losses.html">
+   Loss functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="networks.html">
+   Network architectures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="metrics.html">
+   Metrics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="optimizers.html">
+   Optimizers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data.html">
+   Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="engines.html">
+   Engines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inferers.html">
+   Inference methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="handlers.html">
+   Event handlers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="visualize.html">
+   Visualizations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="utils.html">
+   Utilities
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generic-interfaces">
+   Generic Interfaces
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transform">
+     <cite>
+      Transform
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#maptransform">
+     <cite>
+      MapTransform
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#randomizable">
+     <cite>
+      Randomizable
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#randomizabletransform">
+     <cite>
+      RandomizableTransform
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#compose">
+     <cite>
+      Compose
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#invertibletransform">
+     <cite>
+      InvertibleTransform
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#batchinversetransform">
+     <cite>
+      BatchInverseTransform
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decollated">
+     <cite>
+      Decollated
+     </cite>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vanilla-transforms">
+   Vanilla Transforms
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#crop-and-pad">
+     Crop and Pad
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#spatialpad">
+       <cite>
+        SpatialPad
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#borderpad">
+       <cite>
+        BorderPad
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#divisiblepad">
+       <cite>
+        DivisiblePad
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#spatialcrop">
+       <cite>
+        SpatialCrop
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#centerspatialcrop">
+       <cite>
+        CenterSpatialCrop
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randspatialcrop">
+       <cite>
+        RandSpatialCrop
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randspatialcropsamples">
+       <cite>
+        RandSpatialCropSamples
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cropforeground">
+       <cite>
+        CropForeground
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randweightedcrop">
+       <cite>
+        RandWeightedCrop
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randcropbyposneglabel">
+       <cite>
+        RandCropByPosNegLabel
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randcropbylabelclasses">
+       <cite>
+        RandCropByLabelClasses
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#resizewithpadorcrop">
+       <cite>
+        ResizeWithPadOrCrop
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#boundingrect">
+       <cite>
+        BoundingRect
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randscalecrop">
+       <cite>
+        RandScaleCrop
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#centerscalecrop">
+       <cite>
+        CenterScaleCrop
+       </cite>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intensity">
+     Intensity
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randgaussiannoise">
+       <cite>
+        RandGaussianNoise
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#shiftintensity">
+       <cite>
+        ShiftIntensity
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randshiftintensity">
+       <cite>
+        RandShiftIntensity
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#stdshiftintensity">
+       <cite>
+        StdShiftIntensity
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randstdshiftintensity">
+       <cite>
+        RandStdShiftIntensity
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randbiasfield">
+       <cite>
+        RandBiasField
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#scaleintensity">
+       <cite>
+        ScaleIntensity
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randscaleintensity">
+       <cite>
+        RandScaleIntensity
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#normalizeintensity">
+       <cite>
+        NormalizeIntensity
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#thresholdintensity">
+       <cite>
+        ThresholdIntensity
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#scaleintensityrange">
+       <cite>
+        ScaleIntensityRange
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#scaleintensityrangepercentiles">
+       <cite>
+        ScaleIntensityRangePercentiles
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adjustcontrast">
+       <cite>
+        AdjustContrast
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randadjustcontrast">
+       <cite>
+        RandAdjustContrast
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#maskintensity">
+       <cite>
+        MaskIntensity
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#savitzkygolaysmooth">
+       <cite>
+        SavitzkyGolaySmooth
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gaussiansmooth">
+       <cite>
+        GaussianSmooth
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randgaussiansmooth">
+       <cite>
+        RandGaussianSmooth
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gaussiansharpen">
+       <cite>
+        GaussianSharpen
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randgaussiansharpen">
+       <cite>
+        RandGaussianSharpen
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randhistogramshift">
+       <cite>
+        RandHistogramShift
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#detectenvelope">
+       <cite>
+        DetectEnvelope
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gibbsnoise">
+       <cite>
+        GibbsNoise
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randgibbsnoise">
+       <cite>
+        RandGibbsNoise
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#kspacespikenoise">
+       <cite>
+        KSpaceSpikeNoise
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randkspacespikenoise">
+       <cite>
+        RandKSpaceSpikeNoise
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randcoarsedropout">
+       <cite>
+        RandCoarseDropout
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#histogramnormalize">
+       <cite>
+        HistogramNormalize
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#localpatchshuffling">
+       <cite>
+        LocalPatchShuffling
+       </cite>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#io">
+     IO
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#loadimage">
+       <cite>
+        LoadImage
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#saveimage">
+       <cite>
+        SaveImage
+       </cite>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nvidia-tool-extension-nvtx">
+     NVIDIA Tool Extension (NVTX)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#rangepush">
+       <cite>
+        RangePush
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randrangepush">
+       <cite>
+        RandRangePush
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#rangepop">
+       <cite>
+        RangePop
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randrangepop">
+       <cite>
+        RandRangePop
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#mark">
+       <cite>
+        Mark
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randmark">
+       <cite>
+        RandMark
+       </cite>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#post-processing">
+     Post-processing
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#activations">
+       <cite>
+        Activations
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#asdiscrete">
+       <cite>
+        AsDiscrete
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#keeplargestconnectedcomponent">
+       <cite>
+        KeepLargestConnectedComponent
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#labelfilter">
+       <cite>
+        LabelFilter
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#fillholes">
+       <cite>
+        FillHoles
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#labeltocontour">
+       <cite>
+        LabelToContour
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#meanensemble">
+       <cite>
+        MeanEnsemble
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#prob-nms">
+       <cite>
+        Prob NMS
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#voteensemble">
+       <cite>
+        VoteEnsemble
+       </cite>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spatial">
+     Spatial
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#spacing">
+       <cite>
+        Spacing
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#orientation">
+       <cite>
+        Orientation
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randrotate">
+       <cite>
+        RandRotate
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randflip">
+       <cite>
+        RandFlip
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randaxisflip">
+       <cite>
+        RandAxisFlip
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randzoom">
+       <cite>
+        RandZoom
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#affine">
+       <cite>
+        Affine
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#resample">
+       <cite>
+        Resample
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randaffine">
+       <cite>
+        RandAffine
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randdeformgrid">
+       <cite>
+        RandDeformGrid
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#affinegrid">
+       <cite>
+        AffineGrid
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randaffinegrid">
+       <cite>
+        RandAffineGrid
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#rand2delastic">
+       <cite>
+        Rand2DElastic
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#rand3delastic">
+       <cite>
+        Rand3DElastic
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#rotate90">
+       <cite>
+        Rotate90
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randrotate90">
+       <cite>
+        RandRotate90
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#flip">
+       <cite>
+        Flip
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#resize">
+       <cite>
+        Resize
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#rotate">
+       <cite>
+        Rotate
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#zoom">
+       <cite>
+        Zoom
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#addcoordinatechannels">
+       <cite>
+        AddCoordinateChannels
+       </cite>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#utility">
+     Utility
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#identity">
+       <cite>
+        Identity
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#aschannelfirst">
+       <cite>
+        AsChannelFirst
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#aschannellast">
+       <cite>
+        AsChannelLast
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#addchannel">
+       <cite>
+        AddChannel
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#ensurechannelfirst">
+       <cite>
+        EnsureChannelFirst
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#repeatchannel">
+       <cite>
+        RepeatChannel
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#splitchannel">
+       <cite>
+        SplitChannel
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#casttotype">
+       <cite>
+        CastToType
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#totensor">
+       <cite>
+        ToTensor
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#tonumpy">
+       <cite>
+        ToNumpy
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#tocupy">
+       <cite>
+        ToCupy
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#transpose">
+       <cite>
+        Transpose
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#squeezedim">
+       <cite>
+        SqueezeDim
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#datastats">
+       <cite>
+        DataStats
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#simulatedelay">
+       <cite>
+        SimulateDelay
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#lambda">
+       <cite>
+        Lambda
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randlambda">
+       <cite>
+        RandLambda
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#labeltomask">
+       <cite>
+        LabelToMask
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#fgbgtoindices">
+       <cite>
+        FgBgToIndices
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#classestoindices">
+       <cite>
+        ClassesToIndices
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#converttomultichannelbasedonbratsclasses">
+       <cite>
+        ConvertToMultiChannelBasedOnBratsClasses
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#addextremepointschannel">
+       <cite>
+        AddExtremePointsChannel
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#torchvision">
+       <cite>
+        TorchVision
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#maplabelvalue">
+       <cite>
+        MapLabelValue
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#ensuretype">
+       <cite>
+        EnsureType
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#intensitystats">
+       <cite>
+        IntensityStats
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#todevice">
+       <cite>
+        ToDevice
+       </cite>
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dictionary-transforms">
+   Dictionary Transforms
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#crop-and-pad-dict">
+     Crop and Pad (Dict)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#spatialpadd">
+       <cite>
+        SpatialPadd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#borderpadd">
+       <cite>
+        BorderPadd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#divisiblepadd">
+       <cite>
+        DivisiblePadd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#spatialcropd">
+       <cite>
+        SpatialCropd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#centerspatialcropd">
+       <cite>
+        CenterSpatialCropd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randspatialcropd">
+       <cite>
+        RandSpatialCropd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randspatialcropsamplesd">
+       <cite>
+        RandSpatialCropSamplesd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cropforegroundd">
+       <cite>
+        CropForegroundd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randweightedcropd">
+       <cite>
+        RandWeightedCropd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randcropbyposneglabeld">
+       <cite>
+        RandCropByPosNegLabeld
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randcropbylabelclassesd">
+       <cite>
+        RandCropByLabelClassesd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#resizewithpadorcropd">
+       <cite>
+        ResizeWithPadOrCropd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#boundingrectd">
+       <cite>
+        BoundingRectd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randscalecropd">
+       <cite>
+        RandScaleCropd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#centerscalecropd">
+       <cite>
+        CenterScaleCropd
+       </cite>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intensity-dict">
+     Intensity (Dict)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randgaussiannoised">
+       <cite>
+        RandGaussianNoised
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#shiftintensityd">
+       <cite>
+        ShiftIntensityd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randshiftintensityd">
+       <cite>
+        RandShiftIntensityd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#stdshiftintensityd">
+       <cite>
+        StdShiftIntensityd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randstdshiftintensityd">
+       <cite>
+        RandStdShiftIntensityd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randbiasfieldd">
+       <cite>
+        RandBiasFieldd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#scaleintensityd">
+       <cite>
+        ScaleIntensityd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randscaleintensityd">
+       <cite>
+        RandScaleIntensityd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#normalizeintensityd">
+       <cite>
+        NormalizeIntensityd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#thresholdintensityd">
+       <cite>
+        ThresholdIntensityd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#scaleintensityranged">
+       <cite>
+        ScaleIntensityRanged
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gibbsnoised">
+       <cite>
+        GibbsNoised
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randgibbsnoised">
+       <cite>
+        RandGibbsNoised
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#kspacespikenoised">
+       <cite>
+        KSpaceSpikeNoised
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randkspacespikenoised">
+       <cite>
+        RandKSpaceSpikeNoised
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#scaleintensityrangepercentilesd">
+       <cite>
+        ScaleIntensityRangePercentilesd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adjustcontrastd">
+       <cite>
+        AdjustContrastd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randadjustcontrastd">
+       <cite>
+        RandAdjustContrastd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#maskintensityd">
+       <cite>
+        MaskIntensityd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gaussiansmoothd">
+       <cite>
+        GaussianSmoothd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randgaussiansmoothd">
+       <cite>
+        RandGaussianSmoothd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#gaussiansharpend">
+       <cite>
+        GaussianSharpend
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randgaussiansharpend">
+       <cite>
+        RandGaussianSharpend
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randhistogramshiftd">
+       <cite>
+        RandHistogramShiftd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randcoarsedropoutd">
+       <cite>
+        RandCoarseDropoutd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#histogramnormalized">
+       <cite>
+        HistogramNormalized
+       </cite>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#io-dict">
+     IO (Dict)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#loadimaged">
+       <cite>
+        LoadImaged
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#saveimaged">
+       <cite>
+        SaveImaged
+       </cite>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#post-processing-dict">
+     Post-processing (Dict)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#activationsd">
+       <cite>
+        Activationsd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#asdiscreted">
+       <cite>
+        AsDiscreted
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#keeplargestconnectedcomponentd">
+       <cite>
+        KeepLargestConnectedComponentd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#labelfilterd">
+       <cite>
+        LabelFilterd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#fillholesd">
+       <cite>
+        FillHolesd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#labeltocontourd">
+       <cite>
+        LabelToContourd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#ensembled">
+       <cite>
+        Ensembled
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#meanensembled">
+       <cite>
+        MeanEnsembled
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#voteensembled">
+       <cite>
+        VoteEnsembled
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#invertd">
+       <cite>
+        Invertd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#saveclassificationd">
+       <cite>
+        SaveClassificationd
+       </cite>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spatial-dict">
+     Spatial (Dict)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#spacingd">
+       <cite>
+        Spacingd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#orientationd">
+       <cite>
+        Orientationd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#flipd">
+       <cite>
+        Flipd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randflipd">
+       <cite>
+        RandFlipd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randaxisflipd">
+       <cite>
+        RandAxisFlipd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#rotated">
+       <cite>
+        Rotated
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randrotated">
+       <cite>
+        RandRotated
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#zoomd">
+       <cite>
+        Zoomd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randzoomd">
+       <cite>
+        RandZoomd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randrotate90d">
+       <cite>
+        RandRotate90d
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#rotate90d">
+       <cite>
+        Rotate90d
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#resized">
+       <cite>
+        Resized
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#affined">
+       <cite>
+        Affined
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randaffined">
+       <cite>
+        RandAffined
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#rand2delasticd">
+       <cite>
+        Rand2DElasticd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#rand3delasticd">
+       <cite>
+        Rand3DElasticd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#addcoordinatechannelsd">
+       <cite>
+        AddCoordinateChannelsd
+       </cite>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#utility-dict">
+     Utility (Dict)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#identityd">
+       <cite>
+        Identityd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#aschannelfirstd">
+       <cite>
+        AsChannelFirstd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#aschannellastd">
+       <cite>
+        AsChannelLastd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#addchanneld">
+       <cite>
+        AddChanneld
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#ensurechannelfirstd">
+       <cite>
+        EnsureChannelFirstd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#repeatchanneld">
+       <cite>
+        RepeatChanneld
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#splitchanneld">
+       <cite>
+        SplitChanneld
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#casttotyped">
+       <cite>
+        CastToTyped
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#totensord">
+       <cite>
+        ToTensord
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#tonumpyd">
+       <cite>
+        ToNumpyd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#tocupyd">
+       <cite>
+        ToCupyd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#deleteitemsd">
+       <cite>
+        DeleteItemsd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#selectitemsd">
+       <cite>
+        SelectItemsd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#squeezedimd">
+       <cite>
+        SqueezeDimd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#datastatsd">
+       <cite>
+        DataStatsd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#simulatedelayd">
+       <cite>
+        SimulateDelayd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#copyitemsd">
+       <cite>
+        CopyItemsd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#concatitemsd">
+       <cite>
+        ConcatItemsd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#lambdad">
+       <cite>
+        Lambdad
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randlambdad">
+       <cite>
+        RandLambdad
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#labeltomaskd">
+       <cite>
+        LabelToMaskd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#fgbgtoindicesd">
+       <cite>
+        FgBgToIndicesd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#classestoindicesd">
+       <cite>
+        ClassesToIndicesd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#converttomultichannelbasedonbratsclassesd">
+       <cite>
+        ConvertToMultiChannelBasedOnBratsClassesd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#addextremepointschanneld">
+       <cite>
+        AddExtremePointsChanneld
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#torchvisiond">
+       <cite>
+        TorchVisiond
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#randtorchvisiond">
+       <cite>
+        RandTorchVisiond
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#maplabelvalued">
+       <cite>
+        MapLabelValued
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#ensuretyped">
+       <cite>
+        EnsureTyped
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#intensitystatsd">
+       <cite>
+        IntensityStatsd
+       </cite>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#todeviced">
+       <cite>
+        ToDeviced
+       </cite>
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transform-adaptors">
+   Transform Adaptors
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adaptor">
+     <cite>
+      adaptor
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#apply-alias">
+     <cite>
+      apply_alias
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#to-kwargs">
+     <cite>
+      to_kwargs
+     </cite>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#utilities">
+   Utilities
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="transforms">
+<span id="transform-api"></span><h1>Transforms<a class="headerlink" href="#transforms" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="generic-interfaces">
+<h2>Generic Interfaces<a class="headerlink" href="#generic-interfaces" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="transform">
+<h3><cite>Transform</cite><a class="headerlink" href="#transform" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="maptransform">
+<h3><cite>MapTransform</cite><a class="headerlink" href="#maptransform" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="randomizable">
+<h3><cite>Randomizable</cite><a class="headerlink" href="#randomizable" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="randomizabletransform">
+<h3><cite>RandomizableTransform</cite><a class="headerlink" href="#randomizabletransform" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="compose">
+<h3><cite>Compose</cite><a class="headerlink" href="#compose" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="invertibletransform">
+<h3><cite>InvertibleTransform</cite><a class="headerlink" href="#invertibletransform" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="batchinversetransform">
+<h3><cite>BatchInverseTransform</cite><a class="headerlink" href="#batchinversetransform" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="decollated">
+<h3><cite>Decollated</cite><a class="headerlink" href="#decollated" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="vanilla-transforms">
+<h2>Vanilla Transforms<a class="headerlink" href="#vanilla-transforms" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="crop-and-pad">
+<h3>Crop and Pad<a class="headerlink" href="#crop-and-pad" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="spatialpad">
+<h4><cite>SpatialPad</cite><a class="headerlink" href="#spatialpad" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="borderpad">
+<h4><cite>BorderPad</cite><a class="headerlink" href="#borderpad" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="divisiblepad">
+<h4><cite>DivisiblePad</cite><a class="headerlink" href="#divisiblepad" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="spatialcrop">
+<h4><cite>SpatialCrop</cite><a class="headerlink" href="#spatialcrop" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="centerspatialcrop">
+<h4><cite>CenterSpatialCrop</cite><a class="headerlink" href="#centerspatialcrop" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randspatialcrop">
+<h4><cite>RandSpatialCrop</cite><a class="headerlink" href="#randspatialcrop" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randspatialcropsamples">
+<h4><cite>RandSpatialCropSamples</cite><a class="headerlink" href="#randspatialcropsamples" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="cropforeground">
+<h4><cite>CropForeground</cite><a class="headerlink" href="#cropforeground" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randweightedcrop">
+<h4><cite>RandWeightedCrop</cite><a class="headerlink" href="#randweightedcrop" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randcropbyposneglabel">
+<h4><cite>RandCropByPosNegLabel</cite><a class="headerlink" href="#randcropbyposneglabel" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randcropbylabelclasses">
+<h4><cite>RandCropByLabelClasses</cite><a class="headerlink" href="#randcropbylabelclasses" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="resizewithpadorcrop">
+<h4><cite>ResizeWithPadOrCrop</cite><a class="headerlink" href="#resizewithpadorcrop" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="boundingrect">
+<h4><cite>BoundingRect</cite><a class="headerlink" href="#boundingrect" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randscalecrop">
+<h4><cite>RandScaleCrop</cite><a class="headerlink" href="#randscalecrop" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="centerscalecrop">
+<h4><cite>CenterScaleCrop</cite><a class="headerlink" href="#centerscalecrop" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="intensity">
+<h3>Intensity<a class="headerlink" href="#intensity" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="randgaussiannoise">
+<h4><cite>RandGaussianNoise</cite><a class="headerlink" href="#randgaussiannoise" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="shiftintensity">
+<h4><cite>ShiftIntensity</cite><a class="headerlink" href="#shiftintensity" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randshiftintensity">
+<h4><cite>RandShiftIntensity</cite><a class="headerlink" href="#randshiftintensity" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="stdshiftintensity">
+<h4><cite>StdShiftIntensity</cite><a class="headerlink" href="#stdshiftintensity" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randstdshiftintensity">
+<h4><cite>RandStdShiftIntensity</cite><a class="headerlink" href="#randstdshiftintensity" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randbiasfield">
+<h4><cite>RandBiasField</cite><a class="headerlink" href="#randbiasfield" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="scaleintensity">
+<h4><cite>ScaleIntensity</cite><a class="headerlink" href="#scaleintensity" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randscaleintensity">
+<h4><cite>RandScaleIntensity</cite><a class="headerlink" href="#randscaleintensity" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="normalizeintensity">
+<h4><cite>NormalizeIntensity</cite><a class="headerlink" href="#normalizeintensity" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="thresholdintensity">
+<h4><cite>ThresholdIntensity</cite><a class="headerlink" href="#thresholdintensity" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="scaleintensityrange">
+<h4><cite>ScaleIntensityRange</cite><a class="headerlink" href="#scaleintensityrange" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="scaleintensityrangepercentiles">
+<h4><cite>ScaleIntensityRangePercentiles</cite><a class="headerlink" href="#scaleintensityrangepercentiles" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="adjustcontrast">
+<h4><cite>AdjustContrast</cite><a class="headerlink" href="#adjustcontrast" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randadjustcontrast">
+<h4><cite>RandAdjustContrast</cite><a class="headerlink" href="#randadjustcontrast" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="maskintensity">
+<h4><cite>MaskIntensity</cite><a class="headerlink" href="#maskintensity" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="savitzkygolaysmooth">
+<h4><cite>SavitzkyGolaySmooth</cite><a class="headerlink" href="#savitzkygolaysmooth" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="gaussiansmooth">
+<h4><cite>GaussianSmooth</cite><a class="headerlink" href="#gaussiansmooth" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randgaussiansmooth">
+<h4><cite>RandGaussianSmooth</cite><a class="headerlink" href="#randgaussiansmooth" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="gaussiansharpen">
+<h4><cite>GaussianSharpen</cite><a class="headerlink" href="#gaussiansharpen" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randgaussiansharpen">
+<h4><cite>RandGaussianSharpen</cite><a class="headerlink" href="#randgaussiansharpen" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randhistogramshift">
+<h4><cite>RandHistogramShift</cite><a class="headerlink" href="#randhistogramshift" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="detectenvelope">
+<h4><cite>DetectEnvelope</cite><a class="headerlink" href="#detectenvelope" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="gibbsnoise">
+<h4><cite>GibbsNoise</cite><a class="headerlink" href="#gibbsnoise" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randgibbsnoise">
+<h4><cite>RandGibbsNoise</cite><a class="headerlink" href="#randgibbsnoise" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="kspacespikenoise">
+<h4><cite>KSpaceSpikeNoise</cite><a class="headerlink" href="#kspacespikenoise" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randkspacespikenoise">
+<h4><cite>RandKSpaceSpikeNoise</cite><a class="headerlink" href="#randkspacespikenoise" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randcoarsedropout">
+<h4><cite>RandCoarseDropout</cite><a class="headerlink" href="#randcoarsedropout" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="histogramnormalize">
+<h4><cite>HistogramNormalize</cite><a class="headerlink" href="#histogramnormalize" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="localpatchshuffling">
+<h4><cite>LocalPatchShuffling</cite><a class="headerlink" href="#localpatchshuffling" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="io">
+<h3>IO<a class="headerlink" href="#io" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="loadimage">
+<h4><cite>LoadImage</cite><a class="headerlink" href="#loadimage" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="saveimage">
+<h4><cite>SaveImage</cite><a class="headerlink" href="#saveimage" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="nvidia-tool-extension-nvtx">
+<h3>NVIDIA Tool Extension (NVTX)<a class="headerlink" href="#nvidia-tool-extension-nvtx" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="rangepush">
+<h4><cite>RangePush</cite><a class="headerlink" href="#rangepush" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randrangepush">
+<h4><cite>RandRangePush</cite><a class="headerlink" href="#randrangepush" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="rangepop">
+<h4><cite>RangePop</cite><a class="headerlink" href="#rangepop" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randrangepop">
+<h4><cite>RandRangePop</cite><a class="headerlink" href="#randrangepop" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="mark">
+<h4><cite>Mark</cite><a class="headerlink" href="#mark" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randmark">
+<h4><cite>RandMark</cite><a class="headerlink" href="#randmark" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="post-processing">
+<h3>Post-processing<a class="headerlink" href="#post-processing" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="activations">
+<h4><cite>Activations</cite><a class="headerlink" href="#activations" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="asdiscrete">
+<h4><cite>AsDiscrete</cite><a class="headerlink" href="#asdiscrete" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="keeplargestconnectedcomponent">
+<h4><cite>KeepLargestConnectedComponent</cite><a class="headerlink" href="#keeplargestconnectedcomponent" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="labelfilter">
+<h4><cite>LabelFilter</cite><a class="headerlink" href="#labelfilter" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="fillholes">
+<h4><cite>FillHoles</cite><a class="headerlink" href="#fillholes" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="labeltocontour">
+<h4><cite>LabelToContour</cite><a class="headerlink" href="#labeltocontour" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="meanensemble">
+<h4><cite>MeanEnsemble</cite><a class="headerlink" href="#meanensemble" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="prob-nms">
+<h4><cite>Prob NMS</cite><a class="headerlink" href="#prob-nms" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="voteensemble">
+<h4><cite>VoteEnsemble</cite><a class="headerlink" href="#voteensemble" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="spatial">
+<h3>Spatial<a class="headerlink" href="#spatial" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="spacing">
+<h4><cite>Spacing</cite><a class="headerlink" href="#spacing" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="orientation">
+<h4><cite>Orientation</cite><a class="headerlink" href="#orientation" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randrotate">
+<h4><cite>RandRotate</cite><a class="headerlink" href="#randrotate" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randflip">
+<h4><cite>RandFlip</cite><a class="headerlink" href="#randflip" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randaxisflip">
+<h4><cite>RandAxisFlip</cite><a class="headerlink" href="#randaxisflip" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randzoom">
+<h4><cite>RandZoom</cite><a class="headerlink" href="#randzoom" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="affine">
+<h4><cite>Affine</cite><a class="headerlink" href="#affine" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="resample">
+<h4><cite>Resample</cite><a class="headerlink" href="#resample" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randaffine">
+<h4><cite>RandAffine</cite><a class="headerlink" href="#randaffine" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randdeformgrid">
+<h4><cite>RandDeformGrid</cite><a class="headerlink" href="#randdeformgrid" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="affinegrid">
+<h4><cite>AffineGrid</cite><a class="headerlink" href="#affinegrid" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randaffinegrid">
+<h4><cite>RandAffineGrid</cite><a class="headerlink" href="#randaffinegrid" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="rand2delastic">
+<h4><cite>Rand2DElastic</cite><a class="headerlink" href="#rand2delastic" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="rand3delastic">
+<h4><cite>Rand3DElastic</cite><a class="headerlink" href="#rand3delastic" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="rotate90">
+<h4><cite>Rotate90</cite><a class="headerlink" href="#rotate90" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randrotate90">
+<h4><cite>RandRotate90</cite><a class="headerlink" href="#randrotate90" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="flip">
+<h4><cite>Flip</cite><a class="headerlink" href="#flip" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="resize">
+<h4><cite>Resize</cite><a class="headerlink" href="#resize" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="rotate">
+<h4><cite>Rotate</cite><a class="headerlink" href="#rotate" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="zoom">
+<h4><cite>Zoom</cite><a class="headerlink" href="#zoom" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="addcoordinatechannels">
+<h4><cite>AddCoordinateChannels</cite><a class="headerlink" href="#addcoordinatechannels" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="utility">
+<h3>Utility<a class="headerlink" href="#utility" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="identity">
+<h4><cite>Identity</cite><a class="headerlink" href="#identity" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="aschannelfirst">
+<h4><cite>AsChannelFirst</cite><a class="headerlink" href="#aschannelfirst" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="aschannellast">
+<h4><cite>AsChannelLast</cite><a class="headerlink" href="#aschannellast" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="addchannel">
+<h4><cite>AddChannel</cite><a class="headerlink" href="#addchannel" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="ensurechannelfirst">
+<h4><cite>EnsureChannelFirst</cite><a class="headerlink" href="#ensurechannelfirst" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="repeatchannel">
+<h4><cite>RepeatChannel</cite><a class="headerlink" href="#repeatchannel" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="splitchannel">
+<h4><cite>SplitChannel</cite><a class="headerlink" href="#splitchannel" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="casttotype">
+<h4><cite>CastToType</cite><a class="headerlink" href="#casttotype" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="totensor">
+<h4><cite>ToTensor</cite><a class="headerlink" href="#totensor" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="tonumpy">
+<h4><cite>ToNumpy</cite><a class="headerlink" href="#tonumpy" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="tocupy">
+<h4><cite>ToCupy</cite><a class="headerlink" href="#tocupy" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="transpose">
+<h4><cite>Transpose</cite><a class="headerlink" href="#transpose" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="squeezedim">
+<h4><cite>SqueezeDim</cite><a class="headerlink" href="#squeezedim" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="datastats">
+<h4><cite>DataStats</cite><a class="headerlink" href="#datastats" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="simulatedelay">
+<h4><cite>SimulateDelay</cite><a class="headerlink" href="#simulatedelay" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="lambda">
+<h4><cite>Lambda</cite><a class="headerlink" href="#lambda" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randlambda">
+<h4><cite>RandLambda</cite><a class="headerlink" href="#randlambda" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="labeltomask">
+<h4><cite>LabelToMask</cite><a class="headerlink" href="#labeltomask" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="fgbgtoindices">
+<h4><cite>FgBgToIndices</cite><a class="headerlink" href="#fgbgtoindices" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="classestoindices">
+<h4><cite>ClassesToIndices</cite><a class="headerlink" href="#classestoindices" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="converttomultichannelbasedonbratsclasses">
+<h4><cite>ConvertToMultiChannelBasedOnBratsClasses</cite><a class="headerlink" href="#converttomultichannelbasedonbratsclasses" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="addextremepointschannel">
+<h4><cite>AddExtremePointsChannel</cite><a class="headerlink" href="#addextremepointschannel" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="torchvision">
+<h4><cite>TorchVision</cite><a class="headerlink" href="#torchvision" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="maplabelvalue">
+<h4><cite>MapLabelValue</cite><a class="headerlink" href="#maplabelvalue" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="ensuretype">
+<h4><cite>EnsureType</cite><a class="headerlink" href="#ensuretype" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="intensitystats">
+<h4><cite>IntensityStats</cite><a class="headerlink" href="#intensitystats" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="todevice">
+<h4><cite>ToDevice</cite><a class="headerlink" href="#todevice" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+</div>
+<div class="section" id="dictionary-transforms">
+<h2>Dictionary Transforms<a class="headerlink" href="#dictionary-transforms" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="crop-and-pad-dict">
+<h3>Crop and Pad (Dict)<a class="headerlink" href="#crop-and-pad-dict" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="spatialpadd">
+<h4><cite>SpatialPadd</cite><a class="headerlink" href="#spatialpadd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="borderpadd">
+<h4><cite>BorderPadd</cite><a class="headerlink" href="#borderpadd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="divisiblepadd">
+<h4><cite>DivisiblePadd</cite><a class="headerlink" href="#divisiblepadd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="spatialcropd">
+<h4><cite>SpatialCropd</cite><a class="headerlink" href="#spatialcropd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="centerspatialcropd">
+<h4><cite>CenterSpatialCropd</cite><a class="headerlink" href="#centerspatialcropd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randspatialcropd">
+<h4><cite>RandSpatialCropd</cite><a class="headerlink" href="#randspatialcropd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randspatialcropsamplesd">
+<h4><cite>RandSpatialCropSamplesd</cite><a class="headerlink" href="#randspatialcropsamplesd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="cropforegroundd">
+<h4><cite>CropForegroundd</cite><a class="headerlink" href="#cropforegroundd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randweightedcropd">
+<h4><cite>RandWeightedCropd</cite><a class="headerlink" href="#randweightedcropd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randcropbyposneglabeld">
+<h4><cite>RandCropByPosNegLabeld</cite><a class="headerlink" href="#randcropbyposneglabeld" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randcropbylabelclassesd">
+<h4><cite>RandCropByLabelClassesd</cite><a class="headerlink" href="#randcropbylabelclassesd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="resizewithpadorcropd">
+<h4><cite>ResizeWithPadOrCropd</cite><a class="headerlink" href="#resizewithpadorcropd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="boundingrectd">
+<h4><cite>BoundingRectd</cite><a class="headerlink" href="#boundingrectd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randscalecropd">
+<h4><cite>RandScaleCropd</cite><a class="headerlink" href="#randscalecropd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="centerscalecropd">
+<h4><cite>CenterScaleCropd</cite><a class="headerlink" href="#centerscalecropd" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="intensity-dict">
+<h3>Intensity (Dict)<a class="headerlink" href="#intensity-dict" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="randgaussiannoised">
+<h4><cite>RandGaussianNoised</cite><a class="headerlink" href="#randgaussiannoised" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="shiftintensityd">
+<h4><cite>ShiftIntensityd</cite><a class="headerlink" href="#shiftintensityd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randshiftintensityd">
+<h4><cite>RandShiftIntensityd</cite><a class="headerlink" href="#randshiftintensityd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="stdshiftintensityd">
+<h4><cite>StdShiftIntensityd</cite><a class="headerlink" href="#stdshiftintensityd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randstdshiftintensityd">
+<h4><cite>RandStdShiftIntensityd</cite><a class="headerlink" href="#randstdshiftintensityd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randbiasfieldd">
+<h4><cite>RandBiasFieldd</cite><a class="headerlink" href="#randbiasfieldd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="scaleintensityd">
+<h4><cite>ScaleIntensityd</cite><a class="headerlink" href="#scaleintensityd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randscaleintensityd">
+<h4><cite>RandScaleIntensityd</cite><a class="headerlink" href="#randscaleintensityd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="normalizeintensityd">
+<h4><cite>NormalizeIntensityd</cite><a class="headerlink" href="#normalizeintensityd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="thresholdintensityd">
+<h4><cite>ThresholdIntensityd</cite><a class="headerlink" href="#thresholdintensityd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="scaleintensityranged">
+<h4><cite>ScaleIntensityRanged</cite><a class="headerlink" href="#scaleintensityranged" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="gibbsnoised">
+<h4><cite>GibbsNoised</cite><a class="headerlink" href="#gibbsnoised" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randgibbsnoised">
+<h4><cite>RandGibbsNoised</cite><a class="headerlink" href="#randgibbsnoised" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="kspacespikenoised">
+<h4><cite>KSpaceSpikeNoised</cite><a class="headerlink" href="#kspacespikenoised" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randkspacespikenoised">
+<h4><cite>RandKSpaceSpikeNoised</cite><a class="headerlink" href="#randkspacespikenoised" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="scaleintensityrangepercentilesd">
+<h4><cite>ScaleIntensityRangePercentilesd</cite><a class="headerlink" href="#scaleintensityrangepercentilesd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="adjustcontrastd">
+<h4><cite>AdjustContrastd</cite><a class="headerlink" href="#adjustcontrastd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randadjustcontrastd">
+<h4><cite>RandAdjustContrastd</cite><a class="headerlink" href="#randadjustcontrastd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="maskintensityd">
+<h4><cite>MaskIntensityd</cite><a class="headerlink" href="#maskintensityd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="gaussiansmoothd">
+<h4><cite>GaussianSmoothd</cite><a class="headerlink" href="#gaussiansmoothd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randgaussiansmoothd">
+<h4><cite>RandGaussianSmoothd</cite><a class="headerlink" href="#randgaussiansmoothd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="gaussiansharpend">
+<h4><cite>GaussianSharpend</cite><a class="headerlink" href="#gaussiansharpend" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randgaussiansharpend">
+<h4><cite>RandGaussianSharpend</cite><a class="headerlink" href="#randgaussiansharpend" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randhistogramshiftd">
+<h4><cite>RandHistogramShiftd</cite><a class="headerlink" href="#randhistogramshiftd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randcoarsedropoutd">
+<h4><cite>RandCoarseDropoutd</cite><a class="headerlink" href="#randcoarsedropoutd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="histogramnormalized">
+<h4><cite>HistogramNormalized</cite><a class="headerlink" href="#histogramnormalized" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="io-dict">
+<h3>IO (Dict)<a class="headerlink" href="#io-dict" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="loadimaged">
+<h4><cite>LoadImaged</cite><a class="headerlink" href="#loadimaged" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="saveimaged">
+<h4><cite>SaveImaged</cite><a class="headerlink" href="#saveimaged" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="post-processing-dict">
+<h3>Post-processing (Dict)<a class="headerlink" href="#post-processing-dict" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="activationsd">
+<h4><cite>Activationsd</cite><a class="headerlink" href="#activationsd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="asdiscreted">
+<h4><cite>AsDiscreted</cite><a class="headerlink" href="#asdiscreted" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="keeplargestconnectedcomponentd">
+<h4><cite>KeepLargestConnectedComponentd</cite><a class="headerlink" href="#keeplargestconnectedcomponentd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="labelfilterd">
+<h4><cite>LabelFilterd</cite><a class="headerlink" href="#labelfilterd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="fillholesd">
+<h4><cite>FillHolesd</cite><a class="headerlink" href="#fillholesd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="labeltocontourd">
+<h4><cite>LabelToContourd</cite><a class="headerlink" href="#labeltocontourd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="ensembled">
+<h4><cite>Ensembled</cite><a class="headerlink" href="#ensembled" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="meanensembled">
+<h4><cite>MeanEnsembled</cite><a class="headerlink" href="#meanensembled" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="voteensembled">
+<h4><cite>VoteEnsembled</cite><a class="headerlink" href="#voteensembled" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="invertd">
+<h4><cite>Invertd</cite><a class="headerlink" href="#invertd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="saveclassificationd">
+<h4><cite>SaveClassificationd</cite><a class="headerlink" href="#saveclassificationd" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="spatial-dict">
+<h3>Spatial (Dict)<a class="headerlink" href="#spatial-dict" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="spacingd">
+<h4><cite>Spacingd</cite><a class="headerlink" href="#spacingd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="orientationd">
+<h4><cite>Orientationd</cite><a class="headerlink" href="#orientationd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="flipd">
+<h4><cite>Flipd</cite><a class="headerlink" href="#flipd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randflipd">
+<h4><cite>RandFlipd</cite><a class="headerlink" href="#randflipd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randaxisflipd">
+<h4><cite>RandAxisFlipd</cite><a class="headerlink" href="#randaxisflipd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="rotated">
+<h4><cite>Rotated</cite><a class="headerlink" href="#rotated" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randrotated">
+<h4><cite>RandRotated</cite><a class="headerlink" href="#randrotated" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="zoomd">
+<h4><cite>Zoomd</cite><a class="headerlink" href="#zoomd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randzoomd">
+<h4><cite>RandZoomd</cite><a class="headerlink" href="#randzoomd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randrotate90d">
+<h4><cite>RandRotate90d</cite><a class="headerlink" href="#randrotate90d" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="rotate90d">
+<h4><cite>Rotate90d</cite><a class="headerlink" href="#rotate90d" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="resized">
+<h4><cite>Resized</cite><a class="headerlink" href="#resized" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="affined">
+<h4><cite>Affined</cite><a class="headerlink" href="#affined" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randaffined">
+<h4><cite>RandAffined</cite><a class="headerlink" href="#randaffined" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="rand2delasticd">
+<h4><cite>Rand2DElasticd</cite><a class="headerlink" href="#rand2delasticd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="rand3delasticd">
+<h4><cite>Rand3DElasticd</cite><a class="headerlink" href="#rand3delasticd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="addcoordinatechannelsd">
+<h4><cite>AddCoordinateChannelsd</cite><a class="headerlink" href="#addcoordinatechannelsd" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="utility-dict">
+<h3>Utility (Dict)<a class="headerlink" href="#utility-dict" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="identityd">
+<h4><cite>Identityd</cite><a class="headerlink" href="#identityd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="aschannelfirstd">
+<h4><cite>AsChannelFirstd</cite><a class="headerlink" href="#aschannelfirstd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="aschannellastd">
+<h4><cite>AsChannelLastd</cite><a class="headerlink" href="#aschannellastd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="addchanneld">
+<h4><cite>AddChanneld</cite><a class="headerlink" href="#addchanneld" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="ensurechannelfirstd">
+<h4><cite>EnsureChannelFirstd</cite><a class="headerlink" href="#ensurechannelfirstd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="repeatchanneld">
+<h4><cite>RepeatChanneld</cite><a class="headerlink" href="#repeatchanneld" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="splitchanneld">
+<h4><cite>SplitChanneld</cite><a class="headerlink" href="#splitchanneld" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="casttotyped">
+<h4><cite>CastToTyped</cite><a class="headerlink" href="#casttotyped" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="totensord">
+<h4><cite>ToTensord</cite><a class="headerlink" href="#totensord" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="tonumpyd">
+<h4><cite>ToNumpyd</cite><a class="headerlink" href="#tonumpyd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="tocupyd">
+<h4><cite>ToCupyd</cite><a class="headerlink" href="#tocupyd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="deleteitemsd">
+<h4><cite>DeleteItemsd</cite><a class="headerlink" href="#deleteitemsd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="selectitemsd">
+<h4><cite>SelectItemsd</cite><a class="headerlink" href="#selectitemsd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="squeezedimd">
+<h4><cite>SqueezeDimd</cite><a class="headerlink" href="#squeezedimd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="datastatsd">
+<h4><cite>DataStatsd</cite><a class="headerlink" href="#datastatsd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="simulatedelayd">
+<h4><cite>SimulateDelayd</cite><a class="headerlink" href="#simulatedelayd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="copyitemsd">
+<h4><cite>CopyItemsd</cite><a class="headerlink" href="#copyitemsd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="concatitemsd">
+<h4><cite>ConcatItemsd</cite><a class="headerlink" href="#concatitemsd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="lambdad">
+<h4><cite>Lambdad</cite><a class="headerlink" href="#lambdad" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randlambdad">
+<h4><cite>RandLambdad</cite><a class="headerlink" href="#randlambdad" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="labeltomaskd">
+<h4><cite>LabelToMaskd</cite><a class="headerlink" href="#labeltomaskd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="fgbgtoindicesd">
+<h4><cite>FgBgToIndicesd</cite><a class="headerlink" href="#fgbgtoindicesd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="classestoindicesd">
+<h4><cite>ClassesToIndicesd</cite><a class="headerlink" href="#classestoindicesd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="converttomultichannelbasedonbratsclassesd">
+<h4><cite>ConvertToMultiChannelBasedOnBratsClassesd</cite><a class="headerlink" href="#converttomultichannelbasedonbratsclassesd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="addextremepointschanneld">
+<h4><cite>AddExtremePointsChanneld</cite><a class="headerlink" href="#addextremepointschanneld" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="torchvisiond">
+<h4><cite>TorchVisiond</cite><a class="headerlink" href="#torchvisiond" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="randtorchvisiond">
+<h4><cite>RandTorchVisiond</cite><a class="headerlink" href="#randtorchvisiond" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="maplabelvalued">
+<h4><cite>MapLabelValued</cite><a class="headerlink" href="#maplabelvalued" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="ensuretyped">
+<h4><cite>EnsureTyped</cite><a class="headerlink" href="#ensuretyped" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="intensitystatsd">
+<h4><cite>IntensityStatsd</cite><a class="headerlink" href="#intensitystatsd" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="todeviced">
+<h4><cite>ToDeviced</cite><a class="headerlink" href="#todeviced" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+</div>
+<div class="section" id="transform-adaptors">
+<h2>Transform Adaptors<a class="headerlink" href="#transform-adaptors" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="adaptor">
+<h3><cite>adaptor</cite><a class="headerlink" href="#adaptor" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="apply-alias">
+<h3><cite>apply_alias</cite><a class="headerlink" href="#apply-alias" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="to-kwargs">
+<h3><cite>to_kwargs</cite><a class="headerlink" href="#to-kwargs" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="utilities">
+<h2>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="apps.html" title="previous page">Applications</a>
+    <a class='right-next' id="next-link" href="losses.html" title="next page">Loss functions</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

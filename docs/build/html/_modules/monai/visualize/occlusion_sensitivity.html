@@ -1,0 +1,515 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monai.visualize.occlusion_sensitivity &#8212; MONAI 0.6.0 Documentation</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../index.html">
+  <img src="../../../_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for monai.visualize.occlusion_sensitivity</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 - 2021 MONAI Consortium</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Sequence</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+
+<span class="kn">from</span> <span class="nn">monai.networks.utils</span> <span class="kn">import</span> <span class="n">eval_mode</span>
+<span class="kn">from</span> <span class="nn">monai.visualize.visualizer</span> <span class="kn">import</span> <span class="n">default_upsampler</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">trange</span>
+
+    <span class="n">trange</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">trange</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Computing occlusion sensitivity&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="p">(</span><span class="ne">ImportError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+    <span class="n">trange</span> <span class="o">=</span> <span class="nb">range</span>
+
+<span class="c1"># For stride two (for example),</span>
+<span class="c1"># if input array is:     |0|1|2|3|4|5|6|7|</span>
+<span class="c1"># downsampled output is: | 0 | 1 | 2 | 3 |</span>
+<span class="c1"># So the upsampling should do it by the corners of the image, not their centres</span>
+<span class="n">default_upsampler</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">default_upsampler</span><span class="p">,</span> <span class="n">align_corners</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_check_input_image</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check that the input image is as expected.&quot;&quot;&quot;</span>
+    <span class="c1"># Only accept batch size of 1</span>
+    <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Expected batch size of 1.&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_check_input_bounding_box</span><span class="p">(</span><span class="n">b_box</span><span class="p">,</span> <span class="n">im_shape</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check that the bounding box (if supplied) is as expected.&quot;&quot;&quot;</span>
+    <span class="c1"># If no bounding box has been supplied, set min and max to None</span>
+    <span class="k">if</span> <span class="n">b_box</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">b_box_min</span> <span class="o">=</span> <span class="n">b_box_max</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Bounding box has been supplied</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Should be twice as many elements in `b_box` as `im_shape`</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">b_box</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">im_shape</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Bounding box should contain upper and lower for all dimensions (except batch number)&quot;</span><span class="p">)</span>
+
+        <span class="c1"># If any min&#39;s or max&#39;s are -ve, set them to 0 and im_shape-1, respectively.</span>
+        <span class="n">b_box_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">b_box</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">b_box_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">b_box</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">b_box_min</span><span class="p">[</span><span class="n">b_box_min</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">b_box_max</span><span class="p">[</span><span class="n">b_box_max</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">im_shape</span><span class="p">[</span><span class="n">b_box_max</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="c1"># Check all max&#39;s are &lt; im_shape</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">b_box_max</span> <span class="o">&gt;=</span> <span class="n">im_shape</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Max bounding box should be &lt; image size for all values&quot;</span><span class="p">)</span>
+        <span class="c1"># Check all min&#39;s are &lt;= max&#39;s</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">b_box_min</span> <span class="o">&gt;</span> <span class="n">b_box_max</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Min bounding box should be &lt;= max for all values&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">b_box_min</span><span class="p">,</span> <span class="n">b_box_max</span>
+
+
+<span class="k">def</span> <span class="nf">_append_to_sensitivity_ims</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">batch_images</span><span class="p">,</span> <span class="n">sensitivity_ims</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Infer given images. Append to previous evaluations. Store each class separately.&quot;&quot;&quot;</span>
+    <span class="n">batch_images</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">batch_images</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">batch_images</span><span class="p">)</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">sensitivity_ims</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">sensitivity_ims</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">scores</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">sensitivity_ims</span>
+
+
+<span class="k">def</span> <span class="nf">_get_as_np_array</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">numel</span><span class="p">):</span>
+    <span class="c1"># If not a sequence, then convert scalar to numpy array</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">numel</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># mask_size and stride always 1 in channel dimension</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Convert to numpy array and check dimensions match</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="c1"># Add stride of 1 to the channel direction (since user input was only for spatial dimensions)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">out</span><span class="o">.</span><span class="n">size</span> <span class="o">!=</span> <span class="n">numel</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;If supplying stride/mask_size as sequence, number of elements should match number of spatial dimensions.&quot;</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+
+<div class="viewcode-block" id="OcclusionSensitivity"><a class="viewcode-back" href="../../../visualize.html#monai.visualize.occlusion_sensitivity.OcclusionSensitivity">[docs]</a><span class="k">class</span> <span class="nc">OcclusionSensitivity</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class computes the occlusion sensitivity for a model&#39;s prediction of a given image. By occlusion sensitivity,</span>
+<span class="sd">    we mean how the probability of a given prediction changes as the occluded section of an image changes. This can be</span>
+<span class="sd">    useful to understand why a network is making certain decisions.</span>
+
+<span class="sd">    As important parts of the image are occluded, the probability of classifying the image correctly will decrease.</span>
+<span class="sd">    Hence, more negative values imply the corresponding occluded volume was more important in the decision process.</span>
+
+<span class="sd">    Two ``torch.Tensor`` will be returned by the ``__call__`` method: an occlusion map and an image of the most probable</span>
+<span class="sd">    class. Both images will be cropped if a bounding box used, but voxel sizes will always match the input.</span>
+
+<span class="sd">    The occlusion map shows the inference probabilities when the corresponding part of the image is occluded. Hence,</span>
+<span class="sd">    more -ve values imply that region was important in the decision process. The map will have shape ``BCHW(D)N``,</span>
+<span class="sd">    where ``N`` is the number of classes to be inferred by the network. Hence, the occlusion for class ``i`` can</span>
+<span class="sd">    be seen with ``map[...,i]``.</span>
+
+<span class="sd">    The most probable class is an image of the probable class when the corresponding part of the image is occluded</span>
+<span class="sd">    (equivalent to ``occ_map.argmax(dim=-1)``).</span>
+
+<span class="sd">    See: R. R. Selvaraju et al. Grad-CAM: Visual Explanations from Deep Networks via</span>
+<span class="sd">    Gradient-based Localization. https://doi.org/10.1109/ICCV.2017.74.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        # densenet 2d</span>
+<span class="sd">        from monai.networks.nets import DenseNet121</span>
+<span class="sd">        from monai.visualize import OcclusionSensitivity</span>
+
+<span class="sd">        model_2d = DenseNet121(spatial_dims=2, in_channels=1, out_channels=3)</span>
+<span class="sd">        occ_sens = OcclusionSensitivity(nn_module=model_2d)</span>
+<span class="sd">        occ_map, most_probable_class = occ_sens(x=torch.rand((1, 1, 48, 64)), b_box=[-1, -1, 2, 40, 1, 62])</span>
+
+<span class="sd">        # densenet 3d</span>
+<span class="sd">        from monai.networks.nets import DenseNet</span>
+<span class="sd">        from monai.visualize import OcclusionSensitivity</span>
+
+<span class="sd">        model_3d = DenseNet(spatial_dims=3, in_channels=1, out_channels=3, init_features=2, growth_rate=2, block_config=(6,))</span>
+<span class="sd">        occ_sens = OcclusionSensitivity(nn_module=model_3d, n_batch=10, stride=3)</span>
+<span class="sd">        occ_map, most_probable_class = occ_sens(torch.rand(1, 1, 6, 6, 6), b_box=[-1, -1, 1, 3, -1, -1, -1, -1])</span>
+
+<span class="sd">    See Also:</span>
+
+<span class="sd">        - :py:class:`monai.visualize.occlusion_sensitivity.OcclusionSensitivity.`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="OcclusionSensitivity.__init__"><a class="viewcode-back" href="../../../visualize.html#monai.visualize.occlusion_sensitivity.OcclusionSensitivity.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">nn_module</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+        <span class="n">pad_val</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">mask_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">]</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
+        <span class="n">n_batch</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">128</span><span class="p">,</span>
+        <span class="n">stride</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">upsampler</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_upsampler</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Occlusion sensitivity constructor.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            nn_module: Classification model to use for inference</span>
+<span class="sd">            pad_val: When occluding part of the image, which values should we put</span>
+<span class="sd">                in the image? If ``None`` is used, then the average of the image will be used.</span>
+<span class="sd">            mask_size: Size of box to be occluded, centred on the central voxel. To ensure that the occluded area</span>
+<span class="sd">                is correctly centred, ``mask_size`` and ``stride`` should both be odd or even.</span>
+<span class="sd">            n_batch: Number of images in a batch for inference.</span>
+<span class="sd">            stride: Stride in spatial directions for performing occlusions. Can be single</span>
+<span class="sd">                value or sequence (for varying stride in the different directions).</span>
+<span class="sd">                Should be &gt;= 1. Striding in the channel direction will always be 1.</span>
+<span class="sd">            upsampler: An upsampling method to upsample the output image. Default is</span>
+<span class="sd">                N-dimensional linear (bilinear, trilinear, etc.) depending on num spatial</span>
+<span class="sd">                dimensions of input.</span>
+<span class="sd">            verbose: Use ``tdqm.trange`` output (if available).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">nn_module</span> <span class="o">=</span> <span class="n">nn_module</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upsampler</span> <span class="o">=</span> <span class="n">upsampler</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pad_val</span> <span class="o">=</span> <span class="n">pad_val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask_size</span> <span class="o">=</span> <span class="n">mask_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_batch</span> <span class="o">=</span> <span class="n">n_batch</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stride</span> <span class="o">=</span> <span class="n">stride</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span></div>
+
+    <span class="k">def</span> <span class="nf">_compute_occlusion_sensitivity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">b_box</span><span class="p">):</span>
+
+        <span class="c1"># Get bounding box</span>
+        <span class="n">im_shape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">b_box_min</span><span class="p">,</span> <span class="n">b_box_max</span> <span class="o">=</span> <span class="n">_check_input_bounding_box</span><span class="p">(</span><span class="n">b_box</span><span class="p">,</span> <span class="n">im_shape</span><span class="p">)</span>
+
+        <span class="c1"># Get the number of prediction classes</span>
+        <span class="n">num_classes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nn_module</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span>
+
+        <span class="c1"># If pad val not supplied, get the mean of the image</span>
+        <span class="n">pad_val</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pad_val</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">pad_val</span>
+
+        <span class="c1"># List containing a batch of images to be inferred</span>
+        <span class="n">batch_images</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># List of sensitivity images, one for each inferred class</span>
+        <span class="n">sensitivity_ims</span> <span class="o">=</span> <span class="n">num_classes</span> <span class="o">*</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">device</span><span class="p">)]</span>
+
+        <span class="c1"># If no bounding box supplied, output shape is same as input shape.</span>
+        <span class="c1"># If bounding box is present, shape is max - min + 1</span>
+        <span class="n">output_im_shape</span> <span class="o">=</span> <span class="n">im_shape</span> <span class="k">if</span> <span class="n">b_box</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">b_box_max</span> <span class="o">-</span> <span class="n">b_box_min</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="c1"># Get the stride and mask_size as numpy arrays</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stride</span> <span class="o">=</span> <span class="n">_get_as_np_array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stride</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">im_shape</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask_size</span> <span class="o">=</span> <span class="n">_get_as_np_array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mask_size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">im_shape</span><span class="p">))</span>
+
+        <span class="c1"># For each dimension, ...</span>
+        <span class="k">for</span> <span class="n">o</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">output_im_shape</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stride</span><span class="p">):</span>
+            <span class="c1"># if the size is &gt; 1, then check that the stride is a factor of the output image shape</span>
+            <span class="k">if</span> <span class="n">o</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">o</span> <span class="o">%</span> <span class="n">s</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Stride should be a factor of the image shape. Im shape &quot;</span>
+                    <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;(taking bounding box into account): </span><span class="si">{</span><span class="n">output_im_shape</span><span class="si">}</span><span class="s2">, stride: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stride</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+
+        <span class="c1"># to ensure the occluded area is nicely centred if stride is even, ensure that so is the mask_size</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mask_size</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stride</span> <span class="o">%</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Stride and mask size should both be odd or even (element-wise). &quot;</span>
+                <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;``stride=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stride</span><span class="si">}</span><span class="s2">``, ``mask_size=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mask_size</span><span class="si">}</span><span class="s2">``&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">downsampled_im_shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">output_im_shape</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">stride</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">downsampled_im_shape</span><span class="p">[</span><span class="n">downsampled_im_shape</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># make sure dimension sizes are &gt;= 1</span>
+        <span class="n">num_required_predictions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">downsampled_im_shape</span><span class="p">)</span>
+
+        <span class="c1"># Get bottom left and top right corners of occluded region</span>
+        <span class="n">lower_corner</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stride</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask_size</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">upper_corner</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stride</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask_size</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+
+        <span class="c1"># Loop 1D over image</span>
+        <span class="n">verbose_range</span> <span class="o">=</span> <span class="n">trange</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="k">else</span> <span class="nb">range</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">verbose_range</span><span class="p">(</span><span class="n">num_required_predictions</span><span class="p">):</span>
+            <span class="c1"># Get corresponding ND index</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">downsampled_im_shape</span><span class="p">)</span>
+            <span class="c1"># Multiply by stride</span>
+            <span class="n">idx</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stride</span>
+            <span class="c1"># If a bounding box is being used, we need to add on</span>
+            <span class="c1"># the min to shift to start of region of interest</span>
+            <span class="k">if</span> <span class="n">b_box_min</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">idx</span> <span class="o">+=</span> <span class="n">b_box_min</span>
+
+            <span class="c1"># Get min and max index of box to occlude (and make sure it&#39;s in bounds)</span>
+            <span class="n">min_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="n">lower_corner</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">max_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="n">upper_corner</span><span class="p">,</span> <span class="n">im_shape</span><span class="p">)</span>
+
+            <span class="c1"># Clone and replace target area with `pad_val`</span>
+            <span class="n">occlu_im</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+            <span class="n">occlu_im</span><span class="p">[(</span><span class="o">...</span><span class="p">,)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">min_idx</span><span class="p">,</span> <span class="n">max_idx</span><span class="p">))]</span> <span class="o">=</span> <span class="n">pad_val</span>
+
+            <span class="c1"># Add to list</span>
+            <span class="n">batch_images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">occlu_im</span><span class="p">)</span>
+
+            <span class="c1"># Once the batch is complete (or on last iteration)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">batch_images</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_batch</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">==</span> <span class="n">num_required_predictions</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="c1"># Do the predictions and append to sensitivity maps</span>
+                <span class="n">sensitivity_ims</span> <span class="o">=</span> <span class="n">_append_to_sensitivity_ims</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nn_module</span><span class="p">,</span> <span class="n">batch_images</span><span class="p">,</span> <span class="n">sensitivity_ims</span><span class="p">)</span>
+                <span class="c1"># Clear lists</span>
+                <span class="n">batch_images</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Reshape to match downsampled image, and unsqueeze to add batch dimension back in</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_classes</span><span class="p">):</span>
+            <span class="n">sensitivity_ims</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sensitivity_ims</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">downsampled_im_shape</span><span class="p">))</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">sensitivity_ims</span><span class="p">,</span> <span class="n">output_im_shape</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+        <span class="n">b_box</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            x: Image to use for inference. Should be a tensor consisting of 1 batch.</span>
+<span class="sd">            b_box: Bounding box on which to perform the analysis. The output image will be limited to this size.</span>
+<span class="sd">                There should be a minimum and maximum for all dimensions except batch: ``[min1, max1, min2, max2,...]``.</span>
+<span class="sd">                * By default, the whole image will be used. Decreasing the size will speed the analysis up, which might</span>
+<span class="sd">                    be useful for larger images.</span>
+<span class="sd">                * Min and max are inclusive, so ``[0, 63, ...]`` will have size ``(64, ...)``.</span>
+<span class="sd">                * Use -ve to use ``min=0`` and ``max=im.shape[x]-1`` for xth dimension.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            * Occlusion map:</span>
+<span class="sd">                * Shows the inference probabilities when the corresponding part of the image is occluded.</span>
+<span class="sd">                    Hence, more -ve values imply that region was important in the decision process.</span>
+<span class="sd">                * The map will have shape ``BCHW(D)N``, where N is the number of classes to be inferred by the</span>
+<span class="sd">                    network. Hence, the occlusion for class ``i`` can be seen with ``map[...,i]``.</span>
+<span class="sd">            * Most probable class:</span>
+<span class="sd">                * The most probable class when the corresponding part of the image is occluded (``argmax(dim=-1)``).</span>
+<span class="sd">            Both images will be cropped if a bounding box used, but voxel sizes will always match the input.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">with</span> <span class="n">eval_mode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nn_module</span><span class="p">):</span>
+
+            <span class="c1"># Check input arguments</span>
+            <span class="n">_check_input_image</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+            <span class="c1"># Generate sensitivity images</span>
+            <span class="n">sensitivity_ims_list</span><span class="p">,</span> <span class="n">output_im_shape</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_occlusion_sensitivity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">b_box</span><span class="p">)</span>
+
+            <span class="c1"># Loop over image for each classification</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sens_i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sensitivity_ims_list</span><span class="p">):</span>
+                <span class="c1"># upsample</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">upsampler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sens_i</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">):</span>
+                        <span class="k">raise</span> <span class="ne">AssertionError</span>
+                    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">sens_i</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">):</span>
+                        <span class="n">img_spatial</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">output_im_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+                        <span class="n">sensitivity_ims_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upsampler</span><span class="p">(</span><span class="n">img_spatial</span><span class="p">)(</span><span class="n">sens_i</span><span class="p">)</span>
+
+            <span class="c1"># Convert list of tensors to tensor</span>
+            <span class="n">sensitivity_ims</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">sensitivity_ims_list</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># The most probable class is the max in the classification dimension (last)</span>
+            <span class="n">most_probable_class</span> <span class="o">=</span> <span class="n">sensitivity_ims</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">sensitivity_ims</span><span class="p">,</span> <span class="n">most_probable_class</span></div>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2020 - 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

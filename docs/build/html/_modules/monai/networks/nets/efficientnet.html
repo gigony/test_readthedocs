@@ -1,0 +1,1051 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monai.networks.nets.efficientnet &#8212; MONAI 0.6.0 Documentation</title>
+    
+  <link href="../../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../../index.html">
+  <img src="../../../../_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for monai.networks.nets.efficientnet</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 - 2021 MONAI Consortium</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">from</span> <span class="nn">torch.utils</span> <span class="kn">import</span> <span class="n">model_zoo</span>
+
+<span class="kn">from</span> <span class="nn">monai.networks.layers.factories</span> <span class="kn">import</span> <span class="n">Act</span><span class="p">,</span> <span class="n">Conv</span><span class="p">,</span> <span class="n">Norm</span><span class="p">,</span> <span class="n">Pad</span><span class="p">,</span> <span class="n">Pool</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;EfficientNet&quot;</span><span class="p">,</span> <span class="s2">&quot;EfficientNetBN&quot;</span><span class="p">,</span> <span class="s2">&quot;get_efficientnet_image_size&quot;</span><span class="p">,</span> <span class="s2">&quot;drop_connect&quot;</span><span class="p">]</span>
+
+<span class="n">efficientnet_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># model_name: (width_mult, depth_mult, image_size, dropout_rate, dropconnect_rate)</span>
+    <span class="s2">&quot;efficientnet-b0&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span>
+    <span class="s2">&quot;efficientnet-b1&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span>
+    <span class="s2">&quot;efficientnet-b2&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">260</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span>
+    <span class="s2">&quot;efficientnet-b3&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span>
+    <span class="s2">&quot;efficientnet-b4&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.4</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mi">380</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span>
+    <span class="s2">&quot;efficientnet-b5&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.6</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mi">456</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span>
+    <span class="s2">&quot;efficientnet-b6&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.8</span><span class="p">,</span> <span class="mf">2.6</span><span class="p">,</span> <span class="mi">528</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span>
+    <span class="s2">&quot;efficientnet-b7&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span>
+<span class="p">}</span>
+
+
+<span class="k">class</span> <span class="nc">MBConvBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">spatial_dims</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">in_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">out_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">kernel_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">stride</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">image_size</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+        <span class="n">expand_ratio</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">se_ratio</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span>
+        <span class="n">id_skip</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">batch_norm_momentum</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.99</span><span class="p">,</span>
+        <span class="n">batch_norm_epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">,</span>
+        <span class="n">drop_connect_rate</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Mobile Inverted Residual Bottleneck Block.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            spatial_dims: number of spatial dimensions.</span>
+<span class="sd">            in_channels: number of input channels.</span>
+<span class="sd">            out_classes: number of output channels.</span>
+<span class="sd">            kernel_size: size of the kernel for conv ops.</span>
+<span class="sd">            stride: stride to use for conv ops.</span>
+<span class="sd">            image_size: input image resolution.</span>
+<span class="sd">            expand_ratio: expansion ratio for inverted bottleneck.</span>
+<span class="sd">            se_ratio: squeeze-excitation ratio for se layers.</span>
+<span class="sd">            id_skip: whether to use skip connection.</span>
+<span class="sd">            batch_norm_momentum: momentum for batch norm.</span>
+<span class="sd">            batch_norm_epsilon: epsilon for batch norm.</span>
+<span class="sd">            drop_connect_rate: dropconnect rate for drop connection (individual weights) layers.</span>
+
+<span class="sd">        References:</span>
+<span class="sd">            [1] https://arxiv.org/abs/1704.04861 (MobileNet v1)</span>
+<span class="sd">            [2] https://arxiv.org/abs/1801.04381 (MobileNet v2)</span>
+<span class="sd">            [3] https://arxiv.org/abs/1905.02244 (MobileNet v3)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1"># select the type of N-Dimensional layers to use</span>
+        <span class="c1"># these are based on spatial dims and selected from MONAI factories</span>
+        <span class="n">conv_type</span> <span class="o">=</span> <span class="n">Conv</span><span class="p">[</span><span class="s2">&quot;conv&quot;</span><span class="p">,</span> <span class="n">spatial_dims</span><span class="p">]</span>
+        <span class="n">batchnorm_type</span> <span class="o">=</span> <span class="n">Norm</span><span class="p">[</span><span class="s2">&quot;batch&quot;</span><span class="p">,</span> <span class="n">spatial_dims</span><span class="p">]</span>
+        <span class="n">adaptivepool_type</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">[</span><span class="s2">&quot;adaptiveavg&quot;</span><span class="p">,</span> <span class="n">spatial_dims</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_channels</span> <span class="o">=</span> <span class="n">in_channels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_channels</span> <span class="o">=</span> <span class="n">out_channels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id_skip</span> <span class="o">=</span> <span class="n">id_skip</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stride</span> <span class="o">=</span> <span class="n">stride</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">expand_ratio</span> <span class="o">=</span> <span class="n">expand_ratio</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drop_connect_rate</span> <span class="o">=</span> <span class="n">drop_connect_rate</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">se_ratio</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="mf">0.0</span> <span class="o">&lt;</span> <span class="n">se_ratio</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">has_se</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">se_ratio</span> <span class="o">=</span> <span class="n">se_ratio</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">has_se</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="n">bn_mom</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">batch_norm_momentum</span>  <span class="c1"># pytorch&quot;s difference from tensorflow</span>
+        <span class="n">bn_eps</span> <span class="o">=</span> <span class="n">batch_norm_epsilon</span>
+
+        <span class="c1"># Expansion phase (Inverted Bottleneck)</span>
+        <span class="n">inp</span> <span class="o">=</span> <span class="n">in_channels</span>  <span class="c1"># number of input channels</span>
+        <span class="n">oup</span> <span class="o">=</span> <span class="n">in_channels</span> <span class="o">*</span> <span class="n">expand_ratio</span>  <span class="c1"># number of output channels</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">expand_ratio</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_expand_conv</span> <span class="o">=</span> <span class="n">conv_type</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">inp</span><span class="p">,</span> <span class="n">out_channels</span><span class="o">=</span><span class="n">oup</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_expand_conv_padding</span> <span class="o">=</span> <span class="n">_make_same_padder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_expand_conv</span><span class="p">,</span> <span class="n">image_size</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_bn0</span> <span class="o">=</span> <span class="n">batchnorm_type</span><span class="p">(</span><span class="n">num_features</span><span class="o">=</span><span class="n">oup</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="n">bn_mom</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">bn_eps</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># need to have the following to fix JIT error:</span>
+            <span class="c1">#   &quot;Module &#39;MBConvBlock&#39; has no attribute &#39;_expand_conv&#39;&quot;</span>
+
+            <span class="c1"># FIXME: find a better way to bypass JIT error</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_expand_conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Identity</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_expand_conv_padding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Identity</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_bn0</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Identity</span><span class="p">()</span>
+
+        <span class="c1"># Depthwise convolution phase</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_depthwise_conv</span> <span class="o">=</span> <span class="n">conv_type</span><span class="p">(</span>
+            <span class="n">in_channels</span><span class="o">=</span><span class="n">oup</span><span class="p">,</span>
+            <span class="n">out_channels</span><span class="o">=</span><span class="n">oup</span><span class="p">,</span>
+            <span class="n">groups</span><span class="o">=</span><span class="n">oup</span><span class="p">,</span>  <span class="c1"># groups makes it depthwise</span>
+            <span class="n">kernel_size</span><span class="o">=</span><span class="n">kernel_size</span><span class="p">,</span>
+            <span class="n">stride</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stride</span><span class="p">,</span>
+            <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_depthwise_conv_padding</span> <span class="o">=</span> <span class="n">_make_same_padder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_depthwise_conv</span><span class="p">,</span> <span class="n">image_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bn1</span> <span class="o">=</span> <span class="n">batchnorm_type</span><span class="p">(</span><span class="n">num_features</span><span class="o">=</span><span class="n">oup</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="n">bn_mom</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">bn_eps</span><span class="p">)</span>
+        <span class="n">image_size</span> <span class="o">=</span> <span class="n">_calculate_output_image_size</span><span class="p">(</span><span class="n">image_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stride</span><span class="p">)</span>
+
+        <span class="c1"># Squeeze and Excitation layer, if desired</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_se</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_se_adaptpool</span> <span class="o">=</span> <span class="n">adaptivepool_type</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">num_squeezed_channels</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">in_channels</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">se_ratio</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_se_reduce</span> <span class="o">=</span> <span class="n">conv_type</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">oup</span><span class="p">,</span> <span class="n">out_channels</span><span class="o">=</span><span class="n">num_squeezed_channels</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_se_reduce_padding</span> <span class="o">=</span> <span class="n">_make_same_padder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_se_reduce</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_se_expand</span> <span class="o">=</span> <span class="n">conv_type</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">num_squeezed_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="o">=</span><span class="n">oup</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_se_expand_padding</span> <span class="o">=</span> <span class="n">_make_same_padder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_se_expand</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># Pointwise convolution phase</span>
+        <span class="n">final_oup</span> <span class="o">=</span> <span class="n">out_channels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_project_conv</span> <span class="o">=</span> <span class="n">conv_type</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">oup</span><span class="p">,</span> <span class="n">out_channels</span><span class="o">=</span><span class="n">final_oup</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_project_conv_padding</span> <span class="o">=</span> <span class="n">_make_same_padder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_project_conv</span><span class="p">,</span> <span class="n">image_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bn2</span> <span class="o">=</span> <span class="n">batchnorm_type</span><span class="p">(</span><span class="n">num_features</span><span class="o">=</span><span class="n">final_oup</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="n">bn_mom</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">bn_eps</span><span class="p">)</span>
+
+        <span class="c1"># swish activation to use - using memory efficient swish by default</span>
+        <span class="c1"># can be switched to normal swish using self.set_swish() function call</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_swish</span> <span class="o">=</span> <span class="n">Act</span><span class="p">[</span><span class="s2">&quot;memswish&quot;</span><span class="p">]()</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;MBConvBlock&quot;s forward function.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            inputs: Input tensor.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Output of this block after processing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Expansion and Depthwise Convolution</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">inputs</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">expand_ratio</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_expand_conv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_expand_conv_padding</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bn0</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_swish</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_depthwise_conv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_depthwise_conv_padding</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bn1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_swish</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="c1"># Squeeze and Excitation</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_se</span><span class="p">:</span>
+            <span class="n">x_squeezed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_se_adaptpool</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">x_squeezed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_se_reduce</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_se_reduce_padding</span><span class="p">(</span><span class="n">x_squeezed</span><span class="p">))</span>
+            <span class="n">x_squeezed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_swish</span><span class="p">(</span><span class="n">x_squeezed</span><span class="p">)</span>
+            <span class="n">x_squeezed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_se_expand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_se_expand_padding</span><span class="p">(</span><span class="n">x_squeezed</span><span class="p">))</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">x_squeezed</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span>
+
+        <span class="c1"># Pointwise Convolution</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_project_conv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_project_conv_padding</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bn2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="c1"># Skip connection and drop connect</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">id_skip</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">stride</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_channels</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_channels</span><span class="p">:</span>
+            <span class="c1"># the combination of skip connection and drop connect brings about stochastic depth.</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_connect_rate</span><span class="p">:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">drop_connect</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">drop_connect_rate</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">training</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">inputs</span>  <span class="c1"># skip connection</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+    <span class="k">def</span> <span class="nf">set_swish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">memory_efficient</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Sets swish function as memory efficient (for training) or standard (for export).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            memory_efficient (bool): Whether to use memory-efficient version of swish.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_swish</span> <span class="o">=</span> <span class="n">Act</span><span class="p">[</span><span class="s2">&quot;memswish&quot;</span><span class="p">]()</span> <span class="k">if</span> <span class="n">memory_efficient</span> <span class="k">else</span> <span class="n">Act</span><span class="p">[</span><span class="s2">&quot;swish&quot;</span><span class="p">](</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="EfficientNet"><a class="viewcode-back" href="../../../../networks.html#monai.networks.nets.EfficientNet">[docs]</a><span class="k">class</span> <span class="nc">EfficientNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<div class="viewcode-block" id="EfficientNet.__init__"><a class="viewcode-back" href="../../../../networks.html#monai.networks.nets.EfficientNet.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">blocks_args_str</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">spatial_dims</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">in_channels</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="n">num_classes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+        <span class="n">width_coefficient</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">depth_coefficient</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">dropout_rate</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">image_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">224</span><span class="p">,</span>
+        <span class="n">batch_norm_momentum</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.99</span><span class="p">,</span>
+        <span class="n">batch_norm_epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">,</span>
+        <span class="n">drop_connect_rate</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">depth_divisor</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        EfficientNet based on `Rethinking Model Scaling for Convolutional Neural Networks &lt;https://arxiv.org/pdf/1905.11946.pdf&gt;`_.</span>
+<span class="sd">        Adapted from `EfficientNet-PyTorch</span>
+<span class="sd">        &lt;https://github.com/lukemelas/EfficientNet-PyTorch&gt;`_.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            blocks_args_str: block definitions.</span>
+<span class="sd">            spatial_dims: number of spatial dimensions.</span>
+<span class="sd">            in_channels: number of input channels.</span>
+<span class="sd">            num_classes: number of output classes.</span>
+<span class="sd">            width_coefficient: width multiplier coefficient (w in paper).</span>
+<span class="sd">            depth_coefficient: depth multiplier coefficient (d in paper).</span>
+<span class="sd">            dropout_rate: dropout rate for dropout layers.</span>
+<span class="sd">            image_size: input image resolution.</span>
+<span class="sd">            batch_norm_momentum: momentum for batch norm.</span>
+<span class="sd">            batch_norm_epsilon: epsilon for batch norm.</span>
+<span class="sd">            drop_connect_rate: dropconnect rate for drop connection (individual weights) layers.</span>
+<span class="sd">            depth_divisor: depth divisor for channel rounding.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">spatial_dims</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;spatial_dims can only be 1, 2 or 3.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># select the type of N-Dimensional layers to use</span>
+        <span class="c1"># these are based on spatial dims and selected from MONAI factories</span>
+        <span class="n">conv_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv3d</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Conv</span><span class="p">[</span><span class="s2">&quot;conv&quot;</span><span class="p">,</span> <span class="n">spatial_dims</span><span class="p">]</span>
+        <span class="n">batchnorm_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm3d</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Norm</span><span class="p">[</span><span class="s2">&quot;batch&quot;</span><span class="p">,</span> <span class="n">spatial_dims</span><span class="p">]</span>
+        <span class="n">adaptivepool_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">AdaptiveAvgPool1d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">AdaptiveAvgPool2d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">AdaptiveAvgPool3d</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">[</span>
+            <span class="s2">&quot;adaptiveavg&quot;</span><span class="p">,</span> <span class="n">spatial_dims</span>
+        <span class="p">]</span>
+
+        <span class="c1"># decode blocks args into arguments for MBConvBlock</span>
+        <span class="n">blocks_args</span> <span class="o">=</span> <span class="p">[</span><span class="n">BlockArgs</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">blocks_args_str</span><span class="p">]</span>
+
+        <span class="c1"># checks for successful decoding of blocks_args_str</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">blocks_args</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;blocks_args must be a list&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">blocks_args</span> <span class="o">==</span> <span class="p">[]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;block_args must be non-empty&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_blocks_args</span> <span class="o">=</span> <span class="n">blocks_args</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span> <span class="o">=</span> <span class="n">num_classes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_channels</span> <span class="o">=</span> <span class="n">in_channels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drop_connect_rate</span> <span class="o">=</span> <span class="n">drop_connect_rate</span>
+
+        <span class="c1"># expand input image dimensions to list</span>
+        <span class="n">current_image_size</span> <span class="o">=</span> <span class="p">[</span><span class="n">image_size</span><span class="p">]</span> <span class="o">*</span> <span class="n">spatial_dims</span>
+
+        <span class="c1"># parameters for batch norm</span>
+        <span class="n">bn_mom</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">batch_norm_momentum</span>  <span class="c1"># 1 - bn_m to convert tensorflow&#39;s arg to pytorch bn compatible</span>
+        <span class="n">bn_eps</span> <span class="o">=</span> <span class="n">batch_norm_epsilon</span>
+
+        <span class="c1"># Stem</span>
+        <span class="n">stride</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="n">out_channels</span> <span class="o">=</span> <span class="n">_round_filters</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">width_coefficient</span><span class="p">,</span> <span class="n">depth_divisor</span><span class="p">)</span>  <span class="c1"># number of output channels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_conv_stem</span> <span class="o">=</span> <span class="n">conv_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="n">stride</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_conv_stem_padding</span> <span class="o">=</span> <span class="n">_make_same_padder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_conv_stem</span><span class="p">,</span> <span class="n">current_image_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bn0</span> <span class="o">=</span> <span class="n">batchnorm_type</span><span class="p">(</span><span class="n">num_features</span><span class="o">=</span><span class="n">out_channels</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="n">bn_mom</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">bn_eps</span><span class="p">)</span>
+        <span class="n">current_image_size</span> <span class="o">=</span> <span class="n">_calculate_output_image_size</span><span class="p">(</span><span class="n">current_image_size</span><span class="p">,</span> <span class="n">stride</span><span class="p">)</span>
+
+        <span class="c1"># build MBConv blocks</span>
+        <span class="n">num_blocks</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_blocks</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>
+
+        <span class="c1"># update baseline blocks to input/output filters and number of repeats based on width and depth multipliers.</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">block_args</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_blocks_args</span><span class="p">):</span>
+            <span class="n">block_args</span> <span class="o">=</span> <span class="n">block_args</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span>
+                <span class="n">input_filters</span><span class="o">=</span><span class="n">_round_filters</span><span class="p">(</span><span class="n">block_args</span><span class="o">.</span><span class="n">input_filters</span><span class="p">,</span> <span class="n">width_coefficient</span><span class="p">,</span> <span class="n">depth_divisor</span><span class="p">),</span>
+                <span class="n">output_filters</span><span class="o">=</span><span class="n">_round_filters</span><span class="p">(</span><span class="n">block_args</span><span class="o">.</span><span class="n">output_filters</span><span class="p">,</span> <span class="n">width_coefficient</span><span class="p">,</span> <span class="n">depth_divisor</span><span class="p">),</span>
+                <span class="n">num_repeat</span><span class="o">=</span><span class="n">_round_repeats</span><span class="p">(</span><span class="n">block_args</span><span class="o">.</span><span class="n">num_repeat</span><span class="p">,</span> <span class="n">depth_coefficient</span><span class="p">),</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_blocks_args</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">block_args</span>
+
+            <span class="c1"># calculate the total number of blocks - needed for drop_connect estimation</span>
+            <span class="n">num_blocks</span> <span class="o">+=</span> <span class="n">block_args</span><span class="o">.</span><span class="n">num_repeat</span>
+
+        <span class="c1"># create and add MBConvBlocks to self._blocks</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># block index counter</span>
+        <span class="k">for</span> <span class="n">block_args</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_blocks_args</span><span class="p">:</span>
+            <span class="n">blk_drop_connect_rate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_connect_rate</span>
+
+            <span class="c1"># scale drop connect_rate</span>
+            <span class="k">if</span> <span class="n">blk_drop_connect_rate</span><span class="p">:</span>
+                <span class="n">blk_drop_connect_rate</span> <span class="o">*=</span> <span class="nb">float</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_blocks</span>
+
+            <span class="c1"># the first block needs to take care of stride and filter size increase.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_blocks</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span>
+                <span class="n">MBConvBlock</span><span class="p">(</span>
+                    <span class="n">spatial_dims</span><span class="o">=</span><span class="n">spatial_dims</span><span class="p">,</span>
+                    <span class="n">in_channels</span><span class="o">=</span><span class="n">block_args</span><span class="o">.</span><span class="n">input_filters</span><span class="p">,</span>
+                    <span class="n">out_channels</span><span class="o">=</span><span class="n">block_args</span><span class="o">.</span><span class="n">output_filters</span><span class="p">,</span>
+                    <span class="n">kernel_size</span><span class="o">=</span><span class="n">block_args</span><span class="o">.</span><span class="n">kernel_size</span><span class="p">,</span>
+                    <span class="n">stride</span><span class="o">=</span><span class="n">block_args</span><span class="o">.</span><span class="n">stride</span><span class="p">,</span>
+                    <span class="n">image_size</span><span class="o">=</span><span class="n">current_image_size</span><span class="p">,</span>
+                    <span class="n">expand_ratio</span><span class="o">=</span><span class="n">block_args</span><span class="o">.</span><span class="n">expand_ratio</span><span class="p">,</span>
+                    <span class="n">se_ratio</span><span class="o">=</span><span class="n">block_args</span><span class="o">.</span><span class="n">se_ratio</span><span class="p">,</span>
+                    <span class="n">id_skip</span><span class="o">=</span><span class="n">block_args</span><span class="o">.</span><span class="n">id_skip</span><span class="p">,</span>
+                    <span class="n">batch_norm_momentum</span><span class="o">=</span><span class="n">batch_norm_momentum</span><span class="p">,</span>
+                    <span class="n">batch_norm_epsilon</span><span class="o">=</span><span class="n">batch_norm_epsilon</span><span class="p">,</span>
+                    <span class="n">drop_connect_rate</span><span class="o">=</span><span class="n">blk_drop_connect_rate</span><span class="p">,</span>
+                <span class="p">),</span>
+            <span class="p">)</span>
+            <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># increment blocks index counter</span>
+
+            <span class="n">current_image_size</span> <span class="o">=</span> <span class="n">_calculate_output_image_size</span><span class="p">(</span><span class="n">current_image_size</span><span class="p">,</span> <span class="n">block_args</span><span class="o">.</span><span class="n">stride</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">block_args</span><span class="o">.</span><span class="n">num_repeat</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># modify block_args to keep same output size</span>
+                <span class="n">block_args</span> <span class="o">=</span> <span class="n">block_args</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span><span class="n">input_filters</span><span class="o">=</span><span class="n">block_args</span><span class="o">.</span><span class="n">output_filters</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># add remaining block repeated num_repeat times</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">block_args</span><span class="o">.</span><span class="n">num_repeat</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">blk_drop_connect_rate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_connect_rate</span>
+
+                <span class="c1"># scale drop connect_rate</span>
+                <span class="k">if</span> <span class="n">blk_drop_connect_rate</span><span class="p">:</span>
+                    <span class="n">blk_drop_connect_rate</span> <span class="o">*=</span> <span class="nb">float</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_blocks</span>
+
+                <span class="c1"># add blocks</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_blocks</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span>
+                    <span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span>
+                    <span class="n">MBConvBlock</span><span class="p">(</span>
+                        <span class="n">spatial_dims</span><span class="o">=</span><span class="n">spatial_dims</span><span class="p">,</span>
+                        <span class="n">in_channels</span><span class="o">=</span><span class="n">block_args</span><span class="o">.</span><span class="n">input_filters</span><span class="p">,</span>
+                        <span class="n">out_channels</span><span class="o">=</span><span class="n">block_args</span><span class="o">.</span><span class="n">output_filters</span><span class="p">,</span>
+                        <span class="n">kernel_size</span><span class="o">=</span><span class="n">block_args</span><span class="o">.</span><span class="n">kernel_size</span><span class="p">,</span>
+                        <span class="n">stride</span><span class="o">=</span><span class="n">block_args</span><span class="o">.</span><span class="n">stride</span><span class="p">,</span>
+                        <span class="n">image_size</span><span class="o">=</span><span class="n">current_image_size</span><span class="p">,</span>
+                        <span class="n">expand_ratio</span><span class="o">=</span><span class="n">block_args</span><span class="o">.</span><span class="n">expand_ratio</span><span class="p">,</span>
+                        <span class="n">se_ratio</span><span class="o">=</span><span class="n">block_args</span><span class="o">.</span><span class="n">se_ratio</span><span class="p">,</span>
+                        <span class="n">id_skip</span><span class="o">=</span><span class="n">block_args</span><span class="o">.</span><span class="n">id_skip</span><span class="p">,</span>
+                        <span class="n">batch_norm_momentum</span><span class="o">=</span><span class="n">batch_norm_momentum</span><span class="p">,</span>
+                        <span class="n">batch_norm_epsilon</span><span class="o">=</span><span class="n">batch_norm_epsilon</span><span class="p">,</span>
+                        <span class="n">drop_connect_rate</span><span class="o">=</span><span class="n">blk_drop_connect_rate</span><span class="p">,</span>
+                    <span class="p">),</span>
+                <span class="p">)</span>
+                <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># increment blocks index counter</span>
+
+        <span class="c1"># sanity check to see if len(self._blocks) equal expected num_blocks</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_blocks</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_blocks</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;number of blocks created != num_blocks&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Head</span>
+        <span class="n">head_in_channels</span> <span class="o">=</span> <span class="n">block_args</span><span class="o">.</span><span class="n">output_filters</span>
+        <span class="n">out_channels</span> <span class="o">=</span> <span class="n">_round_filters</span><span class="p">(</span><span class="mi">1280</span><span class="p">,</span> <span class="n">width_coefficient</span><span class="p">,</span> <span class="n">depth_divisor</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_conv_head</span> <span class="o">=</span> <span class="n">conv_type</span><span class="p">(</span><span class="n">head_in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_conv_head_padding</span> <span class="o">=</span> <span class="n">_make_same_padder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_conv_head</span><span class="p">,</span> <span class="n">current_image_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bn1</span> <span class="o">=</span> <span class="n">batchnorm_type</span><span class="p">(</span><span class="n">num_features</span><span class="o">=</span><span class="n">out_channels</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="n">bn_mom</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">bn_eps</span><span class="p">)</span>
+
+        <span class="c1"># final linear layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_avg_pooling</span> <span class="o">=</span> <span class="n">adaptivepool_type</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dropout</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout_rate</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">out_channels</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span><span class="p">)</span>
+
+        <span class="c1"># swish activation to use - using memory efficient swish by default</span>
+        <span class="c1"># can be switched to normal swish using self.set_swish() function call</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_swish</span> <span class="o">=</span> <span class="n">Act</span><span class="p">[</span><span class="s2">&quot;memswish&quot;</span><span class="p">]()</span>
+
+        <span class="c1"># initialize weights using Tensorflow&#39;s init method from official impl.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_weights</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="EfficientNet.set_swish"><a class="viewcode-back" href="../../../../networks.html#monai.networks.nets.EfficientNet.set_swish">[docs]</a>    <span class="k">def</span> <span class="nf">set_swish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">memory_efficient</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets swish function as memory efficient (for training) or standard (for JIT export).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            memory_efficient: whether to use memory-efficient version of swish.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_swish</span> <span class="o">=</span> <span class="n">Act</span><span class="p">[</span><span class="s2">&quot;memswish&quot;</span><span class="p">]()</span> <span class="k">if</span> <span class="n">memory_efficient</span> <span class="k">else</span> <span class="n">Act</span><span class="p">[</span><span class="s2">&quot;swish&quot;</span><span class="p">](</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_blocks</span><span class="p">:</span>
+            <span class="n">block</span><span class="o">.</span><span class="n">set_swish</span><span class="p">(</span><span class="n">memory_efficient</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="EfficientNet.forward"><a class="viewcode-back" href="../../../../networks.html#monai.networks.nets.EfficientNet.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            inputs: input should have spatially N dimensions</span>
+<span class="sd">            ``(Batch, in_channels, dim_0[, dim_1, ..., dim_N])``, N is defined by `dimensions`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A torch Tensor of classification prediction in shape</span>
+<span class="sd">            ``(Batch, num_classes)``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Stem</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conv_stem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_conv_stem_padding</span><span class="p">(</span><span class="n">inputs</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_swish</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bn0</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="c1"># Blocks</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_blocks</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># Head</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conv_head</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_conv_head_padding</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_swish</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bn1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+        <span class="c1"># Pooling and final linear layer</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_avg_pooling</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">start_dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dropout</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span></div>
+
+    <span class="k">def</span> <span class="nf">_initialize_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            None, initializes weights for conv/linear/batchnorm layers</span>
+<span class="sd">            following weight init methods from</span>
+<span class="sd">            `official Tensorflow EfficientNet implementation</span>
+<span class="sd">            &lt;https://github.com/tensorflow/tpu/blob/master/models/official/efficientnet/efficientnet_model.py#L61&gt;`_.</span>
+<span class="sd">            Adapted from `EfficientNet-PyTorch&#39;s init method</span>
+<span class="sd">            &lt;https://github.com/rwightman/gen-efficientnet-pytorch/blob/master/geffnet/efficientnet_builder.py&gt;`_.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">named_modules</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv3d</span><span class="p">)):</span>
+                <span class="n">fan_out</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">kernel_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">out_channels</span>
+                <span class="n">m</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">normal_</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">/</span> <span class="n">fan_out</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">bias</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">m</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">zero_</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm3d</span><span class="p">)):</span>
+                <span class="n">m</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">fill_</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+                <span class="n">m</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">zero_</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">):</span>
+                <span class="n">fan_out</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">fan_in</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">init_range</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">fan_in</span> <span class="o">+</span> <span class="n">fan_out</span><span class="p">)</span>
+                <span class="n">m</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">uniform_</span><span class="p">(</span><span class="o">-</span><span class="n">init_range</span><span class="p">,</span> <span class="n">init_range</span><span class="p">)</span>
+                <span class="n">m</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">zero_</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="EfficientNetBN"><a class="viewcode-back" href="../../../../networks.html#monai.networks.nets.EfficientNetBN">[docs]</a><span class="k">class</span> <span class="nc">EfficientNetBN</span><span class="p">(</span><span class="n">EfficientNet</span><span class="p">):</span>
+<div class="viewcode-block" id="EfficientNetBN.__init__"><a class="viewcode-back" href="../../../../networks.html#monai.networks.nets.EfficientNetBN.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">pretrained</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">spatial_dims</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">in_channels</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="n">num_classes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generic wrapper around EfficientNet, used to initialize EfficientNet-B0 to EfficientNet-B7 models</span>
+<span class="sd">        model_name is mandatory argument as there is no EfficientNetBN itself,</span>
+<span class="sd">        it needs the N in [0, 1, 2, 3, 4, 5, 6, 7] to be a model</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            model_name: name of model to initialize, can be from [efficientnet-b0, ..., efficientnet-b7].</span>
+<span class="sd">            pretrained: whether to initialize pretrained ImageNet weights, only available for spatial_dims=2.</span>
+<span class="sd">            progress: whether to show download progress for pretrained weights download.</span>
+<span class="sd">            spatial_dims: number of spatial dimensions.</span>
+<span class="sd">            in_channels: number of input channels.</span>
+<span class="sd">            num_classes: number of output classes.</span>
+
+<span class="sd">        Examples::</span>
+
+<span class="sd">            # for pretrained spatial 2D ImageNet</span>
+<span class="sd">            &gt;&gt;&gt; image_size = get_efficientnet_image_size(&quot;efficientnet-b0&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; inputs = torch.rand(1, 3, image_size, image_size)</span>
+<span class="sd">            &gt;&gt;&gt; model = EfficientNetBN(&quot;efficientnet-b0&quot;, pretrained=True)</span>
+<span class="sd">            &gt;&gt;&gt; model.eval()</span>
+<span class="sd">            &gt;&gt;&gt; outputs = model(inputs)</span>
+
+<span class="sd">            # create spatial 2D</span>
+<span class="sd">            &gt;&gt;&gt; model = EfficientNetBN(&quot;efficientnet-b0&quot;, spatial_dims=2)</span>
+
+<span class="sd">            # create spatial 3D</span>
+<span class="sd">            &gt;&gt;&gt; model = EfficientNetBN(&quot;efficientnet-b0&quot;, spatial_dims=3)</span>
+
+<span class="sd">            # create EfficientNetB7 for spatial 2D</span>
+<span class="sd">            &gt;&gt;&gt; model = EfficientNetBN(&quot;efficientnet-b7&quot;, spatial_dims=2)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># block args for EfficientNet-B0 to EfficientNet-B7</span>
+        <span class="n">blocks_args_str</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;r1_k3_s11_e1_i32_o16_se0.25&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;r2_k3_s22_e6_i16_o24_se0.25&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;r2_k5_s22_e6_i24_o40_se0.25&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;r3_k3_s22_e6_i40_o80_se0.25&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;r3_k5_s11_e6_i80_o112_se0.25&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;r4_k5_s22_e6_i112_o192_se0.25&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;r1_k3_s11_e6_i192_o320_se0.25&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="c1"># check if model_name is valid model</span>
+        <span class="k">if</span> <span class="n">model_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">efficientnet_params</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;invalid model_name </span><span class="si">{}</span><span class="s2"> found, must be one of </span><span class="si">{}</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">model_name</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">efficientnet_params</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="c1"># get network parameters</span>
+        <span class="n">weight_coeff</span><span class="p">,</span> <span class="n">depth_coeff</span><span class="p">,</span> <span class="n">image_size</span><span class="p">,</span> <span class="n">dropout_rate</span><span class="p">,</span> <span class="n">dropconnect_rate</span> <span class="o">=</span> <span class="n">efficientnet_params</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span>
+
+        <span class="c1"># create model and initialize random weights</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">EfficientNetBN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">blocks_args_str</span><span class="o">=</span><span class="n">blocks_args_str</span><span class="p">,</span>
+            <span class="n">spatial_dims</span><span class="o">=</span><span class="n">spatial_dims</span><span class="p">,</span>
+            <span class="n">in_channels</span><span class="o">=</span><span class="n">in_channels</span><span class="p">,</span>
+            <span class="n">num_classes</span><span class="o">=</span><span class="n">num_classes</span><span class="p">,</span>
+            <span class="n">width_coefficient</span><span class="o">=</span><span class="n">weight_coeff</span><span class="p">,</span>
+            <span class="n">depth_coefficient</span><span class="o">=</span><span class="n">depth_coeff</span><span class="p">,</span>
+            <span class="n">dropout_rate</span><span class="o">=</span><span class="n">dropout_rate</span><span class="p">,</span>
+            <span class="n">image_size</span><span class="o">=</span><span class="n">image_size</span><span class="p">,</span>
+            <span class="n">drop_connect_rate</span><span class="o">=</span><span class="n">dropconnect_rate</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># attempt to load pretrained</span>
+        <span class="n">is_default_model</span> <span class="o">=</span> <span class="p">(</span><span class="n">spatial_dims</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">in_channels</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">loadable_from_file</span> <span class="o">=</span> <span class="n">pretrained</span> <span class="ow">and</span> <span class="n">is_default_model</span>
+
+        <span class="k">if</span> <span class="n">loadable_from_file</span><span class="p">:</span>
+            <span class="c1"># skip loading fc layers for transfer learning applications</span>
+            <span class="n">load_fc</span> <span class="o">=</span> <span class="n">num_classes</span> <span class="o">==</span> <span class="mi">1000</span>
+
+            <span class="c1"># only pretrained for when `spatial_dims` is 2</span>
+            <span class="n">_load_state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">progress</span><span class="p">,</span> <span class="n">load_fc</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;Skipping loading pretrained weights for non-default </span><span class="si">{}</span><span class="s2">, pretrained=</span><span class="si">{}</span><span class="s2">, is_default_model=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">model_name</span><span class="p">,</span> <span class="n">pretrained</span><span class="p">,</span> <span class="n">is_default_model</span>
+                <span class="p">)</span>
+            <span class="p">)</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">get_efficientnet_image_size</span><span class="p">(</span><span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the input image size for a given efficientnet model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model_name: name of model to initialize, can be from [efficientnet-b0, ..., efficientnet-b7].</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Image size for single spatial dimension as integer.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># check if model_name is valid model</span>
+    <span class="k">if</span> <span class="n">model_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">efficientnet_params</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;invalid model_name </span><span class="si">{}</span><span class="s2"> found, must be one of </span><span class="si">{}</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">efficientnet_params</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+        <span class="p">)</span>
+
+    <span class="c1"># return input image size (all dims equal so only need to return for one dim)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">efficientnet_params</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+
+<span class="k">def</span> <span class="nf">drop_connect</span><span class="p">(</span><span class="n">inputs</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">training</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Drop connect layer that drops individual connections.</span>
+<span class="sd">    Differs from dropout as dropconnect drops connections instead of whole neurons as in dropout.</span>
+
+<span class="sd">    Based on `Deep Networks with Stochastic Depth &lt;https://arxiv.org/pdf/1603.09382.pdf&gt;`_.</span>
+<span class="sd">    Adapted from `Official Tensorflow EfficientNet utils</span>
+<span class="sd">    &lt;https://github.com/tensorflow/tpu/blob/master/models/official/efficientnet/utils.py&gt;`_.</span>
+
+<span class="sd">    This function is generalized for MONAI&#39;s N-Dimensional spatial activations</span>
+<span class="sd">    e.g. 1D activations [B, C, H], 2D activations [B, C, H, W] and 3D activations [B, C, H, W, D]</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        input: input tensor with [B, C, dim_1, dim_2, ..., dim_N] where N=spatial_dims.</span>
+<span class="sd">        p: probability to use for dropping connections.</span>
+<span class="sd">        training: whether in training or evaluation mode.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        output: output tensor after applying drop connection.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mf">0.0</span> <span class="ow">or</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;p must be in range of [0, 1], found </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+
+    <span class="c1"># eval mode: drop_connect is switched off - so return input without modifying</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">training</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">inputs</span>
+
+    <span class="c1"># train mode: calculate and apply drop_connect</span>
+    <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">keep_prob</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">p</span>
+    <span class="n">num_dims</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span>
+
+    <span class="c1"># build dimensions for random tensor, use num_dims to populate appropriate spatial dims</span>
+    <span class="n">random_tensor_shape</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">batch_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">num_dims</span>
+
+    <span class="c1"># generate binary_tensor mask according to probability (p for 0, 1-p for 1)</span>
+    <span class="n">random_tensor</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">random_tensor_shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">inputs</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">inputs</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">random_tensor</span> <span class="o">+=</span> <span class="n">keep_prob</span>
+
+    <span class="c1"># round to form binary tensor</span>
+    <span class="n">binary_tensor</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">random_tensor</span><span class="p">)</span>
+
+    <span class="c1"># drop connect using binary tensor</span>
+    <span class="n">output</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span> <span class="o">=</span> <span class="n">inputs</span> <span class="o">/</span> <span class="n">keep_prob</span> <span class="o">*</span> <span class="n">binary_tensor</span>
+    <span class="k">return</span> <span class="n">output</span>
+
+
+<span class="k">def</span> <span class="nf">_load_state_dict</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">load_fc</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">url_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;efficientnet-b0&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com/lukemelas/EfficientNet-PyTorch/releases/download/1.0/efficientnet-b0-355c32eb.pth&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;efficientnet-b1&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com/lukemelas/EfficientNet-PyTorch/releases/download/1.0/efficientnet-b1-f1951068.pth&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;efficientnet-b2&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com/lukemelas/EfficientNet-PyTorch/releases/download/1.0/efficientnet-b2-8bb594d6.pth&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;efficientnet-b3&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com/lukemelas/EfficientNet-PyTorch/releases/download/1.0/efficientnet-b3-5fb5a3c3.pth&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;efficientnet-b4&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com/lukemelas/EfficientNet-PyTorch/releases/download/1.0/efficientnet-b4-6ed6700e.pth&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;efficientnet-b5&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com/lukemelas/EfficientNet-PyTorch/releases/download/1.0/efficientnet-b5-b6417697.pth&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;efficientnet-b6&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com/lukemelas/EfficientNet-PyTorch/releases/download/1.0/efficientnet-b6-c76e70fd.pth&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;efficientnet-b7&quot;</span><span class="p">:</span> <span class="s2">&quot;https://github.com/lukemelas/EfficientNet-PyTorch/releases/download/1.0/efficientnet-b7-dcc49843.pth&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="c1"># load state dict from url</span>
+    <span class="n">model_url</span> <span class="o">=</span> <span class="n">url_map</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span>
+    <span class="n">state_dict</span> <span class="o">=</span> <span class="n">model_zoo</span><span class="o">.</span><span class="n">load_url</span><span class="p">(</span><span class="n">model_url</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="n">progress</span><span class="p">)</span>
+
+    <span class="c1"># load state dict into model parameters</span>
+    <span class="k">if</span> <span class="n">load_fc</span><span class="p">:</span>  <span class="c1"># load everything</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">state_dict</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ret</span><span class="o">.</span><span class="n">missing_keys</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Found missing keys when loading pretrained weights: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ret</span><span class="o">.</span><span class="n">missing_keys</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># skip final FC layers, for transfer learning cases</span>
+        <span class="n">state_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;_fc.weight&quot;</span><span class="p">)</span>
+        <span class="n">state_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;_fc.bias&quot;</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">state_dict</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># check if no other keys missing except FC layer parameters</span>
+        <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">ret</span><span class="o">.</span><span class="n">missing_keys</span><span class="p">)</span> <span class="o">!=</span> <span class="p">{</span><span class="s2">&quot;_fc.weight&quot;</span><span class="p">,</span> <span class="s2">&quot;_fc.bias&quot;</span><span class="p">}:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Found missing keys when loading pretrained weights: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ret</span><span class="o">.</span><span class="n">missing_keys</span><span class="p">))</span>
+
+    <span class="c1"># check for any unexpected keys</span>
+    <span class="k">if</span> <span class="n">ret</span><span class="o">.</span><span class="n">unexpected_keys</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing keys when loading pretrained weights: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ret</span><span class="o">.</span><span class="n">unexpected_keys</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">_get_same_padding_conv_nd</span><span class="p">(</span>
+    <span class="n">image_size</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">kernel_size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">dilation</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">stride</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper for getting padding (nn.ConstantPadNd) to be used to get SAME padding</span>
+<span class="sd">    conv operations similar to Tensorflow&#39;s SAME padding.</span>
+
+<span class="sd">    This function is generalized for MONAI&#39;s N-Dimensional spatial operations (e.g. Conv1D, Conv2D, Conv3D)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image_size: input image/feature spatial size.</span>
+<span class="sd">        kernel_size: conv kernel&#39;s spatial size.</span>
+<span class="sd">        dilation: conv dilation rate for Atrous conv.</span>
+<span class="sd">        stride: stride for conv operation.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        paddings for ConstantPadNd padder to be used on input tensor to conv op.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># get number of spatial dimensions, corresponds to kernel size length</span>
+    <span class="n">num_dims</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">kernel_size</span><span class="p">)</span>
+
+    <span class="c1"># additional checks to populate dilation and stride (in case they are single entry tuples)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dilation</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">dilation</span> <span class="o">=</span> <span class="n">dilation</span> <span class="o">*</span> <span class="n">num_dims</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">stride</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">stride</span> <span class="o">=</span> <span class="n">stride</span> <span class="o">*</span> <span class="n">num_dims</span>
+
+    <span class="c1"># equation to calculate (pad^+ + pad^-) size</span>
+    <span class="n">_pad_size</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="nb">max</span><span class="p">((</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">_i_s</span> <span class="o">/</span> <span class="n">_s</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">_s</span> <span class="o">+</span> <span class="p">(</span><span class="n">_k_s</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">_d</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">_i_s</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_i_s</span><span class="p">,</span> <span class="n">_k_s</span><span class="p">,</span> <span class="n">_d</span><span class="p">,</span> <span class="n">_s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">image_size</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">dilation</span><span class="p">,</span> <span class="n">stride</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="c1"># distribute paddings into pad^+ and pad^- following Tensorflow&#39;s same padding strategy</span>
+    <span class="n">_paddings</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[(</span><span class="n">_p</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">_p</span> <span class="o">-</span> <span class="n">_p</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">_p</span> <span class="ow">in</span> <span class="n">_pad_size</span><span class="p">]</span>
+
+    <span class="c1"># unroll list of tuples to tuples, and then to list</span>
+    <span class="c1"># reversed as nn.ConstantPadNd expects paddings starting with last dimension</span>
+    <span class="n">_paddings_ret</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">outer</span> <span class="k">for</span> <span class="n">inner</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">_paddings</span><span class="p">)</span> <span class="k">for</span> <span class="n">outer</span> <span class="ow">in</span> <span class="n">inner</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">_paddings_ret</span>
+
+
+<span class="k">def</span> <span class="nf">_make_same_padder</span><span class="p">(</span><span class="n">conv_op</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv3d</span><span class="p">],</span> <span class="n">image_size</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper for initializing ConstantPadNd with SAME padding similar to Tensorflow.</span>
+<span class="sd">    Uses output of _get_same_padding_conv_nd() to get the padding size.</span>
+
+<span class="sd">    This function is generalized for MONAI&#39;s N-Dimensional spatial operations (e.g. Conv1D, Conv2D, Conv3D)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        conv_op: nn.ConvNd operation to extract parameters for op from</span>
+<span class="sd">        image_size: input image/feature spatial size</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        If padding required then nn.ConstandNd() padder initialized to paddings otherwise nn.Identity()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># calculate padding required</span>
+    <span class="n">padding</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">_get_same_padding_conv_nd</span><span class="p">(</span><span class="n">image_size</span><span class="p">,</span> <span class="n">conv_op</span><span class="o">.</span><span class="n">kernel_size</span><span class="p">,</span> <span class="n">conv_op</span><span class="o">.</span><span class="n">dilation</span><span class="p">,</span> <span class="n">conv_op</span><span class="o">.</span><span class="n">stride</span><span class="p">)</span>
+
+    <span class="c1"># initialize and return padder</span>
+    <span class="n">padder</span> <span class="o">=</span> <span class="n">Pad</span><span class="p">[</span><span class="s2">&quot;constantpad&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">padding</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">padding</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">padder</span><span class="p">(</span><span class="n">padding</span><span class="o">=</span><span class="n">padding</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">nn</span><span class="o">.</span><span class="n">Identity</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">_round_filters</span><span class="p">(</span><span class="n">filters</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">width_coefficient</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">depth_divisor</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate and round number of filters based on width coefficient multiplier and depth divisor.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filters: number of input filters.</span>
+<span class="sd">        width_coefficient: width coefficient for model.</span>
+<span class="sd">        depth_divisor: depth divisor to use.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        new_filters: new number of filters after calculation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">width_coefficient</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">filters</span>
+
+    <span class="n">multiplier</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">width_coefficient</span>
+    <span class="n">divisor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">depth_divisor</span>
+    <span class="n">filters_float</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">filters</span> <span class="o">*</span> <span class="n">multiplier</span>
+
+    <span class="c1"># follow the formula transferred from official TensorFlow implementation</span>
+    <span class="n">new_filters</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">divisor</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">filters_float</span> <span class="o">+</span> <span class="n">divisor</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">//</span> <span class="n">divisor</span> <span class="o">*</span> <span class="n">divisor</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">new_filters</span> <span class="o">&lt;</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">filters_float</span><span class="p">:</span>  <span class="c1"># prevent rounding by more than 10%</span>
+        <span class="n">new_filters</span> <span class="o">+=</span> <span class="n">divisor</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">new_filters</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_round_repeats</span><span class="p">(</span><span class="n">repeats</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">depth_coefficient</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Re-calculate module&#39;s repeat number of a block based on depth coefficient multiplier.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        repeats: number of original repeats.</span>
+<span class="sd">        depth_coefficient: depth coefficient for model.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        new repeat: new number of repeat after calculating.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">depth_coefficient</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">repeats</span>
+
+    <span class="c1"># follow the formula transferred from official TensorFlow impl.</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">depth_coefficient</span> <span class="o">*</span> <span class="n">repeats</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">_calculate_output_image_size</span><span class="p">(</span><span class="n">input_image_size</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">stride</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">]]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the output image size when using _make_same_padder with a stride.</span>
+<span class="sd">    Required for static padding.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        input_image_size: input image/feature spatial size.</span>
+<span class="sd">        stride: Conv2d operation&quot;s stride.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        output_image_size: output image/feature spatial size.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># checks to extract integer stride in case tuple was received</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">stride</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+        <span class="n">all_strides_equal</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">stride</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">stride</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">all_strides_equal</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;unequal strides are not possible, got </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">stride</span><span class="p">))</span>
+
+        <span class="n">stride</span> <span class="o">=</span> <span class="n">stride</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># return output image size</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">im_sz</span> <span class="o">/</span> <span class="n">stride</span><span class="p">))</span> <span class="k">for</span> <span class="n">im_sz</span> <span class="ow">in</span> <span class="n">input_image_size</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">BlockArgs</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    BlockArgs object to assist in decoding string notation</span>
+<span class="sd">        of arguments for MBConvBlock definition.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">num_repeat</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">kernel_size</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">stride</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">expand_ratio</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">input_filters</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">output_filters</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">id_skip</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">se_ratio</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">block_string</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a BlockArgs object from a string notation of arguments.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            block_string (str): A string notation of arguments.</span>
+<span class="sd">                                Examples: &quot;r1_k3_s11_e1_i32_o16_se0.25&quot;.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            BlockArgs: namedtuple defined at the top of this function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ops</span> <span class="o">=</span> <span class="n">block_string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">ops</span><span class="p">:</span>
+            <span class="n">splits</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(\d.*)&quot;</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">splits</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">splits</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">options</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="c1"># check stride</span>
+        <span class="n">stride_check</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="s2">&quot;s&quot;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+            <span class="ow">or</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">stride_check</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid stride option received&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">BlockArgs</span><span class="p">(</span>
+            <span class="n">num_repeat</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;r&quot;</span><span class="p">]),</span>
+            <span class="n">kernel_size</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;k&quot;</span><span class="p">]),</span>
+            <span class="n">stride</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span>
+            <span class="n">expand_ratio</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;e&quot;</span><span class="p">]),</span>
+            <span class="n">input_filters</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;i&quot;</span><span class="p">]),</span>
+            <span class="n">output_filters</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;o&quot;</span><span class="p">]),</span>
+            <span class="n">id_skip</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;noskip&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">block_string</span><span class="p">),</span>
+            <span class="n">se_ratio</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;se&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="s2">&quot;se&quot;</span> <span class="ow">in</span> <span class="n">options</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">to_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a block string notation for current BlockArgs object</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A string notation of BlockArgs object arguments.</span>
+<span class="sd">                Example: &quot;r1_k3_s11_e1_i32_o16_se0.25_noskip&quot;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="s2">&quot;r</span><span class="si">{}</span><span class="s2">_k</span><span class="si">{}</span><span class="s2">_s</span><span class="si">{}{}</span><span class="s2">_e</span><span class="si">{}</span><span class="s2">_i</span><span class="si">{}</span><span class="s2">_o</span><span class="si">{}</span><span class="s2">_se</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">num_repeat</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kernel_size</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stride</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stride</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">expand_ratio</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">input_filters</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output_filters</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">se_ratio</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">id_skip</span><span class="p">:</span>
+            <span class="n">string</span> <span class="o">+=</span> <span class="s2">&quot;_noskip&quot;</span>
+        <span class="k">return</span> <span class="n">string</span>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2020 - 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

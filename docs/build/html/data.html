@@ -1,0 +1,649 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data &#8212; MONAI Deploy Application SDK 0.1.0 Documentation</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Engines" href="engines.html" />
+    <link rel="prev" title="Optimizers" href="optimizers.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="index.html">
+  <img src="_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="apps.html">
+   Applications
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="transforms.html">
+   Transforms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="losses.html">
+   Loss functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="networks.html">
+   Network architectures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="metrics.html">
+   Metrics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="optimizers.html">
+   Optimizers
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="engines.html">
+   Engines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="inferers.html">
+   Inference methods
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="handlers.html">
+   Event handlers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="visualize.html">
+   Visualizations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="utils.html">
+   Utilities
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generic-interfaces">
+   Generic Interfaces
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dataset">
+     <cite>
+      Dataset
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#iterabledataset">
+     <cite>
+      IterableDataset
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#csviterabledataset">
+     <cite>
+      CSVIterableDataset
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#persistentdataset">
+     <cite>
+      PersistentDataset
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cachentransdataset">
+     <cite>
+      CacheNTransDataset
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lmdbdataset">
+     <cite>
+      LMDBDataset
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cachedataset">
+     <cite>
+      CacheDataset
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#smartcachedataset">
+     <cite>
+      SmartCacheDataset
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#zipdataset">
+     <cite>
+      ZipDataset
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#arraydataset">
+     <cite>
+      ArrayDataset
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#imagedataset">
+     <cite>
+      ImageDataset
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#npzdictitemdataset">
+     <cite>
+      NPZDictItemDataset
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#csvdataset">
+     <cite>
+      CSVDataset
+     </cite>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#patch-based-dataset">
+   Patch-based dataset
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gridpatchdataset">
+     <cite>
+      GridPatchDataset
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#patchiter">
+     <cite>
+      PatchIter
+     </cite>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#patchdataset">
+     <cite>
+      PatchDataset
+     </cite>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#image-reader">
+   Image reader
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#imagereader">
+     ImageReader
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#itkreader">
+     ITKReader
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nibabelreader">
+     NibabelReader
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#numpyreader">
+     NumpyReader
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pilreader">
+     PILReader
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#wsireader">
+     WSIReader
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nifti-format-handling">
+   Nifti format handling
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#writing-nifti">
+     Writing Nifti
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#png-format-handling">
+   PNG format handling
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#writing-png">
+     Writing PNG
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#synthetic">
+   Synthetic
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#utilities">
+   Utilities
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#partition-dataset">
+     Partition Dataset
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#partition-dataset-based-on-classes">
+     Partition Dataset based on classes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#distributedsampler">
+     DistributedSampler
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#distributedweightedrandomsampler">
+     DistributedWeightedRandomSampler
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#datasetsummary">
+     DatasetSummary
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decathlon-datalist">
+     Decathlon Datalist
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dataloader">
+     DataLoader
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#threadbuffer">
+     ThreadBuffer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#testtimeaugmentation">
+     TestTimeAugmentation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="data">
+<span id="id1"></span><h1>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="generic-interfaces">
+<h2>Generic Interfaces<a class="headerlink" href="#generic-interfaces" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="dataset">
+<h3><cite>Dataset</cite><a class="headerlink" href="#dataset" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="iterabledataset">
+<h3><cite>IterableDataset</cite><a class="headerlink" href="#iterabledataset" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="csviterabledataset">
+<h3><cite>CSVIterableDataset</cite><a class="headerlink" href="#csviterabledataset" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="persistentdataset">
+<h3><cite>PersistentDataset</cite><a class="headerlink" href="#persistentdataset" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="cachentransdataset">
+<h3><cite>CacheNTransDataset</cite><a class="headerlink" href="#cachentransdataset" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="lmdbdataset">
+<h3><cite>LMDBDataset</cite><a class="headerlink" href="#lmdbdataset" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="cachedataset">
+<h3><cite>CacheDataset</cite><a class="headerlink" href="#cachedataset" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="smartcachedataset">
+<h3><cite>SmartCacheDataset</cite><a class="headerlink" href="#smartcachedataset" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="zipdataset">
+<h3><cite>ZipDataset</cite><a class="headerlink" href="#zipdataset" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="arraydataset">
+<h3><cite>ArrayDataset</cite><a class="headerlink" href="#arraydataset" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="imagedataset">
+<h3><cite>ImageDataset</cite><a class="headerlink" href="#imagedataset" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="npzdictitemdataset">
+<h3><cite>NPZDictItemDataset</cite><a class="headerlink" href="#npzdictitemdataset" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="csvdataset">
+<h3><cite>CSVDataset</cite><a class="headerlink" href="#csvdataset" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="patch-based-dataset">
+<h2>Patch-based dataset<a class="headerlink" href="#patch-based-dataset" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="gridpatchdataset">
+<h3><cite>GridPatchDataset</cite><a class="headerlink" href="#gridpatchdataset" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="patchiter">
+<h3><cite>PatchIter</cite><a class="headerlink" href="#patchiter" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="patchdataset">
+<h3><cite>PatchDataset</cite><a class="headerlink" href="#patchdataset" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="image-reader">
+<h2>Image reader<a class="headerlink" href="#image-reader" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="imagereader">
+<h3>ImageReader<a class="headerlink" href="#imagereader" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="itkreader">
+<h3>ITKReader<a class="headerlink" href="#itkreader" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="nibabelreader">
+<h3>NibabelReader<a class="headerlink" href="#nibabelreader" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="numpyreader">
+<h3>NumpyReader<a class="headerlink" href="#numpyreader" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="pilreader">
+<h3>PILReader<a class="headerlink" href="#pilreader" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="wsireader">
+<h3>WSIReader<a class="headerlink" href="#wsireader" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="nifti-format-handling">
+<h2>Nifti format handling<a class="headerlink" href="#nifti-format-handling" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="writing-nifti">
+<h3>Writing Nifti<a class="headerlink" href="#writing-nifti" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="png-format-handling">
+<h2>PNG format handling<a class="headerlink" href="#png-format-handling" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="writing-png">
+<h3>Writing PNG<a class="headerlink" href="#writing-png" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="synthetic">
+<h2>Synthetic<a class="headerlink" href="#synthetic" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="utilities">
+<h2>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="partition-dataset">
+<h3>Partition Dataset<a class="headerlink" href="#partition-dataset" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="partition-dataset-based-on-classes">
+<h3>Partition Dataset based on classes<a class="headerlink" href="#partition-dataset-based-on-classes" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="distributedsampler">
+<h3>DistributedSampler<a class="headerlink" href="#distributedsampler" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="distributedweightedrandomsampler">
+<h3>DistributedWeightedRandomSampler<a class="headerlink" href="#distributedweightedrandomsampler" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="datasetsummary">
+<h3>DatasetSummary<a class="headerlink" href="#datasetsummary" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="decathlon-datalist">
+<h3>Decathlon Datalist<a class="headerlink" href="#decathlon-datalist" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="dataloader">
+<h3>DataLoader<a class="headerlink" href="#dataloader" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="threadbuffer">
+<h3>ThreadBuffer<a class="headerlink" href="#threadbuffer" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="testtimeaugmentation">
+<h3>TestTimeAugmentation<a class="headerlink" href="#testtimeaugmentation" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="optimizers.html" title="previous page">Optimizers</a>
+    <a class='right-next' id="next-link" href="engines.html" title="next page">Engines</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

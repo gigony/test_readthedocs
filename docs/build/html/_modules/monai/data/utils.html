@@ -1,0 +1,1318 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monai.data.utils &#8212; MONAI 0.6.0 Documentation</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../index.html">
+  <img src="../../../_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for monai.data.utils</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 - 2021 MONAI Consortium</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span><span class="p">,</span> <span class="n">starmap</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">PurePath</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Generator</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data._utils.collate</span> <span class="kn">import</span> <span class="n">default_collate</span>
+
+<span class="kn">from</span> <span class="nn">monai.networks.layers.simplelayers</span> <span class="kn">import</span> <span class="n">GaussianFilter</span>
+<span class="kn">from</span> <span class="nn">monai.utils</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">MAX_SEED</span><span class="p">,</span>
+    <span class="n">BlendMode</span><span class="p">,</span>
+    <span class="n">NumpyPadMode</span><span class="p">,</span>
+    <span class="n">ensure_tuple</span><span class="p">,</span>
+    <span class="n">ensure_tuple_rep</span><span class="p">,</span>
+    <span class="n">ensure_tuple_size</span><span class="p">,</span>
+    <span class="n">fall_back_tuple</span><span class="p">,</span>
+    <span class="n">first</span><span class="p">,</span>
+    <span class="n">issequenceiterable</span><span class="p">,</span>
+    <span class="n">optional_import</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">monai.utils.enums</span> <span class="kn">import</span> <span class="n">Method</span>
+
+<span class="n">pd</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">optional_import</span><span class="p">(</span><span class="s2">&quot;pandas&quot;</span><span class="p">)</span>
+<span class="n">DataFrame</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">optional_import</span><span class="p">(</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;DataFrame&quot;</span><span class="p">)</span>
+<span class="n">nib</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">optional_import</span><span class="p">(</span><span class="s2">&quot;nibabel&quot;</span><span class="p">)</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;get_random_patch&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;iter_patch_slices&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;dense_patch_slices&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;iter_patch&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get_valid_patch_size&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;list_data_collate&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;worker_init_fn&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;set_rnd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;correct_nifti_header_if_necessary&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rectify_header_sform_qform&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;zoom_affine&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compute_shape_offset&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;to_affine_nd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;create_file_basename&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compute_importance_map&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;is_supported_format&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;partition_dataset&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;partition_dataset_classes&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;select_cross_validation_folds&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;json_hashing&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pickle_hashing&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sorted_dict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;decollate_batch&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rep_scalar_to_batch&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pad_list_data_collate&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;no_collation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;convert_tables_to_dicts&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="get_random_patch"><a class="viewcode-back" href="../../../data.html#monai.data.utils.get_random_patch">[docs]</a><span class="k">def</span> <span class="nf">get_random_patch</span><span class="p">(</span>
+    <span class="n">dims</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">patch_size</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">rand_state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">slice</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a tuple of slices to define a random patch in an array of shape `dims` with size `patch_size` or the as</span>
+<span class="sd">    close to it as possible within the given dimension. It is expected that `patch_size` is a valid patch for a source</span>
+<span class="sd">    of shape `dims` as returned by `get_valid_patch_size`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dims: shape of source array</span>
+<span class="sd">        patch_size: shape of patch size to generate</span>
+<span class="sd">        rand_state: a random state object to generate random numbers from</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (tuple of slice): a tuple of slice objects defining the patch</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># choose the minimal corner of the patch</span>
+    <span class="n">rand_int</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span> <span class="k">if</span> <span class="n">rand_state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">rand_state</span><span class="o">.</span><span class="n">randint</span>
+    <span class="n">min_corner</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">rand_int</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ms</span> <span class="o">-</span> <span class="n">ps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">ms</span> <span class="o">&gt;</span> <span class="n">ps</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">ms</span><span class="p">,</span> <span class="n">ps</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">dims</span><span class="p">,</span> <span class="n">patch_size</span><span class="p">))</span>
+
+    <span class="c1"># create the slices for each dimension which define the patch in the source array</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="n">mc</span><span class="p">,</span> <span class="n">mc</span> <span class="o">+</span> <span class="n">ps</span><span class="p">)</span> <span class="k">for</span> <span class="n">mc</span><span class="p">,</span> <span class="n">ps</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">min_corner</span><span class="p">,</span> <span class="n">patch_size</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="iter_patch_slices"><a class="viewcode-back" href="../../../data.html#monai.data.utils.iter_patch_slices">[docs]</a><span class="k">def</span> <span class="nf">iter_patch_slices</span><span class="p">(</span>
+    <span class="n">dims</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">patch_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">],</span> <span class="n">start_pos</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">()</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">slice</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Yield successive tuples of slices defining patches of size `patch_size` from an array of dimensions `dims`. The</span>
+<span class="sd">    iteration starts from position `start_pos` in the array, or starting at the origin if this isn&#39;t provided. Each</span>
+<span class="sd">    patch is chosen in a contiguous grid using a first dimension as least significant ordering.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dims: dimensions of array to iterate over</span>
+<span class="sd">        patch_size: size of patches to generate slices for, 0 or None selects whole dimension</span>
+<span class="sd">        start_pos: starting position in the array, default is 0 for each dimension</span>
+
+<span class="sd">    Yields:</span>
+<span class="sd">        Tuples of slice objects defining each patch</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ensure patchSize and startPos are the right length</span>
+    <span class="n">ndim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dims</span><span class="p">)</span>
+    <span class="n">patch_size_</span> <span class="o">=</span> <span class="n">get_valid_patch_size</span><span class="p">(</span><span class="n">dims</span><span class="p">,</span> <span class="n">patch_size</span><span class="p">)</span>
+    <span class="n">start_pos</span> <span class="o">=</span> <span class="n">ensure_tuple_size</span><span class="p">(</span><span class="n">start_pos</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span>
+
+    <span class="c1"># collect the ranges to step over each dimension</span>
+    <span class="n">ranges</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">starmap</span><span class="p">(</span><span class="nb">range</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="n">start_pos</span><span class="p">,</span> <span class="n">dims</span><span class="p">,</span> <span class="n">patch_size_</span><span class="p">)))</span>
+
+    <span class="c1"># choose patches by applying product to the ranges</span>
+    <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">ranges</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>  <span class="c1"># reverse ranges order to iterate in index order</span>
+        <span class="k">yield</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">s</span> <span class="o">+</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">position</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">patch_size_</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="dense_patch_slices"><a class="viewcode-back" href="../../../data.html#monai.data.utils.dense_patch_slices">[docs]</a><span class="k">def</span> <span class="nf">dense_patch_slices</span><span class="p">(</span>
+    <span class="n">image_size</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+    <span class="n">patch_size</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+    <span class="n">scan_interval</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">slice</span><span class="p">,</span> <span class="o">...</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Enumerate all slices defining ND patches of size `patch_size` from an `image_size` input image.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image_size: dimensions of image to iterate over</span>
+<span class="sd">        patch_size: size of patches to generate slices</span>
+<span class="sd">        scan_interval: dense patch sampling interval</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        a list of slice objects defining each patch</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">num_spatial_dims</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_size</span><span class="p">)</span>
+    <span class="n">patch_size</span> <span class="o">=</span> <span class="n">get_valid_patch_size</span><span class="p">(</span><span class="n">image_size</span><span class="p">,</span> <span class="n">patch_size</span><span class="p">)</span>
+    <span class="n">scan_interval</span> <span class="o">=</span> <span class="n">ensure_tuple_size</span><span class="p">(</span><span class="n">scan_interval</span><span class="p">,</span> <span class="n">num_spatial_dims</span><span class="p">)</span>
+
+    <span class="n">scan_num</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_spatial_dims</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">scan_interval</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">scan_num</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">image_size</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="n">scan_interval</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+            <span class="n">scan_dim</span> <span class="o">=</span> <span class="n">first</span><span class="p">(</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="k">if</span> <span class="n">d</span> <span class="o">*</span> <span class="n">scan_interval</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">patch_size</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">image_size</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">scan_num</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scan_dim</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">scan_dim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">starts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_spatial_dims</span><span class="p">):</span>
+        <span class="n">dim_starts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">scan_num</span><span class="p">[</span><span class="n">dim</span><span class="p">]):</span>
+            <span class="n">start_idx</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">*</span> <span class="n">scan_interval</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span>
+            <span class="n">start_idx</span> <span class="o">-=</span> <span class="nb">max</span><span class="p">(</span><span class="n">start_idx</span> <span class="o">+</span> <span class="n">patch_size</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">-</span> <span class="n">image_size</span><span class="p">[</span><span class="n">dim</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">dim_starts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">start_idx</span><span class="p">)</span>
+        <span class="n">starts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dim_starts</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="o">*</span><span class="n">starts</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s2">&quot;ij&quot;</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">s</span> <span class="o">+</span> <span class="n">patch_size</span><span class="p">[</span><span class="n">d</span><span class="p">])</span> <span class="k">for</span> <span class="n">d</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">out</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="iter_patch"><a class="viewcode-back" href="../../../data.html#monai.data.utils.iter_patch">[docs]</a><span class="k">def</span> <span class="nf">iter_patch</span><span class="p">(</span>
+    <span class="n">arr</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">patch_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">start_pos</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(),</span>
+    <span class="n">copy_back</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">NumpyPadMode</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">NumpyPadMode</span><span class="o">.</span><span class="n">WRAP</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">pad_opts</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Yield successive patches from `arr` of size `patch_size`. The iteration can start from position `start_pos` in `arr`</span>
+<span class="sd">    but drawing from a padded array extended by the `patch_size` in each dimension (so these coordinates can be negative</span>
+<span class="sd">    to start in the padded region). If `copy_back` is True the values from each patch are written back to `arr`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        arr: array to iterate over</span>
+<span class="sd">        patch_size: size of patches to generate slices for, 0 or None selects whole dimension</span>
+<span class="sd">        start_pos: starting position in the array, default is 0 for each dimension</span>
+<span class="sd">        copy_back: if True data from the yielded patches is copied back to `arr` once the generator completes</span>
+<span class="sd">        mode: {``&quot;constant&quot;``, ``&quot;edge&quot;``, ``&quot;linear_ramp&quot;``, ``&quot;maximum&quot;``, ``&quot;mean&quot;``,</span>
+<span class="sd">            ``&quot;median&quot;``, ``&quot;minimum&quot;``, ``&quot;reflect&quot;``, ``&quot;symmetric&quot;``, ``&quot;wrap&quot;``, ``&quot;empty&quot;``}</span>
+<span class="sd">            One of the listed string values or a user supplied function. Defaults to ``&quot;wrap&quot;``.</span>
+<span class="sd">            See also: https://numpy.org/doc/1.18/reference/generated/numpy.pad.html</span>
+<span class="sd">        pad_opts: padding options, see `numpy.pad`</span>
+
+<span class="sd">    Yields:</span>
+<span class="sd">        Patches of array data from `arr` which are views into a padded array which can be modified, if `copy_back` is</span>
+<span class="sd">        True these changes will be reflected in `arr` once the iteration completes.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        coordinate format is:</span>
+
+<span class="sd">            [1st_dim_start, 1st_dim_end,</span>
+<span class="sd">             2nd_dim_start, 2nd_dim_end,</span>
+<span class="sd">             ...,</span>
+<span class="sd">             Nth_dim_start, Nth_dim_end]]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># ensure patchSize and startPos are the right length</span>
+    <span class="n">patch_size_</span> <span class="o">=</span> <span class="n">get_valid_patch_size</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">patch_size</span><span class="p">)</span>
+    <span class="n">start_pos</span> <span class="o">=</span> <span class="n">ensure_tuple_size</span><span class="p">(</span><span class="n">start_pos</span><span class="p">,</span> <span class="n">arr</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
+
+    <span class="c1"># pad image by maximum values needed to ensure patches are taken from inside an image</span>
+    <span class="n">arrpad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">((</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">patch_size_</span><span class="p">),</span> <span class="n">NumpyPadMode</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="o">**</span><span class="n">pad_opts</span><span class="p">)</span>
+
+    <span class="c1"># choose a start position in the padded image</span>
+    <span class="n">start_pos_padded</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="n">p</span> <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">start_pos</span><span class="p">,</span> <span class="n">patch_size_</span><span class="p">))</span>
+
+    <span class="c1"># choose a size to iterate over which is smaller than the actual padded image to prevent producing</span>
+    <span class="c1"># patches which are only in the padded regions</span>
+    <span class="n">iter_size</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="n">p</span> <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">patch_size_</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">slices</span> <span class="ow">in</span> <span class="n">iter_patch_slices</span><span class="p">(</span><span class="n">iter_size</span><span class="p">,</span> <span class="n">patch_size_</span><span class="p">,</span> <span class="n">start_pos_padded</span><span class="p">):</span>
+        <span class="c1"># compensate original image padding</span>
+        <span class="n">coords_no_pad</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">((</span><span class="n">coord</span><span class="o">.</span><span class="n">start</span> <span class="o">-</span> <span class="n">p</span><span class="p">,</span> <span class="n">coord</span><span class="o">.</span><span class="n">stop</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">coord</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">slices</span><span class="p">,</span> <span class="n">patch_size_</span><span class="p">))</span>
+        <span class="k">yield</span> <span class="n">arrpad</span><span class="p">[</span><span class="n">slices</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">coords_no_pad</span><span class="p">)</span>  <span class="c1"># data and coords (in numpy; works with torch loader)</span>
+
+    <span class="c1"># copy back data from the padded image if required</span>
+    <span class="k">if</span> <span class="n">copy_back</span><span class="p">:</span>
+        <span class="n">slices</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span> <span class="o">+</span> <span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">patch_size_</span><span class="p">,</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+        <span class="n">arr</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">arrpad</span><span class="p">[</span><span class="n">slices</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="get_valid_patch_size"><a class="viewcode-back" href="../../../data.html#monai.data.utils.get_valid_patch_size">[docs]</a><span class="k">def</span> <span class="nf">get_valid_patch_size</span><span class="p">(</span><span class="n">image_size</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">patch_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given an image of dimensions `image_size`, return a patch size tuple taking the dimension from `patch_size` if this is</span>
+<span class="sd">    not 0/None. Otherwise, or if `patch_size` is shorter than `image_size`, the dimension from `image_size` is taken. This ensures</span>
+<span class="sd">    the returned patch size is within the bounds of `image_size`. If `patch_size` is a single number this is interpreted as a</span>
+<span class="sd">    patch of the same dimensionality of `image_size` with that size in each dimension.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ndim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_size</span><span class="p">)</span>
+    <span class="n">patch_size_</span> <span class="o">=</span> <span class="n">ensure_tuple_size</span><span class="p">(</span><span class="n">patch_size</span><span class="p">,</span> <span class="n">ndim</span><span class="p">)</span>
+
+    <span class="c1"># ensure patch size dimensions are not larger than image dimension, if a dimension is None or 0 use whole dimension</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span> <span class="n">ps</span> <span class="ow">or</span> <span class="n">ms</span><span class="p">)</span> <span class="k">for</span> <span class="n">ms</span><span class="p">,</span> <span class="n">ps</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">image_size</span><span class="p">,</span> <span class="n">patch_size_</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="list_data_collate"><a class="viewcode-back" href="../../../data.html#monai.data.utils.list_data_collate">[docs]</a><span class="k">def</span> <span class="nf">list_data_collate</span><span class="p">(</span><span class="n">batch</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Enhancement for PyTorch DataLoader default collate.</span>
+<span class="sd">    If dataset already returns a list of batch data that generated in transforms, need to merge all data to 1 list.</span>
+<span class="sd">    Then it&#39;s same as the default collate behavior.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Need to use this collate if apply some transforms that can generate batch data.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">elem</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">batch</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">k</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">batch</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">elem</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">):</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">elem</span><span class="p">:</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="n">k</span>
+                <span class="n">ret</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_collate</span><span class="p">([</span><span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">ret</span>
+        <span class="k">return</span> <span class="n">default_collate</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">re</span><span class="p">:</span>
+        <span class="n">re_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">re</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;equal size&quot;</span> <span class="ow">in</span> <span class="n">re_str</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">re_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Collate error on the key &#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&#39; of dictionary data.&quot;</span>
+            <span class="n">re_str</span> <span class="o">+=</span> <span class="p">(</span>
+                <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">MONAI hint: if your transforms intentionally create images of different shapes, creating your &quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;`DataLoader` with `collate_fn=pad_list_data_collate` might solve this problem (check its &quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;documentation).&quot;</span>
+            <span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">re_str</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">re</span><span class="p">:</span>
+        <span class="n">re_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">re</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;numpy&quot;</span> <span class="ow">in</span> <span class="n">re_str</span> <span class="ow">and</span> <span class="s2">&quot;Tensor&quot;</span> <span class="ow">in</span> <span class="n">re_str</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">re_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Collate error on the key &#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&#39; of dictionary data.&quot;</span>
+            <span class="n">re_str</span> <span class="o">+=</span> <span class="p">(</span>
+                <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">MONAI hint: if your transforms intentionally create mixtures of torch Tensor and numpy ndarray, &quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;creating your `DataLoader` with `collate_fn=pad_list_data_collate` might solve this problem &quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;(check its documentation).&quot;</span>
+            <span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">re_str</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="decollate_batch"><a class="viewcode-back" href="../../../data.html#monai.data.utils.decollate_batch">[docs]</a><span class="k">def</span> <span class="nf">decollate_batch</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">detach</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;De-collate a batch of data (for example, as produced by a `DataLoader`).</span>
+
+<span class="sd">    Returns a list of structures with the original tensor&#39;s 0-th dimension sliced into elements using `torch.unbind`.</span>
+
+<span class="sd">    Images originally stored as (B,C,H,W,[D]) will be returned as (C,H,W,[D]). Other information,</span>
+<span class="sd">    such as metadata, may have been stored in a list (or a list inside nested dictionaries). In</span>
+<span class="sd">    this case we return the element of the list corresponding to the batch idx.</span>
+
+<span class="sd">    Return types aren&#39;t guaranteed to be the same as the original, since numpy arrays will have been</span>
+<span class="sd">    converted to torch.Tensor, sequences may be converted to lists of tensors,</span>
+<span class="sd">    mappings may be converted into dictionaries.</span>
+
+<span class="sd">    For example:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        batch_data = {</span>
+<span class="sd">            &quot;image&quot;: torch.rand((2,1,10,10)),</span>
+<span class="sd">            &quot;image_meta_dict&quot;: {&quot;scl_slope&quot;: torch.Tensor([0.0, 0.0])}</span>
+<span class="sd">        }</span>
+<span class="sd">        out = decollate_batch(batch_data)</span>
+<span class="sd">        print(len(out))</span>
+<span class="sd">        &gt;&gt;&gt; 2</span>
+
+<span class="sd">        print(out[0])</span>
+<span class="sd">        &gt;&gt;&gt; {&#39;image&#39;: tensor([[[4.3549e-01...43e-01]]]), &#39;image_meta_dict&#39;: {&#39;scl_slope&#39;: 0.0}}</span>
+
+<span class="sd">        batch_data = [torch.rand((2,1,10,10)), torch.rand((2,3,5,5))]</span>
+<span class="sd">        out = decollate_batch(batch_data)</span>
+<span class="sd">        print(out[0])</span>
+<span class="sd">        &gt;&gt;&gt; [tensor([[[4.3549e-01...43e-01]]], tensor([[[5.3435e-01...45e-01]]])]</span>
+
+<span class="sd">        batch_data = torch.rand((2,1,10,10))</span>
+<span class="sd">        out = decollate_batch(batch_data)</span>
+<span class="sd">        print(out[0])</span>
+<span class="sd">        &gt;&gt;&gt; tensor([[[4.3549e-01...43e-01]]])</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        batch: data to be de-collated.</span>
+<span class="sd">        detach: whether to detach the tensors. Scalars tensors will be detached into number types</span>
+<span class="sd">            instead of torch tensors.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">batch</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">batch</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">batch</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">detach</span><span class="p">:</span>
+            <span class="n">batch</span> <span class="o">=</span> <span class="n">batch</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">batch</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">batch</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="k">if</span> <span class="n">detach</span> <span class="k">else</span> <span class="n">batch</span>
+        <span class="n">out_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">unbind</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">out_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">detach</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">out_list</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">out_list</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">):</span>
+        <span class="n">_dict_list</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">decollate_batch</span><span class="p">(</span><span class="n">batch</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">detach</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">}</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">_dict_list</span><span class="p">,</span> <span class="n">item</span><span class="p">))</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">_dict_list</span><span class="o">.</span><span class="n">values</span><span class="p">())]</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+        <span class="n">item_0</span> <span class="o">=</span> <span class="n">first</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item_0</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item_0</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">))</span>
+            <span class="ow">or</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">item_0</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="ow">and</span> <span class="n">item_0</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="c1"># Not running the usual list decollate here:</span>
+            <span class="c1"># don&#39;t decollate [&#39;test&#39;, &#39;test&#39;] into [[&#39;t&#39;, &#39;t&#39;], [&#39;e&#39;, &#39;e&#39;], [&#39;s&#39;, &#39;s&#39;], [&#39;t&#39;, &#39;t&#39;]]</span>
+            <span class="c1"># torch.tensor(0) is iterable but iter(torch.tensor(0)) raises TypeError: iteration over a 0-d tensor</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">decollate_batch</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">detach</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">decollate_batch</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">detach</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">))]</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unable to de-collate: </span><span class="si">{</span><span class="n">batch</span><span class="si">}</span><span class="s2">, type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="rep_scalar_to_batch"><a class="viewcode-back" href="../../../data.html#monai.data.utils.rep_scalar_to_batch">[docs]</a><span class="k">def</span> <span class="nf">rep_scalar_to_batch</span><span class="p">(</span><span class="n">batch_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Utility tp replicate the scalar items of a list or dictionary to ensure all the items have batch dimension.</span>
+<span class="sd">    It leverages `decollate_batch(detach=False)` to filter out the scalar items.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_detect_batch_size</span><span class="p">(</span><span class="n">batch_data</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Detect the batch size from a list of data, some items in the list have batch dim, some not.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">batch_data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="ow">and</span> <span class="n">v</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">batch_data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">issequenceiterable</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;batch_data doesn&#39;t contain batched Tensor data, use the length of first sequence data.&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;failed to automatically detect the batch size.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">batch_data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="n">_detect_batch_size</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">batch_data</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+        <span class="n">dict_batch</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">batch_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">decollate_batch</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">detach</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">==</span> <span class="n">v</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="c1"># if decollating a list, the result may be the same list, so should skip this case</span>
+                <span class="n">dict_batch</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">decollate_batch</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">detach</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dict_batch</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+        <span class="k">return</span> <span class="n">dict_batch</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">batch_data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="n">_detect_batch_size</span><span class="p">(</span><span class="n">batch_data</span><span class="p">)</span>
+        <span class="n">list_batch</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">batch_data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">decollate_batch</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">detach</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">==</span> <span class="n">b</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">list_batch</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">decollate_batch</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">detach</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">list_batch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">list_batch</span>
+    <span class="c1"># if not dict or list, just return the original data</span>
+    <span class="k">return</span> <span class="n">batch_data</span></div>
+
+
+<div class="viewcode-block" id="pad_list_data_collate"><a class="viewcode-back" href="../../../data.html#monai.data.utils.pad_list_data_collate">[docs]</a><span class="k">def</span> <span class="nf">pad_list_data_collate</span><span class="p">(</span>
+    <span class="n">batch</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">,</span>
+    <span class="n">method</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Method</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Method</span><span class="o">.</span><span class="n">SYMMETRIC</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">NumpyPadMode</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">NumpyPadMode</span><span class="o">.</span><span class="n">CONSTANT</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function version of :py:class:`monai.transforms.croppad.batch.PadListDataCollate`.</span>
+
+<span class="sd">    Same as MONAI&#39;s ``list_data_collate``, except any tensors are centrally padded to match the shape of the biggest</span>
+<span class="sd">    tensor in each dimension. This transform is useful if some of the applied transforms generate batch data of</span>
+<span class="sd">    different sizes.</span>
+
+<span class="sd">    This can be used on both list and dictionary data. In the case of the dictionary data, this transform will be added</span>
+<span class="sd">    to the list of invertible transforms.</span>
+
+<span class="sd">    The inverse can be called using the static method: `monai.transforms.croppad.batch.PadListDataCollate.inverse`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        batch: batch of data to pad-collate</span>
+<span class="sd">        method: padding method (see :py:class:`monai.transforms.SpatialPad`)</span>
+<span class="sd">        mode: padding mode (see :py:class:`monai.transforms.SpatialPad`)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">monai.transforms.croppad.batch</span> <span class="kn">import</span> <span class="n">PadListDataCollate</span>  <span class="c1"># needs to be here to avoid circular import</span>
+
+    <span class="k">return</span> <span class="n">PadListDataCollate</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">mode</span><span class="p">)(</span><span class="n">batch</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="no_collation"><a class="viewcode-back" href="../../../data.html#monai.data.utils.no_collation">[docs]</a><span class="k">def</span> <span class="nf">no_collation</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    No any collation operation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="worker_init_fn"><a class="viewcode-back" href="../../../data.html#monai.data.utils.worker_init_fn">[docs]</a><span class="k">def</span> <span class="nf">worker_init_fn</span><span class="p">(</span><span class="n">worker_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Callback function for PyTorch DataLoader `worker_init_fn`.</span>
+<span class="sd">    It can set different random seed for the transforms in different workers.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">worker_info</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get_worker_info</span><span class="p">()</span>
+    <span class="n">set_rnd</span><span class="p">(</span><span class="n">worker_info</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">worker_info</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="set_rnd"><a class="viewcode-back" href="../../../data.html#monai.data.utils.set_rnd">[docs]</a><span class="k">def</span> <span class="nf">set_rnd</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set seed or random state for all randomisable properties of obj.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        seed: set the random state with an integer seed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;__dict__&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">seed</span>  <span class="c1"># no attribute</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;set_random_state&quot;</span><span class="p">):</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">set_random_state</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span> <span class="o">%</span> <span class="n">MAX_SEED</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">seed</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># a different seed for the next component</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;__&quot;</span><span class="p">):</span>  <span class="c1"># skip the private methods</span>
+            <span class="k">continue</span>
+        <span class="n">seed</span> <span class="o">=</span> <span class="n">set_rnd</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">seed</span></div>
+
+
+<div class="viewcode-block" id="correct_nifti_header_if_necessary"><a class="viewcode-back" href="../../../data.html#monai.data.utils.correct_nifti_header_if_necessary">[docs]</a><span class="k">def</span> <span class="nf">correct_nifti_header_if_necessary</span><span class="p">(</span><span class="n">img_nii</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check nifti object header&#39;s format, update the header if needed.</span>
+<span class="sd">    In the updated image pixdim matches the affine.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        img_nii: nifti image object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dim</span> <span class="o">=</span> <span class="n">img_nii</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;dim&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">dim</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">img_nii</span>  <span class="c1"># do nothing for high-dimensional array</span>
+    <span class="c1"># check that affine matches zooms</span>
+    <span class="n">pixdim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img_nii</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">get_zooms</span><span class="p">())[:</span><span class="n">dim</span><span class="p">]</span>
+    <span class="n">norm_affine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">img_nii</span><span class="o">.</span><span class="n">affine</span><span class="p">[:</span><span class="n">dim</span><span class="p">,</span> <span class="p">:</span><span class="n">dim</span><span class="p">]),</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">pixdim</span><span class="p">,</span> <span class="n">norm_affine</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">img_nii</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">img_nii</span><span class="p">,</span> <span class="s2">&quot;get_sform&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">rectify_header_sform_qform</span><span class="p">(</span><span class="n">img_nii</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">img_nii</span></div>
+
+
+<div class="viewcode-block" id="rectify_header_sform_qform"><a class="viewcode-back" href="../../../data.html#monai.data.utils.rectify_header_sform_qform">[docs]</a><span class="k">def</span> <span class="nf">rectify_header_sform_qform</span><span class="p">(</span><span class="n">img_nii</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Look at the sform and qform of the nifti object and correct it if any</span>
+<span class="sd">    incompatibilities with pixel dimensions</span>
+
+<span class="sd">    Adapted from https://github.com/NifTK/NiftyNet/blob/v0.6.0/niftynet/io/misc_io.py</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        img_nii: nifti image object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">img_nii</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;dim&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">pixdim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img_nii</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">get_zooms</span><span class="p">())[:</span><span class="n">d</span><span class="p">]</span>
+    <span class="n">sform</span><span class="p">,</span> <span class="n">qform</span> <span class="o">=</span> <span class="n">img_nii</span><span class="o">.</span><span class="n">get_sform</span><span class="p">(),</span> <span class="n">img_nii</span><span class="o">.</span><span class="n">get_qform</span><span class="p">()</span>
+    <span class="n">norm_sform</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">sform</span><span class="p">[:</span><span class="n">d</span><span class="p">,</span> <span class="p">:</span><span class="n">d</span><span class="p">]),</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">norm_qform</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">qform</span><span class="p">[:</span><span class="n">d</span><span class="p">,</span> <span class="p">:</span><span class="n">d</span><span class="p">]),</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">sform_mismatch</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">norm_sform</span><span class="p">,</span> <span class="n">pixdim</span><span class="p">)</span>
+    <span class="n">qform_mismatch</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">norm_qform</span><span class="p">,</span> <span class="n">pixdim</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">img_nii</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;sform_code&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">sform_mismatch</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">img_nii</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">qform_mismatch</span><span class="p">:</span>
+            <span class="n">img_nii</span><span class="o">.</span><span class="n">set_sform</span><span class="p">(</span><span class="n">img_nii</span><span class="o">.</span><span class="n">get_qform</span><span class="p">())</span>
+            <span class="k">return</span> <span class="n">img_nii</span>
+    <span class="k">if</span> <span class="n">img_nii</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;qform_code&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">qform_mismatch</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">img_nii</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">sform_mismatch</span><span class="p">:</span>
+            <span class="n">img_nii</span><span class="o">.</span><span class="n">set_qform</span><span class="p">(</span><span class="n">img_nii</span><span class="o">.</span><span class="n">get_sform</span><span class="p">())</span>
+            <span class="k">return</span> <span class="n">img_nii</span>
+
+    <span class="n">norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">img_nii</span><span class="o">.</span><span class="n">affine</span><span class="p">[:</span><span class="n">d</span><span class="p">,</span> <span class="p">:</span><span class="n">d</span><span class="p">]),</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Modifying image pixdim from </span><span class="si">{</span><span class="n">pixdim</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">norm</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">img_nii</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">set_zooms</span><span class="p">(</span><span class="n">norm</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">img_nii</span></div>
+
+
+<div class="viewcode-block" id="zoom_affine"><a class="viewcode-back" href="../../../data.html#monai.data.utils.zoom_affine">[docs]</a><span class="k">def</span> <span class="nf">zoom_affine</span><span class="p">(</span><span class="n">affine</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">diagonal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    To make column norm of `affine` the same as `scale`.  If diagonal is False,</span>
+<span class="sd">    returns an affine that combines orthogonal rotation and the new scale.</span>
+<span class="sd">    This is done by first decomposing `affine`, then setting the zoom factors to</span>
+<span class="sd">    `scale`, and composing a new affine; the shearing factors are removed.  If</span>
+<span class="sd">    diagonal is True, returns a diagonal matrix, the scaling factors are set</span>
+<span class="sd">    to the diagonal elements.  This function always return an affine with zero</span>
+<span class="sd">    translations.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        affine (nxn matrix): a square matrix.</span>
+<span class="sd">        scale: new scaling factor along each dimension. if the components of the `scale` are non-positive values,</span>
+<span class="sd">            will use the corresponding components of the origial pixdim, which is computed from the `affine`.</span>
+<span class="sd">        diagonal: whether to return a diagonal scaling matrix.</span>
+<span class="sd">            Defaults to True.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: When ``affine`` is not a square matrix.</span>
+<span class="sd">        ValueError: When ``scale`` contains a nonpositive scalar.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        the updated `n x n` affine.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">affine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">affine</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">affine</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">affine</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;affine must be n x n, got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">affine</span><span class="p">)</span><span class="si">}</span><span class="s2"> x </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">affine</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="n">scale_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">affine</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="c1"># compute original pixdim</span>
+    <span class="n">norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">affine</span><span class="p">),</span> <span class="mi">0</span><span class="p">))[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">scale_np</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">d</span><span class="p">:</span>  <span class="c1"># defaults based on affine</span>
+        <span class="n">scale_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scale_np</span><span class="p">,</span> <span class="n">norm</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">scale_np</span><span class="p">)</span> <span class="p">:])</span>
+    <span class="n">scale_np</span> <span class="o">=</span> <span class="n">scale_np</span><span class="p">[:</span><span class="n">d</span><span class="p">]</span>
+    <span class="n">scale_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">fall_back_tuple</span><span class="p">(</span><span class="n">scale_np</span><span class="p">,</span> <span class="n">norm</span><span class="p">))</span>
+
+    <span class="n">scale_np</span><span class="p">[</span><span class="n">scale_np</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="k">if</span> <span class="n">diagonal</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scale_np</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]))</span>
+    <span class="n">rzs</span> <span class="o">=</span> <span class="n">affine</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># rotation zoom scale</span>
+    <span class="n">zs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">rzs</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">rzs</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">rotation</span> <span class="o">=</span> <span class="n">rzs</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">zs</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">zs</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">scale_np</span><span class="p">)</span>
+    <span class="c1"># construct new affine with rotation and zoom</span>
+    <span class="n">new_affine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">affine</span><span class="p">))</span>
+    <span class="n">new_affine</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">rotation</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_affine</span></div>
+
+
+<div class="viewcode-block" id="compute_shape_offset"><a class="viewcode-back" href="../../../data.html#monai.data.utils.compute_shape_offset">[docs]</a><span class="k">def</span> <span class="nf">compute_shape_offset</span><span class="p">(</span>
+    <span class="n">spatial_shape</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">in_affine</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">out_affine</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given input and output affine, compute appropriate shapes</span>
+<span class="sd">    in the output space based on the input array&#39;s shape.</span>
+<span class="sd">    This function also returns the offset to put the shape</span>
+<span class="sd">    in a good position with respect to the world coordinate system.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spatial_shape: input array&#39;s shape</span>
+<span class="sd">        in_affine (matrix): 2D affine matrix</span>
+<span class="sd">        out_affine (matrix): 2D affine matrix</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">spatial_shape</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">sr</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">in_affine</span> <span class="o">=</span> <span class="n">to_affine_nd</span><span class="p">(</span><span class="n">sr</span><span class="p">,</span> <span class="n">in_affine</span><span class="p">)</span>
+    <span class="n">out_affine</span> <span class="o">=</span> <span class="n">to_affine_nd</span><span class="p">(</span><span class="n">sr</span><span class="p">,</span> <span class="n">out_affine</span><span class="p">)</span>
+    <span class="n">in_coords</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">dim</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">shape</span><span class="p">]</span>
+    <span class="n">corners</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="o">*</span><span class="n">in_coords</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s2">&quot;ij&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">corners</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">corners</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">corners</span><span class="p">[:</span><span class="mi">1</span><span class="p">])))</span>
+    <span class="n">corners</span> <span class="o">=</span> <span class="n">in_affine</span> <span class="o">@</span> <span class="n">corners</span>
+    <span class="n">corners_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">out_affine</span><span class="p">)</span> <span class="o">@</span> <span class="n">corners</span>
+    <span class="n">corners_out</span> <span class="o">=</span> <span class="n">corners_out</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">corners_out</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">out_shape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">corners_out</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">nib</span><span class="o">.</span><span class="n">io_orientation</span><span class="p">(</span><span class="n">in_affine</span><span class="p">),</span> <span class="n">nib</span><span class="o">.</span><span class="n">io_orientation</span><span class="p">(</span><span class="n">out_affine</span><span class="p">)):</span>
+        <span class="c1"># same orientation, get translate from the origin</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">in_affine</span> <span class="o">@</span> <span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">sr</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">offset</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">offset</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># different orientation, the min is the origin</span>
+        <span class="n">corners</span> <span class="o">=</span> <span class="n">corners</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">corners</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">corners</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out_shape</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span> <span class="n">offset</span></div>
+
+
+<div class="viewcode-block" id="to_affine_nd"><a class="viewcode-back" href="../../../data.html#monai.data.utils.to_affine_nd">[docs]</a><span class="k">def</span> <span class="nf">to_affine_nd</span><span class="p">(</span><span class="n">r</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">affine</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Using elements from affine, to create a new affine matrix by</span>
+<span class="sd">    assigning the rotation/zoom/scaling matrix and the translation vector.</span>
+
+<span class="sd">    when ``r`` is an integer, output is an (r+1)x(r+1) matrix,</span>
+<span class="sd">    where the top left kxk elements are copied from ``affine``,</span>
+<span class="sd">    the last column of the output affine is copied from ``affine``&#39;s last column.</span>
+<span class="sd">    `k` is determined by `min(r, len(affine) - 1)`.</span>
+
+<span class="sd">    when ``r`` is an affine matrix, the output has the same as ``r``,</span>
+<span class="sd">    the top left kxk elements are  copied from ``affine``,</span>
+<span class="sd">    the last column of the output affine is copied from ``affine``&#39;s last column.</span>
+<span class="sd">    `k` is determined by `min(len(r) - 1, len(affine) - 1)`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        r (int or matrix): number of spatial dimensions or an output affine to be filled.</span>
+<span class="sd">        affine (matrix): 2D affine matrix</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: When ``affine`` dimensions is not 2.</span>
+<span class="sd">        ValueError: When ``r`` is nonpositive.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        an (r+1) x (r+1) matrix</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">affine_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">affine</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">affine_np</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;affine must have 2 dimensions, got </span><span class="si">{</span><span class="n">affine_np</span><span class="o">.</span><span class="n">ndim</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="n">new_affine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">new_affine</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">sr</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">new_affine</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">sr</span><span class="p">)</span> <span class="ow">or</span> <span class="n">sr</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;r must be positive, got </span><span class="si">{</span><span class="n">sr</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="n">new_affine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">sr</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new_affine</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">affine_np</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">new_affine</span><span class="p">[:</span><span class="n">d</span><span class="p">,</span> <span class="p">:</span><span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="n">affine_np</span><span class="p">[:</span><span class="n">d</span><span class="p">,</span> <span class="p">:</span><span class="n">d</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">new_affine</span><span class="p">[:</span><span class="n">d</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">affine_np</span><span class="p">[:</span><span class="n">d</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">new_affine</span></div>
+
+
+<div class="viewcode-block" id="create_file_basename"><a class="viewcode-back" href="../../../data.html#monai.data.utils.create_file_basename">[docs]</a><span class="k">def</span> <span class="nf">create_file_basename</span><span class="p">(</span>
+    <span class="n">postfix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">input_file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">folder_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">data_root_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">patch_index</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Utility function to create the path to the output file based on the input</span>
+<span class="sd">    filename (file name extension is not added by this function).</span>
+<span class="sd">    When `data_root_dir` is not specified, the output file name is:</span>
+
+<span class="sd">        `folder_path/input_file_name (no ext.) /input_file_name (no ext.)[_postfix]`</span>
+
+<span class="sd">    otherwise the relative path with respect to `data_root_dir` will be inserted, for example:</span>
+<span class="sd">    input_file_name: /foo/bar/test1/image.png,</span>
+<span class="sd">    postfix: seg</span>
+<span class="sd">    folder_path: /output,</span>
+<span class="sd">    data_root_dir: /foo/bar,</span>
+<span class="sd">    output will be: /output/test1/image/image_seg</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        postfix: output name&#39;s postfix</span>
+<span class="sd">        input_file_name: path to the input image file.</span>
+<span class="sd">        folder_path: path for the output file</span>
+<span class="sd">        data_root_dir: if not empty, it specifies the beginning parts of the input file&#39;s</span>
+<span class="sd">            absolute path. This is used to compute `input_file_rel_path`, the relative path to the file from</span>
+<span class="sd">            `data_root_dir` to preserve folder structure when saving in case there are files in different</span>
+<span class="sd">            folders with the same file names.</span>
+<span class="sd">        patch_index: if not None, append the patch index to filename.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># get the filename and directory</span>
+    <span class="n">filedir</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">input_file_name</span><span class="p">)</span>
+    <span class="c1"># remove extension</span>
+    <span class="n">filename</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ext</span> <span class="o">==</span> <span class="s2">&quot;.gz&quot;</span><span class="p">:</span>
+        <span class="n">filename</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="c1"># use data_root_dir to find relative path to file</span>
+    <span class="n">filedir_rel_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">data_root_dir</span> <span class="ow">and</span> <span class="n">filedir</span><span class="p">:</span>
+        <span class="n">filedir_rel_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">relpath</span><span class="p">(</span><span class="n">filedir</span><span class="p">,</span> <span class="n">data_root_dir</span><span class="p">)</span>
+
+    <span class="c1"># sub-folder path will be original name without the extension</span>
+    <span class="n">subfolder_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder_path</span><span class="p">,</span> <span class="n">filedir_rel_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">subfolder_path</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">subfolder_path</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">postfix</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># add the sub-folder plus the postfix name to become the file basename in the output path</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">subfolder_path</span><span class="p">,</span> <span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">postfix</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">subfolder_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">patch_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{</span><span class="n">patch_index</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">output</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="compute_importance_map"><a class="viewcode-back" href="../../../data.html#monai.data.utils.compute_importance_map">[docs]</a><span class="k">def</span> <span class="nf">compute_importance_map</span><span class="p">(</span>
+    <span class="n">patch_size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">BlendMode</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">BlendMode</span><span class="o">.</span><span class="n">CONSTANT</span><span class="p">,</span>
+    <span class="n">sigma_scale</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.125</span><span class="p">,</span>
+    <span class="n">device</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;cpu&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Get importance map for different weight modes.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        patch_size: Size of the required importance map. This should be either H, W [,D].</span>
+<span class="sd">        mode: {``&quot;constant&quot;``, ``&quot;gaussian&quot;``}</span>
+<span class="sd">            How to blend output of overlapping windows. Defaults to ``&quot;constant&quot;``.</span>
+
+<span class="sd">            - ``&quot;constant``&quot;: gives equal weight to all predictions.</span>
+<span class="sd">            - ``&quot;gaussian``&quot;: gives less weight to predictions on edges of windows.</span>
+
+<span class="sd">        sigma_scale: Sigma_scale to calculate sigma for each dimension</span>
+<span class="sd">            (sigma = sigma_scale * dim_size). Used for gaussian mode only.</span>
+<span class="sd">        device: Device to put importance map on.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: When ``mode`` is not one of [&quot;constant&quot;, &quot;gaussian&quot;].</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Tensor of size patch_size.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mode</span> <span class="o">=</span> <span class="n">BlendMode</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>  <span class="c1"># type: ignore[arg-type]</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">BlendMode</span><span class="o">.</span><span class="n">CONSTANT</span><span class="p">:</span>
+        <span class="n">importance_map</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">patch_size</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">BlendMode</span><span class="o">.</span><span class="n">GAUSSIAN</span><span class="p">:</span>
+        <span class="n">center_coords</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">//</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">patch_size</span><span class="p">]</span>
+        <span class="n">sigma_scale</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">sigma_scale</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">patch_size</span><span class="p">))</span>
+        <span class="n">sigmas</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">sigma_s</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sigma_s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">patch_size</span><span class="p">,</span> <span class="n">sigma_scale</span><span class="p">)]</span>
+
+        <span class="n">importance_map</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">patch_size</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">importance_map</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">center_coords</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">pt_gaussian</span> <span class="o">=</span> <span class="n">GaussianFilter</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">patch_size</span><span class="p">),</span> <span class="n">sigmas</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+        <span class="n">importance_map</span> <span class="o">=</span> <span class="n">pt_gaussian</span><span class="p">(</span><span class="n">importance_map</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="n">importance_map</span> <span class="o">=</span> <span class="n">importance_map</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">importance_map</span> <span class="o">=</span> <span class="n">importance_map</span> <span class="o">/</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">importance_map</span><span class="p">)</span>
+        <span class="n">importance_map</span> <span class="o">=</span> <span class="n">importance_map</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+
+        <span class="c1"># importance_map cannot be 0, otherwise we may end up with nans!</span>
+        <span class="n">min_non_zero</span> <span class="o">=</span> <span class="n">importance_map</span><span class="p">[</span><span class="n">importance_map</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">importance_map</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">importance_map</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="n">min_non_zero</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Unsupported mode: </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">, available options are [</span><span class="si">{</span><span class="n">BlendMode</span><span class="o">.</span><span class="n">CONSTANT</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">BlendMode</span><span class="o">.</span><span class="n">CONSTANT</span><span class="si">}</span><span class="s2">].&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">importance_map</span></div>
+
+
+<div class="viewcode-block" id="is_supported_format"><a class="viewcode-back" href="../../../data.html#monai.data.utils.is_supported_format">[docs]</a><span class="k">def</span> <span class="nf">is_supported_format</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n">suffixes</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Verify whether the specified file or files format match supported suffixes.</span>
+<span class="sd">    If supported suffixes is None, skip the verification and return True.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename: file name or a list of file names to read.</span>
+<span class="sd">            if a list of files, verify all the suffixes.</span>
+<span class="sd">        suffixes: all the supported image suffixes of current reader, must be a list of lower case suffixes.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">filenames</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">ensure_tuple</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+        <span class="n">tokens</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">PurePath</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">suffixes</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">all</span><span class="p">(</span><span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">suffixes</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="partition_dataset"><a class="viewcode-back" href="../../../data.html#monai.data.utils.partition_dataset">[docs]</a><span class="k">def</span> <span class="nf">partition_dataset</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">,</span>
+    <span class="n">ratios</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">num_partitions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">drop_last</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">even_divisible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Split the dataset into N partitions. It can support shuffle based on specified random seed.</span>
+<span class="sd">    Will return a set of datasets, every dataset contains 1 partition of original dataset.</span>
+<span class="sd">    And it can split the dataset based on specified ratios or evenly split into `num_partitions`.</span>
+<span class="sd">    Refer to: https://pytorch.org/docs/stable/distributed.html#module-torch.distributed.launch.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        It also can be used to partition dataset for ranks in distributed training.</span>
+<span class="sd">        For example, partition dataset before training and use `CacheDataset`, every rank trains with its own data.</span>
+<span class="sd">        It can avoid duplicated caching content in each rank, but will not do global shuffle before every epoch:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            data_partition = partition_dataset(</span>
+<span class="sd">                data=train_files,</span>
+<span class="sd">                num_partitions=dist.get_world_size(),</span>
+<span class="sd">                shuffle=True,</span>
+<span class="sd">                even_divisible=True,</span>
+<span class="sd">            )[dist.get_rank()]</span>
+
+<span class="sd">            train_ds = SmartCacheDataset(</span>
+<span class="sd">                data=data_partition,</span>
+<span class="sd">                transform=train_transforms,</span>
+<span class="sd">                replace_rate=0.2,</span>
+<span class="sd">                cache_num=15,</span>
+<span class="sd">            )</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data: input dataset to split, expect a list of data.</span>
+<span class="sd">        ratios: a list of ratio number to split the dataset, like [8, 1, 1].</span>
+<span class="sd">        num_partitions: expected number of the partitions to evenly split, only works when `ratios` not specified.</span>
+<span class="sd">        shuffle: whether to shuffle the original dataset before splitting.</span>
+<span class="sd">        seed: random seed to shuffle the dataset, only works when `shuffle` is True.</span>
+<span class="sd">        drop_last: only works when `even_divisible` is False and no ratios specified.</span>
+<span class="sd">            if True, will drop the tail of the data to make it evenly divisible across partitions.</span>
+<span class="sd">            if False, will add extra indices to make the data evenly divisible across partitions.</span>
+<span class="sd">        even_divisible: if True, guarantee every partition has same length.</span>
+
+<span class="sd">    Examples::</span>
+
+<span class="sd">        &gt;&gt;&gt; data = [1, 2, 3, 4, 5]</span>
+<span class="sd">        &gt;&gt;&gt; partition_dataset(data, ratios=[0.6, 0.2, 0.2], shuffle=False)</span>
+<span class="sd">        [[1, 2, 3], [4], [5]]</span>
+<span class="sd">        &gt;&gt;&gt; partition_dataset(data, num_partitions=2, shuffle=False)</span>
+<span class="sd">        [[1, 3, 5], [2, 4]]</span>
+<span class="sd">        &gt;&gt;&gt; partition_dataset(data, num_partitions=2, shuffle=False, even_divisible=True, drop_last=True)</span>
+<span class="sd">        [[1, 3], [2, 4]]</span>
+<span class="sd">        &gt;&gt;&gt; partition_dataset(data, num_partitions=2, shuffle=False, even_divisible=True, drop_last=False)</span>
+<span class="sd">        [[1, 3, 5], [2, 4, 1]]</span>
+<span class="sd">        &gt;&gt;&gt; partition_dataset(data, num_partitions=2, shuffle=False, even_divisible=False, drop_last=False)</span>
+<span class="sd">        [[1, 3, 5], [2, 4]]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">datasets</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">data_len</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">shuffle</span><span class="p">:</span>
+        <span class="c1"># deterministically shuffle based on fixed seed for every process</span>
+        <span class="n">rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="n">rs</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ratios</span><span class="p">:</span>
+        <span class="n">next_idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">rsum</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ratios</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ratios</span><span class="p">:</span>
+            <span class="n">start_idx</span> <span class="o">=</span> <span class="n">next_idx</span>
+            <span class="n">next_idx</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">start_idx</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span> <span class="o">/</span> <span class="n">rsum</span> <span class="o">*</span> <span class="n">data_len</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">data_len</span><span class="p">)</span>
+            <span class="n">datasets</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">[</span><span class="n">start_idx</span><span class="p">:</span><span class="n">next_idx</span><span class="p">]])</span>
+        <span class="k">return</span> <span class="n">datasets</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">num_partitions</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;must specify number of partitions or ratios.&quot;</span><span class="p">)</span>
+    <span class="c1"># evenly split the data without ratios</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">even_divisible</span> <span class="ow">and</span> <span class="n">drop_last</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;drop_last only works when even_divisible is True.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">data_len</span> <span class="o">&lt;</span> <span class="n">num_partitions</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;there is no enough data to be split into </span><span class="si">{</span><span class="n">num_partitions</span><span class="si">}</span><span class="s2"> partitions.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">drop_last</span> <span class="ow">and</span> <span class="n">data_len</span> <span class="o">%</span> <span class="n">num_partitions</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># split to nearest available length that is evenly divisible</span>
+        <span class="n">num_samples</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">((</span><span class="n">data_len</span> <span class="o">-</span> <span class="n">num_partitions</span><span class="p">)</span> <span class="o">/</span> <span class="n">num_partitions</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">num_samples</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">data_len</span> <span class="o">/</span> <span class="n">num_partitions</span><span class="p">)</span>
+    <span class="c1"># use original data length if not even divisible</span>
+    <span class="n">total_size</span> <span class="o">=</span> <span class="n">num_samples</span> <span class="o">*</span> <span class="n">num_partitions</span> <span class="k">if</span> <span class="n">even_divisible</span> <span class="k">else</span> <span class="n">data_len</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">drop_last</span> <span class="ow">and</span> <span class="n">total_size</span> <span class="o">-</span> <span class="n">data_len</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># add extra samples to make it evenly divisible</span>
+        <span class="n">indices</span> <span class="o">+=</span> <span class="n">indices</span><span class="p">[:</span> <span class="p">(</span><span class="n">total_size</span> <span class="o">-</span> <span class="n">data_len</span><span class="p">)]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># remove tail of data to make it evenly divisible</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[:</span><span class="n">total_size</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_partitions</span><span class="p">):</span>
+        <span class="n">_indices</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">total_size</span><span class="p">:</span><span class="n">num_partitions</span><span class="p">]</span>
+        <span class="n">datasets</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">_indices</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">datasets</span></div>
+
+
+<div class="viewcode-block" id="partition_dataset_classes"><a class="viewcode-back" href="../../../data.html#monai.data.utils.partition_dataset_classes">[docs]</a><span class="k">def</span> <span class="nf">partition_dataset_classes</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">,</span>
+    <span class="n">classes</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+    <span class="n">ratios</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">num_partitions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">drop_last</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">even_divisible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Split the dataset into N partitions based on the given class labels.</span>
+<span class="sd">    It can make sure the same ratio of classes in every partition.</span>
+<span class="sd">    Others are same as :py:class:`monai.data.partition_dataset`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data: input dataset to split, expect a list of data.</span>
+<span class="sd">        classes: a list of labels to help split the data, the length must match the length of data.</span>
+<span class="sd">        ratios: a list of ratio number to split the dataset, like [8, 1, 1].</span>
+<span class="sd">        num_partitions: expected number of the partitions to evenly split, only works when no `ratios`.</span>
+<span class="sd">        shuffle: whether to shuffle the original dataset before splitting.</span>
+<span class="sd">        seed: random seed to shuffle the dataset, only works when `shuffle` is True.</span>
+<span class="sd">        drop_last: only works when `even_divisible` is False and no ratios specified.</span>
+<span class="sd">            if True, will drop the tail of the data to make it evenly divisible across partitions.</span>
+<span class="sd">            if False, will add extra indices to make the data evenly divisible across partitions.</span>
+<span class="sd">        even_divisible: if True, guarantee every partition has same length.</span>
+
+<span class="sd">    Examples::</span>
+
+<span class="sd">        &gt;&gt;&gt; data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]</span>
+<span class="sd">        &gt;&gt;&gt; classes = [2, 0, 2, 1, 3, 2, 2, 0, 2, 0, 3, 3, 1, 3]</span>
+<span class="sd">        &gt;&gt;&gt; partition_dataset_classes(data, classes, shuffle=False, ratios=[2, 1])</span>
+<span class="sd">        [[2, 8, 4, 1, 3, 6, 5, 11, 12], [10, 13, 7, 9, 14]]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">classes</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;length of classes </span><span class="si">{</span><span class="n">classes</span><span class="si">}</span><span class="s2"> must match the dataset length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="n">datasets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">class_indices</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">classes</span><span class="p">):</span>
+        <span class="n">class_indices</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="n">class_partition_indices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Sequence</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">per_class_indices</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">class_indices</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+        <span class="n">per_class_partition_indices</span> <span class="o">=</span> <span class="n">partition_dataset</span><span class="p">(</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">per_class_indices</span><span class="p">,</span>
+            <span class="n">ratios</span><span class="o">=</span><span class="n">ratios</span><span class="p">,</span>
+            <span class="n">num_partitions</span><span class="o">=</span><span class="n">num_partitions</span><span class="p">,</span>
+            <span class="n">shuffle</span><span class="o">=</span><span class="n">shuffle</span><span class="p">,</span>
+            <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span>
+            <span class="n">drop_last</span><span class="o">=</span><span class="n">drop_last</span><span class="p">,</span>
+            <span class="n">even_divisible</span><span class="o">=</span><span class="n">even_divisible</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">class_partition_indices</span><span class="p">:</span>
+            <span class="n">class_partition_indices</span> <span class="o">=</span> <span class="n">per_class_partition_indices</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">part</span><span class="p">,</span> <span class="n">data_indices</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">class_partition_indices</span><span class="p">,</span> <span class="n">per_class_partition_indices</span><span class="p">):</span>
+                <span class="n">part</span> <span class="o">+=</span> <span class="n">data_indices</span>
+
+    <span class="n">rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">indices</span> <span class="ow">in</span> <span class="n">class_partition_indices</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">shuffle</span><span class="p">:</span>
+            <span class="n">rs</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+        <span class="n">datasets</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">datasets</span></div>
+
+
+<div class="viewcode-block" id="select_cross_validation_folds"><a class="viewcode-back" href="../../../data.html#monai.data.utils.select_cross_validation_folds">[docs]</a><span class="k">def</span> <span class="nf">select_cross_validation_folds</span><span class="p">(</span><span class="n">partitions</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Iterable</span><span class="p">],</span> <span class="n">folds</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Select cross validation data based on data partitions and specified fold index.</span>
+<span class="sd">    if a list of fold indices is provided, concatenate the partitions of these folds.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        partitions: a sequence of datasets, each item is a iterable</span>
+<span class="sd">        folds: the indices of the partitions to be combined.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A list of combined datasets.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        &gt;&gt;&gt; partitions = [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10]]</span>
+<span class="sd">        &gt;&gt;&gt; select_cross_validation_folds(partitions, 2)</span>
+<span class="sd">        [5, 6]</span>
+<span class="sd">        &gt;&gt;&gt; select_cross_validation_folds(partitions, [1, 2])</span>
+<span class="sd">        [3, 4, 5, 6]</span>
+<span class="sd">        &gt;&gt;&gt; select_cross_validation_folds(partitions, [-1, 2])</span>
+<span class="sd">        [9, 10, 5, 6]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">data_item</span> <span class="k">for</span> <span class="n">fold_id</span> <span class="ow">in</span> <span class="n">ensure_tuple</span><span class="p">(</span><span class="n">folds</span><span class="p">)</span> <span class="k">for</span> <span class="n">data_item</span> <span class="ow">in</span> <span class="n">partitions</span><span class="p">[</span><span class="n">fold_id</span><span class="p">]]</span></div>
+
+
+<div class="viewcode-block" id="json_hashing"><a class="viewcode-back" href="../../../data.html#monai.data.utils.json_hashing">[docs]</a><span class="k">def</span> <span class="nf">json_hashing</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        item: data item to be hashed</span>
+
+<span class="sd">    Returns: the corresponding hash key</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: Find way to hash transforms content as part of the cache</span>
+    <span class="n">cache_key</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cache_key</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="pickle_hashing"><a class="viewcode-back" href="../../../data.html#monai.data.utils.pickle_hashing">[docs]</a><span class="k">def</span> <span class="nf">pickle_hashing</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">HIGHEST_PROTOCOL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        item: data item to be hashed</span>
+<span class="sd">        protocol: protocol version used for pickling,</span>
+<span class="sd">            defaults to `pickle.HIGHEST_PROTOCOL`.</span>
+
+<span class="sd">    Returns: the corresponding hash key</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cache_key</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">sorted_dict</span><span class="p">(</span><span class="n">item</span><span class="p">),</span> <span class="n">protocol</span><span class="o">=</span><span class="n">protocol</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cache_key</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="sorted_dict"><a class="viewcode-back" href="../../../data.html#monai.data.utils.sorted_dict">[docs]</a><span class="k">def</span> <span class="nf">sorted_dict</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return a new sorted dictionary from the `item`.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">item</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">sorted_dict</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="n">reverse</span><span class="p">)}</span></div>
+
+
+<div class="viewcode-block" id="convert_tables_to_dicts"><a class="viewcode-back" href="../../../data.html#monai.data.utils.convert_tables_to_dicts">[docs]</a><span class="k">def</span> <span class="nf">convert_tables_to_dicts</span><span class="p">(</span>
+    <span class="n">dfs</span><span class="p">,</span>
+    <span class="n">row_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">col_names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">col_types</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">col_groups</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Utility to join pandas tables, select rows, columns and generate groups.</span>
+<span class="sd">    Will return a list of dictionaries, every dictionary maps to a row of data in tables.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dfs: data table in pandas Dataframe format. if providing a list of tables, will join them.</span>
+<span class="sd">        row_indices: indices of the expected rows to load. it should be a list,</span>
+<span class="sd">            every item can be a int number or a range `[start, end)` for the indices.</span>
+<span class="sd">            for example: `row_indices=[[0, 100], 200, 201, 202, 300]`. if None,</span>
+<span class="sd">            load all the rows in the file.</span>
+<span class="sd">        col_names: names of the expected columns to load. if None, load all the columns.</span>
+<span class="sd">        col_types: `type` and `default value` to convert the loaded columns, if None, use original data.</span>
+<span class="sd">            it should be a dictionary, every item maps to an expected column, the `key` is the column</span>
+<span class="sd">            name and the `value` is None or a dictionary to define the default value and data type.</span>
+<span class="sd">            the supported keys in dictionary are: [&quot;type&quot;, &quot;default&quot;], and note that the value of `default`</span>
+<span class="sd">            should not be `None`. for example::</span>
+
+<span class="sd">                col_types = {</span>
+<span class="sd">                    &quot;subject_id&quot;: {&quot;type&quot;: str},</span>
+<span class="sd">                    &quot;label&quot;: {&quot;type&quot;: int, &quot;default&quot;: 0},</span>
+<span class="sd">                    &quot;ehr_0&quot;: {&quot;type&quot;: float, &quot;default&quot;: 0.0},</span>
+<span class="sd">                    &quot;ehr_1&quot;: {&quot;type&quot;: float, &quot;default&quot;: 0.0},</span>
+<span class="sd">                }</span>
+
+<span class="sd">        col_groups: args to group the loaded columns to generate a new column,</span>
+<span class="sd">            it should be a dictionary, every item maps to a group, the `key` will</span>
+<span class="sd">            be the new column name, the `value` is the names of columns to combine. for example:</span>
+<span class="sd">            `col_groups={&quot;ehr&quot;: [f&quot;ehr_{i}&quot; for i in range(10)], &quot;meta&quot;: [&quot;meta_1&quot;, &quot;meta_2&quot;]}`</span>
+<span class="sd">        kwargs: additional arguments for `pandas.merge()` API to join tables.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="n">ensure_tuple</span><span class="p">(</span><span class="n">dfs</span><span class="p">))</span>
+    <span class="c1"># parse row indices</span>
+    <span class="n">rows</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">row_indices</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># type: ignore</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">row_indices</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;range of row indices must contain 2 values: start and end.&quot;</span><span class="p">)</span>
+                <span class="n">rows</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="c1"># convert to a list of dictionaries corresponding to every row</span>
+    <span class="n">data_</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">rows</span><span class="p">]</span> <span class="k">if</span> <span class="n">col_names</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">rows</span><span class="p">,</span> <span class="n">col_names</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">col_types</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="c1"># fill default values for NaN</span>
+        <span class="n">defaults</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;default&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">col_types</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">}</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">defaults</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">data_</span> <span class="o">=</span> <span class="n">data_</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">defaults</span><span class="p">)</span>
+        <span class="c1"># convert data types</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">col_types</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="s2">&quot;type&quot;</span> <span class="ow">in</span> <span class="n">v</span><span class="p">}</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">types</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">data_</span> <span class="o">=</span> <span class="n">data_</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">types</span><span class="p">)</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
+
+    <span class="c1"># group columns to generate new column</span>
+    <span class="k">if</span> <span class="n">col_groups</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">groups</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">cols</span> <span class="ow">in</span> <span class="n">col_groups</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">groups</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="c1"># invert items of groups to every row of data</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">groups</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="n">data</span></div>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2020 - 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

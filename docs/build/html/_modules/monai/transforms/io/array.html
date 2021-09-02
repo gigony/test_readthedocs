@@ -1,0 +1,489 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monai.transforms.io.array &#8212; MONAI 0.6.0 Documentation</title>
+    
+  <link href="../../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../../index.html">
+  <img src="../../../../_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for monai.transforms.io.array</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 - 2021 MONAI Consortium</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">A collection of &quot;vanilla&quot; transforms for IO functions</span>
+<span class="sd">https://github.com/Project-MONAI/MONAI/wiki/MONAI_Design</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="kn">from</span> <span class="nn">monai.config</span> <span class="kn">import</span> <span class="n">DtypeLike</span>
+<span class="kn">from</span> <span class="nn">monai.data.image_reader</span> <span class="kn">import</span> <span class="n">ImageReader</span><span class="p">,</span> <span class="n">ITKReader</span><span class="p">,</span> <span class="n">NibabelReader</span><span class="p">,</span> <span class="n">NumpyReader</span><span class="p">,</span> <span class="n">PILReader</span>
+<span class="kn">from</span> <span class="nn">monai.data.nifti_saver</span> <span class="kn">import</span> <span class="n">NiftiSaver</span>
+<span class="kn">from</span> <span class="nn">monai.data.png_saver</span> <span class="kn">import</span> <span class="n">PNGSaver</span>
+<span class="kn">from</span> <span class="nn">monai.transforms.transform</span> <span class="kn">import</span> <span class="n">Transform</span>
+<span class="kn">from</span> <span class="nn">monai.utils</span> <span class="kn">import</span> <span class="n">GridSampleMode</span><span class="p">,</span> <span class="n">GridSamplePadMode</span>
+<span class="kn">from</span> <span class="nn">monai.utils</span> <span class="kn">import</span> <span class="n">ImageMetaKey</span> <span class="k">as</span> <span class="n">Key</span>
+<span class="kn">from</span> <span class="nn">monai.utils</span> <span class="kn">import</span> <span class="n">InterpolateMode</span><span class="p">,</span> <span class="n">ensure_tuple</span><span class="p">,</span> <span class="n">optional_import</span>
+
+<span class="n">nib</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">optional_import</span><span class="p">(</span><span class="s2">&quot;nibabel&quot;</span><span class="p">)</span>
+<span class="n">Image</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">optional_import</span><span class="p">(</span><span class="s2">&quot;PIL.Image&quot;</span><span class="p">)</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;LoadImage&quot;</span><span class="p">,</span> <span class="s2">&quot;SaveImage&quot;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">switch_endianness</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">new</span><span class="o">=</span><span class="s2">&quot;&lt;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert the input `data` endianness to `new`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data: input to be converted.</span>
+<span class="sd">        new: the target endianness, currently support &quot;&lt;&quot; or &quot;&gt;&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="c1"># default to system endian</span>
+        <span class="n">sys_native</span> <span class="o">=</span> <span class="p">((</span><span class="n">sys</span><span class="o">.</span><span class="n">byteorder</span> <span class="o">==</span> <span class="s2">&quot;little&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;&lt;&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&gt;&quot;</span>
+        <span class="n">current_</span> <span class="o">=</span> <span class="n">sys_native</span> <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">byteorder</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;&lt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">byteorder</span>
+        <span class="k">if</span> <span class="n">new</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;&lt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Not implemented option new=</span><span class="si">{</span><span class="n">new</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">current_</span> <span class="o">!=</span> <span class="n">new</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">byteswap</span><span class="p">()</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">switch_endianness</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">new</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">switch_endianness</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">new</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">switch_endianness</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">new</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))):</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+
+<div class="viewcode-block" id="LoadImage"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.LoadImage">[docs]</a><span class="k">class</span> <span class="nc">LoadImage</span><span class="p">(</span><span class="n">Transform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load image file or files from provided path based on reader.</span>
+<span class="sd">    Automatically choose readers based on the supported suffixes and in below order:</span>
+<span class="sd">    - User specified reader at runtime when call this loader.</span>
+<span class="sd">    - Registered readers from the latest to the first in list.</span>
+<span class="sd">    - Default readers: (nii, nii.gz -&gt; NibabelReader), (png, jpg, bmp -&gt; PILReader),</span>
+<span class="sd">    (npz, npy -&gt; NumpyReader), (others -&gt; ITKReader).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LoadImage.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.LoadImage.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">reader</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">ImageReader</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">image_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="p">:</span> <span class="n">DtypeLike</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            reader: register reader to load image file and meta data, if None, still can register readers</span>
+<span class="sd">                at runtime or use the default readers. If a string of reader name provided, will construct</span>
+<span class="sd">                a reader object with the `*args` and `**kwargs` parameters, supported reader name: &quot;NibabelReader&quot;,</span>
+<span class="sd">                &quot;PILReader&quot;, &quot;ITKReader&quot;, &quot;NumpyReader&quot;.</span>
+<span class="sd">            image_only: if True return only the image volume, otherwise return image data array and header dict.</span>
+<span class="sd">            dtype: if not None convert the loaded image to this data type.</span>
+<span class="sd">            args: additional parameters for reader if providing a reader name.</span>
+<span class="sd">            kwargs: additional parameters for reader if providing a reader name.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            The transform returns image data array if `image_only` is True,</span>
+<span class="sd">            or a tuple of two elements containing the data array, and the meta data in a dict format otherwise.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># set predefined readers as default</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">readers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ImageReader</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">ITKReader</span><span class="p">(),</span> <span class="n">NumpyReader</span><span class="p">(),</span> <span class="n">PILReader</span><span class="p">(),</span> <span class="n">NibabelReader</span><span class="p">()]</span>
+        <span class="k">if</span> <span class="n">reader</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">supported_readers</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;nibabelreader&quot;</span><span class="p">:</span> <span class="n">NibabelReader</span><span class="p">,</span>
+                    <span class="s2">&quot;pilreader&quot;</span><span class="p">:</span> <span class="n">PILReader</span><span class="p">,</span>
+                    <span class="s2">&quot;itkreader&quot;</span><span class="p">:</span> <span class="n">ITKReader</span><span class="p">,</span>
+                    <span class="s2">&quot;numpyreader&quot;</span><span class="p">:</span> <span class="n">NumpyReader</span><span class="p">,</span>
+                <span class="p">}</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">reader</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">supported_readers</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unsupported reader type: </span><span class="si">{</span><span class="n">reader</span><span class="si">}</span><span class="s2">, available options: </span><span class="si">{</span><span class="n">supported_readers</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">supported_readers</span><span class="p">[</span><span class="n">reader</span><span class="p">](</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_only</span> <span class="o">=</span> <span class="n">image_only</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="n">dtype</span></div>
+
+<div class="viewcode-block" id="LoadImage.register"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.LoadImage.register">[docs]</a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reader</span><span class="p">:</span> <span class="n">ImageReader</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ImageReader</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Register image reader to load image file and meta data, latest registered reader has higher priority.</span>
+<span class="sd">        Return all the registered image readers.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            reader: registered reader to load image file and meta data based on suffix,</span>
+<span class="sd">                if all registered readers can&#39;t match suffix at runtime, use the default readers.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="n">ImageReader</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;reader must be ImageReader object, but got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">readers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">readers</span></div>
+
+<div class="viewcode-block" id="LoadImage.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.LoadImage.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">filename</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">reader</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ImageReader</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            filename: path file or file-like object or a list of files.</span>
+<span class="sd">                will save the filename to meta_data with key `filename_or_obj`.</span>
+<span class="sd">                if provided a list of files, use the filename of first file.</span>
+<span class="sd">            reader: runtime reader to load image file and meta data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">reader</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">reader</span><span class="o">.</span><span class="n">verify_suffix</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">readers</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">verify_suffix</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+                    <span class="n">reader</span> <span class="o">=</span> <span class="n">r</span>
+                    <span class="k">break</span>
+
+        <span class="k">if</span> <span class="n">reader</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;can not find suitable reader for this file: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">. </span><span class="se">\</span>
+<span class="s2">                Please install dependency libraries: (nii, nii.gz) -&gt; Nibabel, (png, jpg, bmp) -&gt; PIL, </span><span class="se">\</span>
+<span class="s2">                (npz, npy) -&gt; Numpy, others -&gt; ITK. Refer to the installation instruction: </span><span class="se">\</span>
+<span class="s2">                https://docs.monai.io/en/latest/installation.html#installing-the-recommended-dependencies.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">img</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">img_array</span><span class="p">,</span> <span class="n">meta_data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">img_array</span> <span class="o">=</span> <span class="n">img_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_only</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">img_array</span>
+        <span class="n">meta_data</span><span class="p">[</span><span class="n">Key</span><span class="o">.</span><span class="n">FILENAME_OR_OBJ</span><span class="p">]</span> <span class="o">=</span> <span class="n">ensure_tuple</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># make sure all elements in metadata are little endian</span>
+        <span class="n">meta_data</span> <span class="o">=</span> <span class="n">switch_endianness</span><span class="p">(</span><span class="n">meta_data</span><span class="p">,</span> <span class="s2">&quot;&lt;&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">img_array</span><span class="p">,</span> <span class="n">meta_data</span></div></div>
+
+
+<div class="viewcode-block" id="SaveImage"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SaveImage">[docs]</a><span class="k">class</span> <span class="nc">SaveImage</span><span class="p">(</span><span class="n">Transform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Save transformed data into files, support NIfTI and PNG formats.</span>
+<span class="sd">    It can work for both numpy array and PyTorch Tensor in both preprocessing transform</span>
+<span class="sd">    chain and postprocessing transform chain.</span>
+<span class="sd">    The name of saved file will be `{input_image_name}_{output_postfix}{output_ext}`,</span>
+<span class="sd">    where the input image name is extracted from the provided meta data dictionary.</span>
+<span class="sd">    If no meta data provided, use index from 0 as the filename prefix.</span>
+<span class="sd">    It can also save a list of PyTorch Tensor or numpy array without `batch dim`.</span>
+
+<span class="sd">    Note: image should be channel-first shape: [C,H,W,[D]].</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        output_dir: output image directory.</span>
+<span class="sd">        output_postfix: a string appended to all output file names, default to `trans`.</span>
+<span class="sd">        output_ext: output file extension name, available extensions: `.nii.gz`, `.nii`, `.png`.</span>
+<span class="sd">        resample: whether to resample before saving the data array.</span>
+<span class="sd">            if saving PNG format image, based on the `spatial_shape` from metadata.</span>
+<span class="sd">            if saving NIfTI format image, based on the `original_affine` from metadata.</span>
+<span class="sd">        mode: This option is used when ``resample = True``. Defaults to ``&quot;nearest&quot;``.</span>
+
+<span class="sd">            - NIfTI files {``&quot;bilinear&quot;``, ``&quot;nearest&quot;``}</span>
+<span class="sd">                Interpolation mode to calculate output values.</span>
+<span class="sd">                See also: https://pytorch.org/docs/stable/nn.functional.html#grid-sample</span>
+<span class="sd">            - PNG files {``&quot;nearest&quot;``, ``&quot;linear&quot;``, ``&quot;bilinear&quot;``, ``&quot;bicubic&quot;``, ``&quot;trilinear&quot;``, ``&quot;area&quot;``}</span>
+<span class="sd">                The interpolation mode.</span>
+<span class="sd">                See also: https://pytorch.org/docs/stable/nn.functional.html#interpolate</span>
+
+<span class="sd">        padding_mode: This option is used when ``resample = True``. Defaults to ``&quot;border&quot;``.</span>
+
+<span class="sd">            - NIfTI files {``&quot;zeros&quot;``, ``&quot;border&quot;``, ``&quot;reflection&quot;``}</span>
+<span class="sd">                Padding mode for outside grid values.</span>
+<span class="sd">                See also: https://pytorch.org/docs/stable/nn.functional.html#grid-sample</span>
+<span class="sd">            - PNG files</span>
+<span class="sd">                This option is ignored.</span>
+
+<span class="sd">        scale: {``255``, ``65535``} postprocess data by clipping to [0, 1] and scaling</span>
+<span class="sd">            [0, 255] (uint8) or [0, 65535] (uint16). Default is None to disable scaling.</span>
+<span class="sd">            it&#39;s used for PNG format only.</span>
+<span class="sd">        dtype: data type during resampling computation. Defaults to ``np.float64`` for best precision.</span>
+<span class="sd">            if None, use the data type of input data. To be compatible with other modules,</span>
+<span class="sd">            the output data type is always ``np.float32``.</span>
+<span class="sd">            it&#39;s used for NIfTI format only.</span>
+<span class="sd">        output_dtype: data type for saving data. Defaults to ``np.float32``.</span>
+<span class="sd">            it&#39;s used for NIfTI format only.</span>
+<span class="sd">        squeeze_end_dims: if True, any trailing singleton dimensions will be removed (after the channel</span>
+<span class="sd">            has been moved to the end). So if input is (C,H,W,D), this will be altered to (H,W,D,C), and</span>
+<span class="sd">            then if C==1, it will be saved as (H,W,D). If D also ==1, it will be saved as (H,W). If false,</span>
+<span class="sd">            image will always be saved as (H,W,D,C).</span>
+<span class="sd">            it&#39;s used for NIfTI format only.</span>
+<span class="sd">        data_root_dir: if not empty, it specifies the beginning parts of the input file&#39;s</span>
+<span class="sd">            absolute path. it&#39;s used to compute `input_file_rel_path`, the relative path to the file from</span>
+<span class="sd">            `data_root_dir` to preserve folder structure when saving in case there are files in different</span>
+<span class="sd">            folders with the same file names. for example:</span>
+<span class="sd">            input_file_name: /foo/bar/test1/image.nii,</span>
+<span class="sd">            output_postfix: seg</span>
+<span class="sd">            output_ext: nii.gz</span>
+<span class="sd">            output_dir: /output,</span>
+<span class="sd">            data_root_dir: /foo/bar,</span>
+<span class="sd">            output will be: /output/test1/image/image_seg.nii.gz</span>
+<span class="sd">        print_log: whether to print log about the saved file path, etc. default to `True`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span><span class="p">,</span>
+        <span class="n">output_postfix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;trans&quot;</span><span class="p">,</span>
+        <span class="n">output_ext</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;.nii.gz&quot;</span><span class="p">,</span>
+        <span class="n">resample</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">GridSampleMode</span><span class="p">,</span> <span class="n">InterpolateMode</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;nearest&quot;</span><span class="p">,</span>
+        <span class="n">padding_mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">GridSamplePadMode</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">GridSamplePadMode</span><span class="o">.</span><span class="n">BORDER</span><span class="p">,</span>
+        <span class="n">scale</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="p">:</span> <span class="n">DtypeLike</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+        <span class="n">output_dtype</span><span class="p">:</span> <span class="n">DtypeLike</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
+        <span class="n">squeeze_end_dims</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">data_root_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">print_log</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saver</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">NiftiSaver</span><span class="p">,</span> <span class="n">PNGSaver</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">output_ext</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;.nii.gz&quot;</span><span class="p">,</span> <span class="s2">&quot;.nii&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">saver</span> <span class="o">=</span> <span class="n">NiftiSaver</span><span class="p">(</span>
+                <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
+                <span class="n">output_postfix</span><span class="o">=</span><span class="n">output_postfix</span><span class="p">,</span>
+                <span class="n">output_ext</span><span class="o">=</span><span class="n">output_ext</span><span class="p">,</span>
+                <span class="n">resample</span><span class="o">=</span><span class="n">resample</span><span class="p">,</span>
+                <span class="n">mode</span><span class="o">=</span><span class="n">GridSampleMode</span><span class="p">(</span><span class="n">mode</span><span class="p">),</span>
+                <span class="n">padding_mode</span><span class="o">=</span><span class="n">padding_mode</span><span class="p">,</span>
+                <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span>
+                <span class="n">output_dtype</span><span class="o">=</span><span class="n">output_dtype</span><span class="p">,</span>
+                <span class="n">squeeze_end_dims</span><span class="o">=</span><span class="n">squeeze_end_dims</span><span class="p">,</span>
+                <span class="n">data_root_dir</span><span class="o">=</span><span class="n">data_root_dir</span><span class="p">,</span>
+                <span class="n">print_log</span><span class="o">=</span><span class="n">print_log</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">output_ext</span> <span class="o">==</span> <span class="s2">&quot;.png&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">saver</span> <span class="o">=</span> <span class="n">PNGSaver</span><span class="p">(</span>
+                <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
+                <span class="n">output_postfix</span><span class="o">=</span><span class="n">output_postfix</span><span class="p">,</span>
+                <span class="n">output_ext</span><span class="o">=</span><span class="n">output_ext</span><span class="p">,</span>
+                <span class="n">resample</span><span class="o">=</span><span class="n">resample</span><span class="p">,</span>
+                <span class="n">mode</span><span class="o">=</span><span class="n">InterpolateMode</span><span class="p">(</span><span class="n">mode</span><span class="p">),</span>
+                <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span>
+                <span class="n">data_root_dir</span><span class="o">=</span><span class="n">data_root_dir</span><span class="p">,</span>
+                <span class="n">print_log</span><span class="o">=</span><span class="n">print_log</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unsupported output extension: </span><span class="si">{</span><span class="n">output_ext</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SaveImage.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SaveImage.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">meta_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            img: target data content that save into file.</span>
+<span class="sd">            meta_data: key-value pairs of meta_data corresponding to the data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">meta_data</span><span class="p">)</span></div></div>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2020 - 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,831 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monai.transforms.post.dictionary &#8212; MONAI 0.6.0 Documentation</title>
+    
+  <link href="../../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../../index.html">
+  <img src="../../../../_static/MONAI-logo-color.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../whatsnew.html">
+  What’s New
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../highlights.html">
+  Modules Overview
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../api.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../installation.html">
+  Installation Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../contrib.html">
+  Development
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://github.com/Project-MONAI/tutorials">Tutorials<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/project-monai/monai" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/projectmonai" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for monai.transforms.post.dictionary</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 - 2021 MONAI Consortium</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">A collection of dictionary-based wrappers around the &quot;vanilla&quot; transforms for model output tensors</span>
+<span class="sd">defined in :py:class:`monai.transforms.utility.array`.</span>
+
+<span class="sd">Class names are ended with &#39;d&#39; to denote dictionary-based transforms.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Hashable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="kn">from</span> <span class="nn">monai.config</span> <span class="kn">import</span> <span class="n">KeysCollection</span>
+<span class="kn">from</span> <span class="nn">monai.data.csv_saver</span> <span class="kn">import</span> <span class="n">CSVSaver</span>
+<span class="kn">from</span> <span class="nn">monai.transforms.inverse</span> <span class="kn">import</span> <span class="n">InvertibleTransform</span>
+<span class="kn">from</span> <span class="nn">monai.transforms.post.array</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Activations</span><span class="p">,</span>
+    <span class="n">AsDiscrete</span><span class="p">,</span>
+    <span class="n">KeepLargestConnectedComponent</span><span class="p">,</span>
+    <span class="n">LabelToContour</span><span class="p">,</span>
+    <span class="n">MeanEnsemble</span><span class="p">,</span>
+    <span class="n">ProbNMS</span><span class="p">,</span>
+    <span class="n">VoteEnsemble</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">monai.transforms.transform</span> <span class="kn">import</span> <span class="n">MapTransform</span>
+<span class="kn">from</span> <span class="nn">monai.transforms.utility.array</span> <span class="kn">import</span> <span class="n">ToTensor</span>
+<span class="kn">from</span> <span class="nn">monai.transforms.utils</span> <span class="kn">import</span> <span class="n">allow_missing_keys_mode</span><span class="p">,</span> <span class="n">convert_inverse_interp_mode</span>
+<span class="kn">from</span> <span class="nn">monai.utils</span> <span class="kn">import</span> <span class="n">ensure_tuple</span><span class="p">,</span> <span class="n">ensure_tuple_rep</span>
+<span class="kn">from</span> <span class="nn">monai.utils.enums</span> <span class="kn">import</span> <span class="n">InverseKeys</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Activationsd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AsDiscreted&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;KeepLargestConnectedComponentd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LabelToContourd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Ensembled&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MeanEnsembled&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VoteEnsembled&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ActivationsD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ActivationsDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AsDiscreteD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AsDiscreteDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;InvertD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;InvertDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Invertd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;KeepLargestConnectedComponentD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;KeepLargestConnectedComponentDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LabelToContourD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LabelToContourDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MeanEnsembleD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;MeanEnsembleDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VoteEnsembleD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;VoteEnsembleDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ProbNMSd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ProbNMSD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ProbNMSDict&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SaveClassificationd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SaveClassificationD&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SaveClassificationDict&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="Activationsd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.Activationsd">[docs]</a><span class="k">class</span> <span class="nc">Activationsd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.AddActivations`.</span>
+<span class="sd">    Add activation layers to the input data specified by `keys`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Activationsd.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.Activationsd.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">sigmoid</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">softmax</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">other</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">Callable</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to model output and label.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            sigmoid: whether to execute sigmoid function on model output before transform.</span>
+<span class="sd">                it also can be a sequence of bool, each element corresponds to a key in ``keys``.</span>
+<span class="sd">            softmax: whether to execute softmax function on model output before transform.</span>
+<span class="sd">                it also can be a sequence of bool, each element corresponds to a key in ``keys``.</span>
+<span class="sd">            other: callable function to execute other activation layers,</span>
+<span class="sd">                for example: `other = torch.tanh`. it also can be a sequence of Callable, each</span>
+<span class="sd">                element corresponds to a key in ``keys``.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sigmoid</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">softmax</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">softmax</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">other</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span> <span class="o">=</span> <span class="n">Activations</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Activationsd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.Activationsd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">sigmoid</span><span class="p">,</span> <span class="n">softmax</span><span class="p">,</span> <span class="n">other</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">softmax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">other</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">sigmoid</span><span class="p">,</span> <span class="n">softmax</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="AsDiscreted"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.AsDiscreted">[docs]</a><span class="k">class</span> <span class="nc">AsDiscreted</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.AsDiscrete`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AsDiscreted.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.AsDiscreted.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">argmax</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">to_onehot</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">n_classes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">threshold_values</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">logit_thresh</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to model output and label.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            argmax: whether to execute argmax function on input data before transform.</span>
+<span class="sd">                it also can be a sequence of bool, each element corresponds to a key in ``keys``.</span>
+<span class="sd">            to_onehot: whether to convert input data into the one-hot format. Defaults to False.</span>
+<span class="sd">                it also can be a sequence of bool, each element corresponds to a key in ``keys``.</span>
+<span class="sd">            n_classes: the number of classes to convert to One-Hot format. it also can be a</span>
+<span class="sd">                sequence of int, each element corresponds to a key in ``keys``.</span>
+<span class="sd">            threshold_values: whether threshold the float value to int number 0 or 1, default is False.</span>
+<span class="sd">                it also can be a sequence of bool, each element corresponds to a key in ``keys``.</span>
+<span class="sd">            logit_thresh: the threshold value for thresholding operation, default is 0.5.</span>
+<span class="sd">                it also can be a sequence of float, each element corresponds to a key in ``keys``.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">argmax</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">argmax</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">to_onehot</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">to_onehot</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_classes</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">n_classes</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threshold_values</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">threshold_values</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logit_thresh</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">logit_thresh</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span> <span class="o">=</span> <span class="n">AsDiscrete</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="AsDiscreted.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.AsDiscreted.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">argmax</span><span class="p">,</span> <span class="n">to_onehot</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">,</span> <span class="n">threshold_values</span><span class="p">,</span> <span class="n">logit_thresh</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span>
+            <span class="n">d</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">argmax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_onehot</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_classes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold_values</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">logit_thresh</span>
+        <span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="p">(</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">],</span>
+                <span class="n">argmax</span><span class="p">,</span>
+                <span class="n">to_onehot</span><span class="p">,</span>
+                <span class="n">n_classes</span><span class="p">,</span>
+                <span class="n">threshold_values</span><span class="p">,</span>
+                <span class="n">logit_thresh</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="KeepLargestConnectedComponentd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.KeepLargestConnectedComponentd">[docs]</a><span class="k">class</span> <span class="nc">KeepLargestConnectedComponentd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.KeepLargestConnectedComponent`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="KeepLargestConnectedComponentd.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.KeepLargestConnectedComponentd.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">applied_labels</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">independent</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">connectivity</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            applied_labels: Labels for applying the connected component on.</span>
+<span class="sd">                If only one channel. The pixel whose value is not in this list will remain unchanged.</span>
+<span class="sd">                If the data is in one-hot format, this is the channel indices to apply transform.</span>
+<span class="sd">            independent: consider several labels as a whole or independent, default is `True`.</span>
+<span class="sd">                Example use case would be segment label 1 is liver and label 2 is liver tumor, in that case</span>
+<span class="sd">                you want this &quot;independent&quot; to be specified as False.</span>
+<span class="sd">            connectivity: Maximum number of orthogonal hops to consider a pixel/voxel as a neighbor.</span>
+<span class="sd">                Accepted values are ranging from  1 to input.ndim. If ``None``, a full</span>
+<span class="sd">                connectivity of ``input.ndim`` is used.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span> <span class="o">=</span> <span class="n">KeepLargestConnectedComponent</span><span class="p">(</span><span class="n">applied_labels</span><span class="p">,</span> <span class="n">independent</span><span class="p">,</span> <span class="n">connectivity</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="KeepLargestConnectedComponentd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.KeepLargestConnectedComponentd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="LabelToContourd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.LabelToContourd">[docs]</a><span class="k">class</span> <span class="nc">LabelToContourd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.LabelToContour`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LabelToContourd.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.LabelToContourd.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">kernel_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Laplace&quot;</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be transformed.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            kernel_type: the method applied to do edge detection, default is &quot;Laplace&quot;.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">converter</span> <span class="o">=</span> <span class="n">LabelToContour</span><span class="p">(</span><span class="n">kernel_type</span><span class="o">=</span><span class="n">kernel_type</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LabelToContourd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.LabelToContourd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converter</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="Ensembled"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.Ensembled">[docs]</a><span class="k">class</span> <span class="nc">Ensembled</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class of dictionary-based ensemble transforms.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Ensembled.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.Ensembled.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">ensemble</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">],</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]],</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">],</span>
+        <span class="n">output_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be stack and execute ensemble.</span>
+<span class="sd">                if only 1 key provided, suppose it&#39;s a PyTorch Tensor with data stacked on dimension `E`.</span>
+<span class="sd">            output_key: the key to store ensemble result in the dictionary.</span>
+<span class="sd">            ensemble: callable method to execute ensemble on specified data.</span>
+<span class="sd">                if only 1 key provided in `keys`, `output_key` can be None and use `keys` as default.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: When ``ensemble`` is not ``callable``.</span>
+<span class="sd">            ValueError: When ``len(keys) &gt; 1`` and ``output_key=None``. Incompatible values.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">callable</span><span class="p">(</span><span class="n">ensemble</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ensemble must be callable but is </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">ensemble</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ensemble</span> <span class="o">=</span> <span class="n">ensemble</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">output_key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Incompatible values: len(self.keys) &gt; 1 and output_key=None.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_key</span> <span class="o">=</span> <span class="n">output_key</span> <span class="k">if</span> <span class="n">output_key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Ensembled.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.Ensembled.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">items</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">],</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">items</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">)]</span>
+        <span class="n">d</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">output_key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ensemble</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="MeanEnsembled"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.MeanEnsembled">[docs]</a><span class="k">class</span> <span class="nc">MeanEnsembled</span><span class="p">(</span><span class="n">Ensembled</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.MeanEnsemble`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="MeanEnsembled.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.MeanEnsembled.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">output_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">weights</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be stack and execute ensemble.</span>
+<span class="sd">                if only 1 key provided, suppose it&#39;s a PyTorch Tensor with data stacked on dimension `E`.</span>
+<span class="sd">            output_key: the key to store ensemble result in the dictionary.</span>
+<span class="sd">                if only 1 key provided in `keys`, `output_key` can be None and use `keys` as default.</span>
+<span class="sd">            weights: can be a list or tuple of numbers for input data with shape: [E, C, H, W[, D]].</span>
+<span class="sd">                or a Numpy ndarray or a PyTorch Tensor data.</span>
+<span class="sd">                the `weights` will be added to input data from highest dimension, for example:</span>
+<span class="sd">                1. if the `weights` only has 1 dimension, it will be added to the `E` dimension of input data.</span>
+<span class="sd">                2. if the `weights` has 2 dimensions, it will be added to `E` and `C` dimensions.</span>
+<span class="sd">                it&#39;s a typical practice to add weights for different classes:</span>
+<span class="sd">                to ensemble 3 segmentation model outputs, every output has 4 channels(classes),</span>
+<span class="sd">                so the input data shape can be: [3, 4, H, W, D].</span>
+<span class="sd">                and add different `weights` for different classes, so the `weights` shape can be: [3, 4].</span>
+<span class="sd">                for example: `weights = [[1, 2, 3, 4], [4, 3, 2, 1], [1, 1, 1, 1]]`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ensemble</span> <span class="o">=</span> <span class="n">MeanEnsemble</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">ensemble</span><span class="p">,</span> <span class="n">output_key</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="VoteEnsembled"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.VoteEnsembled">[docs]</a><span class="k">class</span> <span class="nc">VoteEnsembled</span><span class="p">(</span><span class="n">Ensembled</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dictionary-based wrapper of :py:class:`monai.transforms.VoteEnsemble`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="VoteEnsembled.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.VoteEnsembled.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span> <span class="n">output_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to be stack and execute ensemble.</span>
+<span class="sd">                if only 1 key provided, suppose it&#39;s a PyTorch Tensor with data stacked on dimension `E`.</span>
+<span class="sd">            output_key: the key to store ensemble result in the dictionary.</span>
+<span class="sd">                if only 1 key provided in `keys`, `output_key` can be None and use `keys` as default.</span>
+<span class="sd">            num_classes: if the input is single channel data instead of One-Hot, we can&#39;t get class number</span>
+<span class="sd">                from channel, need to explicitly specify the number of classes to vote.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ensemble</span> <span class="o">=</span> <span class="n">VoteEnsemble</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span><span class="n">num_classes</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">ensemble</span><span class="p">,</span> <span class="n">output_key</span><span class="p">)</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">ProbNMSd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Performs probability based non-maximum suppression (NMS) on the probabilities map via</span>
+<span class="sd">    iteratively selecting the coordinate with highest probability and then move it as well</span>
+<span class="sd">    as its surrounding values. The remove range is determined by the parameter `box_size`.</span>
+<span class="sd">    If multiple coordinates have the same highest probability, only one of them will be</span>
+<span class="sd">    selected.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spatial_dims: number of spatial dimensions of the input probabilities map.</span>
+<span class="sd">            Defaults to 2.</span>
+<span class="sd">        sigma: the standard deviation for gaussian filter.</span>
+<span class="sd">            It could be a single value, or `spatial_dims` number of values. Defaults to 0.0.</span>
+<span class="sd">        prob_threshold: the probability threshold, the function will stop searching if</span>
+<span class="sd">            the highest probability is no larger than the threshold. The value should be</span>
+<span class="sd">            no less than 0.0. Defaults to 0.5.</span>
+<span class="sd">        box_size: the box size (in pixel) to be removed around the the pixel with the maximum probability.</span>
+<span class="sd">            It can be an integer that defines the size of a square or cube,</span>
+<span class="sd">            or a list containing different values for each dimensions. Defaults to 48.</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        a list of selected lists, where inner lists contain probability and coordinates.</span>
+<span class="sd">        For example, for 3D input, the inner lists are in the form of [probability, x, y, z].</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: When ``prob_threshold`` is less than 0.0.</span>
+<span class="sd">        ValueError: When ``box_size`` is a list or tuple, and its length is not equal to `spatial_dims`.</span>
+<span class="sd">        ValueError: When ``box_size`` has a less than 1 value.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">spatial_dims</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">sigma</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">],</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">prob_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">box_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">48</span><span class="p">,</span>
+        <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prob_nms</span> <span class="o">=</span> <span class="n">ProbNMS</span><span class="p">(</span>
+            <span class="n">spatial_dims</span><span class="o">=</span><span class="n">spatial_dims</span><span class="p">,</span>
+            <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span>
+            <span class="n">prob_threshold</span><span class="o">=</span><span class="n">prob_threshold</span><span class="p">,</span>
+            <span class="n">box_size</span><span class="o">=</span><span class="n">box_size</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]]):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prob_nms</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span>
+
+
+<div class="viewcode-block" id="Invertd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.Invertd">[docs]</a><span class="k">class</span> <span class="nc">Invertd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Utility transform to automatically invert the previously applied transforms.</span>
+<span class="sd">    When applying preprocessing transforms on a orig_key(like: `image`, `label`, etc.), we record the context</span>
+<span class="sd">    information of applied transforms in a dictionary in the input data dictionary with the key</span>
+<span class="sd">    &quot;{orig_key}_transforms&quot;. This transform will extract the transform context information of `orig_keys`</span>
+<span class="sd">    then invert the transforms(got from this context information) on the `keys` data.</span>
+<span class="sd">    Typical usage is to invert the preprocessing transforms(applied on input `image`) on the model `pred` data.</span>
+
+<span class="sd">    The output of the inverted data and metadata will be stored at `keys` and `meta_keys` respectively.</span>
+<span class="sd">    To correctly invert the transforms, the information of the previously applied transforms should be</span>
+<span class="sd">    available at `orig_keys`, and the original metadata at `orig_meta_keys`.</span>
+<span class="sd">    (`meta_key_postfix` is an optional string to conveniently construct &quot;meta_keys&quot; and/or &quot;orig_meta_keys&quot;.)</span>
+
+<span class="sd">    A detailed usage example is available in the tutorial:</span>
+<span class="sd">    https://github.com/Project-MONAI/tutorials/blob/master/3d_segmentation/torch/unet_inference_dict.py</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        According to the `collate_fn`, this transform may return a list of Tensor without batch dim,</span>
+<span class="sd">        thus some following transforms may not support a list of Tensor, and users can leverage the</span>
+<span class="sd">        `post_func` arg for basic processing logic.</span>
+
+<span class="sd">        This transform needs to extract the context information of applied transforms and the meta data</span>
+<span class="sd">        dictionary from the input data dictionary, then use some numpy arrays in them to computes the inverse</span>
+<span class="sd">        logic, so please don&#39;t move `data[&quot;{orig_key}_transforms&quot;]` and `data[&quot;{orig_meta_key}&quot;]` to GPU device.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Invertd.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.Invertd.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">transform</span><span class="p">:</span> <span class="n">InvertibleTransform</span><span class="p">,</span>
+        <span class="n">orig_keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">meta_keys</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">KeysCollection</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">orig_meta_keys</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">KeysCollection</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">meta_key_postfix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;meta_dict&quot;</span><span class="p">,</span>
+        <span class="n">nearest_interp</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">bool</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">to_tensor</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">bool</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">device</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">],</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">]]]</span> <span class="o">=</span> <span class="s2">&quot;cpu&quot;</span><span class="p">,</span>
+        <span class="n">post_func</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Callable</span><span class="p">]]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span>
+        <span class="n">num_workers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: the key of expected data in the dict, invert transforms on it, in-place operation.</span>
+<span class="sd">                it also can be a list of keys, will invert transform for each of them, like: [&quot;pred&quot;, &quot;pred_class2&quot;].</span>
+<span class="sd">            transform: the previous callable transform that applied on input data.</span>
+<span class="sd">            orig_keys: the key of the original input data in the dict. will get the applied transform information</span>
+<span class="sd">                for this input data, then invert them for the expected data with `keys`.</span>
+<span class="sd">                It can also be a list of keys, each matches to the `keys` data.</span>
+<span class="sd">            meta_keys: explicitly indicate the key for the inverted meta data dictionary.</span>
+<span class="sd">                the meta data is a dictionary object which contains: filename, original_shape, etc.</span>
+<span class="sd">                it can be a sequence of string, map to the `keys`.</span>
+<span class="sd">                if None, will try to construct meta_keys by `{key}_{meta_key_postfix}`.</span>
+<span class="sd">            orig_meta_keys: the key of the meta data of original input data, will get the `affine`, `data_shape`, etc.</span>
+<span class="sd">                the meta data is a dictionary object which contains: filename, original_shape, etc.</span>
+<span class="sd">                it can be a sequence of string, map to the `keys`.</span>
+<span class="sd">                if None, will try to construct meta_keys by `{orig_key}_{meta_key_postfix}`.</span>
+<span class="sd">                meta data will also be inverted and stored in `meta_keys`.</span>
+<span class="sd">            meta_key_postfix: if `orig_meta_keys` is None, use `{orig_key}_{meta_key_postfix}` to to fetch the</span>
+<span class="sd">                meta data from dict, if `meta_keys` is None, use `{key}_{meta_key_postfix}`.</span>
+<span class="sd">                default is `meta_dict`, the meta data is a dictionary object.</span>
+<span class="sd">                For example, to handle orig_key `image`,  read/write `affine` matrices from the</span>
+<span class="sd">                metadata `image_meta_dict` dictionary&#39;s `affine` field.</span>
+<span class="sd">                the inverted meta dict will be stored with key: &quot;{key}_{meta_key_postfix}&quot;.</span>
+<span class="sd">            nearest_interp: whether to use `nearest` interpolation mode when inverting the spatial transforms,</span>
+<span class="sd">                default to `True`. If `False`, use the same interpolation mode as the original transform.</span>
+<span class="sd">                it also can be a list of bool, each matches to the `keys` data.</span>
+<span class="sd">            to_tensor: whether to convert the inverted data into PyTorch Tensor first, default to `True`.</span>
+<span class="sd">                it also can be a list of bool, each matches to the `keys` data.</span>
+<span class="sd">            device: if converted to Tensor, move the inverted results to target device before `post_func`,</span>
+<span class="sd">                default to &quot;cpu&quot;, it also can be a list of string or `torch.device`,</span>
+<span class="sd">                each matches to the `keys` data.</span>
+<span class="sd">            post_func: post processing for the inverted data, should be a callable function.</span>
+<span class="sd">                it also can be a list of callable, each matches to the `keys` data.</span>
+<span class="sd">            num_workers: number of workers when run data loader for inverse transforms,</span>
+<span class="sd">                default to 0 as only run one iteration and multi-processing may be even slower.</span>
+<span class="sd">                Set to `None`, to use the `num_workers` of the input transform data loader.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="n">InvertibleTransform</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;transform is not invertible, can&#39;t invert transform for the data.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">transform</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">orig_keys</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">orig_keys</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta_keys</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span> <span class="k">if</span> <span class="n">meta_keys</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">ensure_tuple</span><span class="p">(</span><span class="n">meta_keys</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">meta_keys</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;meta_keys should have the same length as keys.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">orig_meta_keys</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">orig_meta_keys</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta_key_postfix</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">meta_key_postfix</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nearest_interp</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">nearest_interp</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">to_tensor</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">to_tensor</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">post_func</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">post_func</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_totensor</span> <span class="o">=</span> <span class="n">ToTensor</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Invertd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.Invertd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span>
+            <span class="n">key</span><span class="p">,</span>
+            <span class="n">orig_key</span><span class="p">,</span>
+            <span class="n">meta_key</span><span class="p">,</span>
+            <span class="n">orig_meta_key</span><span class="p">,</span>
+            <span class="n">meta_key_postfix</span><span class="p">,</span>
+            <span class="n">nearest_interp</span><span class="p">,</span>
+            <span class="n">to_tensor</span><span class="p">,</span>
+            <span class="n">device</span><span class="p">,</span>
+            <span class="n">post_func</span><span class="p">,</span>
+        <span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span>
+            <span class="n">d</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">orig_keys</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_keys</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">orig_meta_keys</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_key_postfix</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nearest_interp</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">to_tensor</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">post_func</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="n">transform_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">orig_key</span><span class="si">}{</span><span class="n">InverseKeys</span><span class="o">.</span><span class="n">KEY_SUFFIX</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">if</span> <span class="n">transform_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;transform info of `</span><span class="si">{</span><span class="n">orig_key</span><span class="si">}</span><span class="s2">` is not available or no InvertibleTransform applied.&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="n">transform_info</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">transform_key</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">nearest_interp</span><span class="p">:</span>
+                <span class="n">transform_info</span> <span class="o">=</span> <span class="n">convert_inverse_interp_mode</span><span class="p">(</span>
+                    <span class="n">trans_info</span><span class="o">=</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">transform_info</span><span class="p">),</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">,</span>
+                    <span class="n">align_corners</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="nb">input</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+                <span class="nb">input</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+            <span class="c1"># construct the input dict data for BatchInverseTransform</span>
+            <span class="n">input_dict</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">orig_key</span><span class="p">:</span> <span class="nb">input</span><span class="p">,</span>
+                <span class="n">transform_key</span><span class="p">:</span> <span class="n">transform_info</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="n">orig_meta_key</span> <span class="o">=</span> <span class="n">orig_meta_key</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">orig_key</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">meta_key_postfix</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">meta_key</span> <span class="o">=</span> <span class="n">meta_key</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">meta_key_postfix</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">if</span> <span class="n">orig_meta_key</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+                <span class="n">input_dict</span><span class="p">[</span><span class="n">orig_meta_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">orig_meta_key</span><span class="p">]</span>
+
+            <span class="k">with</span> <span class="n">allow_missing_keys_mode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
+                <span class="n">inverted</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">inverse</span><span class="p">(</span><span class="n">input_dict</span><span class="p">)</span>
+
+            <span class="c1"># save the inverted data</span>
+            <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">post_func</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_totensor</span><span class="p">(</span><span class="n">inverted</span><span class="p">[</span><span class="n">orig_key</span><span class="p">])</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> <span class="k">if</span> <span class="n">to_tensor</span> <span class="k">else</span> <span class="n">inverted</span><span class="p">[</span><span class="n">orig_key</span><span class="p">])</span>
+            <span class="c1"># save the inverted meta dict</span>
+            <span class="k">if</span> <span class="n">orig_meta_key</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">meta_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">inverted</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">orig_meta_key</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">d</span></div></div>
+
+
+<div class="viewcode-block" id="SaveClassificationd"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SaveClassificationd">[docs]</a><span class="k">class</span> <span class="nc">SaveClassificationd</span><span class="p">(</span><span class="n">MapTransform</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Save the classification results and meta data into CSV file or other storage.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SaveClassificationd.__init__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SaveClassificationd.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="n">KeysCollection</span><span class="p">,</span>
+        <span class="n">meta_keys</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">KeysCollection</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">meta_key_postfix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;meta_dict&quot;</span><span class="p">,</span>
+        <span class="n">saver</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CSVSaver</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;./&quot;</span><span class="p">,</span>
+        <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;predictions.csv&quot;</span><span class="p">,</span>
+        <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">flush</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">allow_missing_keys</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            keys: keys of the corresponding items to model output, this transform only supports 1 key.</span>
+<span class="sd">                See also: :py:class:`monai.transforms.compose.MapTransform`</span>
+<span class="sd">            meta_keys: explicitly indicate the key of the corresponding meta data dictionary.</span>
+<span class="sd">                for example, for data with key `image`, the metadata by default is in `image_meta_dict`.</span>
+<span class="sd">                the meta data is a dictionary object which contains: filename, original_shape, etc.</span>
+<span class="sd">                it can be a sequence of string, map to the `keys`.</span>
+<span class="sd">                if None, will try to construct meta_keys by `key_{meta_key_postfix}`.</span>
+<span class="sd">                will extract the filename of input image to save classifcation results.</span>
+<span class="sd">            meta_key_postfix: `key_{postfix}` was used to store the metadata in `LoadImaged`.</span>
+<span class="sd">                so need the key to extract the metadata of input image, like filename, etc. default is `meta_dict`.</span>
+<span class="sd">                for example, for data with key `image`, the metadata by default is in `image_meta_dict`.</span>
+<span class="sd">                the meta data is a dictionary object which contains: filename, original_shape, etc.</span>
+<span class="sd">                this arg only works when `meta_keys=None`. if no corresponding metadata, set to `None`.</span>
+<span class="sd">            saver: the saver instance to save classification results, if None, create a CSVSaver internally.</span>
+<span class="sd">                the saver must provide `save(data, meta_data)` and `finalize()` APIs.</span>
+<span class="sd">            output_dir: if `saver=None`, specify the directory to save the CSV file.</span>
+<span class="sd">            filename: if `saver=None`, specify the name of the saved CSV file.</span>
+<span class="sd">            overwrite: if `saver=None`, indicate whether to overwriting existing CSV file content, if True,</span>
+<span class="sd">                will clear the file before saving. otherwise, will apend new content to the CSV file.</span>
+<span class="sd">            flush: if `saver=None`, indicate whether to write the cache data to CSV file immediately</span>
+<span class="sd">                in this transform and clear the cache. default to True.</span>
+<span class="sd">                If False, may need user to call `saver.finalize()` manually or use `ClassificationSaver` handler.</span>
+<span class="sd">            allow_missing_keys: don&#39;t raise exception if key is missing.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">allow_missing_keys</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;only 1 key is allowed when saving the classification result.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saver</span> <span class="o">=</span> <span class="n">saver</span> <span class="ow">or</span> <span class="n">CSVSaver</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">,</span> <span class="n">flush</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flush</span> <span class="o">=</span> <span class="n">flush</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta_keys</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">meta_keys</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta_key_postfix</span> <span class="o">=</span> <span class="n">ensure_tuple_rep</span><span class="p">(</span><span class="n">meta_key_postfix</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="SaveClassificationd.__call__"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SaveClassificationd.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">meta_key</span><span class="p">,</span> <span class="n">meta_key_postfix</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_iterator</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_keys</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_key_postfix</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">meta_key</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">meta_key_postfix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">meta_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">meta_key_postfix</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">meta_data</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">meta_key</span><span class="p">]</span> <span class="k">if</span> <span class="n">meta_key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">saver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">meta_data</span><span class="o">=</span><span class="n">meta_data</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">flush</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">saver</span><span class="o">.</span><span class="n">finalize</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">d</span></div>
+
+<div class="viewcode-block" id="SaveClassificationd.get_saver"><a class="viewcode-back" href="../../../../transforms.html#monai.transforms.SaveClassificationd.get_saver">[docs]</a>    <span class="k">def</span> <span class="nf">get_saver</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        If want to write content into file, may need to call `finalize` of saver when epoch completed.</span>
+<span class="sd">        Or users can also get the cache content from `saver` instead of writing into file.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">saver</span></div></div>
+
+
+<span class="n">ActivationsD</span> <span class="o">=</span> <span class="n">ActivationsDict</span> <span class="o">=</span> <span class="n">Activationsd</span>
+<span class="n">AsDiscreteD</span> <span class="o">=</span> <span class="n">AsDiscreteDict</span> <span class="o">=</span> <span class="n">AsDiscreted</span>
+<span class="n">KeepLargestConnectedComponentD</span> <span class="o">=</span> <span class="n">KeepLargestConnectedComponentDict</span> <span class="o">=</span> <span class="n">KeepLargestConnectedComponentd</span>
+<span class="n">LabelToContourD</span> <span class="o">=</span> <span class="n">LabelToContourDict</span> <span class="o">=</span> <span class="n">LabelToContourd</span>
+<span class="n">MeanEnsembleD</span> <span class="o">=</span> <span class="n">MeanEnsembleDict</span> <span class="o">=</span> <span class="n">MeanEnsembled</span>
+<span class="n">ProbNMSD</span> <span class="o">=</span> <span class="n">ProbNMSDict</span> <span class="o">=</span> <span class="n">ProbNMSd</span>
+<span class="n">VoteEnsembleD</span> <span class="o">=</span> <span class="n">VoteEnsembleDict</span> <span class="o">=</span> <span class="n">VoteEnsembled</span>
+<span class="n">InvertD</span> <span class="o">=</span> <span class="n">InvertDict</span> <span class="o">=</span> <span class="n">Invertd</span>
+<span class="n">SaveClassificationD</span> <span class="o">=</span> <span class="n">SaveClassificationDict</span> <span class="o">=</span> <span class="n">SaveClassificationd</span>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2020 - 2021 MONAI Consortium.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>
