@@ -8,18 +8,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""
-.. autosummary::
-    :toctree: _autosummary
 
-    core
-    utils
-    packager
-    runner
-    cli
-    exceptions
-"""
+import os
+import sys
 
-from . import _version, cli, core, exceptions, packager, runner, utils
-
-__version__ = _version.get_versions()["version"]
+_current_dir = os.path.abspath(os.path.dirname(__file__))
+if sys.path and os.path.abspath(sys.path[0]) != _current_dir:
+    sys.path.insert(0, _current_dir)
+del _current_dir

@@ -8,18 +8,21 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""
-.. autosummary::
-    :toctree: _autosummary
 
-    core
-    utils
-    packager
-    runner
-    cli
-    exceptions
-"""
+from typing import Any, Dict, Optional, Union
 
-from . import _version, cli, core, exceptions, packager, runner, utils
+try:
+    from numpy.typing import ArrayLike  # type: ignore
+except ImportError:
+    ArrayLike = Any
 
-__version__ = _version.get_versions()["version"]
+from .domain import Domain
+
+
+class Image(Domain):
+    def __init__(self, data: Union[ArrayLike], metadata: Optional[Dict] = None):
+        super().__init__(metadata)
+        self._data = data
+
+    def asnumpy(self) -> ArrayLike:
+        return self._data

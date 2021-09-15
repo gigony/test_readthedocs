@@ -12,14 +12,17 @@
 .. autosummary::
     :toctree: _autosummary
 
-    core
-    utils
-    packager
-    runner
-    cli
-    exceptions
+    Model
+    ModelFactory
+    NamedModel
+    TorchScriptModel
+    TritonModel
 """
 
-from . import _version, cli, core, exceptions, packager, runner, utils
+from .factory import ModelFactory
+from .model import Model
+from .named_model import NamedModel
+from .torch_model import TorchScriptModel
+from .triton_model import TritonModel
 
-__version__ = _version.get_versions()["version"]
+Model.register([TritonModel, NamedModel, TorchScriptModel, Model])

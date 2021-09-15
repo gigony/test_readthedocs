@@ -8,18 +8,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""
-.. autosummary::
-    :toctree: _autosummary
 
-    core
-    utils
-    packager
-    runner
-    cli
-    exceptions
-"""
 
-from . import _version, cli, core, exceptions, packager, runner, utils
+from main import main  # type: ignore # for pytype
 
-__version__ = _version.get_versions()["version"]
+if __name__ == "__main__":
+    main()

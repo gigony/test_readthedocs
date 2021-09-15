@@ -12,14 +12,18 @@
 .. autosummary::
     :toctree: _autosummary
 
-    core
-    utils
-    packager
-    runner
-    cli
-    exceptions
+    Domain
+    DataPath
+    NamedDataPath
+    Image
+    DICOMStudy
+    DICOMSeries
+    DICOMSOPInstance
 """
 
-from . import _version, cli, core, exceptions, packager, runner, utils
-
-__version__ = _version.get_versions()["version"]
+from .datapath import DataPath, NamedDataPath
+from .dicom_series import DICOMSeries
+from .dicom_sop_instance import DICOMSOPInstance
+from .dicom_study import DICOMStudy
+from .domain import Domain
+from .image import Image
