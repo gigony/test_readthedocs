@@ -45,7 +45,10 @@ copyright = "2021 MONAI Consortium"
 author = "MONAI Contributors"
 
 # The full version, including alpha/beta/rc tags
-from monai.deploy import __version__ as MONAI_APP_SDK_VERSION  # noqa: E402
+if on_rtd:
+    MONAI_APP_SDK_VERSION = READTHEDOCS_VERSION
+else:
+    from monai.deploy import __version__ as MONAI_APP_SDK_VERSION  # noqa: E402
 
 short_version = MONAI_APP_SDK_VERSION.split("+")[0]
 release = short_version
