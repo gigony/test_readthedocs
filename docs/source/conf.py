@@ -4,13 +4,22 @@
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+# -- Handle ReadTheDocs.org build -------------------------------------------
+
+import os
+# on_rtd is whether we are on readthedocs.org
+on_rtd = os.environ.get("READTHEDOCS", None) == "True"
+if on_rtd:
+    import subprocess
+    subprocess.call("../../run install_doc_requirements", shell=True)
+    subprocess.call("../../run setup_gen_docs", shell=True)
+
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import os
 import re
 import sys
 

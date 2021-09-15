@@ -23,6 +23,7 @@ scikit-image
 plotly
 nibabel
 monai
+pydicom
 sphinx-autodoc-typehints==1.12.0
 sphinxcontrib-applehelp
 sphinxcontrib-devhelp
