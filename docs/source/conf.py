@@ -11,7 +11,7 @@ import os
 on_rtd = os.environ.get("READTHEDOCS", None) == "True"
 if on_rtd:
     import subprocess
-    subprocess.call("../../run install_doc_requirements", shell=True)
+    subprocess.call("../../run setup", shell=True)
     subprocess.call("../../run setup_gen_docs", shell=True)
 
 # -- Path setup --------------------------------------------------------------
