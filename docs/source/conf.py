@@ -11,8 +11,8 @@ import os
 on_rtd = os.environ.get("READTHEDOCS", None) == "True"
 if on_rtd:
     import subprocess
-    subprocess.call("../../run setup", shell=True)
-    subprocess.call("../../run setup_gen_docs", shell=True)
+    subprocess.call("/bin/bash -c 'source /home/docs/checkouts/readthedocs.org/user_builds/gigony-demo/envs/latest/bin/activate; printenv; ../../run setup'", shell=True)
+    subprocess.call("/bin/bash -c 'source /home/docs/checkouts/readthedocs.org/user_builds/gigony-demo/envs/latest/bin/activate; ../../run setup_gen_docs'", shell=True)
 
 # -- Path setup --------------------------------------------------------------
 
