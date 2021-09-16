@@ -9,9 +9,14 @@ import os
 
 # on_rtd is whether we are on readthedocs.org
 on_rtd = os.environ.get("READTHEDOCS", None) == "True"
+print(f"## on_rtd:{on_rtd}")
+
 if on_rtd:
     READTHEDOCS_PROJECT = os.environ.get("READTHEDOCS_PROJECT", "monai-deploy-app-sdk")
     READTHEDOCS_VERSION = os.environ.get("READTHEDOCS_VERSION", "latest")
+    print(f"## READTHEDOCS_PROJECT:{READTHEDOCS_PROJECT}")
+    print(f"## READTHEDOCS_VERSION:{READTHEDOCS_VERSION}")
+
     import subprocess
 
     subprocess.call(
@@ -20,7 +25,7 @@ if on_rtd:
         shell=True,
     )
     subprocess.call(
-        "/bin/bash -c 'source /home/docs/checkouts/readthedocs.org/user_builds/"
+        "/bin/bash -c 'printenv; source /home/docs/checkouts/readthedocs.org/user_builds/"
         f"{READTHEDOCS_PROJECT}/envs/{READTHEDOCS_VERSION}/bin/activate; ../../run setup_gen_docs'",
         shell=True,
     )
@@ -44,15 +49,18 @@ project = "MONAI Deploy App SDK"
 copyright = "2021 MONAI Consortium"
 author = "MONAI Contributors"
 
-# The full version, including alpha/beta/rc tags
-if on_rtd:
-    MONAI_APP_SDK_VERSION = READTHEDOCS_VERSION
-else:
-    from monai.deploy import __version__ as MONAI_APP_SDK_VERSION  # noqa: E402
+print(f"## READTHEDOCS_PROJECT:{READTHEDOCS_PROJECT}")
+print(f"## READTHEDOCS_VERSION:{READTHEDOCS_VERSION}")
 
+# The full version, including alpha/beta/rc tags
+from monai.deploy import __version__ as MONAI_APP_SDK_VERSION  # noqa: E402
+
+print(f"## MONAI_APP_SDK_VERSION:{MONAI_APP_SDK_VERSION}")
 short_version = MONAI_APP_SDK_VERSION.split("+")[0]
 release = short_version
 version = re.sub(r"(a|b|r)\d+.*", "", short_version)
+
+print(f"#short_version={short_version}, release={release}, version={version}")
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
