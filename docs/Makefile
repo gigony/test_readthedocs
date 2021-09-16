@@ -21,5 +21,3 @@ help:
 
 clean:
 	rm -rf build/
-
-# dummy
